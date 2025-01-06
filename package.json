@@ -1,0 +1,23 @@
+{
+  "name": "gestion-geopatagonia",
+  "version": "1.0.0",
+  "description": "App de gestión de PAC/observaciónes para Geopatagonia",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/app.js",
+    "test": "nodemon ./src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GuillermoCochrane/gestion-geopatagonia.git"
+  },
+  "author": "Guillermo Cochrane",
+  "license": "ISC",
+  "homepage": "https://github.com/GuillermoCochrane/gestion-geopatagonia#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
