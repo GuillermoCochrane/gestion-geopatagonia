@@ -18,6 +18,31 @@ USE `geopatagonia_db`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `entes_inspectores`
+--
+
+DROP TABLE IF EXISTS `entes_inspectores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `entes_inspectores` (
+  `id` int(100) unsigned NOT NULL AUTO_INCREMENT,
+  `ente_inspector` varchar(100) NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `entes_inspectores`
+--
+
+LOCK TABLES `entes_inspectores` WRITE;
+/*!40000 ALTER TABLE `entes_inspectores` DISABLE KEYS */;
+/*!40000 ALTER TABLE `entes_inspectores` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `origenes`
 --
 
@@ -25,7 +50,7 @@ DROP TABLE IF EXISTS `origenes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `origenes` (
-  `id` int(10) unsigned NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `origen` varchar(100) NOT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
@@ -50,7 +75,7 @@ DROP TABLE IF EXISTS `roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roles` (
-  `id` int(10) unsigned NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `rol` varchar(60) NOT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
@@ -76,4 +101,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-06 16:52:04
+-- Dump completed on 2025-01-06 17:00:58
