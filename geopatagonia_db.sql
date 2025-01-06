@@ -18,6 +18,33 @@ USE `geopatagonia_db`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `adjuntos_originaciones`
+--
+
+DROP TABLE IF EXISTS `adjuntos_originaciones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `adjuntos_originaciones` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL,
+  `archivo` varchar(200) NOT NULL,
+  `descripcion` varchar(300) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `adjuntos_originaciones`
+--
+
+LOCK TABLES `adjuntos_originaciones` WRITE;
+/*!40000 ALTER TABLE `adjuntos_originaciones` DISABLE KEYS */;
+/*!40000 ALTER TABLE `adjuntos_originaciones` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `entes_inspectores`
 --
 
@@ -152,4 +179,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-06 17:23:17
+-- Dump completed on 2025-01-06 17:30:59
