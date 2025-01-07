@@ -123,6 +123,43 @@ LOCK TABLES `estados` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `observaciónes_pacs`
+--
+
+DROP TABLE IF EXISTS `observaciónes_pacs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `observaciónes_pacs` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `inciso` smallint(5) unsigned DEFAULT NULL,
+  `descripcion` varchar(300) NOT NULL,
+  `fecha_requerida` date NOT NULL,
+  `referencia` varchar(100) NOT NULL,
+  `fecha_negociable` tinyint(1) unsigned DEFAULT 0,
+  `requiere_analisis` tinyint(1) unsigned DEFAULT 0,
+  `responsable_id` int(10) unsigned NOT NULL,
+  `originacion_id` int(10) unsigned NOT NULL,
+  `estado_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_op_responsable_id_idx` (`responsable_id`),
+  KEY `fk_op_originacion_id_idx` (`originacion_id`),
+  KEY `fk_op_estado_id_idx` (`estado_id`),
+  CONSTRAINT `fk_op_estado_id` FOREIGN KEY (`estado_id`) REFERENCES `estados` (`id`) ON UPDATE NO ACTION,
+  CONSTRAINT `fk_op_originacion_id` FOREIGN KEY (`originacion_id`) REFERENCES `originaciones` (`id`) ON UPDATE NO ACTION,
+  CONSTRAINT `fk_op_responsable_id` FOREIGN KEY (`responsable_id`) REFERENCES `usuarios` (`id`) ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `observaciónes_pacs`
+--
+
+LOCK TABLES `observaciónes_pacs` WRITE;
+/*!40000 ALTER TABLE `observaciónes_pacs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `observaciónes_pacs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `origenes`
 --
 
@@ -274,4 +311,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-07 14:46:34
+-- Dump completed on 2025-01-07 16:05:40
