@@ -31,7 +31,10 @@ CREATE TABLE `adjuntos_observacion_pac` (
   `descripcion` varchar(300) DEFAULT '-',
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
+  `observacion_pac_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `adjuntos_observaciones_pacs_id_idx` (`observacion_pac_id`),
+  CONSTRAINT `adjuntos_observaciones_pacs_id` FOREIGN KEY (`observacion_pac_id`) REFERENCES `observaciónes_pacs` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -311,4 +314,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-07 16:12:20
+-- Dump completed on 2025-01-07 16:20:16
