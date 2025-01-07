@@ -206,11 +206,11 @@ CREATE TABLE `originaciones` (
   KEY `fk_originacion_observador_id_idx` (`observador_id`),
   KEY `fk_originacion_sector_id_idx` (`sector_id`),
   KEY `fk_originacion_estado_idx` (`estado_id`),
-  CONSTRAINT `fk_originacion_ente_inspector_id` FOREIGN KEY (`ente_inspector_id`) REFERENCES `entes_inspectores` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_originacion_estado` FOREIGN KEY (`estado_id`) REFERENCES `estados` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_originacion_observador_id` FOREIGN KEY (`observador_id`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_originacion_origen_id` FOREIGN KEY (`origen_id`) REFERENCES `origenes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_originacion_sector_id` FOREIGN KEY (`sector_id`) REFERENCES `sectores` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_originacion_ente_inspector_id` FOREIGN KEY (`ente_inspector_id`) REFERENCES `entes_inspectores` (`id`) ON UPDATE NO ACTION,
+  CONSTRAINT `fk_originacion_estado` FOREIGN KEY (`estado_id`) REFERENCES `estados` (`id`) ON UPDATE NO ACTION,
+  CONSTRAINT `fk_originacion_observador_id` FOREIGN KEY (`observador_id`) REFERENCES `usuarios` (`id`) ON UPDATE NO ACTION,
+  CONSTRAINT `fk_originacion_origen_id` FOREIGN KEY (`origen_id`) REFERENCES `origenes` (`id`) ON UPDATE NO ACTION,
+  CONSTRAINT `fk_originacion_sector_id` FOREIGN KEY (`sector_id`) REFERENCES `sectores` (`id`) ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -311,4 +311,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-07 16:09:08
+-- Dump completed on 2025-01-07 16:12:20
