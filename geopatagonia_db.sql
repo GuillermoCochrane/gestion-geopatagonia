@@ -148,6 +148,45 @@ LOCK TABLES `origenes` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `originaciones`
+--
+
+DROP TABLE IF EXISTS `originaciones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `originaciones` (
+  `id` int(100) unsigned NOT NULL,
+  `fecha_de_observacion` date NOT NULL,
+  `lugar` varchar(60) NOT NULL,
+  `ente_inspector_id` int(100) unsigned NOT NULL,
+  `origen_id` int(10) unsigned NOT NULL,
+  `observador_id` int(100) unsigned NOT NULL,
+  `sector_id` int(100) unsigned NOT NULL,
+  `estado_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_usuario_ente_inspector_idx` (`ente_inspector_id`),
+  KEY `fk_usuario_origen_id_idx` (`origen_id`),
+  KEY `fk_originacion_observador_id_idx` (`observador_id`),
+  KEY `fk_originacion_sector_id_idx` (`sector_id`),
+  KEY `fk_originacion_estado_idx` (`estado_id`),
+  CONSTRAINT `fk_originacion_ente_inspector_id` FOREIGN KEY (`ente_inspector_id`) REFERENCES `entes_inspectores` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_originacion_estado` FOREIGN KEY (`estado_id`) REFERENCES `estados` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_originacion_observador_id` FOREIGN KEY (`observador_id`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_originacion_origen_id` FOREIGN KEY (`origen_id`) REFERENCES `origenes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_originacion_sector_id` FOREIGN KEY (`sector_id`) REFERENCES `sectores` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `originaciones`
+--
+
+LOCK TABLES `originaciones` WRITE;
+/*!40000 ALTER TABLE `originaciones` DISABLE KEYS */;
+/*!40000 ALTER TABLE `originaciones` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `roles`
 --
 
@@ -235,4 +274,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-07 13:18:52
+-- Dump completed on 2025-01-07 14:46:34
