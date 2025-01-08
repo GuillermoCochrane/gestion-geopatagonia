@@ -94,6 +94,14 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: 'RESTRICT',
       onUpdate: 'NO ACTION'
     });
+
+    Usuario.hasMany(models.Originacion, {
+      // Una usuario puede tener (ser observador de) muchas originaciones
+      as: 'originaciones',
+      foreignKey: 'observador_id',
+      onDelete: 'RESTRICT',
+      onUpdate: 'NO ACTION'
+    });
   };
 
   return Usuario;

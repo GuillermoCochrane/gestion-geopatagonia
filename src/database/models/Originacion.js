@@ -73,5 +73,15 @@ module.exports = function(sequelize, DataTypes) {
 
   const Originacion = sequelize.define(alias, cols, config);
 
+  Originacion.associate = function (models) {
+    Originacion.belongsTo(models.Usuario, {
+      // Una observación puede tener a un solo usuario (como observador)
+      as: 'observador',
+      foreignKey: 'observador_id',
+      onDelete: 'RESTRICT',
+      onUpdate: 'NO ACTION'
+    });
+  };
+
   return Originacion;
 };
