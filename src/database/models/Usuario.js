@@ -86,6 +86,14 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: 'RESTRICT',
       onUpdate: 'NO ACTION'
     });
+
+    Usuario.hasMany(models.ObservacionPAC, {
+      // Una usuario puede tener (ser respondsable de) muchas observaciones
+      as: 'observaciones_pacs',
+      foreignKey: 'responsable_id',
+      onDelete: 'RESTRICT',
+      onUpdate: 'NO ACTION'
+    });
   };
 
   return Usuario;
