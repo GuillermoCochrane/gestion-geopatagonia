@@ -3,6 +3,7 @@ module.exports = function(sequelize, DataTypes) {
 
   let cols = {
     id: {
+       // ID del rol, clave primaria autoincremental
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
       primaryKey: true,
@@ -10,11 +11,17 @@ module.exports = function(sequelize, DataTypes) {
     },
 
     rol: {
+      // Nombre del rol, máximo 60 caracteres
       type: DataTypes.STRING(60),
       allowNull: false,
       validate: {
-        len: [1, 60],
-        notEmpty: true,
+        len: {
+          args: [1, 60],
+          msg: 'El nombre del sector debe tener entre 1 y 60 caracteres.',
+        },
+        notEmpty: {
+          msg: 'El campo rol no puede estar vacío.',
+        },
       },
     },
   };
