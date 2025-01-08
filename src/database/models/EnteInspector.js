@@ -1,27 +1,27 @@
 module.exports = function(sequelize, DataTypes) {
 
-  let alias = 'Sector';
+  let alias = 'EnteInspector';
 
   let cols = {
     id: {
-       // ID del sector, clave primaria autoincremental
+       // ID del ente inspector, clave primaria autoincremental
       type: DataTypes.INTEGER.UNSIGNED,
       primaryKey: true,
       allowNull: false,
       autoIncrement: true,
     },
 
-    sector: {
-      // Nombre del sector, máximo 100 caracteres
+    ente_inspector: {
+      // Nombre del ente inspector, máximo 100 caracteres
       type: DataTypes.STRING(100),
       allowNull: false,
       validate: {
         len: {
           args: [1, 100],
-          msg: 'El nombre del sector debe tener entre 1 y 100 caracteres.',
+          msg: 'El nombre del ente inspector debe tener entre 1 y 100 caracteres.',
         },
         notEmpty: {
-          msg: 'El campo "sector" no puede estar vacío.',
+          msg: 'El campo "ente_inspector" no puede estar vacío.',
         },
       },
     },
@@ -32,10 +32,10 @@ module.exports = function(sequelize, DataTypes) {
     createdAt: 'created_at',
     updatedAt: 'updated_at',
     deletedAt: false,
-    tableName: 'sectores'
+    tableName: 'entes_inspectores'
   };
 
-  const Sector = sequelize.define(alias, cols, config);
+  const EnteInspector = sequelize.define(alias, cols, config);
 
-  return Sector;
+  return EnteInspector;
 };

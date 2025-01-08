@@ -20,7 +20,7 @@ module.exports = function(sequelize, DataTypes) {
           msg: 'El nombre del sector debe tener entre 1 y 60 caracteres.',
         },
         notEmpty: {
-          msg: 'El campo rol no puede estar vacío.',
+          msg: 'El campo "rol" no puede estar vacío.',
         },
       },
     },
