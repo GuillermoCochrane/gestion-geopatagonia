@@ -30,7 +30,8 @@ module.exports = function(sequelize, DataTypes) {
     timestamps: true,
     createdAt: 'created_at',
     updatedAt: 'updated_at',
-    deletedAt: false
+    deletedAt: false,
+    tableName: 'roles'
   };
 
   const Rol = sequelize.define(alias, cols, config);

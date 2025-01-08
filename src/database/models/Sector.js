@@ -32,6 +32,7 @@ module.exports = function(sequelize, DataTypes) {
     createdAt: 'created_at',
     updatedAt: 'updated_at',
     deletedAt: false,
+    tableName: 'sectores'
   };
 
   const Sector = sequelize.define(alias, cols, config);
