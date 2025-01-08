@@ -78,5 +78,15 @@ module.exports = function(sequelize, DataTypes) {
 
   const Usuario = sequelize.define(alias, cols, config);
 
+  Usuario.associate = function (models) {
+    Usuario.belongsTo(  models.Rol, {
+      // Una usuario puede tener un solo rol
+      as: 'rol',
+      foreignKey: 'rol_id',
+      onDelete: 'RESTRICT',
+      onUpdate: 'NO ACTION'
+    });
+  };
+
   return Usuario;
 };

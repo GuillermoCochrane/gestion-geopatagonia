@@ -36,5 +36,15 @@ module.exports = function(sequelize, DataTypes) {
 
   const Rol = sequelize.define(alias, cols, config);
 
+  Rol.associate = function (models) {
+    Rol.hasMany(models.Usuario, {
+      // Una rol puede tener muchos usuarios
+      as: 'usuarios',
+      foreignKey: 'rol_id',
+      onDelete: 'RESTRICT',
+      onUpdate: 'NO ACTION'
+    });
+  };
+
   return Rol;
 }
