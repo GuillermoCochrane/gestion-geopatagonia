@@ -58,6 +58,14 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: 'RESTRICT',
       onUpdate: 'NO ACTION'
     });
+
+    Estado.hasMany(models.Originacion, {
+      // Un estado puede tener muchas originaciones
+      as: 'originaciones',
+      foreignKey: 'estado_id',
+      onDelete: 'RESTRICT',
+      onUpdate: 'NO ACTION'
+    });
   };
 
   return Estado;
