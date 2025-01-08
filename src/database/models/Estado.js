@@ -50,5 +50,15 @@ module.exports = function(sequelize, DataTypes) {
 
   const Estado = sequelize.define(alias, cols, config);
 
+  Estado.associate = function (models) {
+    Estado.hasMany(models.ObservacionPAC, {
+      // Un estado puede tener muchas observaciones
+      as: 'observaciones_pacs',
+      foreignKey: 'estado_id',
+      onDelete: 'RESTRICT',
+      onUpdate: 'NO ACTION'
+    });
+  };
+
   return Estado;
 };

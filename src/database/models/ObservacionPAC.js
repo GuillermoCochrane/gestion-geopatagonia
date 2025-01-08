@@ -104,6 +104,14 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: 'RESTRICT',
       onUpdate: 'NO ACTION'
     });
+
+    ObservacionPAC.belongsTo(models.Estado, {
+      // Una observación puede tener a un solo estado
+      as: 'estado',
+      foreignKey: 'estado_id',
+      onDelete: 'RESTRICT',
+      onUpdate: 'NO ACTION'
+    });
   };
 
   return ObservacionPAC;
