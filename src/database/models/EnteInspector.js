@@ -41,7 +41,7 @@ module.exports = function(sequelize, DataTypes) {
 
     EnteInspector.hasMany(models.Originacion, {
       // Un ente inspector puede tener muchas observaciones
-      as: 'observaciones_pacs',
+      as: 'originaciones',
       foreignKey: 'ente_inspector_id',
       onDelete: 'RESTRICT',
       onUpdate: 'NO ACTION'

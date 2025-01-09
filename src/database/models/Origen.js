@@ -41,7 +41,7 @@ module.exports = function(sequelize, DataTypes) {
 
     Origen.hasMany(models.ObservacionPAC, {
       // Un origen puede tener muchas observaciones
-      as: 'observaciones_pacs',
+      as: 'originaciones',
       foreignKey: 'origen_id',
       onDelete: 'RESTRICT',
       onUpdate: 'NO ACTION'
