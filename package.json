@@ -15,7 +15,9 @@
   "license": "ISC",
   "homepage": "https://github.com/GuillermoCochrane/gestion-geopatagonia#readme",
   "dependencies": {
+    "ejs": "^3.1.10",
     "express": "^4.21.2",
+    "method-override": "^3.0.0",
     "mysql2": "^3.12.0",
     "sequelize": "^6.37.5"
   },
