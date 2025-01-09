@@ -37,5 +37,17 @@ module.exports = function(sequelize, DataTypes) {
 
   const Sector = sequelize.define(alias, cols, config);
 
+  Sector.associate = function (models) {
+
+    Sector.hasMany(models.Originacion, {
+      // Un sector puede tener muchas observaciones
+      as: 'originaciones',
+      foreignKey: 'sector_id',
+      onDelete: 'RESTRICT',
+      onUpdate: 'NO ACTION'
+    });
+
+  };
+
   return Sector;
 };

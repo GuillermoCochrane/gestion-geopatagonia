@@ -107,6 +107,14 @@ module.exports = function(sequelize, DataTypes) {
       onUpdate: 'NO ACTION'
     });
 
+    Originacion.belongsTo(models.Sector, {
+      // Una originación puede tener a un solo sector
+      as: 'sector',
+      foreignKey: 'sector_id',
+      onDelete: 'RESTRICT',
+      onUpdate: 'NO ACTION'
+    });
+
     Originacion.hasMany(models.ObservacionPAC, {
       // Una observación puede tener muchas observaciones
       as: 'observaciones_pacs',
