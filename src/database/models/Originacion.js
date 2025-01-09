@@ -74,8 +74,9 @@ module.exports = function(sequelize, DataTypes) {
   const Originacion = sequelize.define(alias, cols, config);
 
   Originacion.associate = function (models) {
+
     Originacion.belongsTo(models.Usuario, {
-      // Una observación puede tener a un solo usuario (como observador)
+      // Una originación puede tener a un solo usuario (como observador)
       as: 'observador',
       foreignKey: 'observador_id',
       onDelete: 'RESTRICT',
@@ -83,9 +84,17 @@ module.exports = function(sequelize, DataTypes) {
     });
 
     Originacion.belongsTo(models.Estado, {
-      // Una observación puede tener a un solo estado
+      // Una originación puede tener a un solo estado
       as: 'estado',
       foreignKey: 'estado_id',
+      onDelete: 'RESTRICT',
+      onUpdate: 'NO ACTION'
+    });
+
+    Originacion.belongsTo(models.EnteInspector, {
+      // Una originación puede tener a un solo ente inspector
+      as: 'ente_inspector',
+      foreignKey: 'ente_inspector_id',
       onDelete: 'RESTRICT',
       onUpdate: 'NO ACTION'
     });
@@ -97,6 +106,7 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: 'RESTRICT',
       onUpdate: 'NO ACTION'
     });
+
   };
 
   return Originacion;

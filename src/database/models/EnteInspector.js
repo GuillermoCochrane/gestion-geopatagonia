@@ -37,5 +37,17 @@ module.exports = function(sequelize, DataTypes) {
 
   const EnteInspector = sequelize.define(alias, cols, config);
 
+  EnteInspector.associate = function (models) {
+
+    EnteInspector.hasMany(models.Originacion, {
+      // Un ente inspector puede tener muchas observaciones
+      as: 'observaciones_pacs',
+      foreignKey: 'ente_inspector_id',
+      onDelete: 'RESTRICT',
+      onUpdate: 'NO ACTION'
+    });
+
+  };
+
   return EnteInspector;
 };
