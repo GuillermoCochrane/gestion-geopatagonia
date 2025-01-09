@@ -117,7 +117,7 @@ CREATE TABLE `estados` (
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,6 +126,7 @@ CREATE TABLE `estados` (
 
 LOCK TABLES `estados` WRITE;
 /*!40000 ALTER TABLE `estados` DISABLE KEYS */;
+INSERT INTO `estados` VALUES (1,'Abierta',NULL,'2025-01-09 22:55:31','2025-01-09 22:55:31'),(2,'No tratado',NULL,'2025-01-09 22:55:54','2025-01-09 22:55:54'),(3,'En Curso',NULL,'2025-01-09 22:56:07','2025-01-09 22:56:07'),(4,'Con Acciones Vencidas',NULL,'2025-01-09 22:56:24','2025-01-09 22:56:24'),(5,'Vencidas',NULL,'2025-01-09 22:56:34','2025-01-09 22:56:34'),(6,'Cerrado',NULL,'2025-01-09 22:56:49','2025-01-09 22:56:49'),(7,'No Verificadas',NULL,'2025-01-09 22:57:07','2025-01-09 22:57:07'),(8,'Verificado No Efecitvo',NULL,'2025-01-09 22:57:33','2025-01-09 22:57:33'),(9,'Verificado Efecitvo',NULL,'2025-01-09 22:57:44','2025-01-09 22:57:44');
 /*!40000 ALTER TABLE `estados` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -321,4 +322,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-09 19:44:55
+-- Dump completed on 2025-01-09 19:58:52
