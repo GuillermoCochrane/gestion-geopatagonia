@@ -37,5 +37,17 @@ module.exports = function(sequelize, DataTypes) {
 
   const Origen = sequelize.define(alias, cols, config);
 
+  Origen.associate = function (models) {
+
+    Origen.hasMany(models.ObservacionPAC, {
+      // Un origen puede tener muchas observaciones
+      as: 'observaciones_pacs',
+      foreignKey: 'origen_id',
+      onDelete: 'RESTRICT',
+      onUpdate: 'NO ACTION'
+    });
+
+  };
+
   return Origen;
 };
