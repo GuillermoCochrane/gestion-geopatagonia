@@ -123,6 +123,14 @@ module.exports = function(sequelize, DataTypes) {
       onUpdate: 'NO ACTION'
     });
 
+    Originacion.hasMany(models.AdjuntoOriginacion, {
+      // Una observación puede tener muchos adjuntos
+      as: 'adjuntos',
+      foreignKey: 'originacion_id',
+      onDelete: 'CASCADE',
+      onUpdate: 'NO ACTION'
+    });
+
   };
 
   return Originacion;

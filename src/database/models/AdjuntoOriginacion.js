@@ -71,5 +71,17 @@ module.exports = function(sequelize, DataTypes) {
 
   const AdjuntoOriginacion = sequelize.define(alias, cols, config);
 
+  AdjuntoOriginacion.associate = function (models) {
+
+    AdjuntoOriginacion.belongsTo(models.Originacion, {
+      // Un adjunto puede pertenecer a una observación
+      as: 'originacion',
+      foreignKey: 'originacion_id',
+      onDelete: 'CASCADE',
+      onUpdate: 'NO ACTION'
+    });
+
+  };
+
   return AdjuntoOriginacion;
-};  
+};
