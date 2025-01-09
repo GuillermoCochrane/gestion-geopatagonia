@@ -114,6 +114,14 @@ module.exports = function(sequelize, DataTypes) {
       onUpdate: 'NO ACTION'
     });
 
+    ObservacionPAC.belongsTo(models.Originacion, {
+      // Una observación puede tener a un solo origen
+      as: 'originacion',
+      foreignKey: 'originacion_id',
+      onDelete: 'RESTRICT',
+      onUpdate: 'NO ACTION'
+    });
+
     ObservacionPAC.hasMany(models.AdjuntoObservacionPAC, {
       // Una observación puede tener muchos adjuntos
       as: 'adjuntos',
@@ -121,6 +129,7 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: 'CASCADE',
       onUpdate: 'NO ACTION'
     });
+    
   };
 
   return ObservacionPAC;

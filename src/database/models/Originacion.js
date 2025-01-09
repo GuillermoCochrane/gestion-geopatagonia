@@ -89,6 +89,14 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: 'RESTRICT',
       onUpdate: 'NO ACTION'
     });
+
+    Originacion.hasMany(models.ObservacionPAC, {
+      // Una observación puede tener muchas observaciones
+      as: 'observaciones_pacs',
+      foreignKey: 'originacion_id',
+      onDelete: 'RESTRICT',
+      onUpdate: 'NO ACTION'
+    });
   };
 
   return Originacion;
