@@ -71,5 +71,17 @@ module.exports = function(sequelize, DataTypes) {
 
   const AdjuntoObservacionPAC = sequelize.define(alias, cols, config);
 
+  AdjuntoObservacionPAC.associate = function (models) {
+
+    AdjuntoObservacionPAC.belongsTo(models.ObservacionPAC, {
+      // Un adjunto puede pertenecer a una observación
+      as: 'observacion_pac',
+      foreignKey: 'observacion_pac_id',
+      onDelete: 'CASCADE',
+      onUpdate: 'NO ACTION'
+    });
+
+  };
+
   return AdjuntoObservacionPAC;
 };  

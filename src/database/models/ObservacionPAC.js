@@ -97,6 +97,7 @@ module.exports = function(sequelize, DataTypes) {
   const ObservacionPAC = sequelize.define(alias, cols, config);
 
   ObservacionPAC.associate = function (models) {
+
     ObservacionPAC.belongsTo(models.Usuario, {
       // Una observación puede tener a un solo usuario (como responsable)
       as: 'responsable',
@@ -110,6 +111,14 @@ module.exports = function(sequelize, DataTypes) {
       as: 'estado',
       foreignKey: 'estado_id',
       onDelete: 'RESTRICT',
+      onUpdate: 'NO ACTION'
+    });
+
+    ObservacionPAC.hasMany(models.AdjuntoObservacionPAC, {
+      // Una observación puede tener muchos adjuntos
+      as: 'adjuntos',
+      foreignKey: 'observacion_pac_id',
+      onDelete: 'CASCADE',
       onUpdate: 'NO ACTION'
     });
   };
