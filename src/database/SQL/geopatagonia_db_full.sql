@@ -270,7 +270,7 @@ CREATE TABLE `sectores` (
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -279,6 +279,7 @@ CREATE TABLE `sectores` (
 
 LOCK TABLES `sectores` WRITE;
 /*!40000 ALTER TABLE `sectores` DISABLE KEYS */;
+INSERT INTO `sectores` VALUES (1,'SMAC','2025-01-09 22:41:20','2025-01-09 22:41:20'),(2,'Coiled Tubing','2025-01-09 22:42:21','2025-01-09 22:42:21'),(3,'Cementación y Estimulación','2025-01-09 22:42:35','2025-01-09 22:42:35'),(4,'Control Geológico','2025-01-09 22:42:48','2025-01-09 22:42:48'),(5,'Wireline','2025-01-09 22:43:04','2025-01-09 22:43:04');
 /*!40000 ALTER TABLE `sectores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -320,4 +321,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-09 19:35:44
+-- Dump completed on 2025-01-09 19:44:55
