@@ -90,7 +90,7 @@ CREATE TABLE `entes_inspectores` (
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,6 +99,7 @@ CREATE TABLE `entes_inspectores` (
 
 LOCK TABLES `entes_inspectores` WRITE;
 /*!40000 ALTER TABLE `entes_inspectores` DISABLE KEYS */;
+INSERT INTO `entes_inspectores` VALUES (1,'GeoPatagonia','2025-01-09 22:19:38','2025-01-09 22:19:38'),(2,'YPF','2025-01-09 22:20:08','2025-01-09 22:20:08'),(3,'Pan American Energy','2025-01-09 22:20:45','2025-01-09 22:20:45'),(4,'Tecpetrol','2025-01-09 22:21:06','2025-01-09 22:21:06'),(5,'CGC','2025-01-09 22:21:20','2025-01-09 22:21:20'),(6,'Chevron','2025-01-09 22:21:37','2025-01-09 22:21:37'),(7,'Petrobras','2025-01-09 22:21:46','2025-01-09 22:21:46');
 /*!40000 ALTER TABLE `entes_inspectores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -242,7 +243,7 @@ CREATE TABLE `roles` (
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -251,6 +252,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
+INSERT INTO `roles` VALUES (1,'Ejecutor','2025-01-09 22:00:04','2025-01-09 22:00:04'),(2,'Originador','2025-01-09 22:00:27','2025-01-09 22:00:27'),(3,'Tratador','2025-01-09 22:00:49','2025-01-09 22:00:49'),(4,'Observador','2025-01-09 22:01:06','2025-01-09 22:01:06'),(5,'Administrador','2025-01-09 22:01:17','2025-01-09 22:01:17'),(6,'GeoPatagonia','2025-01-09 22:15:55','2025-01-09 22:15:55'),(7,'GeoPatagonia','2025-01-09 22:17:26','2025-01-09 22:17:26'),(8,'GeoPatagonia','2025-01-09 22:17:53','2025-01-09 22:17:53');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -317,4 +319,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-09 18:55:09
+-- Dump completed on 2025-01-09 19:24:14
