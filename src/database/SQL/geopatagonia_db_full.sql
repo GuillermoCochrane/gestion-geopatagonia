@@ -179,7 +179,7 @@ CREATE TABLE `origenes` (
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -188,6 +188,7 @@ CREATE TABLE `origenes` (
 
 LOCK TABLES `origenes` WRITE;
 /*!40000 ALTER TABLE `origenes` DISABLE KEYS */;
+INSERT INTO `origenes` VALUES (1,'Accidente','2025-01-09 22:32:59','2025-01-09 22:32:59'),(2,'Rotura de equipo','2025-01-09 22:33:09','2025-01-09 22:33:09'),(3,'Flata de insumos','2025-01-09 22:33:17','2025-01-09 22:33:17'),(4,'Problemas climaticos','2025-01-09 22:33:45','2025-01-09 22:33:45');
 /*!40000 ALTER TABLE `origenes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -319,4 +320,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-09 19:24:14
+-- Dump completed on 2025-01-09 19:35:44
