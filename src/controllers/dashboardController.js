@@ -10,6 +10,11 @@ const dashboardController = {
         const data = await Estado.findAll();
         return res.json({data});
     },
+
+    inspectores: async(req, res) => {
+        const data = await EnteInspector.findAll();
+        return res.json({data});
+    },
     
     origenes: async(req, res) => {
         const data = await Origen.findAll();

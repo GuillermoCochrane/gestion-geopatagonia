@@ -7,6 +7,9 @@ router.get("/", dashboardController.index);
 //Estados
 router.get("/estados", dashboardController.estados);
 
+//Entes Inspectores
+router.get("/inspectores", dashboardController.inspectores);
+
 //Origines
 router.get("/origenes", dashboardController.origenes);
 
