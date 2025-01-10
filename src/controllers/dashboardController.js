@@ -30,6 +30,11 @@ const dashboardController = {
         const data = await Rol.findAll();
         return res.json({data});
     },
+
+    usuarios: async(req, res) => {
+        const data = await Usuario.findAll();
+        return res.json({data});
+    }
 };
 
 module.exports = dashboardController;
