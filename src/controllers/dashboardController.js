@@ -11,6 +11,10 @@ const dashboardController = {
         return res.json({data});
     },
     
+    origenes: async(req, res) => {
+        const data = await Origen.findAll();
+        return res.json({data});
+    }
 };
 
 module.exports = dashboardController;
