@@ -16,4 +16,7 @@ router.get("/origenes", dashboardController.origenes);
 //Sectores
 router.get("/sectores", dashboardController.sectores);
 
+//Roles
+router.get("/roles", dashboardController.roles);
+
 module.exports = router;

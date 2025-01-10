@@ -24,7 +24,12 @@ const dashboardController = {
     sectores: async(req, res) => {
         const data = await Sector.findAll();
         return res.json({data});
-    }
+    },
+
+    roles: async(req, res) => {
+        const data = await Rol.findAll();
+        return res.json({data});
+    },
 };
 
 module.exports = dashboardController;
