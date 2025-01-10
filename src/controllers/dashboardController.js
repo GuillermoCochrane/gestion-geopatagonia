@@ -19,6 +19,11 @@ const dashboardController = {
     origenes: async(req, res) => {
         const data = await Origen.findAll();
         return res.json({data});
+    },
+
+    sectores: async(req, res) => {
+        const data = await Sector.findAll();
+        return res.json({data});
     }
 };
 
