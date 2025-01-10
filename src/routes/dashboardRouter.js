@@ -4,4 +4,7 @@ const dashboardController = require("../controllers/dashboardController");
 
 router.get("/", dashboardController.index);
 
+//Estados
+router.get("/estados", dashboardController.estados);
+
 module.exports = router;
