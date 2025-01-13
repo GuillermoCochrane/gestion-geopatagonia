@@ -1,6 +1,5 @@
 /* Colors & other configs */
 :root {
-  --dropdown-width: 180px;
   --white: #fff;
   --ice: #ebebeb;
   --grey: #666666;
@@ -33,14 +32,15 @@ header.fixed {
   padding: 10px;
   top: 0;
   width: 100%;
-  z-index: 100;
   position: fixed;
   box-shadow: 0px 2px 7px 0px rgba(50,50,50,0.6);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  min-height: 85px;
+  min-height: 10vh;
+  z-index: 100;
+  background-color: var(--ice);
 }
 
 header aside {
@@ -74,18 +74,29 @@ main {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: 90px;
+  margin-top: 60px;
 }
 
 nav{
   width: 20%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 1.5rem;
+  color: var(--white);
+  background-color: var(--darkgrey);
+  box-shadow: 0px 2px 10px 1px rgba(130, 130, 130);
+  padding-top: 30px;
+  position: relative;
+  z-index: -20;
+  height: 90vh;
 }
 
+
 section{
-  width: 80%;
-  min-height: 80vh;
+  min-width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  min-height: 90vh;
 }
