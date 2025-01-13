@@ -110,6 +110,8 @@ CREATE TABLE `observaciónes_pacs` (
   `responsable_id` int(10) unsigned NOT NULL,
   `originacion_id` int(10) unsigned NOT NULL,
   `estado_id` int(10) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `fk_op_responsable_id_idx` (`responsable_id`),
   KEY `fk_op_originacion_id_idx` (`originacion_id`),
@@ -152,6 +154,8 @@ CREATE TABLE `originaciones` (
   `observador_id` int(100) unsigned NOT NULL,
   `sector_id` int(100) unsigned NOT NULL,
   `estado_id` int(10) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `fk_usuario_ente_inspector_idx` (`ente_inspector_id`),
   KEY `fk_usuario_origen_id_idx` (`origen_id`),
@@ -211,6 +215,8 @@ CREATE TABLE `usuarios` (
   `email` varchar(50) NOT NULL,
   `password` varchar(70) NOT NULL,
   `rol_id` int(10) unsigned DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `fk_usuarios_roles_idx` (`rol_id`),
@@ -227,4 +233,4 @@ CREATE TABLE `usuarios` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-13 12:45:58
+-- Dump completed on 2025-01-13 12:58:28
