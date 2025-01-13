@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="icon" type="image/png" href="/img/icon.png"> <!-- favicon -->
+    <!-- por si se usa multiples archivos css -->
+    <% for (const style of styles) { %> 
+      <link rel="stylesheet" href="/css/<%= style %>.css">
+    <% } %>
+    <!-- por si se usa multiples archivos js para front-end -->
+    <%  for (const eachScript of pageScript) { %> 
+        <script src="/js/<%= eachScript %>.js"></script>
+    <% } %>
+    <script src="https://kit.fontawesome.com/8aa20abfbf.js" crossorigin="anonymous"></script> <!--  íconos de fontawesome -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet"> --> <!-- ver fuentes de googlefonts  -->
+    <title><%= title %></title>
+</head>
