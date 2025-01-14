@@ -1,0 +1,9 @@
+<%- include('../partials/head.ejs') %>
+<body>
+  <%- include('../partials/header.ejs', {usuario: "Juan Perez"}) %>
+  <main>
+    <%- include('../partials/dashboard/navBar.ejs') %>
+    <%- include(subSection) %>
+  </main>
+</body>
+</html>
