@@ -1,4 +1,3 @@
-const { estados } = require("../controllers/dashboardController");
 const db = require("../database/models");
 const { Estado, EnteInspector, Origen, Sector, Rol, Usuario } = db;
 
