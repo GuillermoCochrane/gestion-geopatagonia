@@ -6,7 +6,7 @@ const dashboardUtilities = {
 
   styles: ["dashboard"],
 
-  pageScript: ["dashboard"],
+  pageScript: ["dashboard/dashboard"],
 
   indexData: function(){
     return {
@@ -28,10 +28,18 @@ const dashboardUtilities = {
 
       // Convertimos las instancias de Sequelize a objetos planos
       const estadosPlanos = estados.map(estado => estado.get({ plain: true }));
+      const dashboardHeader = {
+        mainLabel: "Estados",
+        newLabel: "Nuevo estado"
+      };
+
+      let pageScript = this.pageScript;
+      pageScript.push("dashboard/sectionhandler");
 
       return {
         subSection: "./estados.ejs",
         title: "Estados",
+        dashboardHeader: dashboardHeader,
         styles: this.styles,
         pageScript: this.pageScript,
         estados: estadosPlanos
