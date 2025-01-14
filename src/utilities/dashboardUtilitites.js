@@ -7,7 +7,7 @@ const dashboardUtilities = {
 
   pageScript: ["dashboard"],
 
-  indexData: () => {
+  indexData: function(){
     return {
       subSection: "../../dashboard/index.ejs",
       title: "Panel de control",
