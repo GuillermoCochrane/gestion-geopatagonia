@@ -8,6 +8,16 @@ const dashboardUtilities = {
 
   pageScript: ["dashboard/dashboard"],
 
+  errorInfo: function(){
+    return {
+      subSection: "./error.ejs",
+      title: "Error",
+      styles: this.styles,
+      pageScript: this.pageScript,
+      error: true,
+    }
+  },
+
   indexData: function(){
     return {
       subSection: "./index.ejs",
@@ -19,11 +29,15 @@ const dashboardUtilities = {
 
   estadosData: async function() {
     try {
-      const estados = await Estado.findAll();
+
+      let estados = await Estado.findAll();
 
       // Si no se encuentran estados, devolvemos un mensaje de error
       if (estados.length === 0) {
-        return { error: true, message: "No hay estados registrados.", errorData: null };
+        let data = this.errorInfo();
+        data.message = "No hay estados registrados.";
+        data.errorData = null;
+        return data;
       }
 
       // Convertimos las instancias de Sequelize a objetos planos
@@ -47,7 +61,10 @@ const dashboardUtilities = {
   
     } catch (error) {
       console.error(error); // Registro del error para depuración
-      return { error: true, message: "Error al obtener los estados.", errorData: error.message || error };
+      let data = this.errorInfo();
+      data.message = "Error al obtener los estados.";
+      data.errorData = error.message || error;
+      return data;
     }
   },
 
