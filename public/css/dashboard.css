@@ -5,6 +5,9 @@
   --grey: #666666;
   --darkgrey: #444444;
   --dark: #222222;
+  --font: #4b4b4d /* rgb(75, 75, 77) */;
+  --logo: #ED3237; /* rgb(237, 50, 55); */
+  --logo-secondary:  #A9abae; /* rgb(169, 171, 174); */ 
   --success: #39b54a;
   --error: orangered;
 }
@@ -83,7 +86,7 @@ nav{
   flex-direction: column;
   padding-left: 1.5rem;
   color: var(--white);
-  background-color: var(--darkgrey);
+  background-color: var(--font);
   box-shadow: 0px 2px 10px 1px rgba(130, 130, 130);
   padding-top: 40px;
   position: relative;
@@ -101,10 +104,11 @@ nav ul li{
 
 nav ul li a{
   color: var(--white);
+  transition: 0.5s ease-out;
 }
 
 nav ul li a:hover{
-  color: var(--ice);
+  color: var(--logo);
   text-decoration: underline;
 }
 
