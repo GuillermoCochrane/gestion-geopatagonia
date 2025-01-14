@@ -1,0 +1,16 @@
+<label>
+  <h4>Nombre</h4>
+  <br>
+  <input type="text" name="nombre" id="nombre" value="<%= locals.estado ? estado.nombre : null %>">
+  <span><%= (locals.errors && errors.nombre) ? errors.nombre.msg : null %></span>
+</label>
+<label>
+  <h4>Descripción</h>
+  <br>
+  <input type="text" name="descripcion" id="descripcion" value="<%= locals.estado ? estado.descripcion : null %>">
+  <span><%= (locals.errors && errors.descripcion) ? errors.descripcion.msg : null %></span>
+</label>
+<br>
+<button type="submit">
+  Nuevo estado
+</button>
