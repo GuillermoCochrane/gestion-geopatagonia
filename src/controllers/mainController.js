@@ -1,6 +1,6 @@
 const mainController = {
     index: (req, res) => {
-        res.send("Página principal");
+        res.redirect("/dashboard");
     },
 };
 

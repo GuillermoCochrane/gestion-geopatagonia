@@ -1,14 +1,11 @@
 const db = require("../database/models");
+const dashboardUtilities = require("../utilities/dashboardUtilitites");
 const { Estado, EnteInspector, Origen, Sector, Rol, Usuario } = db;
 
 const dashboardController = {
+
     index: (req, res) => {
-        let data = {
-            subSection: "../../dashboard/index.ejs",
-            title: "Panel de control",
-            styles: ["dashboard"],
-            pageScript: ["dashboard"]
-        }
+        let data = dashboardUtilities.indexData();
         res.render("partials/dashboard/dashboard", data);
     },
 
