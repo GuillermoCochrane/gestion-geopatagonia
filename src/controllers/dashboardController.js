@@ -6,12 +6,23 @@ const dashboardController = {
 
     index: (req, res) => {
         let data = dashboardUtilities.indexData();
-        res.render("partials/dashboard/dashboard", data);
+        return res.render("dashboard/dashboard", data);
     },
 
     estados: async(req, res) => {
-        const data = await Estado.findAll();
-        return res.json({data});
+        try{
+            let data = await dashboardUtilities.estadosData();
+            if(data.error){
+                return res.render("dashboard/dashboard", data);
+            } 
+            return res.render("dashboard/dashboard", data);
+        } catch (error) {
+            console.error(error);
+            let errorData = dashboardUtilities.errorInfo();
+            errorData.message = "Error interno del servidor.";
+            errorData.errorData = error.message || error;
+            return res.render("dashboard/dashboard", errorData);
+        }
     },
 
     inspectores: async(req, res) => {
