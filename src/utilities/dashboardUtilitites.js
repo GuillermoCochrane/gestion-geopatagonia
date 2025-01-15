@@ -61,12 +61,15 @@ const dashboardUtilities = {
       estadosPlanos = utilities.multipleDateFormat(estadosPlanos);
 
       return {
-        subSection: "./estados.ejs",
+        subSection: "./subSections.ejs",
         title: "Estados",
         dashboardHeader: dashboardHeader,
+        estados: estadosPlanos,
         styles: this.styles,
-        pageScript: this.pageScript,
-        estados: estadosPlanos
+        pageScript: pageScript,
+        tabla: "tablaEstados",
+        path: "estados",
+        formulario: "formEstados"
       };
   
     } catch (error) {
