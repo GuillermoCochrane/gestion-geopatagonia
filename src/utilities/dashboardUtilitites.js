@@ -1,4 +1,5 @@
 const db = require("../database/models");
+const utilities = require("./utilities");
 const { Estado, EnteInspector, Origen, Sector, Rol, Usuario } = db;
 
 const dashboardUtilities = {
@@ -48,6 +49,12 @@ const dashboardUtilities = {
 
       let pageScript = this.pageScript;
       pageScript.push("dashboard/sectionhandler");
+      
+      // recorremos cada estado y le formateamos la fecha de creación y actualización
+      for (const estado of estadosPlanos) {
+        estado.created_at = utilities.formatDateDisplay(estado.created_at);
+        estado.updated_at = utilities.formatDateDisplay(estado.updated_at);
+      }
 
       return {
         subSection: "./estados.ejs",
