@@ -8,13 +8,15 @@ const dashboardUtilities = {
 
   pageScript: ["dashboard/dashboard"],
 
-  errorInfo: function(){
+  errorInfo: function(errormsg){
     return {
       subSection: "./error.ejs",
       title: "Error",
       styles: this.styles,
       pageScript: this.pageScript,
       error: true,
+      message: `No hay ${errormsg} disponibles en la base de datos.`,
+      errorData: null,
     }
   },
 
@@ -34,9 +36,7 @@ const dashboardUtilities = {
 
       // Si no se encuentran estados, devolvemos un mensaje de error
       if (estados.length === 0) {
-        let data = this.errorInfo();
-        data.message = "No hay estados registrados.";
-        data.errorData = null;
+        let data = this.errorInfo("estados");
         return data;
       }
 
