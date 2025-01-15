@@ -74,43 +74,52 @@ const dashboardUtilities = {
   
     } catch (error) {
       console.error(error); // Registro del error para depuración
-      let data = this.errorInfo();
-      data.message = "Error al obtener los estados.";
-      data.errorData = error.message || error;
+      let data = this.errorHandler(error);
       return data;
     }
   },
 
   rolesData: async function() {
-    let roles = await Rol.findAll();
+    try{
 
-    // Si no se encuentran roles, devolvemos un mensaje de error
-    if (roles.length === 0) {
-      let data = this.errorInfo("roles");
+      let roles = await Rol.findAll();
+
+      // Si no se encuentran roles, devolvemos un mensaje de error
+      if (roles.length === 0) {
+        let data = this.errorInfo("roles");
+        return data;
+      }
+
+      // Convertimos las instancias de Sequelize a objetos planos
+      let rolesPlanos = roles.map(rol => rol.get({ plain: true }));
+      const dashboardHeader = {
+        mainLabel: "Roles",
+        newLabel: "Nuevo rol"
+      };
+
+      let pageScript = this.pageScript;
+      pageScript.push("dashboard/sectionhandler");
+
+      // Formateamos la fecha de creación y actualización a cada rol
+      rolesPlanos = utilities.multipleDateFormat(rolesPlanos);
+
+      return {
+        subSection: "./subSections.ejs",
+        title: "Roles",
+        dashboardHeader: dashboardHeader,
+        roles: rolesPlanos,
+        styles: this.styles,
+        pageScript: pageScript,
+        tabla: "tablaRoles",
+        path: "roles",
+        formulario: "formRoles"
+      };
+    } catch (error) {
+      console.error(error); // Registro del error para depuración
+      let data = this.errorHandler(error);
       return data;
     }
-
-    // Convertimos las instancias de Sequelize a objetos planos
-    let rolesPlanos = roles.map(rol => rol.get({ plain: true }));
-    const dashboardHeader = {
-      mainLabel: "Roles",
-      newLabel: "Nuevo rol"
-    };
-
-    let pageScript = this.pageScript;
-    pageScript.push("dashboard/sectionhandler");
-
-    return {
-      subSection: "./roles.ejs",
-      title: "Roles",
-      dashboardHeader: dashboardHeader,
-      styles: this.styles,
-      pageScript: this.pageScript,
-      roles: rolesPlanos
-    };
   },
-
-
 }
 
 module.exports = dashboardUtilities;
