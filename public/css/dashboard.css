@@ -81,7 +81,7 @@ main {
 }
 
 nav{
-  width: 13%;
+  width: 16%;
   display: flex;
   flex-direction: column;
   padding-left: 1.5rem;
@@ -113,7 +113,7 @@ nav ul li a:hover{
 }
 
 section{
-  min-width: 88%;
+  min-width: 85%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
