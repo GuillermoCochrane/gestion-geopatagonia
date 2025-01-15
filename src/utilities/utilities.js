@@ -19,8 +19,17 @@ const utilities = {
       const { day, month, year } = this.getDateParts(date);
       if (!day || !month || !year) return 'Fecha inválida';
   
-      return `${day} / ${month} / ${year}`;
+      return `${day}/${month}/${year}`;
     },
+
+    // Método para devolver una lista de fechas en formato dd / mm / yyyy
+    multipleDateFormat: function(dates){
+      for(const date of dates){
+        date.created_at = this.formatDateDisplay(date.created_at);
+        date.updated_at = this.formatDateDisplay(date.updated_at);
+      }
+      return dates;
+    }
 };
 
 module.exports = utilities;

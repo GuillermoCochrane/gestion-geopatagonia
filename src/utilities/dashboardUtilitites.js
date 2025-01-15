@@ -41,7 +41,7 @@ const dashboardUtilities = {
       }
 
       // Convertimos las instancias de Sequelize a objetos planos
-      const estadosPlanos = estados.map(estado => estado.get({ plain: true }));
+      let estadosPlanos = estados.map(estado => estado.get({ plain: true }));
       const dashboardHeader = {
         mainLabel: "Estados",
         newLabel: "Nuevo estado"
@@ -50,11 +50,8 @@ const dashboardUtilities = {
       let pageScript = this.pageScript;
       pageScript.push("dashboard/sectionhandler");
       
-      // recorremos cada estado y le formateamos la fecha de creación y actualización
-      for (const estado of estadosPlanos) {
-        estado.created_at = utilities.formatDateDisplay(estado.created_at);
-        estado.updated_at = utilities.formatDateDisplay(estado.updated_at);
-      }
+      // Formateamos la fecha de creación y actualización a cada estado 
+      estadosPlanos = utilities.multipleDateFormat(estadosPlanos);
 
       return {
         subSection: "./estados.ejs",
