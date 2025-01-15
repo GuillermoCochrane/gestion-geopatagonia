@@ -14,6 +14,13 @@ const utilities = {
     };
   },
 
+    // Método para devolver la fecha en formato dd / mm / yyyy
+    formatDateDisplay: function(date){
+      const { day, month, year } = this.getDateParts(date);
+      if (!day || !month || !year) return 'Fecha inválida';
+  
+      return `${day} / ${month} / ${year}`;
+    },
 };
 
 module.exports = utilities;
