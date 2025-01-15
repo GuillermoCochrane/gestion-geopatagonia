@@ -18,11 +18,14 @@ const dashboardController = {
             return res.render("dashboard/dashboard", data);
         } catch (error) {
             console.error(error);
-            let errorData = dashboardUtilities.errorInfo();
-            errorData.message = "Error interno del servidor.";
-            errorData.errorData = error.message || error;
-            return res.render("dashboard/dashboard", errorData);
+            let data = dashboardUtilities.errorHandler(error); 
+            return res.render("dashboard/dashboard", data);
         }
+    },
+
+    roles: async(req, res) => {
+        const data = await Rol.findAll();
+        return res.json({data});
     },
 
     inspectores: async(req, res) => {
@@ -37,11 +40,6 @@ const dashboardController = {
 
     sectores: async(req, res) => {
         const data = await Sector.findAll();
-        return res.json({data});
-    },
-
-    roles: async(req, res) => {
-        const data = await Rol.findAll();
         return res.json({data});
     },
 

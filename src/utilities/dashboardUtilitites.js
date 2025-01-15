@@ -20,6 +20,13 @@ const dashboardUtilities = {
     }
   },
 
+  errorHandler: function(error){
+    let errorData = this.errorInfo();
+    errorData.message = "Error interno del servidor.";
+    errorData.errorData = error.message || error;
+    return errorData;
+  },
+
   indexData: function(){
     return {
       subSection: "./index.ejs",
@@ -70,6 +77,36 @@ const dashboardUtilities = {
       return data;
     }
   },
+
+  rolesData: async function() {
+    let roles = await Rol.findAll();
+
+    // Si no se encuentran roles, devolvemos un mensaje de error
+    if (roles.length === 0) {
+      let data = this.errorInfo("roles");
+      return data;
+    }
+
+    // Convertimos las instancias de Sequelize a objetos planos
+    let rolesPlanos = roles.map(rol => rol.get({ plain: true }));
+    const dashboardHeader = {
+      mainLabel: "Roles",
+      newLabel: "Nuevo rol"
+    };
+
+    let pageScript = this.pageScript;
+    pageScript.push("dashboard/sectionhandler");
+
+    return {
+      subSection: "./roles.ejs",
+      title: "Roles",
+      dashboardHeader: dashboardHeader,
+      styles: this.styles,
+      pageScript: this.pageScript,
+      roles: rolesPlanos
+    };
+  },
+
 
 }
 
