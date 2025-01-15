@@ -148,6 +148,8 @@ CREATE TABLE `observaciónes_pacs` (
   `responsable_id` int(10) unsigned NOT NULL,
   `originacion_id` int(10) unsigned NOT NULL,
   `estado_id` int(10) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `fk_op_responsable_id_idx` (`responsable_id`),
   KEY `fk_op_originacion_id_idx` (`originacion_id`),
@@ -209,6 +211,8 @@ CREATE TABLE `originaciones` (
   `observador_id` int(100) unsigned NOT NULL,
   `sector_id` int(100) unsigned NOT NULL,
   `estado_id` int(10) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `fk_usuario_ente_inspector_idx` (`ente_inspector_id`),
   KEY `fk_usuario_origen_id_idx` (`origen_id`),
@@ -254,7 +258,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'Ejecutor','2025-01-09 22:00:04','2025-01-09 22:00:04'),(2,'Originador','2025-01-09 22:00:27','2025-01-09 22:00:27'),(3,'Tratador','2025-01-09 22:00:49','2025-01-09 22:00:49'),(4,'Observador','2025-01-09 22:01:06','2025-01-09 22:01:06'),(5,'Administrador','2025-01-09 22:01:17','2025-01-09 22:01:17'),(6,'GeoPatagonia','2025-01-09 22:15:55','2025-01-09 22:15:55'),(7,'GeoPatagonia','2025-01-09 22:17:26','2025-01-09 22:17:26'),(8,'GeoPatagonia','2025-01-09 22:17:53','2025-01-09 22:17:53');
+INSERT INTO `roles` VALUES (1,'Ejecutor','2025-01-09 22:00:04','2025-01-09 22:00:04'),(2,'Originador','2025-01-09 22:00:27','2025-01-09 22:00:27'),(3,'Tratador','2025-01-09 22:00:49','2025-01-09 22:00:49'),(4,'Observador','2025-01-09 22:01:06','2025-01-09 22:01:06'),(5,'Administrador','2025-01-09 22:01:17','2025-01-09 22:01:17');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -297,6 +301,8 @@ CREATE TABLE `usuarios` (
   `email` varchar(50) NOT NULL,
   `password` varchar(70) NOT NULL,
   `rol_id` int(10) unsigned DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `fk_usuarios_roles_idx` (`rol_id`),
@@ -322,4 +328,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-09 19:58:52
+-- Dump completed on 2025-01-15 19:02:44
