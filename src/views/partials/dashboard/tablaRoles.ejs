@@ -1,0 +1,26 @@
+<thead>
+  <tr>
+    <th> # </th>
+    <th>Rol</th>
+    <th>Creado</th>
+    <th>Modificado</th>
+    <th>Acciones</th>
+  </tr>
+</thead>
+<tbody>
+  <% for (const rol of roles) { %>
+    <tr>
+      <td><%= rol.id %></td>
+      <td><%= rol.rol %></td>
+      <td><%= rol.created_at %></td>
+      <td><%= rol.updated_at %></td>
+      <td>
+        <a href="/dashboard/roles/editar/<%= rol.id %>">
+          <button>
+            Editar
+          </button>
+        </a>
+      </td>
+    </tr>
+  <% } %>
+</tbody>
