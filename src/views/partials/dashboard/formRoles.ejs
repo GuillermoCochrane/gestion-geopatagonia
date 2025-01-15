@@ -1,0 +1,10 @@
+<label>
+  <h4>Rol</h4>
+  <br>
+  <input type="text" name="rol" id="rol" value="<%= locals.rol ? rol.rol : null %>">
+  <span><%= (locals.errors && errors.rol) ? errors.rol.msg : null %></span>
+</label>
+<br>
+<button type="submit">
+  Nuevo Rol
+</button>
