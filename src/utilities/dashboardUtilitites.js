@@ -43,6 +43,43 @@ const dashboardUtilities = {
     };
   },
 
+  dataHandler: async function (modelo, entidad, coleccion) {
+    try {
+      // Consulta a la base de datos
+      let registros = await modelo.findAll();
+
+      // Si no se encuentran registros, devolvemos un mensaje de error
+      if (registros.length === 0) {
+        return this.errorInfo(coleccion);
+      }
+
+      // Convertimos las instancias de Sequelize a objetos planos
+      let registrosPlanos = registros.map((registro) => registro.get({ plain: true }));
+
+      // Formateamos las fechas en los registros
+      registrosPlanos = utilities.multipleDateFormat(registrosPlanos);
+
+      // Generamos encabezado y configuración dinámicos
+      const dashboardHeader =  this.headerData(entidad);
+      const config = this.configData(coleccion); 
+      const pageScript = [...this.pageScript, "dashboard/sectionhandler"];
+
+      // Retornamos los datos procesados
+      return {
+        ...config,
+        pageScript,
+        dashboardHeader,
+        [coleccion]: registrosPlanos,
+        title: dashboardHeader.mainLabel,
+        styles: this.styles,
+        subSection: "./subSections.ejs",
+      };
+    } catch (error) {
+      console.error(error); // Registro del error para depuración
+      return this.errorHandler(error);
+    }
+  },
+
   indexData: function(){
     return {
       subSection: "./index.ejs",
