@@ -1,0 +1,10 @@
+<label>
+  <h4>Sector</h4>
+  <br>
+  <input type="text" name="sector" id="sector" value="<%= locals.sector ? sector.sector : null %>">
+  <span><%= (locals.errors && errors.sector) ? errors.sector.msg : null %></span>
+</label>
+<br>
+<button type="submit">
+  Nuevo Sector
+</button>
