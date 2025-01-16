@@ -28,8 +28,7 @@ const dashboardUtilities = {
   },
 
   configData: function(coleccion){
-    //const newName = coleccion.charAt(0).toUpperCase() + coleccion.slice(1);
-    const newName =`${coleccion.charAt(0).toLowerCase()}${coleccion.slice(1)}`;
+    const newName = coleccion.charAt(0).toUpperCase() + coleccion.slice(1);
     return {
       tabla: `tabla${newName}`,
       path: coleccion,
@@ -37,6 +36,12 @@ const dashboardUtilities = {
     }
   },
 
+  headerData: function (entidad) {
+    return {
+      mainLabel: entidad.charAt(0).toUpperCase() + entidad.slice(1),
+      newLabel: `Nuevo ${entidad}`,
+    };
+  },
 
   indexData: function(){
     return {
