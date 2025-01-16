@@ -29,6 +29,22 @@ const utilities = {
         date.updated_at = this.formatDateDisplay(date.updated_at);
       }
       return dates;
+    },
+
+    // Método para cambiar una cadena de texto a con "_" a espacios y poner las primeras letras en mayúsculas
+    stringformater: function (string) {
+      if (string.includes('_')) {
+          let nuevoStr = string.replace(/_/g, ' ');  
+          let palabras = nuevoStr.split(' ');    
+          string = "";  
+    
+          for (const palabra of palabras) {
+            string += palabra.charAt(0).toUpperCase() + palabra.slice(1) + " ";
+          }
+    
+          string = string.trim();
+      } 
+      return string;
     }
 };
 
