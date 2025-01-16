@@ -1,0 +1,26 @@
+<thead>
+  <tr>
+    <th> # </th>
+    <th>Origen</th>
+    <th>Creado</th>
+    <th>Modificado</th>
+    <th>Acciones</th>
+  </tr>
+</thead>
+<tbody>
+  <% for (const origen of origenes) { %>
+    <tr>
+      <td><%= origen.id %></td>
+      <td><%= origen.origen %></td>
+      <td><%= origen.created_at %></td>
+      <td><%= origen.updated_at %></td>
+      <td>
+        <a href="/dashboard/origenes/editar/<%= origen.id %>">
+          <button>
+            Editar
+          </button>
+        </a>
+      </td>
+    </tr>
+  <% } %>
+</tbody>
