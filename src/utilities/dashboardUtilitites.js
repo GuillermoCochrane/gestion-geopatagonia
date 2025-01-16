@@ -90,88 +90,11 @@ const dashboardUtilities = {
   },
 
   estadosData: async function() {
-    try {
-
-      let estados = await Estado.findAll();
-
-      // Si no se encuentran estados, devolvemos un mensaje de error
-      if (estados.length === 0) {
-        let data = this.errorInfo("estados");
-        return data;
-      }
-
-      // Convertimos las instancias de Sequelize a objetos planos
-      let estadosPlanos = estados.map(estado => estado.get({ plain: true }));
-      const dashboardHeader = {
-        mainLabel: "Estados",
-        newLabel: "Nuevo estado"
-      };
-
-      let pageScript = this.pageScript;
-      pageScript.push("dashboard/sectionhandler");
-      
-      // Formateamos la fecha de creación y actualización a cada estado 
-      estadosPlanos = utilities.multipleDateFormat(estadosPlanos);
-
-      return {
-        subSection: "./subSections.ejs",
-        title: "Estados",
-        dashboardHeader: dashboardHeader,
-        estados: estadosPlanos,
-        styles: this.styles,
-        pageScript: pageScript,
-        tabla: "tablaEstados",
-        path: "estados",
-        formulario: "formEstados"
-      };
-  
-    } catch (error) {
-      console.error(error); // Registro del error para depuración
-      let data = this.errorHandler(error);
-      return data;
-    }
+    return this.dataHandler(Estado, "estado", "estados");
   },
 
   rolesData: async function() {
-    try{
-
-      let roles = await Rol.findAll();
-
-      // Si no se encuentran roles, devolvemos un mensaje de error
-      if (roles.length === 0) {
-        let data = this.errorInfo("roles");
-        return data;
-      }
-
-      // Convertimos las instancias de Sequelize a objetos planos
-      let rolesPlanos = roles.map(rol => rol.get({ plain: true }));
-      const dashboardHeader = {
-        mainLabel: "Roles",
-        newLabel: "Nuevo rol"
-      };
-
-      let pageScript = this.pageScript;
-      pageScript.push("dashboard/sectionhandler");
-
-      // Formateamos la fecha de creación y actualización a cada rol
-      rolesPlanos = utilities.multipleDateFormat(rolesPlanos);
-
-      return {
-        subSection: "./subSections.ejs",
-        title: "Roles",
-        dashboardHeader: dashboardHeader,
-        roles: rolesPlanos,
-        styles: this.styles,
-        pageScript: pageScript,
-        tabla: "tablaRoles",
-        path: "roles",
-        formulario: "formRoles"
-      };
-    } catch (error) {
-      console.error(error); // Registro del error para depuración
-      let data = this.errorHandler(error);
-      return data;
-    }
+    return this.dataHandler(Rol, "rol", "roles");
   },
 }
 
