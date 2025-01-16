@@ -1,0 +1,26 @@
+<thead>
+  <tr>
+    <th> # </th>
+    <th>Ente Inspector</th>
+    <th>Creado</th>
+    <th>Modificado</th>
+    <th>Acciones</th>
+  </tr>
+</thead>
+<tbody>
+  <% for (const ente_inspector of entes_inspectores) { %>
+    <tr>
+      <td><%= ente_inspector.id %></td>
+      <td><%= ente_inspector.ente_inspector %></td>
+      <td><%= ente_inspector.created_at %></td>
+      <td><%= ente_inspector.updated_at %></td>
+      <td>
+        <a href="/dashboard/enteInspector/editar/<%= ente_inspector.id %>">
+          <button>
+            Editar
+          </button>
+        </a>
+      </td>
+    </tr>
+  <% } %>
+</tbody>
