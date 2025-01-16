@@ -88,14 +88,6 @@ const dashboardUtilities = {
       pageScript: this.pageScript
     }
   },
-
-  estadosData: async function() {
-    return this.dataHandler(Estado, "estado", "estados");
-  },
-
-  rolesData: async function() {
-    return this.dataHandler(Rol, "rol", "roles");
-  },
 }
 
 module.exports = dashboardUtilities;
