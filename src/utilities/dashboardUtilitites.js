@@ -27,6 +27,17 @@ const dashboardUtilities = {
     return errorData;
   },
 
+  configData: function(coleccion){
+    //const newName = coleccion.charAt(0).toUpperCase() + coleccion.slice(1);
+    const newName =`${coleccion.charAt(0).toLowerCase()}${coleccion.slice(1)}`;
+    return {
+      tabla: `tabla${newName}`,
+      path: coleccion,
+      formulario: `form${newName}`,
+    }
+  },
+
+
   indexData: function(){
     return {
       subSection: "./index.ejs",
