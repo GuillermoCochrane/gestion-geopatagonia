@@ -12,9 +12,9 @@ const dashboardController = {
     estados: async(req, res) => {
         try{
             let data = await dashboardUtilities.dataHandler(Estado, "estado", "estados");
-            if(data.error){
-                return res.render("dashboard/dashboard", data);
-            } 
+
+            if(data.error) return res.render("dashboard/dashboard", data); 
+
             return res.render("dashboard/dashboard", data);
         } catch (error) {
             console.error(error);
@@ -26,9 +26,9 @@ const dashboardController = {
     roles: async(req, res) => {
         try{
             let data = await dashboardUtilities.dataHandler(Rol, "rol", "roles");
-            if(data.error){
-                return res.render("dashboard/dashboard", data);
-            } 
+
+            if (data.error) return res.render("dashboard/dashboard", data);
+
             return res.render("dashboard/dashboard", data);
         } catch (error) {
             console.error(error);
@@ -37,18 +37,27 @@ const dashboardController = {
         }
     },
 
-    inspectores: async(req, res) => {
-        const data = await EnteInspector.findAll();
-        return res.json({data});
-    },
-    
     origenes: async(req, res) => {
-        const data = await Origen.findAll();
-        return res.json({data});
+        try{
+            let data = await dashboardUtilities.dataHandler(Origen, "origen", "origenes");
+
+            if (data.error) return res.render("dashboard/dashboard", data);
+
+            return res.render("dashboard/dashboard", data);
+        } catch (error) {
+            console.error(error);
+            let data = dashboardUtilities.errorHandler(error); 
+            return res.render("dashboard/dashboard", data);
+        }
     },
 
     sectores: async(req, res) => {
         const data = await Sector.findAll();
+        return res.json({data});
+    },
+
+    inspectores: async(req, res) => {
+        const data = await EnteInspector.findAll();
         return res.json({data});
     },
 
