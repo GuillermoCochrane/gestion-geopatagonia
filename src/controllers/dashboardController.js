@@ -11,7 +11,7 @@ const dashboardController = {
 
     estados: async(req, res) => {
         try{
-            let data = await dashboardUtilities.estadosData();
+            let data = await dashboardUtilities.dataHandler(Estado, "estado", "estados");
             if(data.error){
                 return res.render("dashboard/dashboard", data);
             } 
@@ -25,7 +25,7 @@ const dashboardController = {
 
     roles: async(req, res) => {
         try{
-            let data = await dashboardUtilities.rolesData();
+            let data = await dashboardUtilities.dataHandler(Rol, "rol", "roles");
             if(data.error){
                 return res.render("dashboard/dashboard", data);
             } 
