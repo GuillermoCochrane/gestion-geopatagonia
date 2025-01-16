@@ -36,9 +36,9 @@ const dashboardUtilities = {
     }
   },
 
-  headerData: function (entidad) {
+  headerData: function (entidad, coleccion) {
     return {
-      mainLabel: entidad.charAt(0).toUpperCase() + entidad.slice(1),
+      mainLabel: coleccion.charAt(0).toUpperCase() + coleccion.slice(1),
       newLabel: `Nuevo ${entidad}`,
     };
   },
@@ -60,7 +60,7 @@ const dashboardUtilities = {
       registrosPlanos = utilities.multipleDateFormat(registrosPlanos);
 
       // Generamos encabezado y configuración dinámicos
-      const dashboardHeader =  this.headerData(entidad);
+      const dashboardHeader =  this.headerData(entidad, coleccion);
       const config = this.configData(coleccion); 
       const pageScript = [...this.pageScript, "dashboard/sectionhandler"];
 
