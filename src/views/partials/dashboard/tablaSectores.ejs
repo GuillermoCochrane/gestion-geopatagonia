@@ -1,0 +1,26 @@
+<thead>
+  <tr>
+    <th> # </th>
+    <th>Sector</th>
+    <th>Creado</th>
+    <th>Modificado</th>
+    <th>Acciones</th>
+  </tr>
+</thead>
+<tbody>
+  <% for (const sector of sectores) { %>
+    <tr>
+      <td><%= sector.id %></td>
+      <td><%= sector.sector %></td>
+      <td><%= sector.created_at %></td>
+      <td><%= sector.updated_at %></td>
+      <td>
+        <a href="/dashboard/sectores/editar/<%= sector.id %>">
+          <button>
+            Editar
+          </button>
+        </a>
+      </td>
+    </tr>
+  <% } %>
+</tbody>
