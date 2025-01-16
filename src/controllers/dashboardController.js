@@ -66,8 +66,19 @@ const dashboardController = {
     },
 
     inspectores: async(req, res) => {
-        const data = await EnteInspector.findAll();
-        return res.json({data});
+        try{
+            let data = await dashboardUtilities.dataHandler(EnteInspector, "ente_inspector", "entes_inspectores");
+
+            if (data.error) return res.render("dashboard/dashboard", data);
+
+            return res.render("dashboard/dashboard", data);
+        } catch (error) {
+            console.error(error);
+            let data = dashboardUtilities.errorHandler(error); 
+            return res.render("dashboard/dashboard", data);
+        }
+        /* const data = await EnteInspector.findAll();
+        return res.json({data}); */
     },
 
     usuarios: async(req, res) => {
