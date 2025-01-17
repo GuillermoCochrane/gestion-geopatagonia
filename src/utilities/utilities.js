@@ -31,21 +31,30 @@ const utilities = {
       return dates;
     },
 
-    // Método para cambiar una cadena de texto a con "_" a espacios y poner las primeras letras en mayúsculas
-    stringformater: function (string) {
+    // Método para cambiar una cadena de texto a con "_" a espacios o a "" y poner las primeras letras en mayúsculas
+    adjustUnderscores: function (string, method) {
       if (string.includes('_')) {
+
           let nuevoStr = string.replace(/_/g, ' ');  
           let palabras = nuevoStr.split(' ');    
           string = "";  
-    
           for (const palabra of palabras) {
-            string += palabra.charAt(0).toUpperCase() + palabra.slice(1) + " ";
+            // Pone la primera letra en mayúscula
+            string += this.adjustCase(palabra, true);
+            if (method) string += " ";
           }
-    
           string = string.trim();
       } 
       return string;
-    }
+    },
+
+    // Método para cambiar a mayúsculas o minúsculas la primera letra de cada palabra
+    adjustCase: function(string, capitalize) {
+      return capitalize
+          ? string.charAt(0).toUpperCase() + string.slice(1)
+          : string.charAt(0).toLowerCase() + string.slice(1);
+  }
+
 };
 
 module.exports = utilities;
