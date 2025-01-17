@@ -38,8 +38,8 @@ const dashboardUtilities = {
 
   headerData: function (entidad, coleccion) {
     return {
-      mainLabel: coleccion.charAt(0).toUpperCase() + coleccion.slice(1),
-      newLabel: `Nuevo ${entidad}`,
+      mainLabel: utilities.adjustUnderscores(coleccion,true),
+      newLabel: `Nuevo ${utilities.adjustUnderscores(entidad,true)}`,
     };
   },
 
