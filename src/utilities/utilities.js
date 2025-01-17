@@ -33,18 +33,21 @@ const utilities = {
 
     // Método para cambiar una cadena de texto a con "_" a espacios o a "" y poner las primeras letras en mayúsculas
     adjustUnderscores: function (string, method) {
+      let palabras = [];
+      // Si hay "_" en el string, separa las palabras; sino, pone el string en un array
       if (string.includes('_')) {
-
           let nuevoStr = string.replace(/_/g, ' ');  
-          let palabras = nuevoStr.split(' ');    
-          string = "";  
-          for (const palabra of palabras) {
-            // Pone la primera letra en mayúscula
-            string += this.adjustCase(palabra, true);
-            if (method) string += " ";
-          }
-          string = string.trim();
+          palabras = nuevoStr.split(' ');
+      } else {
+        palabras.push(string);
+      }
+      string = "";  
+      for (const palabra of palabras) {
+        // Pone la primera letra en mayúscula
+        string += this.adjustCase(palabra, true);
+        if (method) string += " ";
       } 
+      string = string.trim();
       return string;
     },
 
