@@ -28,7 +28,7 @@ const dashboardUtilities = {
   },
 
   configData: function(coleccion){
-    const newName = coleccion.charAt(0).toUpperCase() + coleccion.slice(1);
+    const newName = utilities.adjustUnderscores(coleccion,false) //coleccion.charAt(0).toUpperCase() + coleccion.slice(1);
     return {
       tabla: `tabla${newName}`,
       path: coleccion,
