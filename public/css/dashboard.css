@@ -80,7 +80,7 @@ main {
   margin-top: 60px;
 }
 
-nav{
+nav.sidebar{
   width: 16%;
   display: flex;
   flex-direction: column;
@@ -93,21 +93,21 @@ nav{
   height: 90vh;
 }
 
-nav ul{
+nav.sidebar ul{
   list-style: none;
   font-size: 18px;
 }
 
-nav ul li{
+nav.sidebar ul li{
   margin: 10px 0;
 }
 
-nav ul li a{
+nav.sidebar ul li a{
   color: var(--white);
   transition: 0.5s ease-out;
 }
 
-nav ul li a:hover{
+nav.sidear ul li a:hover{
   color: var(--logo);
   text-decoration: underline;
 }
