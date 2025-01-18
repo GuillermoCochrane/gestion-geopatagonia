@@ -162,3 +162,8 @@ main section.managemnet header nav button.inactive{
   color: var(--font);
   border: 2px var(--font) solid;
 }
+
+main section.managemnet header h2{
+  font-size: 22px;
+  padding-top: 10px;
+}
