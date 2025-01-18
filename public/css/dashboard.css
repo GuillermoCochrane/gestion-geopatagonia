@@ -145,3 +145,20 @@ main section.managemnet header nav{
   padding-bottom: 30px;
 }
 
+main section.managemnet header nav button{
+  padding-block: 8px;
+  padding-inline: 12px;
+  border: 2px transparent solid;
+  background-color: var(--font);
+  color: var(--white);
+  font-size: 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+main section.managemnet header nav button.inactive{
+  background-color: var(--white);
+  color: var(--font);
+  border: 2px var(--font) solid;
+}
