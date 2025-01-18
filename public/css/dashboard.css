@@ -120,3 +120,7 @@ section{
   align-items: center;
   min-height: 90vh;
 }
+
+section.managemnet{
+  justify-content: space-around;
+}

@@ -1,9 +1,9 @@
-<section>
+<section class="managemnet">
   <%- include("../partials/dashboard/buttonsHeader.ejs") %>
   <table id="main-content">
     <%- include(`../partials/dashboard/${tabla}.ejs`) %>
   </table >
-    <form action=<%=`/dashboard/${path}/nuevo`%> method="POST"  id="new-content" hidden>
-      <%- include(`../partials/dashboard/${formulario}.ejs`) %>
-    </form>
+  <form action=<%=`/dashboard/${path}/nuevo`%> method="POST"  id="new-content" hidden>
+    <%- include(`../partials/dashboard/${formulario}.ejs`) %>
+  </form>
 </section>
