@@ -13,7 +13,7 @@ window.addEventListener("load", () =>{
       if (buttonNumber === 1) {
           mainTitle.style.display = "block";
           newTitle.style.display = "none";
-          mainContent.style.display = "block";
+          mainContent.style.display = "table";
           newContent.style.display = "none";
       } else if (buttonNumber === 2) {
           mainTitle.style.display = "none";
