@@ -191,4 +191,9 @@ main section.managemnet table#main-content td button{
 
 main section.managemnet table#main-content tr{
   border: 1px solid var(--font);
+  transition: 0.5s ease-out;
+}
+
+main section.managemnet table#main-content tr:hover{
+  background-color: var(--white);
 }
