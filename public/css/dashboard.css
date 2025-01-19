@@ -175,6 +175,12 @@ main section.managemnet table#main-content{
   font-size: 14px;
 }
 
+main section.managemnet table#main-content th{
+  padding: 10px;
+  background-color: var(--font);
+  color: var(--white);
+}
+
 main section.managemnet table#main-content td{
   padding: 7px;
   text-align: center;
