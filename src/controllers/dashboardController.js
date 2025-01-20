@@ -88,7 +88,11 @@ const dashboardController = {
             return res.json(message);
         }
         return res.json({data});
-    }
+    },
+
+    nuevoEstado: async(req, res) => {
+        return res.json(req.body);
+    },
 };
 
 module.exports = dashboardController;

@@ -6,6 +6,7 @@ router.get("/", dashboardController.index);
 
 //Estados
 router.get("/estados", dashboardController.estados);
+router.post("/estados/nuevo", dashboardController.nuevoEstado);
 
 //Entes Inspectores
 router.get("/inspectores", dashboardController.inspectores);
