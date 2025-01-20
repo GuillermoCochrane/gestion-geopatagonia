@@ -21,7 +21,7 @@ router.get("/sectores", dashboardController.sectores);
 router.post("/sectores/nuevo", dashboardController.nuevoSector);
 
 //Entes Inspectores
-router.get("/inspectores", dashboardController.inspectores);
+router.get("/entes_inspectores", dashboardController.inspectores);
 router.post("/entes_inspectores/nuevo", dashboardController.nuevoInspector);
 
 //Usuarios
