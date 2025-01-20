@@ -18,6 +18,7 @@ router.post("/origenes/nuevo", dashboardController.nuevoOrigen);
 
 //Sectores
 router.get("/sectores", dashboardController.sectores);
+router.post("/sectores/nuevo", dashboardController.nuevoSector);
 
 //Entes Inspectores
 router.get("/inspectores", dashboardController.inspectores);

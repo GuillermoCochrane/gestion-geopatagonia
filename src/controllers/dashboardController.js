@@ -101,6 +101,10 @@ const dashboardController = {
     nuevoOrigen: async(req, res) => {
         return res.json(req.body);
     },
+
+    nuevoSector: async(req, res) => {
+        return res.json(req.body);
+    },
 };
 
 module.exports = dashboardController;
