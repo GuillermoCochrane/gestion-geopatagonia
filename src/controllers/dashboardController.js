@@ -94,6 +94,10 @@ const dashboardController = {
         return res.json(req.body);
     },
 
+    nuevoRol: async(req, res) => {
+        return res.json(req.body);
+    },
+
     nuevoOrigen: async(req, res) => {
         return res.json(req.body);
     },

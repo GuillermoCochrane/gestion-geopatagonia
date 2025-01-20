@@ -10,6 +10,7 @@ router.post("/estados/nuevo", dashboardController.nuevoEstado);
 
 //Roles
 router.get("/roles", dashboardController.roles);
+router.post("/roles/nuevo", dashboardController.nuevoRol);
 
 //Origines
 router.get("/origenes", dashboardController.origenes);
