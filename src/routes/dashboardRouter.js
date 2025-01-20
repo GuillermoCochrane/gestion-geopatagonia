@@ -8,17 +8,18 @@ router.get("/", dashboardController.index);
 router.get("/estados", dashboardController.estados);
 router.post("/estados/nuevo", dashboardController.nuevoEstado);
 
-//Entes Inspectores
-router.get("/inspectores", dashboardController.inspectores);
+//Roles
+router.get("/roles", dashboardController.roles);
 
 //Origines
 router.get("/origenes", dashboardController.origenes);
+router.post("/origenes/nuevo", dashboardController.nuevoOrigen);
 
 //Sectores
 router.get("/sectores", dashboardController.sectores);
 
-//Roles
-router.get("/roles", dashboardController.roles);
+//Entes Inspectores
+router.get("/inspectores", dashboardController.inspectores);
 
 //Usuarios
 router.get("/usuarios", dashboardController.usuarios);

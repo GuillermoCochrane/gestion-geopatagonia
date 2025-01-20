@@ -93,6 +93,10 @@ const dashboardController = {
     nuevoEstado: async(req, res) => {
         return res.json(req.body);
     },
+
+    nuevoOrigen: async(req, res) => {
+        return res.json(req.body);
+    },
 };
 
 module.exports = dashboardController;
