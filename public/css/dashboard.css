@@ -114,7 +114,7 @@ nav.sidear ul li a:hover{
 
 main section{
   min-width: 85%;
-  /* display: flex; */
+  display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
@@ -122,7 +122,7 @@ main section{
 }
 
 main section.managemnet{
-  justify-content: space-around;
+  display: block;
 }
 
 main section.managemnet header{
