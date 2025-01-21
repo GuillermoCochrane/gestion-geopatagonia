@@ -182,7 +182,7 @@ main section.managemnet table#main-content th{
 }
 
 main section.managemnet table#main-content td{
-  padding: 7px;
+  padding: 5px;
   text-align: center;
   border: 1px solid var(--font);
 }
@@ -193,6 +193,15 @@ main section.managemnet table#main-content td:nth-child(2){
 
 main section.managemnet table#main-content td button{
   margin: auto;
+  padding-inline: 8px;
+  padding-block: 4px;
+  border: 2px transparent solid;
+  background-color: var(--font);
+  color: var(--white);
+  font-size: 14px;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 main section.managemnet table#main-content tr{
