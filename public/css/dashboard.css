@@ -277,3 +277,16 @@ main section.managemnet form#new-content span{
   color: var(--logo);
   width: 90%;
 }
+
+main section.managemnet form#new-content button{
+  width: 40%;
+  padding-block: 10px;
+  border: 2px transparent solid;
+  background-color: var(--font);
+  color: var(--white);
+  font-size: 15px;
+  border-radius: 8px;
+  /* font-weight: bold; */
+  cursor: pointer;
+  margin-inline: auto;
+}
