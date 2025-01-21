@@ -15,11 +15,15 @@ window.addEventListener("load", () =>{
           newTitle.style.display = "none";
           mainContent.style.display = "table";
           newContent.style.display = "none";
+					mainButton.classList.add("inactive");
+					newButton.classList.remove("inactive");
       } else if (buttonNumber === 2) {
           mainTitle.style.display = "none";
           newTitle.style.display = "block";
           mainContent.style.display = "none";
           newContent.style.display = "block";
+					mainButton.classList.remove("inactive");
+					newButton.classList.add("inactive");
       }
   }
 })
