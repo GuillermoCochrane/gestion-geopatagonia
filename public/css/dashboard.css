@@ -269,3 +269,11 @@ main section.managemnet form#new-content input:focus{
   outline: 2px solid var(--font);
   outline-offset: 1px;
 }
+
+main section.managemnet form#new-content span{
+  font-size: 14px;
+  display: inline-block;
+  padding-inline: 3px;
+  color: var(--logo);
+  width: 90%;
+}
