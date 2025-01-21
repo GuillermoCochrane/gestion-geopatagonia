@@ -231,11 +231,26 @@ main section.managemnet form#new-content{
   background-color: var(--logo-secondary);
   width: 30%;
   padding-inline: 30px;
-  padding-block: 20px;
+  padding-top: 10px;
+  padding-bottom: 20px;
   border-radius: 10px;
   font-size: 15px;
 }
 
 main section.managemnet form#new-content.hidden{
   display: none;
+}
+
+main section.managemnet form#new-content label{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+main section.managemnet form#new-content label h4{
+  font-size: 18px;
+  margin-bottom: 5px;
+  padding-inline: 3px;
+  font-weight: bold;
 }
