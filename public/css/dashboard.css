@@ -254,3 +254,18 @@ main section.managemnet form#new-content label h4{
   padding-inline: 3px;
   font-weight: bold;
 }
+
+main section.managemnet form#new-content input{
+  width: 100%;
+  padding-block: 3px;
+  padding-inline: 5px;
+  border-radius: 6px;
+  font-size: 15px;
+  border: 2px solid transparent;
+  margin-bottom: 10px;
+}
+
+main section.managemnet form#new-content input:focus{
+  outline: 2px solid var(--font);
+  outline-offset: 1px;
+}
