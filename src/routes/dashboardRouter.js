@@ -5,6 +5,7 @@ const dashboardController = require("../controllers/dashboardController");
 //Middlewares
 
 const rolValidation = require("../middlewares/validations/rolValidationMDW");
+const origenValidation = require("../middlewares/validations/origenValidationMDW");
 
 
 //Rutas
@@ -20,7 +21,7 @@ router.post("/roles/nuevo", rolValidation, dashboardController.nuevoRol);
 
 //Origines
 router.get("/origenes", dashboardController.origenes);
-router.post("/origenes/nuevo", dashboardController.nuevoOrigen);
+router.post("/origenes/nuevo", origenValidation, dashboardController.nuevoOrigen);
 
 //Sectores
 router.get("/sectores", dashboardController.sectores);

@@ -121,13 +121,28 @@ const dashboardController = {
     },
 
     nuevoOrigen: async(req, res) => {
-        try{
-            let data = Origen.create(req.body);
-            if(data) return res.redirect("/dashboard/origenes");
-        } catch (error) {
-            console.error(error);
-            let data = dashboardUtilities.errorHandler(error); 
-            return res.render("dashboard/dashboard", data);
+        let errors = validationResult(req);
+        if (errors.isEmpty()){
+            try{
+                let data = Origen.create(req.body);
+                if(data) return res.redirect("/dashboard/origenes");
+            } catch (error) {
+                console.error(error);
+                let data = dashboardUtilities.errorHandler(error); 
+                return res.render("dashboard/dashboard", data);
+            }
+        } else {
+            try{
+                let data = await dashboardUtilities.dataHandler(Origen, "origen", "origenes");
+                data.origen = {origen: req.body.origen};
+                data.errors = errors.mapped();
+                if (data.error) return res.render("dashboard/dashboard", data);
+                return res.render("dashboard/dashboard", data);
+            } catch (error) {
+                console.error(error);
+                let data = dashboardUtilities.errorHandler(error); 
+                return res.render("dashboard/dashboard", data);
+            }
         }
     },
 
