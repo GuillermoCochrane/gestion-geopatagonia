@@ -112,6 +112,18 @@ const dashboardUtilities = {
     return data;
   },
 
+  createOrigen: async function(data){
+    try {
+      const origen = await Origen.create(data);
+      if (origen) {
+        return origen;
+      }
+    } catch (error) {
+      console.error(error); 
+      return this.errorHandler(error);
+    }
+  },
+
 }
 
 module.exports = dashboardUtilities;
