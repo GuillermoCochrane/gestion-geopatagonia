@@ -1,9 +1,9 @@
 <section class="managemnet">
   <%- include("../partials/dashboard/buttonsHeader.ejs") %>
-  <table id="main-content">
+  <table id="main-content" class="<%= locals.errors ? "hidden" : "" %>">
     <%- include(`../partials/dashboard/${tabla}.ejs`) %>
   </table >
-  <form action=<%=`/dashboard/${path}/nuevo`%> method="POST"  id="new-content" class="hidden" >
+  <form action=<%=`/dashboard/${path}/nuevo`%> method="POST"  id="new-content" class="<%= locals.errors ? "" : "hidden" %>" >
     <%- include(`../partials/dashboard/${formulario}.ejs`) %>
   </form>
 </section>

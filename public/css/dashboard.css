@@ -118,8 +118,8 @@ main section{
   min-width: 85%;
   display: flex;
   flex-direction: column;
-  /* justify-content: space-evenly; */
-  /* align-items: center; */
+  justify-content: space-evenly;
+  align-items: center;
   min-height: 90vh;
   height: max-content;
   overflow-x: hidden;
@@ -130,6 +130,7 @@ main section{
 
 main section.managemnet{
   display: flex;
+  justify-content: flex-start;
 }
 
 main section.managemnet header{
