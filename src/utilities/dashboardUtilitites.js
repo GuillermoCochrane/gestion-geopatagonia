@@ -104,6 +104,14 @@ const dashboardUtilities = {
     }
   },
 
+  rolErrorsHandler: async function(modelo, entidad, coleccion, oldDara, errors){
+    let data = await this.dataHandler(modelo, entidad, coleccion);
+    console.log(data);
+    data.rol = {rol: oldDara.rol};
+    data.errors = errors;
+    return data;
+  },
+
 }
 
 module.exports = dashboardUtilities;
