@@ -121,7 +121,14 @@ const dashboardController = {
     },
 
     nuevoOrigen: async(req, res) => {
-        return res.json(req.body);
+        try{
+            let data = Origen.create(req.body);
+            if(data) return res.redirect("/dashboard/origenes");
+        } catch (error) {
+            console.error(error);
+            let data = dashboardUtilities.errorHandler(error); 
+            return res.render("dashboard/dashboard", data);
+        }
     },
 
     nuevoSector: async(req, res) => {
