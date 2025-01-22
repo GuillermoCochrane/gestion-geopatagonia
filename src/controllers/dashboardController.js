@@ -99,10 +99,9 @@ const dashboardController = {
         let errors = validationResult(req);
         if (errors.isEmpty()){
             try{
-                let rol = await Rol.create(req.body);
-                if(rol){
-                    return res.redirect("/dashboard/roles");
-                }
+                let rol = await dashboardUtilities.createRol(req.body);
+                if(rol.error) return res.render("dashboard/dashboard", rol);
+                return res.redirect("/dashboard/roles");
             } catch (error) {
                 console.error(error);
                 let data = dashboardUtilities.errorHandler(error); 
