@@ -109,10 +109,8 @@ const dashboardController = {
             }
         } else {
             try{
-                let data = await dashboardUtilities.dataHandler(Rol, "rol", "roles");
+                let data = await dashboardUtilities.rolErrorsHandler(Rol, "rol", "roles", req.body, errors.mapped());
                 if (data.error) return res.render("dashboard/dashboard", data);
-                data.rol = {rol: req.body.rol,};
-                data.errors = errors.mapped();
                 return res.render("dashboard/dashboard", data);
             } catch (error) {
                 console.error(error);
