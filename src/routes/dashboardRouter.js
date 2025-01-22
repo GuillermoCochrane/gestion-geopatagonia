@@ -2,6 +2,12 @@ const express = require("express");
 const router = express.Router();
 const dashboardController = require("../controllers/dashboardController");
 
+//Middlewares
+
+const rolValidation = require("../middlewares/validations/rolValidationMDW");
+
+
+//Rutas
 router.get("/", dashboardController.index);
 
 //Estados
@@ -10,7 +16,7 @@ router.post("/estados/nuevo", dashboardController.nuevoEstado);
 
 //Roles
 router.get("/roles", dashboardController.roles);
-router.post("/roles/nuevo", dashboardController.nuevoRol);
+router.post("/roles/nuevo", rolValidation, dashboardController.nuevoRol);
 
 //Origines
 router.get("/origenes", dashboardController.origenes);

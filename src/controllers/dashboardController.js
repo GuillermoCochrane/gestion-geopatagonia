@@ -1,6 +1,7 @@
 const db = require("../database/models");
 const dashboardUtilities = require("../utilities/dashboardUtilitites");
 const { Estado, EnteInspector, Origen, Sector, Rol, Usuario } = db;
+const { validationResult } = require('express-validator');
 
 const dashboardController = {
 
@@ -95,16 +96,30 @@ const dashboardController = {
     },
 
     nuevoRol: async(req, res) => {
-        try{
-            let data = { rol: req.body.rol, };
-            let rol = await Rol.create(data);
-            if(rol){
-                return res.redirect("/dashboard/roles");
+        let errors = validationResult(req);
+        if (errors.isEmpty()){
+            try{
+                let rol = await Rol.create(req.body);
+                if(rol){
+                    return res.redirect("/dashboard/roles");
+                }
+            } catch (error) {
+                console.error(error);
+                let data = dashboardUtilities.errorHandler(error); 
+                return res.render("dashboard/dashboard", data);
             }
-        } catch (error) {
-            console.error(error);
-            let data = dashboardUtilities.errorHandler(error); 
-            return res.render("dashboard/dashboard", data);
+        } else {
+            try{
+                let data = await dashboardUtilities.dataHandler(Rol, "rol", "roles");
+                if (data.error) return res.render("dashboard/dashboard", data);
+                data.rol = {rol: req.body.rol,};
+                data.errors = errors.mapped();
+                return res.render("dashboard/dashboard", data);
+            } catch (error) {
+                console.error(error);
+                let data = dashboardUtilities.errorHandler(error); 
+                return res.render("dashboard/dashboard", data);
+            }
         }
     },
 
