@@ -95,7 +95,17 @@ const dashboardController = {
     },
 
     nuevoRol: async(req, res) => {
-        return res.json(req.body);
+        try{
+            let data = { rol: req.body.rol, };
+            let rol = await Rol.create(data);
+            if(rol){
+                return res.redirect("/dashboard/roles");
+            }
+        } catch (error) {
+            console.error(error);
+            let data = dashboardUtilities.errorHandler(error); 
+            return res.render("dashboard/dashboard", data);
+        }
     },
 
     nuevoOrigen: async(req, res) => {
