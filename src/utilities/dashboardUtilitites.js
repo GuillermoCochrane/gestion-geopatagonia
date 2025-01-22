@@ -88,6 +88,22 @@ const dashboardUtilities = {
       pageScript: this.pageScript
     }
   },
+
+  createRol: async function(data){
+    try {
+      // Creamos el objeto Rol
+      const rol = await Rol.create(data);
+
+      // Si se crea el rol, devolvemos el objeto creado
+      if (rol) {
+        return rol;
+      }
+    } catch (error) {
+      console.error(error); // Registro del error para depuración
+      return this.errorHandler(error);
+    }
+  },
+
 }
 
 module.exports = dashboardUtilities;
