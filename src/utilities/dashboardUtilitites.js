@@ -89,6 +89,18 @@ const dashboardUtilities = {
     }
   },
 
+  createEntity: async function (Model, data) {
+    try {
+      // Almacenamos en entity los datos recibidos al intentar crear la entrada en la base de datos
+      const entity = await Model.create(data);
+      // si se crea la entrada, devolvemos el objeto creado
+      if (entity) return entity;
+    } catch (error) {
+      console.error(error); // Registro del error para depuración
+      return this.errorHandler(error);
+    }
+  },  
+
   createRol: async function(data){
     try {
       // Creamos el objeto Rol
