@@ -43,10 +43,10 @@ const dashboardUtilities = {
     };
   },
 
-  dataHandler: async function (modelo, entidad, coleccion) {
+  dataHandler: async function (Modelo, entidad, coleccion) {
     try {
       // Consulta a la base de datos
-      let registros = await modelo.findAll();
+      let registros = await Modelo.findAll();
 
       // Si no se encuentran registros, devolvemos un mensaje de error
       if (registros.length === 0) {
@@ -89,10 +89,10 @@ const dashboardUtilities = {
     }
   },
 
-  createEntity: async function (Model, data) {
+  createEntity: async function (Modelo, data) {
     try {
       // Almacenamos en entity los datos recibidos al intentar crear la entrada en la base de datos
-      const entity = await Model.create(data);
+      const entity = await Modelo.create(data);
       // si se crea la entrada, devolvemos el objeto creado
       if (entity) return entity;
     } catch (error) {
@@ -101,38 +101,11 @@ const dashboardUtilities = {
     }
   },  
 
-  createRol: async function(data){
-    try {
-      // Creamos el objeto Rol
-      const rol = await Rol.create(data);
-
-      // Si se crea el rol, devolvemos el objeto creado
-      if (rol) {
-        return rol;
-      }
-    } catch (error) {
-      console.error(error); // Registro del error para depuración
-      return this.errorHandler(error);
-    }
-  },
-
   rolErrorsHandler: async function(modelo, entidad, coleccion, oldDara, errors){
     let data = await this.dataHandler(modelo, entidad, coleccion);
     data.rol = {rol: oldDara.rol};
     data.errors = errors;
     return data;
-  },
-
-  createOrigen: async function(data){
-    try {
-      const origen = await Origen.create(data);
-      if (origen) {
-        return origen;
-      }
-    } catch (error) {
-      console.error(error); 
-      return this.errorHandler(error);
-    }
   },
 
   origenErrorsHandler: async function(modelo, entidad, coleccion, oldDara, errors){
