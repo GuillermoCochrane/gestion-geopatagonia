@@ -99,7 +99,29 @@ const dashboardUtilities = {
       console.error(error); // Registro del error para depuración
       return this.errorHandler(error);
     }
-  },  
+  },
+
+  formErrorsHandler: async function(modelo, entidad, coleccion, oldData, errors) {
+    try {
+        // Obtiene datos para la vista
+        let data = await this.dataHandler(modelo, entidad, coleccion); 
+
+        // Itera sobre todas las claves de oldData
+        for (const fieldName in oldData) {
+            // Agrega cada campo ingresado por el usuario al objeto de datos
+            data[fieldName] = { [fieldName]: oldData[fieldName] };
+        }
+
+        // Agrega los errores de validación
+        data.errors = errors;
+
+        return data; // Devuelve el objeto con los datos necesarios para la vista
+    } catch (error) {
+        console.error(error);
+        return this.errorHandler(error); // Maneja errores internos si ocurre un problema
+    }
+},
+
 
   rolErrorsHandler: async function(modelo, entidad, coleccion, oldDara, errors){
     let data = await this.dataHandler(modelo, entidad, coleccion);
