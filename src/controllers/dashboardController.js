@@ -99,7 +99,7 @@ const dashboardController = {
         let errors = validationResult(req);
         if (errors.isEmpty()){
             try{
-                let rol = await dashboardUtilities.createRol(req.body);
+                let rol = await dashboardUtilities.createEntity(Rol, req.body);
                 if(rol.error) return res.render("dashboard/dashboard", rol);
                 return res.redirect("/dashboard/roles");
             } catch (error) {
@@ -124,7 +124,7 @@ const dashboardController = {
         let errors = validationResult(req);
         if (errors.isEmpty()){
             try{
-                let origen = await dashboardUtilities.createOrigen(req.body);
+                let origen = await dashboardUtilities.createEntity(Origen, req.body);
                 if(origen.error) return res.render("dashboard/dashboard", origen);
                 return res.redirect("/dashboard/origenes");
             } catch (error) {
