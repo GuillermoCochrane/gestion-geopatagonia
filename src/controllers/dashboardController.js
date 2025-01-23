@@ -146,7 +146,8 @@ const dashboardController = {
     },
 
     nuevoSector: async(req, res) => {
-        return res.json(req.body);
+        let sector = await Sector.create(req.body)
+        if (sector) return res.redirect("/dashboard/sectores")
     },
 
     nuevoInspector: async(req, res) => {
