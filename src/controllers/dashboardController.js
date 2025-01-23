@@ -171,8 +171,28 @@ const dashboardController = {
     },
 
     nuevoInspector: async(req, res) => {
-        let enteInspector = await dashboardUtilities.createEntity(EnteInspector, req.body);
-        if (enteInspector) return res.redirect("/dashboard/entes_inspectores");
+        let errors = validationResult(req);
+        if (errors.isEmpty()){
+            try{
+                let inspector = await dashboardUtilities.createEntity(EnteInspector, req.body);
+                if(inspector.error) return res.render("dashboard/dashboard", inspector);
+                return res.redirect("/dashboard/entes_inspectores");
+            } catch (error) {
+                console.error(error);
+                let data = dashboardUtilities.errorHandler(error); 
+                return res.render("dashboard/dashboard", data);
+            }
+        } else {
+            try{
+                let data = await dashboardUtilities.formErrorsHandler(EnteInspector, "ente_inspector", "entes_inspectores", req.body, errors.mapped());
+                if (data.error) return res.render("dashboard/dashboard", data);
+                return res.render("dashboard/dashboard", data);
+            } catch (error) {
+                console.error(error);
+                let data = dashboardUtilities.errorHandler(error); 
+                return res.render("dashboard/dashboard", data);
+            }
+        }
     }
 };
 
