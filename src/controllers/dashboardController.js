@@ -146,8 +146,28 @@ const dashboardController = {
     },
 
     nuevoSector: async(req, res) => {
-        let sector = await Sector.create(req.body)
-        if (sector) return res.redirect("/dashboard/sectores")
+        let errors = validationResult(req);
+        if (errors.isEmpty()){
+            try{
+                let sector = await dashboardUtilities.createEntity(Sector, req.body);
+                if(sector.error) return res.render("dashboard/dashboard", sector);
+                return res.redirect("/dashboard/sectores");
+            } catch (error) {
+                console.error(error);
+                let data = dashboardUtilities.errorHandler(error); 
+                return res.render("dashboard/dashboard", data);
+            }
+        } else {
+            try{
+                let data = await dashboardUtilities.formErrorsHandler(Sector, "sector", "sectores", req.body, errors.mapped());
+                if (data.error) return res.render("dashboard/dashboard", data);
+                return res.render("dashboard/dashboard", data);
+            } catch (error) {
+                console.error(error);
+                let data = dashboardUtilities.errorHandler(error); 
+                return res.render("dashboard/dashboard", data);
+            }
+        }
     },
 
     nuevoInspector: async(req, res) => {
