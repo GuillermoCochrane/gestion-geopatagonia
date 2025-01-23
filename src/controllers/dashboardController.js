@@ -171,7 +171,8 @@ const dashboardController = {
     },
 
     nuevoInspector: async(req, res) => {
-        return res.json(req.body);
+        let enteInspector = await dashboardUtilities.createEntity(EnteInspector, req.body);
+        if (enteInspector) return res.redirect("/dashboard/entes_inspectores");
     }
 };
 
