@@ -6,6 +6,7 @@ const dashboardController = require("../controllers/dashboardController");
 
 const rolValidation = require("../middlewares/validations/rolValidationMDW");
 const origenValidation = require("../middlewares/validations/origenValidationMDW");
+const sectorValidation = require("../middlewares/validations/sectorValidationMDW");
 
 
 //Rutas
@@ -25,7 +26,7 @@ router.post("/origenes/nuevo", origenValidation, dashboardController.nuevoOrigen
 
 //Sectores
 router.get("/sectores", dashboardController.sectores);
-router.post("/sectores/nuevo", dashboardController.nuevoSector);
+router.post("/sectores/nuevo", sectorValidation, dashboardController.nuevoSector);
 
 //Entes Inspectores
 router.get("/entes_inspectores", dashboardController.inspectores);
