@@ -172,13 +172,13 @@ main section.managemnet header nav button.inactive{
 
 main section.managemnet header h2{
   font-size: 22px;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
 }
 
 main section.managemnet table#main-content{
   width: 80%;
   border-collapse: collapse;
-  margin: auto;
+  margin-inline: auto;
   font-size: 14px;
 }
 
@@ -277,10 +277,11 @@ main section.managemnet form#new-content span{
   padding-inline: 3px;
   color: var(--logo);
   width: 90%;
+  margin-inline: auto;
 }
 
 main section.managemnet form#new-content button{
-  width: 40%;
+  width: 50%;
   padding-block: 10px;
   border: 2px transparent solid;
   background-color: var(--font);
