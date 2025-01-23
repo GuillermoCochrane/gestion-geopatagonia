@@ -109,7 +109,7 @@ const dashboardController = {
             }
         } else {
             try{
-                let data = await dashboardUtilities.rolErrorsHandler(Rol, "rol", "roles", req.body, errors.mapped());
+                let data = await dashboardUtilities.formErrorsHandler(Rol, "rol", "roles", req.body, errors.mapped());
                 if (data.error) return res.render("dashboard/dashboard", data);
                 return res.render("dashboard/dashboard", data);
             } catch (error) {
@@ -134,7 +134,7 @@ const dashboardController = {
             }
         } else {
             try{
-                let data = await dashboardUtilities.origenErrorsHandler(Origen, "origen", "origenes", req.body, errors.mapped());
+                let data = await dashboardUtilities.formErrorsHandler(Origen, "origen", "origenes", req.body, errors.mapped());
                 if (data.error) return res.render("dashboard/dashboard", data);
                 return res.render("dashboard/dashboard", data);
             } catch (error) {
