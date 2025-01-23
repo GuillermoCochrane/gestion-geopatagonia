@@ -6,4 +6,4 @@ const enteInspectorValidationMDW = [
       .isLength({max: 100}).withMessage("El campo Ente Inspector no puede tener más de 100 caracteres")
 ];
 
-module.exports = sectorValidationMDW;
+module.exports = enteInspectorValidationMDW;

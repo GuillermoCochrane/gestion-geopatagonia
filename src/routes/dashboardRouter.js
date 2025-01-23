@@ -3,11 +3,10 @@ const router = express.Router();
 const dashboardController = require("../controllers/dashboardController");
 
 //Middlewares
-
 const rolValidation = require("../middlewares/validations/rolValidationMDW");
 const origenValidation = require("../middlewares/validations/origenValidationMDW");
 const sectorValidation = require("../middlewares/validations/sectorValidationMDW");
-
+const enteValidation = require("../middlewares/validations/enteInspectorValidationMDW");
 
 //Rutas
 router.get("/", dashboardController.index);
@@ -30,7 +29,7 @@ router.post("/sectores/nuevo", sectorValidation, dashboardController.nuevoSector
 
 //Entes Inspectores
 router.get("/entes_inspectores", dashboardController.inspectores);
-router.post("/entes_inspectores/nuevo", dashboardController.nuevoInspector);
+router.post("/entes_inspectores/nuevo", enteValidation, dashboardController.nuevoInspector);
 
 //Usuarios
 router.get("/usuarios", dashboardController.usuarios);
