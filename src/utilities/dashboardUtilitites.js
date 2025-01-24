@@ -105,11 +105,12 @@ const dashboardUtilities = {
     try {
         // Obtiene datos para la vista
         let data = await this.dataHandler(modelo, entidad, coleccion); 
-
+        console.log(data);
+        data[entidad] = {};
         // Itera sobre todas las claves de oldData
         for (const fieldName in oldData) {
             // Agrega cada campo ingresado por el usuario al objeto de datos
-            data[fieldName] = { [fieldName]: oldData[fieldName] };
+            data[entidad][fieldName] = oldData[fieldName];
         }
 
         // Agrega los errores de validación
