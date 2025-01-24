@@ -3,6 +3,7 @@ const router = express.Router();
 const dashboardController = require("../controllers/dashboardController");
 
 //Middlewares
+const estadosValidation = require("../middlewares/validations/estadoValidationMDW");
 const rolValidation = require("../middlewares/validations/rolValidationMDW");
 const origenValidation = require("../middlewares/validations/origenValidationMDW");
 const sectorValidation = require("../middlewares/validations/sectorValidationMDW");
@@ -13,7 +14,7 @@ router.get("/", dashboardController.index);
 
 //Estados
 router.get("/estados", dashboardController.estados);
-router.post("/estados/nuevo", dashboardController.nuevoEstado);
+router.post("/estados/nuevo", estadosValidation, dashboardController.nuevoEstado);
 
 //Roles
 router.get("/roles", dashboardController.roles);
