@@ -5,7 +5,8 @@
 </label>
 <label>
   <h4>Descripción</h4>
-  <textarea name="descripcion" id="descripcion" value="<%= locals.estado ? estado.descripcion : null %>">
+  <textarea name="descripcion" id="descripcion" >
+    <%= locals.estado ? estado.descripcion : null %>
   </textarea>
   <span><%= (locals.errors && errors.descripcion) ? errors.descripcion.msg : null %></span>
 </label>
