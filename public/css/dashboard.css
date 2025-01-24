@@ -256,6 +256,7 @@ main section.managemnet form#new-content label h4{
   font-weight: bold;
 }
 
+main section.managemnet form#new-content textarea,
 main section.managemnet form#new-content input{
   width: 100%;
   padding-block: 3px;
@@ -264,6 +265,11 @@ main section.managemnet form#new-content input{
   font-size: 15px;
   border: 2px solid transparent;
   margin-bottom: 10px;
+}
+
+main section.managemnet form#new-content textarea{
+  resize: none;
+  field-sizing: content;
 }
 
 main section.managemnet form#new-content input:focus{
