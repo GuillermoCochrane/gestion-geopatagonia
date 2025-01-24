@@ -117,10 +117,10 @@ const dashboardUtilities = {
         data.errors = errors;
 
         return data; // Devuelve el objeto con los datos necesarios para la vista
-    } catch (error) {
-        console.error(error);
-        return this.errorHandler(error); // Maneja errores internos si ocurre un problema
-    }
+        } catch (error) {
+          console.error(error);
+          return this.errorHandler(error); // Maneja errores internos si ocurre un problema
+        }
 },
 
 }

@@ -92,7 +92,8 @@ const dashboardController = {
     },
 
     nuevoEstado: async(req, res) => {
-        return res.json(req.body);
+        await Estado.create(req.body);
+        return res.redirect("/dashboard/estados")
     },
 
     nuevoRol: async(req, res) => {
