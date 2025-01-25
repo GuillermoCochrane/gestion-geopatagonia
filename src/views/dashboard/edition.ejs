@@ -1,0 +1,10 @@
+<section class="managemnet">
+  <header>
+    <h2 id="mainTitle" class="editFormTitle">
+      <%= title %>
+    </h2>
+  </header>
+  <form action=<%=`/dashboard/${path}/editar/${id}`%> method="POST"  id="dashboard-form" class="<%= locals.errors ? "" : "hidden" %>" >
+    <%- include(`../partials/dashboard/${formulario}.ejs`) %>
+  </form>
+</section>
