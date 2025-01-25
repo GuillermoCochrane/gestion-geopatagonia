@@ -215,7 +215,28 @@ const dashboardController = {
                 return res.render("dashboard/dashboard", data);
             }
         }
-    }
+    },
+
+    estado: async(req, res) => {
+        try{
+            let estado = await Estado.findByPk(req.params.id);
+            estado = estado.get({ plain: true });
+            let data = {estado};
+            data.title = "Editando Estado: " + estado.nombre;
+            data.path = "estados";
+            data.id = req.params.id;
+            data.subSection = "./edition.ejs";
+            data.styles = dashboardUtilities.styles;
+            data.pageScript = dashboardUtilities.pageScript;
+            data.formulario = "formEstados";
+            return res.render("dashboard/dashboard", data);
+        } catch (error) {
+            console.error(error);
+            let data = dashboardUtilities.errorHandler(error); 
+            return res.render("dashboard/dashboard", data);
+        }
+    },
+
 };
 
 module.exports = dashboardController;

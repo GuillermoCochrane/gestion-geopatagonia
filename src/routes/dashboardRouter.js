@@ -15,6 +15,7 @@ router.get("/", dashboardController.index);
 //Estados
 router.get("/estados", dashboardController.estados);
 router.post("/estados/nuevo", estadosValidation, dashboardController.nuevoEstado);
+router.get("/estados/editar/:id", dashboardController.estado);
 
 //Roles
 router.get("/roles", dashboardController.roles);
