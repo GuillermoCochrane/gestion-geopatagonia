@@ -175,6 +175,11 @@ main section.managemnet header h2{
   padding-bottom: 20px;
 }
 
+.editFormTitle {
+  padding-top: 1.5em;
+  margin-inline: auto;
+}
+
 main section.managemnet table#main-content{
   width: 80%;
   border-collapse: collapse;
@@ -224,7 +229,7 @@ main section.managemnet table#main-content tr:hover{
   background-color: var(--white);
 }
 
-main section.managemnet form#new-content{
+main section.managemnet form#dashboard-form{
   padding-block: 1em;
   margin-inline: auto;
   display: flex;
@@ -238,26 +243,26 @@ main section.managemnet form#new-content{
   font-size: 15px;
 }
 
-main section.managemnet form#new-content.hidden{
+main section.managemnet form#dashboard-form.hidden{
   display: none;
 }
 
-main section.managemnet form#new-content label{
+main section.managemnet form#dashboard-form label{
   display: flex;
   flex-direction: column;
   width: 100%;
   margin-bottom: 15px;
 }
 
-main section.managemnet form#new-content label h4{
+main section.managemnet form#dashboard-form label h4{
   font-size: 18px;
   margin-bottom: 5px;
   padding-inline: 3px;
   font-weight: bold;
 }
 
-main section.managemnet form#new-content textarea,
-main section.managemnet form#new-content input{
+main section.managemnet form#dashboard-form textarea,
+main section.managemnet form#dashboard-form input{
   width: 100%;
   padding-block: 3px;
   padding-inline: 5px;
@@ -267,17 +272,17 @@ main section.managemnet form#new-content input{
   margin-bottom: 10px;
 }
 
-main section.managemnet form#new-content textarea{
+main section.managemnet form#dashboard-form textarea{
   resize: none;
   field-sizing: content;
 }
 
-main section.managemnet form#new-content input:focus{
+main section.managemnet form#dashboard-form input:focus{
   outline: 2px solid var(--font);
   outline-offset: 1px;
 }
 
-main section.managemnet form#new-content span{
+main section.managemnet form#dashboard-form span{
   font-size: 14px;
   display: inline-block;
   padding-inline: 3px;
@@ -286,7 +291,7 @@ main section.managemnet form#new-content span{
   margin-inline: auto;
 }
 
-main section.managemnet form#new-content button{
+main section.managemnet form#dashboard-form button{
   width: 50%;
   padding-block: 10px;
   border: 2px transparent solid;
