@@ -1,6 +1,4 @@
-const db = require("../database/models");
 const utilities = require("./utilities");
-const { Estado, EnteInspector, Origen, Sector, Rol, Usuario } = db;
 
 const dashboardUtilities = {
 
@@ -46,11 +44,12 @@ const dashboardUtilities = {
 
   finalData: function(entidad, coleccion, registros, id = null){
     const config = this.configData(coleccion);
+    const headerData = this.headerData(entidad, coleccion);
     return {
       ...config,
-      dashboardHeader: this.headerData(entidad, coleccion),
+      dashboardHeader: headerData,
       pageScript: [...this.pageScript, "dashboard/sectionhandler"],
-      title: id ? `Editando ${entidad} : ${registros[0].nombre}` : config.mainLabel,
+      title: id ? `Editando ${headerData.entity} : ${registros[0].nombre}` : config.mainLabel,
       styles: this.styles,
       subSection: id ? "./edition.ejs" : "./subSections.ejs",
       [coleccion]: registros,
