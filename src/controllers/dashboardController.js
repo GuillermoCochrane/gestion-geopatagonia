@@ -78,8 +78,6 @@ const dashboardController = {
             let data = dashboardUtilities.errorHandler(error); 
             return res.render("dashboard/dashboard", data);
         }
-        /* const data = await EnteInspector.findAll();
-        return res.json({data}); */
     },
 
     usuarios: async(req, res) => {
@@ -219,16 +217,8 @@ const dashboardController = {
 
     estado: async(req, res) => {
         try{
-            let estado = await Estado.findByPk(req.params.id);
-            estado = estado.get({ plain: true });
-            let data = {estado};
-            data.title = "Editando Estado: " + estado.nombre;
-            data.path = "estados";
-            data.id = req.params.id;
-            data.subSection = "./edition.ejs";
-            data.styles = dashboardUtilities.styles;
-            data.pageScript = dashboardUtilities.pageScript;
-            data.formulario = "formEstados";
+            let data = await dashboardUtilities.dataHandler(Estado, "estado", "estados", req.params.id);
+            if(data.error) return res.render("dashboard/dashboard", data);
             return res.render("dashboard/dashboard", data);
         } catch (error) {
             console.error(error);
