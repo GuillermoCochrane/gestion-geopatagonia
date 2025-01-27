@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
       autoIncrement: true,
     },
 
-    nombre: {
+    estado: {
       // Nombre del estado, máximo 60 caracteres
       type: DataTypes.STRING(60),
       allowNull: false,
