@@ -49,10 +49,10 @@ const dashboardUtilities = {
       ...config,
       dashboardHeader: headerData,
       pageScript: [...this.pageScript, "dashboard/sectionhandler"],
-      title: id ? `Editando ${headerData.entity} : ${registros[0].nombre}` : config.mainLabel,
+      title: id ? `Editando ${headerData.entity} : ${registros[0][entidad]}` : config.mainLabel,
       styles: this.styles,
       subSection: id ? "./edition.ejs" : "./subSections.ejs",
-      [coleccion]: registros,
+      [coleccion]: id ? registros[0] : registros,
       id,
     }
   },
@@ -72,7 +72,6 @@ const dashboardUtilities = {
 
       // Convertimos las instancias de Sequelize a objetos planos
       let registrosPlanos = registros.map((registro) => registro.get({ plain: true }));
-      console.log(registrosPlanos[0].nombre);
       // Formateamos las fechas en los registros
       registrosPlanos = utilities.multipleDateFormat(registrosPlanos);
 
