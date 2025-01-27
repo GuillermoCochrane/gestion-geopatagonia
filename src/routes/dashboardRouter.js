@@ -30,6 +30,7 @@ router.get("/origenes/editar/:id", dashboardController.origen);
 //Sectores
 router.get("/sectores", dashboardController.sectores);
 router.post("/sectores/nuevo", sectorValidation, dashboardController.nuevoSector);
+router.get("/sectores/editar/:id", dashboardController.sector);
 
 //Entes Inspectores
 router.get("/entes_inspectores", dashboardController.inspectores);

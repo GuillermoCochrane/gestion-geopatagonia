@@ -251,6 +251,18 @@ const dashboardController = {
         }
     },
 
+    sector: async(req, res) => {
+        try{
+            let data = await dashboardUtilities.dataHandler(Sector, "sector", "sectores", req.params.id);
+            if(data.error) return res.render("dashboard/dashboard", data);
+            return res.render("dashboard/dashboard", data);
+        } catch (error) {
+            console.error(error);
+            let data = dashboardUtilities.errorHandler(error); 
+            return res.render("dashboard/dashboard", data);
+        }
+    },
+
 };
 
 module.exports = dashboardController;
