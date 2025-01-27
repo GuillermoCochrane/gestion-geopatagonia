@@ -20,6 +20,7 @@ router.get("/estados/editar/:id", dashboardController.estado);
 //Roles
 router.get("/roles", dashboardController.roles);
 router.post("/roles/nuevo", rolValidation, dashboardController.nuevoRol);
+router.get("/roles/editar/:id", dashboardController.rol);
 
 //Origines
 router.get("/origenes", dashboardController.origenes);
