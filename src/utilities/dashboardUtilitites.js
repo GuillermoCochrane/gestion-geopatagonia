@@ -43,7 +43,7 @@ const dashboardUtilities = {
     };
   },
 
-  finalData: function(entidad, coleccion, id ){
+  finalData: function(entidad, coleccion, registros, id = null){
     const config = this.configData(coleccion);
     return {
       ...config,
@@ -52,14 +52,17 @@ const dashboardUtilities = {
       title: id ? `Editando ${config.mainLabel} : ${registrosPlanos[0].nombre}` : config.mainLabel,
       styles: this.styles,
       subSection: id ? "./edition.ejs" : "./subSections.ejs",
+      [coleccion]: registros,
     }
   },
 
-
   dataHandler: async function (Modelo, entidad, coleccion, id = null) {
     try {
-      // Consulta a la base de datos
-      let registros = await Modelo.findAll();
+      // Construir el objeto "where" de manera condicional
+      const where = id ? { id } : {};
+
+      // Obtener los registros usando findAll con el "where" opcional
+      let registros = await Modelo.findAll({ where });
 
       // Si no se encuentran registros, devolvemos un mensaje de error
       if (registros.length === 0) {
@@ -72,21 +75,8 @@ const dashboardUtilities = {
       // Formateamos las fechas en los registros
       registrosPlanos = utilities.multipleDateFormat(registrosPlanos);
 
-      // Generamos encabezado y configuración dinámicos
-      const dashboardHeader =  this.headerData(entidad, coleccion);
-      const config = this.configData(coleccion); 
-      const pageScript = [...this.pageScript, "dashboard/sectionhandler"];
-
       // Retornamos los datos procesados
-      return {
-        ...config,
-        pageScript,
-        dashboardHeader,
-        [coleccion]: registrosPlanos,
-        title: dashboardHeader.mainLabel,
-        styles: this.styles,
-        subSection: "./subSections.ejs",
-      };
+      return  this.finalData(entidad, coleccion, registrosPlanos, id);
     } catch (error) {
       console.error(error); // Registro del error para depuración
       return this.errorHandler(error);
