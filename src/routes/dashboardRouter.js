@@ -35,6 +35,7 @@ router.get("/sectores/editar/:id", dashboardController.sector);
 //Entes Inspectores
 router.get("/entes_inspectores", dashboardController.inspectores);
 router.post("/entes_inspectores/nuevo", enteValidation, dashboardController.nuevoInspector);
+router.get("/ente_inspector/editar/:id", dashboardController.inspector);
 
 //Usuarios
 router.get("/usuarios", dashboardController.usuarios);
