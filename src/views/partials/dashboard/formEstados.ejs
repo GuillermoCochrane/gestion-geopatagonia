@@ -1,6 +1,6 @@
 <label>
   <h4>Nombre</h4>
-  <input type="text" name="nombre" id="nombre" value="<%= locals.estado ? estado.nombre : null %>">
+  <input type="text" name="nombre" id="nombre" value="<%= locals.estado ? estado.estado : null %>">
   <span><%= (locals.errors && errors.nombre) ? errors.nombre.msg : null %></span>
 </label>
 <label>
