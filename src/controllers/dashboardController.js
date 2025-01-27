@@ -239,6 +239,18 @@ const dashboardController = {
         }
     },
 
+    origen: async(req, res) => {
+        try{
+            let data = await dashboardUtilities.dataHandler(Origen, "origen", "origenes", req.params.id);
+            if(data.error) return res.render("dashboard/dashboard", data);
+            return res.render("dashboard/dashboard", data);
+        } catch (error) {
+            console.error(error);
+            let data = dashboardUtilities.errorHandler(error); 
+            return res.render("dashboard/dashboard", data);
+        }
+    },
+
 };
 
 module.exports = dashboardController;

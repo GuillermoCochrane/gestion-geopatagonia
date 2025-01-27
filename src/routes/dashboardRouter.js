@@ -25,6 +25,7 @@ router.get("/roles/editar/:id", dashboardController.rol);
 //Origines
 router.get("/origenes", dashboardController.origenes);
 router.post("/origenes/nuevo", origenValidation, dashboardController.nuevoOrigen);
+router.get("/origenes/editar/:id", dashboardController.origen);
 
 //Sectores
 router.get("/sectores", dashboardController.sectores);
