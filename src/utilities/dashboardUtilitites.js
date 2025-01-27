@@ -43,7 +43,20 @@ const dashboardUtilities = {
     };
   },
 
-  dataHandler: async function (Modelo, entidad, coleccion) {
+  finalData: function(entidad, coleccion, id ){
+    const config = this.configData(coleccion);
+    return {
+      ...config,
+      dashboardHeader: this.headerData(entidad, coleccion),
+      pageScript: [...this.pageScript, "dashboard/sectionhandler"],
+      title: id ? `Editando ${config.mainLabel} : ${registrosPlanos[0].nombre}` : config.mainLabel,
+      styles: this.styles,
+      subSection: id ? "./edition.ejs" : "./subSections.ejs",
+    }
+  },
+
+
+  dataHandler: async function (Modelo, entidad, coleccion, id = null) {
     try {
       // Consulta a la base de datos
       let registros = await Modelo.findAll();
