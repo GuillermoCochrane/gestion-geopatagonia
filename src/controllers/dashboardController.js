@@ -300,6 +300,31 @@ const dashboardController = {
         }
     },
 
+    editarOrigen: async(req, res) => {
+        const errors = validationResult(req)
+        if (errors.isEmpty()){
+            try{
+                let origen = await dashboardUtilities.updateEntity(Origen, req.body, req.params.id);
+                if(origen.error) return res.render("dashboard/dashboard", origen);
+                return res.redirect("/dashboard/origenes");
+            } catch (error) {
+                console.error(error);
+                let data = dashboardUtilities.errorHandler(error); 
+                return res.render("dashboard/dashboard", data);
+            }
+        } else {
+            try{
+                let data = await dashboardUtilities.formErrorsHandler(Origen, "origen", "origenes", req.body, errors.mapped(), req.params.id);
+                if (data.error) return res.render("dashboard/dashboard", data);
+                return res.render("dashboard/dashboard", data);
+            } catch (error) {
+                console.error(error);
+                let data = dashboardUtilities.errorHandler(error); 
+                return res.render("dashboard/dashboard", data);
+            }
+        }
+    },
+
     sector: async(req, res) => {
         try{
             let data = await dashboardUtilities.dataHandler(Sector, "sector", "sectores", req.params.id);
