@@ -112,7 +112,6 @@ const dashboardController = {
                 return res.render("dashboard/dashboard", data);
             }
         }
-
     },
 
     nuevoRol: async(req, res) => {
@@ -228,20 +227,27 @@ const dashboardController = {
     },
 
     editarEstado: async(req, res) => {
-        try{
-            await Estado.update(
-                req.body,
-                {
-                    where: {
-                        id: req.params.id
-                    }
-                }
-            );
-            return res.redirect("/dashboard/estados");
-        } catch (error) {
-            console.error(error);
-            let data = dashboardUtilities.errorHandler(error); 
-            return res.render("dashboard/dashboard", data);
+        const errors = validationResult(req)
+        if (errors.isEmpty()){
+            try{
+                let estado = await dashboardUtilities.updateEntity(Estado, req.body, req.params.id);
+                if(estado.error) return res.render("dashboard/dashboard", estado);
+                return res.redirect("/dashboard/estados");
+            } catch (error) {
+                console.error(error);
+                let data = dashboardUtilities.errorHandler(error); 
+                return res.render("dashboard/dashboard", data);
+            }
+        } else {
+            try{
+                let data = await dashboardUtilities.formErrorsHandler(Estado, "estado", "estados", req.body, errors.mapped(), req.params.id);
+                if (data.error) return res.render("dashboard/dashboard", data);
+                return res.render("dashboard/dashboard", data);
+            } catch (error) {
+                console.error(error);
+                let data = dashboardUtilities.errorHandler(error); 
+                return res.render("dashboard/dashboard", data);
+            }
         }
     },
 
