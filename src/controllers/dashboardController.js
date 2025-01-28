@@ -337,6 +337,31 @@ const dashboardController = {
         }
     },
 
+    editarSector: async(req, res) => {
+        const errors = validationResult(req)
+        if (errors.isEmpty()){
+            try{
+                let sector = await dashboardUtilities.updateEntity(Sector, req.body, req.params.id);
+                if(sector.error) return res.render("dashboard/dashboard", sector);
+                return res.redirect("/dashboard/sectores");
+            } catch (error) {
+                console.error(error);
+                let data = dashboardUtilities.errorHandler(error); 
+                return res.render("dashboard/dashboard", data);
+            }
+        } else {
+            try{
+                let data = await dashboardUtilities.formErrorsHandler(Sector, "sector", "sectores", req.body, errors.mapped(), req.params.id);
+                if (data.error) return res.render("dashboard/dashboard", data);
+                return res.render("dashboard/dashboard", data);
+            } catch (error) {
+                console.error(error);
+                let data = dashboardUtilities.errorHandler(error); 
+                return res.render("dashboard/dashboard", data);
+            }
+        }
+    },
+
     inspector: async(req, res) => {
         try{
             let data = await dashboardUtilities.dataHandler(EnteInspector, "ente_inspector", "entes_inspectores", req.params.id);
