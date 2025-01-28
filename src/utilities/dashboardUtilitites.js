@@ -117,10 +117,10 @@ const dashboardUtilities = {
     }
   },
 
-  formErrorsHandler: async function(modelo, entidad, coleccion, oldData, errors) {
+  formErrorsHandler: async function(modelo, entidad, coleccion, oldData, errors, id = null) {
     try {
         // Obtiene datos para la vista
-        let data = await this.dataHandler(modelo, entidad, coleccion); 
+        let data = await this.dataHandler(modelo, entidad, coleccion, id); 
         data[entidad] = {};
         // Itera sobre todas las claves de oldData
         for (const fieldName in oldData) {
@@ -129,8 +129,8 @@ const dashboardUtilities = {
         }
         // Agrega los errores de validación
         data.errors = errors;
-
-        return data; // Devuelve el objeto con los datos necesarios para la vista
+        // Devuelve el objeto con los datos necesarios para la vista
+        return data; 
         } catch (error) {
           console.error(error);
           return this.errorHandler(error); // Maneja errores internos si ocurre un problema
