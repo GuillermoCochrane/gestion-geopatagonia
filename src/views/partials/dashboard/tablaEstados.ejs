@@ -13,7 +13,7 @@
     <tr>
       <td><%= estado.id %></td>
       <td><%= estado.estado %></td>
-      <td><%= estado.descripcion != null ? estado.descripcion : " - " %></td>
+      <td><%= estado.descripcion  ? estado.descripcion : " - " %></td>
       <td><%= estado.created_at %></td>
       <td><%= estado.updated_at %></td>
       <td>
