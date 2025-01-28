@@ -263,6 +263,31 @@ const dashboardController = {
         }
     },
 
+    editarRol: async(req, res) => {
+        const errors = validationResult(req)
+        if (errors.isEmpty()){
+            try{
+                let rol = await dashboardUtilities.updateEntity(Rol, req.body, req.params.id);
+                if(rol.error) return res.render("dashboard/dashboard", rol);
+                return res.redirect("/dashboard/roles");
+            } catch (error) {
+                console.error(error);
+                let data = dashboardUtilities.errorHandler(error); 
+                return res.render("dashboard/dashboard", data);
+            }
+        } else {
+            try{
+                let data = await dashboardUtilities.formErrorsHandler(Rol, "rol", "roles", req.body, errors.mapped(), req.params.id);
+                if (data.error) return res.render("dashboard/dashboard", data);
+                return res.render("dashboard/dashboard", data);
+            } catch (error) {
+                console.error(error);
+                let data = dashboardUtilities.errorHandler(error); 
+                return res.render("dashboard/dashboard", data);
+            }
+        }
+    },
+
     origen: async(req, res) => {
         try{
             let data = await dashboardUtilities.dataHandler(Origen, "origen", "origenes", req.params.id);
