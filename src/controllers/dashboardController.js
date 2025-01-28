@@ -227,6 +227,24 @@ const dashboardController = {
         }
     },
 
+    editarEstado: async(req, res) => {
+        try{
+            await Estado.update(
+                req.body,
+                {
+                    where: {
+                        id: req.params.id
+                    }
+                }
+            );
+            return res.redirect("/dashboard/estados");
+        } catch (error) {
+            console.error(error);
+            let data = dashboardUtilities.errorHandler(error); 
+            return res.render("dashboard/dashboard", data);
+        }
+    },
+
     rol: async(req, res) => {
         try{
             let data = await dashboardUtilities.dataHandler(Rol, "rol", "roles", req.params.id);
