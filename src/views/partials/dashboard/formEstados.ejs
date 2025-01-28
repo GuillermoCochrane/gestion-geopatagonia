@@ -8,6 +8,4 @@
   <textarea name="descripcion" id="descripcion" ><%= locals.estado ? estado.descripcion : "" %></textarea>
   <span><%= (locals.errors && errors.descripcion) ? errors.descripcion.msg : null %></span>
 </label>
-<button type="submit">
-  Nuevo estado
-</button>
+<%- include(`./submitButton.ejs`) %>

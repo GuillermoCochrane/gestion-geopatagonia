@@ -3,6 +3,4 @@
   <input type="text" name="rol" id="rol" value="<%= locals.rol ? rol.rol : null %>">
   <span><%= (locals.errors && errors.rol) ? errors.rol.msg : null %></span>
 </label>
-<button type="submit">
-  Nuevo Rol
-</button>
+<%- include(`./submitButton.ejs`) %>

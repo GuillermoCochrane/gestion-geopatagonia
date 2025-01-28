@@ -3,6 +3,4 @@
   <input type="text" name="sector" id="sector" value="<%= locals.sector ? sector.sector : null %>">
   <span><%= (locals.errors && errors.sector) ? errors.sector.msg : null %></span>
 </label>
-<button type="submit">
-  Nuevo Sector
-</button>
+<%- include(`./submitButton.ejs`) %>

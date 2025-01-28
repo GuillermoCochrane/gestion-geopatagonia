@@ -3,6 +3,4 @@
   <input type="text" name="origen" id="origen" value="<%= locals.origen ? origen.origen : null %>">
   <span><%= (locals.errors && errors.origen) ? errors.origen.msg : null %></span>
 </label>
-<button type="submit">
-  Nuevo Origen
-</button>
+<%- include(`./submitButton.ejs`) %>
