@@ -105,6 +105,18 @@ const dashboardUtilities = {
     }
   },
 
+  updateEntity: async function (Modelo, data, id) {
+    try {
+      // Almacenamos en entity los datos recibidos al intentar editar la entrada en la base de datos
+      const entity = await Modelo.update(data, {where: { id: id } });
+      // si se edita la entrada, devolvemos el objeto creado
+      if (entity) return entity;
+    } catch (error) {
+      console.error(error); // Registro del error para depuración
+      return this.errorHandler(error);
+    }
+  },
+
   formErrorsHandler: async function(modelo, entidad, coleccion, oldData, errors) {
     try {
         // Obtiene datos para la vista
@@ -123,7 +135,7 @@ const dashboardUtilities = {
           console.error(error);
           return this.errorHandler(error); // Maneja errores internos si ocurre un problema
         }
-},
+  },
 
 }
 
