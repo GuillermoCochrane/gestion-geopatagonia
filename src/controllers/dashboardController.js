@@ -374,6 +374,31 @@ const dashboardController = {
         }
     },
 
+    editarEnteInspector: async(req, res) => {
+        const errors = validationResult(req)
+        if (errors.isEmpty()){
+            try{
+                let ente_inspector = await dashboardUtilities.updateEntity(EnteInspector, req.body, req.params.id);
+                if(ente_inspector.error) return res.render("dashboard/dashboard", ente_inspector);
+                return res.redirect("/dashboard/entes_inspectores");
+            } catch (error) {
+                console.error(error);
+                let data = dashboardUtilities.errorHandler(error); 
+                return res.render("dashboard/dashboard", data);
+            }
+        } else {
+            try{
+                let data = await dashboardUtilities.formErrorsHandler(EnteInspector, "ente_inspector", "entes_inspectores", req.body, errors.mapped(), req.params.id);
+                if (data.error) return res.render("dashboard/dashboard", data);
+                return res.render("dashboard/dashboard", data);
+            } catch (error) {
+                console.error(error);
+                let data = dashboardUtilities.errorHandler(error); 
+                return res.render("dashboard/dashboard", data);
+            }
+        }
+    },
+
 };
 
 module.exports = dashboardController;

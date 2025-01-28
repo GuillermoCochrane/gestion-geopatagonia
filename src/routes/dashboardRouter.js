@@ -40,6 +40,7 @@ router.put("/sectores/editar/:id", sectorValidation, dashboardController.editarS
 router.get("/entes_inspectores", dashboardController.inspectores);
 router.post("/entes_inspectores/nuevo", enteValidation, dashboardController.nuevoInspector);
 router.get("/ente_inspector/editar/:id", dashboardController.inspector);
+router.put("/entes_inspectores/editar/:id", enteValidation, dashboardController.editarEnteInspector);
 
 //Usuarios
 router.get("/usuarios", dashboardController.usuarios);
