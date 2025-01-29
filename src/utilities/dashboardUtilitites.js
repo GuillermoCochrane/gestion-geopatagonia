@@ -60,6 +60,24 @@ const dashboardUtilities = {
     }
   },
 
+  deleteData: async function(Modelo, entidad, coleccion, id){
+    try {
+      let entity = await Modelo.findByPk(id);
+      if(!entity) return this.errorInfo(coleccion);
+      return {
+        title: `Eliminar ${entidad}: ${entity[entidad]}`,
+        path: coleccion,
+        id,
+        styles: this.styles,
+        pageScript: this.pageScript,
+        subSection: "./delete.ejs",
+      }
+    } catch (error) {
+      console.error(error); // Registro del error para depuración
+      return this.errorHandler(error);
+    }
+  },
+
   dataHandler: async function (Modelo, entidad, coleccion, id = null) {
     try {
       // Construir el objeto "where" de manera condicional
