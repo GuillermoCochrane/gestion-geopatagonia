@@ -45,10 +45,12 @@ const dashboardUtilities = {
   finalData: function(entidad, coleccion, registros, id = null){
     const config = this.configData(coleccion);
     const headerData = this.headerData(entidad, coleccion);
+    const scripts = this.pageScript;
+    !id  ?  scripts.push("dashboard/sectionhandler") : null;
     return {
       ...config,
       dashboardHeader: headerData,
-      pageScript: [...this.pageScript, "dashboard/sectionhandler"],
+      pageScript: scripts,
       title: id ? `Editando ${headerData.entity} : ${registros[0][entidad]}` : config.mainLabel,
       styles: this.styles,
       subSection: id ? "./edition.ejs" : "./subSections.ejs",
