@@ -172,7 +172,6 @@ main section.managemnet header nav button.inactive{
 
 main section.managemnet header h2{
   font-size: 22px;
-  padding-bottom: 20px;
 }
 
 .editFormTitle {
@@ -207,6 +206,13 @@ main section.managemnet table#main-content td:nth-child(2){
   text-align: left;
 }
 
+main section.managemnet table#main-content td:last-child{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  border-color: transparent;
+}
+
 main section.managemnet table#main-content td button{
   margin: auto;
   padding-inline: 8px;
@@ -238,7 +244,7 @@ main section.managemnet form#dashboard-form{
   width: 30%;
   padding-inline: 30px;
   padding-top: 10px;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   border-radius: 10px;
   font-size: 15px;
 }
@@ -291,15 +297,40 @@ main section.managemnet form#dashboard-form span{
   margin-inline: auto;
 }
 
+main section.managemnet form#dashboard-form aside{
+  margin-block: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
 main section.managemnet form#dashboard-form button{
-  width: 50%;
+  width: 40%;
   padding-block: 10px;
   border: 2px transparent solid;
   background-color: var(--font);
   color: var(--white);
   font-size: 15px;
   border-radius: 8px;
-  /* font-weight: bold; */
   cursor: pointer;
   margin-inline: auto;
+}
+
+main section.managemnet form#dashboard-form button.delete,
+main section.managemnet table#main-content td button.delete{
+  background-color: var(--ice);
+  color: var(--logo);
+  border-color: var(--logo);
+  transition: all 0.7s ease-out;
+}
+
+main section.managemnet form#dashboard-form button.delete:hover,
+main section.managemnet table#main-content td button.delete:hover{
+  background-color: var(--logo);
+  color: var(--white);
+  border-color: transparent;
+}
+
+main section.managemnet form#dashboard-form.confirm-delete{
+  background-color: transparent;
 }
