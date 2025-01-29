@@ -1,0 +1,17 @@
+<section class="managemnet">
+  <header>
+    <h2 id="mainTitle" class="editFormTitle">
+      <%= title %>
+    </h2>
+  </header>
+  <form action=<%=`/dashboard/${path}/editar/${id}?_method=PUT`%> method="POST" id="dashboard-form" >
+    <aside>
+      <button type="submit" class="delete">
+        Eliminar
+      </button>      
+      <button type="button" onclick="window.history.back()">
+        Volver
+      </button>
+    </aside>
+  </form>
+</section>
