@@ -23,6 +23,7 @@ router.get("/roles", dashboardController.roles);
 router.post("/roles/nuevo", rolValidation, dashboardController.nuevoRol);
 router.get("/roles/editar/:id", dashboardController.rol);
 router.put("/roles/editar/:id", rolValidation, dashboardController.editarRol);
+router.get("/roles/eliminar/:id", dashboardController.eliminarRol);
 
 //Origines
 router.get("/origenes", dashboardController.origenes);

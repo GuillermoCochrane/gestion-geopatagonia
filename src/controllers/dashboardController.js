@@ -13,9 +13,7 @@ const dashboardController = {
     estados: async(req, res) => {
         try{
             let data = await dashboardUtilities.dataHandler(Estado, "estado", "estados");
-
             if(data.error) return res.render("dashboard/dashboard", data); 
-
             return res.render("dashboard/dashboard", data);
         } catch (error) {
             console.error(error);
@@ -27,9 +25,7 @@ const dashboardController = {
     roles: async(req, res) => {
         try{
             let data = await dashboardUtilities.dataHandler(Rol, "rol", "roles");
-
             if (data.error) return res.render("dashboard/dashboard", data);
-
             return res.render("dashboard/dashboard", data);
         } catch (error) {
             console.error(error);
@@ -41,9 +37,7 @@ const dashboardController = {
     origenes: async(req, res) => {
         try{
             let data = await dashboardUtilities.dataHandler(Origen, "origen", "origenes");
-
             if (data.error) return res.render("dashboard/dashboard", data);
-
             return res.render("dashboard/dashboard", data);
         } catch (error) {
             console.error(error);
@@ -55,9 +49,7 @@ const dashboardController = {
     sectores: async(req, res) => {
         try{
             let data = await dashboardUtilities.dataHandler(Sector, "sector", "sectores");
-
             if (data.error) return res.render("dashboard/dashboard", data);
-
             return res.render("dashboard/dashboard", data);
         } catch (error) {
             console.error(error);
@@ -69,9 +61,7 @@ const dashboardController = {
     inspectores: async(req, res) => {
         try{
             let data = await dashboardUtilities.dataHandler(EnteInspector, "ente_inspector", "entes_inspectores");
-
             if (data.error) return res.render("dashboard/dashboard", data);
-
             return res.render("dashboard/dashboard", data);
         } catch (error) {
             console.error(error);
@@ -399,6 +389,17 @@ const dashboardController = {
         }
     },
 
+    eliminarRol: async(req, res) => {
+        try{
+            const data = await dashboardUtilities.deleteData(Rol, "rol", "roles",  req.params.id);
+            if(data.error) return res.render("dashboard/dashboard", data);
+            return res.render("dashboard/dashboard", data);
+        } catch (error) {
+            console.error(error);
+            let data = dashboardUtilities.errorHandler(error); 
+            return res.render("dashboard/dashboard", data);
+        }
+    },
 };
 
 module.exports = dashboardController;
