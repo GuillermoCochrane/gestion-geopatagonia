@@ -137,6 +137,18 @@ const dashboardUtilities = {
     }
   },
 
+  deleteEntity: async function (Modelo,  id) {
+    try {
+      // Elimina la entrada en la base de datos
+      const entity = await Modelo.destroy({ where: { id } });
+      // si se elimina la entrada, devolvemos el objeto creado
+      if (entity) return entity;
+    } catch (error) {
+      console.error(error); // Registro del error para depuración
+      return this.errorHandler(error);
+    }
+  },
+
   formErrorsHandler: async function(modelo, entidad, coleccion, oldData, errors, id = null) {
     try {
         // Obtiene datos para la vista
