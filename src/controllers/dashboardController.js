@@ -389,6 +389,18 @@ const dashboardController = {
         }
     },
 
+    eliminarEstado: async(req, res) => {
+        try{
+            const data = await dashboardUtilities.deleteData(Estado, "estado", "estados",  req.params.id);
+            if(data.error) return res.render("dashboard/dashboard", data);
+            return res.render("dashboard/dashboard", data);
+        } catch (error) {
+            console.error(error);
+            let data = dashboardUtilities.errorHandler(error); 
+            return res.render("dashboard/dashboard", data);
+        }
+    },
+
     eliminarRol: async(req, res) => {
         try{
             const data = await dashboardUtilities.deleteData(Rol, "rol", "roles",  req.params.id);
