@@ -18,6 +18,7 @@ router.post("/estados/nuevo", estadosValidation, dashboardController.nuevoEstado
 router.get("/estados/editar/:id", dashboardController.estado);
 router.put("/estados/editar/:id", estadosValidation, dashboardController.editarEstado);
 router.get("/estados/eliminar/:id", dashboardController.eliminarEstado);
+router.delete("/estados/eliminar/:id", dashboardController.estadoEliminado);
 
 //Roles
 router.get("/roles", dashboardController.roles);
