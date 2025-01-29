@@ -31,6 +31,7 @@ router.get("/origenes", dashboardController.origenes);
 router.post("/origenes/nuevo", origenValidation, dashboardController.nuevoOrigen);
 router.get("/origenes/editar/:id", dashboardController.origen);
 router.put("/origenes/editar/:id", origenValidation, dashboardController.editarOrigen);
+router.get("/origenes/eliminar/:id", dashboardController.eliminarOrigen);
 
 //Sectores
 router.get("/sectores", dashboardController.sectores);
