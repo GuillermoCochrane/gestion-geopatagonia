@@ -424,6 +424,18 @@ const dashboardController = {
             return res.render("dashboard/dashboard", data);
         }
     },
+
+    eliminarSector: async(req, res) => {
+        try{
+            const data = await dashboardUtilities.deleteData(Sector, "sector", "sectores",  req.params.id);
+            if(data.error) return res.render("dashboard/dashboard", data);
+            return res.render("dashboard/dashboard", data);
+        } catch (error) {
+            console.error(error);
+            let data = dashboardUtilities.errorHandler(error); 
+            return res.render("dashboard/dashboard", data);
+        }
+    },
 };
 
 module.exports = dashboardController;

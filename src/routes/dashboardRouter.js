@@ -38,6 +38,7 @@ router.get("/sectores", dashboardController.sectores);
 router.post("/sectores/nuevo", sectorValidation, dashboardController.nuevoSector);
 router.get("/sectores/editar/:id", dashboardController.sector);
 router.put("/sectores/editar/:id", sectorValidation, dashboardController.editarSector);
+router.get("/sectores/eliminar/:id", dashboardController.eliminarSector);
 
 //Entes Inspectores
 router.get("/entes_inspectores", dashboardController.inspectores);
