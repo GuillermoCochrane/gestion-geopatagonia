@@ -46,7 +46,7 @@ const dashboardUtilities = {
     const config = this.configData(coleccion);
     const headerData = this.headerData(entidad, coleccion);
     let scripts = this.pageScript;
-    scripts = [...scripts, "validator.min", `dashboard/validations/${entidad}Validation`];
+    scripts = [...scripts, "validator.min", "dashboard/validations/validations", `dashboard/validations/${entidad}Validation`];
     !id && scripts.push("dashboard/sectionhandler");
     return {
       ...config,
