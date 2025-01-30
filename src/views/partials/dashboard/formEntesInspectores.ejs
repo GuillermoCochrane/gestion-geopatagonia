@@ -1,6 +1,6 @@
 <label>
   <h4>Ente Inspector</h4>
   <input type="text" name="ente_inspector" id="ente_inspector" value="<%= locals.ente_inspector ? ente_inspector.ente_inspector : null %>">
-  <span><%= (locals.errors && errors.ente_inspector) ? errors.ente_inspector.msg : null %></span>
+  <span id="error-ente_inspector"><%= (locals.errors && errors.ente_inspector) ? errors.ente_inspector.msg : null %></span>
 </label>
 <%- include(`./submitButton.ejs`) %>
