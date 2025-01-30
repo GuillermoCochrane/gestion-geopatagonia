@@ -45,8 +45,9 @@ const dashboardUtilities = {
   finalData: function(entidad, coleccion, registros, id = null){
     const config = this.configData(coleccion);
     const headerData = this.headerData(entidad, coleccion);
-    const scripts = this.pageScript;
-    !id  ?  scripts.push("dashboard/sectionhandler") : null;
+    let scripts = this.pageScript;
+    scripts = [...scripts, "validator.min", `dashboard/validations/${entidad}Validation`];
+    !id && scripts.push("dashboard/sectionhandler");
     return {
       ...config,
       dashboardHeader: headerData,
@@ -54,8 +55,8 @@ const dashboardUtilities = {
       title: id ? `Editando ${headerData.entity} : ${registros[0][entidad]}` : config.mainLabel,
       styles: this.styles,
       subSection: id ? "./edition.ejs" : "./subSections.ejs",
-      [coleccion]: !id ? registros : null,
-      [entidad]: id ? registros[0] : null,
+      [coleccion]: !id && registros,
+      [entidad]: id && registros[0],
       id,
     }
   },
