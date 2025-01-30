@@ -50,6 +50,7 @@ router.post("/entes_inspectores/nuevo", enteValidation, dashboardController.nuev
 router.get("/entes_inspectores/editar/:id", dashboardController.inspector);
 router.put("/entes_inspectores/editar/:id", enteValidation, dashboardController.editarEnteInspector);
 router.get("/entes_inspectores/eliminar/:id", dashboardController.eliminarEnteInspector);
+router.delete("/entes_inspectores/eliminar/:id", dashboardController.enteInspectorEliminado);
 
 //Usuarios
 router.get("/usuarios", dashboardController.usuarios);

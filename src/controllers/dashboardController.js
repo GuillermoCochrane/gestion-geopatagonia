@@ -496,6 +496,18 @@ const dashboardController = {
             return res.render("dashboard/dashboard", data);
         }
     },
+
+    enteInspectorEliminado: async(req, res) => {
+        try{
+            const data = await dashboardUtilities.deleteEntity(EnteInspector, req.params.id);
+            if(data.error) return res.render("dashboard/dashboard", data);
+            return res.redirect("/dashboard/entes_inspectores");
+        } catch (error) {
+            console.error(error);
+            let data = dashboardUtilities.errorHandler(error); 
+            return res.render("dashboard/dashboard", data);
+        }
+    },
 };
 
 module.exports = dashboardController;
