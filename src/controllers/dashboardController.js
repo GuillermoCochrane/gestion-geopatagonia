@@ -473,6 +473,18 @@ const dashboardController = {
         }
     },
 
+    sectorEliminado: async(req, res) => {
+        try{
+            const data = await dashboardUtilities.deleteEntity(Sector, req.params.id);
+            if(data.error) return res.render("dashboard/dashboard", data);
+            return res.redirect("/dashboard/sectores");
+        } catch (error) {
+            console.error(error);
+            let data = dashboardUtilities.errorHandler(error); 
+            return res.render("dashboard/dashboard", data);
+        }
+    },
+
     eliminarEnteInspector: async(req, res) => {
         try{
             const data = await dashboardUtilities.deleteData(EnteInspector, "ente_inspector", "entes_inspectores",  req.params.id);
