@@ -284,6 +284,12 @@ main section.managemnet form#dashboard-form input.input-error{
   border-color: var(--logo);
 }
 
+main section.managemnet form#dashboard-form textarea.input-ok,
+main section.managemnet form#dashboard-form input.input-ok{
+  color: var(--success);
+  border-color: var(--success);
+}
+
 main section.managemnet form#dashboard-form textarea{
   resize: none;
   field-sizing: content;
