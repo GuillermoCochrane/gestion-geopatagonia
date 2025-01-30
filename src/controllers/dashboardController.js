@@ -425,6 +425,18 @@ const dashboardController = {
         }
     },
 
+    rolEliminado: async(req, res) => {
+        try{
+            const data = await dashboardUtilities.deleteEntity(Rol,  req.params.id);
+            if(data.error) return res.render("dashboard/dashboard", data);
+            return res.redirect("/dashboard/roles");
+        } catch (error) {
+            console.error(error);
+            let data = dashboardUtilities.errorHandler(error); 
+            return res.render("dashboard/dashboard", data);
+        }
+    },
+
     eliminarOrigen: async(req, res) => {
         try{
             const data = await dashboardUtilities.deleteData(Origen, "origen", "origenes",  req.params.id);
