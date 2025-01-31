@@ -56,11 +56,13 @@ header aside {
 }
 
 header figure{
-  max-width: 200px;
+  max-width: 220px;
+  display: flex;
+  justify-content: space-between;
 }
 
 header figure img{
-  width: 100%;
+  width: 90%;
 }
 
 header aside figure {
@@ -109,9 +111,13 @@ nav.sidebar ul li a{
   transition: 0.5s ease-out;
 }
 
-nav.sidear ul li a:hover{
+nav.sidebar ul li a:hover{
   color: var(--logo);
   text-decoration: underline;
+}
+
+nav.sidebar.hidden{
+  display: none;
 }
 
 main section{
