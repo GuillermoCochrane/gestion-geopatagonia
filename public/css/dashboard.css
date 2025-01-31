@@ -285,6 +285,8 @@ main section.managemnet form#dashboard-form input{
   margin-bottom: 10px;
 }
 
+
+main section.managemnet form#dashboard-form select.input-error,
 main section.managemnet form#dashboard-form textarea.input-error,
 main section.managemnet form#dashboard-form input.input-error{
   color: var(--logo);
