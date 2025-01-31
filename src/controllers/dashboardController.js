@@ -71,12 +71,35 @@ const dashboardController = {
     },
 
     usuarios: async(req, res) => {
-        const data = await Usuario.findAll();
-        if(data.length === 0){
-            let message = [{alerta: "No hay usuarios registrados."}];
-            return res.json(message);
-        }
-        return res.json({data});
+        const usuarios = await Usuario.findAll(
+            {
+                include: [
+                    {
+                        model: Rol,
+                        attributes: ["rol"],
+                        as: "rol"
+                    }
+                ]
+            }
+        );
+        const roles = await Rol.findAll();
+        let data = {
+            usuarios,
+            roles,
+            styles: dashboardUtilities.styles,
+            pageScript: [...dashboardUtilities.pageScript, "dashboard/sectionhandler"],
+            tabla: "tablaUsuarios",
+            path: "usuarios",
+            formulario: "formUsuarios",
+            dashboardHeader:{
+                mainLabel: "Usuarios",
+                newLabel: "Nuevo Usuario",
+                entity: "Usuario",
+            },
+            title: "Usuarios",
+            subSection: "./subSections.ejs",
+        };
+        return res.render("dashboard/dashboard", data);
     },
 
     nuevoEstado: async(req, res) => {
