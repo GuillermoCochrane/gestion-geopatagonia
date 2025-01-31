@@ -1,0 +1,44 @@
+
+<thead>
+  <tr>
+    <th> # </th>
+    <th>Nombre</th>
+    <th>Email</th>
+    <th>Rol</th>
+    <th>Creado</th>
+    <th>Modificado</th>
+    <th>Acciones</th>
+  </tr>
+</thead>
+<tbody>
+  <% if (usuarios.length === 0) { %>
+    <tr>
+      <td colspan="7" style="text-align: center; display: table-cell; border-color:var(--font);">
+        No hay usuarios
+      </td>
+    </tr>
+  <% } else { %>
+    <% for (const usuario of usuarios) { %>
+      <tr>
+        <td><%= usuario.id %></td>
+        <td><%= usuario.nombre %></td>
+        <td><%= usuario.email  %></td>
+        <td><%= usuario.rol.rol %></td>
+        <td><%= usuario.created_at %></td>
+        <td><%= usuario.updated_at %></td>
+        <td>
+          <a href="/dashboard/usuarios/editar/<%= usuario.id %>">
+            <button>
+              Editar
+            </button>
+          </a>
+          <a href="/dashboard/usuarios/eliminar/<%= usuario.id %>">
+            <button class="delete">
+              Eliminar
+            </button>
+          </a>
+        </td>
+      </tr>
+      <% } %>
+  <% } %>
+</tbody>
