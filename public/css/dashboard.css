@@ -273,6 +273,7 @@ main section.managemnet form#dashboard-form label h4{
   font-weight: bold;
 }
 
+main section.managemnet form#dashboard-form select,
 main section.managemnet form#dashboard-form textarea,
 main section.managemnet form#dashboard-form input{
   width: 100%;
