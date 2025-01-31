@@ -10,11 +10,17 @@ const inputOK = (input) => {
   input.classList.add("input-ok");
 };
 
+const underscoreToSpace = (string) => {
+  return string.includes('_') 
+          ? string.replace(/_/g, ' ') 
+          : string;
+};
+
 const requiredValidation = (input) => {
-  let error = document.querySelector(`#error-${input.id}`);
   let label = input.id;
+  let error = document.querySelector(`#error-${label}`);
   if(validator.isEmpty(input.value)){
-      let errormsg = `${input.id} es obligatorio`;
+      let errormsg = `${underscoreToSpace(label)} es obligatorio`;
       error.innerText =  errormsg;
       errors[label] = errormsg;
       inputError(input);
@@ -26,10 +32,10 @@ const requiredValidation = (input) => {
 };
 
 const minlengthValidation = (input,min) => {
-  let error = document.querySelector( `#error-${input.id}`);
   let label = input.id;
+  let error = document.querySelector( `#error-${label}`);
   if(!validator.isLength(input.value, {min})){
-      let errormsg = `${input.id} debe tener mínimo ${min} caracteres`;
+      let errormsg = `${underscoreToSpace(label)} debe tener mínimo ${min} caracteres`;
       error.innerText = errormsg;
       errors[label] = errormsg;
       inputError(input);
@@ -41,10 +47,10 @@ const minlengthValidation = (input,min) => {
 };
 
 const maxlengthValidation = (input,max) => {
-  let error = document.querySelector( `#error-${input.id}`);
   let label = input.id;
+  let error = document.querySelector( `#error-${label}`);
   if(!validator.isLength(input.value, {max})){
-      let errormsg = `${input.id} debe tener máximo ${max} caracteres`;
+      let errormsg = `${underscoreToSpace(label)} debe tener máximo ${max} caracteres`;
       error.innerText = errormsg;
       errors[label] = errormsg;
       inputError(input);
