@@ -1,0 +1,26 @@
+<label>
+  <h4>Nombre</h4>
+  <input type="text" name="usuario" id="usuario" value="<%= locals.usuario ? usuario.usuario : null %>">
+  <span id="error-usuario"><%= (locals.errors && errors.nombre) ? errors.nombre.msg : null %></span>
+</label>
+<label>
+  <h4>Email</h4>
+  <input type="text" name="email" id="email" value="<%= locals.usuario ? usuario.email : null %>">
+  <span id="error-email"><%= (locals.errors && errors.email) ? errors.email.msg : null %></span>
+</label>
+<label>
+  <h4>Rol</h4>
+  <select name="rol" id="rol">
+    <option value="" <% !(locals.usuario && usuario.rol.rol) && 'selected'  %>>Selecione el rol</option>
+    <% for (const rol of roles) { %>
+      <option value="<%= rol.id %>" <%= (locals.usuario && usuario.rol.rol === rol.rol) ? 'selected' : '' %>><%= rol.rol %></option>
+    <% } %>
+  </select>
+  <span id="error-rol"><%= (locals.errors && errors.rol) ? errors.rol.msg : null %></span>
+</label>
+<label>
+  <h4>Contraseña</h4>
+  <input type="password" name="password" id="password" value="<%= locals.usuario ? usuario.password : null %>">
+  <span id="error-password"><%= (locals.errors && errors.password) ? errors.password.msg : null %></span>
+</label>
+<%- include(`./submitButton.ejs`) %>
