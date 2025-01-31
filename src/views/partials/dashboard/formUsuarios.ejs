@@ -11,7 +11,7 @@
 <label>
   <h4>Rol</h4>
   <select name="rol" id="rol">
-    <option value="" <% !(locals.usuario && usuario.rol.rol) && 'selected'  %>>Selecione el rol</option>
+    <option value="" <%= !locals.usuario  && 'selected'  %> disabled>Selecione el rol</option>
     <% for (const rol of roles) { %>
       <option value="<%= rol.id %>" <%= (locals.usuario && usuario.rol.rol === rol.rol) ? 'selected' : '' %>><%= rol.rol %></option>
     <% } %>
