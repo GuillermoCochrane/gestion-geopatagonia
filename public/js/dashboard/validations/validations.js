@@ -29,7 +29,7 @@ const minlengthValidation = (input,min) => {
   let error = document.querySelector( `#error-${input.id}`);
   let label = input.id;
   if(!validator.isLength(input.value, {min})){
-      let errormsg = `El ${input.id} debe tener ${min} caracteres`;
+      let errormsg = `${input.id} debe tener mínimo ${min} caracteres`;
       error.innerText = errormsg;
       errors[label] = errormsg;
       inputError(input);
@@ -44,7 +44,7 @@ const maxlengthValidation = (input,max) => {
   let error = document.querySelector( `#error-${input.id}`);
   let label = input.id;
   if(!validator.isLength(input.value, {max})){
-      let errormsg = `El ${input.id} debe tener ${max} caracteres`;
+      let errormsg = `${input.id} debe tener máximo ${max} caracteres`;
       error.innerText = errormsg;
       errors[label] = errormsg;
       inputError(input);
