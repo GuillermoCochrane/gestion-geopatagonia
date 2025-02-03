@@ -1,6 +1,6 @@
 <label>
   <h4>Nombre</h4>
-  <input type="text" name="usuario" id="usuario" value="<%= locals.usuario ? usuario.usuario : null %>">
+  <input type="text" name="nombre" id="nombre" value="<%= locals.usuario ? usuario.nombre : null %>">
   <span id="error-usuario"><%= (locals.errors && errors.nombre) ? errors.nombre.msg : null %></span>
 </label>
 <label>
@@ -10,7 +10,7 @@
 </label>
 <label>
   <h4>Rol</h4>
-  <select name="rol" id="rol">
+  <select name="rol_id" id="rol">
     <option value="" <%= !locals.usuario  && 'selected'  %> disabled>Selecione el rol</option>
     <% for (const rol of roles) { %>
       <option value="<%= rol.id %>" <%= (locals.usuario && usuario.rol.rol === rol.rol) ? 'selected' : '' %>><%= rol.rol %></option>
