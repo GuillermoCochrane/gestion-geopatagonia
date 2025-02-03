@@ -42,6 +42,16 @@ const dashboardUtilities = {
     };
   },
 
+  indexData: function(){
+    return {
+      subSection: "./index.ejs",
+      title: "Panel de control",
+      styles: this.styles,
+      pageScript: this.pageScript
+    }
+  },
+
+
   finalData: function(entidad, coleccion, registros, id = null){
     const config = this.configData(coleccion);
     const headerData = this.headerData(entidad, coleccion);
@@ -105,12 +115,32 @@ const dashboardUtilities = {
     }
   },
 
-  indexData: function(){
-    return {
-      subSection: "./index.ejs",
-      title: "Panel de control",
-      styles: this.styles,
-      pageScript: this.pageScript
+  userData: async function(ModeloUsuario, ModeloRol) {
+    try {
+      // Obtebemos el usuario
+      const usuarios = await ModeloUsuario.findAll({
+        include: [{
+          model: ModeloRol,
+          attributes: ["rol"],
+          as: "rol"
+        }]
+      });
+      // Obtenemos el rol
+      const roles = await ModeloRol.findAll();
+      if (roles.length === 0) rol = [{rol: "No hay roles definidos"}];
+
+      // Convertimos las instancias de Sequelize a objetos planos
+      let usuariosPlanos = usuarios.map((usuario) => usuario.get({ plain: true }));
+      usuariosPlanos = utilities.multipleDateFormat(usuariosPlanos);
+      let rolesPlanos = roles.map((rol) => rol.get({ plain: true }));
+      rolesPlanos = utilities.multipleDateFormat(rolesPlanos);
+      // Retornamos los datos procesados
+      return  {...this.finalData("Usuario", "usuarios", usuariosPlanos), roles: rolesPlanos};
+
+
+    } catch (error) {
+      console.error(error); // Registro del error para depuración
+      return this.errorHandler(error);
     }
   },
 
