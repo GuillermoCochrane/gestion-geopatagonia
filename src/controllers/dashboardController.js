@@ -71,35 +71,14 @@ const dashboardController = {
     },
 
     usuarios: async(req, res) => {
-        const usuarios = await Usuario.findAll(
-            {
-                include: [
-                    {
-                        model: Rol,
-                        attributes: ["rol"],
-                        as: "rol"
-                    }
-                ]
-            }
-        );
-        const roles = await Rol.findAll();
-        let data = {
-            usuarios,
-            roles,
-            styles: dashboardUtilities.styles,
-            pageScript: [...dashboardUtilities.pageScript, "dashboard/sectionhandler"],
-            tabla: "tablaUsuarios",
-            path: "usuarios",
-            formulario: "formUsuarios",
-            dashboardHeader:{
-                mainLabel: "Usuarios",
-                newLabel: "Nuevo Usuario",
-                entity: "Usuario",
-            },
-            title: "Usuarios",
-            subSection: "./subSections.ejs",
-        };
-        return res.render("dashboard/dashboard", data);
+        try{
+            let data = await dashboardUtilities.userData(Usuario, Rol);
+            return res.render("dashboard/dashboard", data);
+        } catch (error) {
+            console.error(error);
+            let data = dashboardUtilities.errorHandler(error); 
+            return res.render("dashboard/dashboard", data);
+        }
     },
 
     nuevoEstado: async(req, res) => {
