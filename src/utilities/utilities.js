@@ -64,6 +64,11 @@ const utilities = {
       return capitalize
           ? string.charAt(0).toUpperCase() + string.slice(1)
           : string.charAt(0).toLowerCase() + string.slice(1);
+    },
+
+    // Método para convertir en un objeto plano, la información de una instancia de Sequelize 
+    plainData: function(data){
+      return data.map((register) => register.get({ plain: true }));
     }
 
 };
