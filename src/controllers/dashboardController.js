@@ -73,6 +73,7 @@ const dashboardController = {
     usuarios: async(req, res) => {
         try{
             let data = await dashboardUtilities.userData(Usuario, Rol);
+            //return res.send(data);
             return res.render("dashboard/dashboard", data);
         } catch (error) {
             console.error(error);
@@ -203,6 +204,18 @@ const dashboardController = {
                 let data = dashboardUtilities.errorHandler(error); 
                 return res.render("dashboard/dashboard", data);
             }
+        }
+    },
+
+    nuevoUsuario: async(req, res) => {
+        try{
+            let usuario = await dashboardUtilities.createEntity(Usuario, req.body);
+            if(usuario.error) return res.render("dashboard/dashboard", usuario);
+            return res.redirect("/dashboard/usuarios");
+        } catch (error) {
+            console.error(error);
+            let data = dashboardUtilities.errorHandler(error); 
+            return res.render("dashboard/dashboard", data);
         }
     },
 

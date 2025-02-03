@@ -54,5 +54,6 @@ router.delete("/entes_inspectores/eliminar/:id", dashboardController.enteInspect
 
 //Usuarios
 router.get("/usuarios", dashboardController.usuarios);
+router.post("/usuarios/nuevo", dashboardController.nuevoUsuario);
 
 module.exports = router;
