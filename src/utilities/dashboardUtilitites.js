@@ -65,9 +65,7 @@ const dashboardUtilities = {
       title: id ? `Editando ${headerData.entity} : ${registros[0][entidad]}` : config.mainLabel,
       styles: this.styles,
       subSection: id ? "./edition.ejs" : "./subSections.ejs",
-      [coleccion]: !id && registros,
-      [entidad]: id && registros[0],
-      id,
+      ...(id ? { id, [entidad]: registros[0] } : { [coleccion]: registros })
     }
   },
 
