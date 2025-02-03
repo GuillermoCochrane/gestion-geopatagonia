@@ -134,7 +134,6 @@ const dashboardUtilities = {
       let rolesPlanos = utilities.plainData(roles);
       //Damos formato las fechas 
       usuariosPlanos = utilities.multipleDateFormat(usuariosPlanos);
-      rolesPlanos = utilities.multipleDateFormat(rolesPlanos);
       // Retornamos los datos procesados
       return  {...this.finalData("Usuario", "usuarios", usuariosPlanos), roles: rolesPlanos};
 
