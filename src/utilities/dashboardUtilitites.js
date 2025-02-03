@@ -103,7 +103,7 @@ const dashboardUtilities = {
       }
 
       // Convertimos las instancias de Sequelize a objetos planos
-      let registrosPlanos = registros.map((registro) => registro.get({ plain: true }));
+      let registrosPlanos = utilities.plainData(registros);
       // Formateamos las fechas en los registros
       registrosPlanos = utilities.multipleDateFormat(registrosPlanos);
 
@@ -130,13 +130,13 @@ const dashboardUtilities = {
       if (roles.length === 0) rol = [{rol: "No hay roles definidos"}];
 
       // Convertimos las instancias de Sequelize a objetos planos
-      let usuariosPlanos = usuarios.map((usuario) => usuario.get({ plain: true }));
+      let usuariosPlanos = utilities.plainData(usuarios);
+      let rolesPlanos = utilities.plainData(roles);
+      //Damos formato las fechas 
       usuariosPlanos = utilities.multipleDateFormat(usuariosPlanos);
-      let rolesPlanos = roles.map((rol) => rol.get({ plain: true }));
       rolesPlanos = utilities.multipleDateFormat(rolesPlanos);
       // Retornamos los datos procesados
       return  {...this.finalData("Usuario", "usuarios", usuariosPlanos), roles: rolesPlanos};
-
 
     } catch (error) {
       console.error(error); // Registro del error para depuración
