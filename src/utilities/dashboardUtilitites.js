@@ -125,7 +125,6 @@ const dashboardUtilities = {
       });
       // Obtenemos el rol
       let roles = await ModeloRol.findAll();
-      roles = [];
       (roles.length === 0) 
             ? roles = [{rol: "No hay roles definidos"}] 
             : roles = utilities.plainData(roles);
