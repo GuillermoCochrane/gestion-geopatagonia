@@ -124,16 +124,18 @@ const dashboardUtilities = {
         }]
       });
       // Obtenemos el rol
-      const roles = await ModeloRol.findAll();
-      if (roles.length === 0) rol = [{rol: "No hay roles definidos"}];
+      let roles = await ModeloRol.findAll();
+      roles = [];
+      (roles.length === 0) 
+            ? roles = [{rol: "No hay roles definidos"}] 
+            : roles = utilities.plainData(roles);
 
       // Convertimos las instancias de Sequelize a objetos planos
       let usuariosPlanos = utilities.plainData(usuarios);
-      let rolesPlanos = utilities.plainData(roles);
       //Damos formato las fechas 
       usuariosPlanos = utilities.multipleDateFormat(usuariosPlanos);
       // Retornamos los datos procesados
-      return  {...this.finalData("Usuario", "usuarios", usuariosPlanos), roles: rolesPlanos};
+      return  {...this.finalData("Usuario", "usuarios", usuariosPlanos), roles};
 
     } catch (error) {
       console.error(error); // Registro del error para depuración
