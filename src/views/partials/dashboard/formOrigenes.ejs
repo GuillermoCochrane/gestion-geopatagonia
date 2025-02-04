@@ -1,6 +1,6 @@
 <label>
   <h4>Origen</h4>
-  <input type="text" name="origen" id="origen" value="<%= locals.origen ? origen.origen : null %>">
-  <span id="error-origen"><%= (locals.errors && errors.origen) ? errors.origen.msg : null %></span>
+  <input type="text" name="origen" id="origen" value="<%= locals.origen?.origen%>">
+  <span id="error-origen"><%= locals.errors?.origen?.msg %></span>
 </label>
 <%- include(`./submitButton.ejs`) %>
