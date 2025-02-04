@@ -8,6 +8,7 @@ const rolValidation = require("../middlewares/validations/rolValidationMDW");
 const origenValidation = require("../middlewares/validations/origenValidationMDW");
 const sectorValidation = require("../middlewares/validations/sectorValidationMDW");
 const enteValidation = require("../middlewares/validations/enteInspectorValidationMDW");
+const usuarioValidation = require("../middlewares/validations/usuarioValidationMDW");
 
 //Rutas
 router.get("/", dashboardController.index);
@@ -54,6 +55,6 @@ router.delete("/entes_inspectores/eliminar/:id", dashboardController.enteInspect
 
 //Usuarios
 router.get("/usuarios", dashboardController.usuarios);
-router.post("/usuarios/nuevo", dashboardController.nuevoUsuario);
+router.post("/usuarios/nuevo", usuarioValidation, dashboardController.nuevoUsuario);
 
 module.exports = router;
