@@ -1,26 +1,26 @@
 <label>
   <h4>Nombre</h4>
-  <input type="text" name="nombre" id="nombre" value="<%= locals.usuario ? usuario.nombre : null %>">
-  <span id="error-usuario"><%= (locals.errors && errors.nombre) ? errors.nombre.msg : null %></span>
+  <input type="text" name="nombre" id="nombre" value="<%= locals.usuario?.nombre  %>">
+  <span id="error-usuario"><%= locals.errors?.nombre?.msg  %></span>
 </label>
 <label>
   <h4>Email</h4>
-  <input type="text" name="email" id="email" value="<%= locals.usuario ? usuario.email : null %>">
-  <span id="error-email"><%= (locals.errors && errors.email) ? errors.email.msg : null %></span>
+  <input type="text" name="email" id="email" value="<%= locals.usuario?.email %>">
+  <span id="error-email"><%= locals.errors?.email?.msg  %></span>
 </label>
 <label>
   <h4>Rol</h4>
   <select name="rol_id" id="rol">
-    <option value="" <%= (!locals.usuario?.rol_id) && 'selected' %> disabled>Selecione el rol</option>
+    <option value="" <%= (!locals.usuario?.rol_id) && 'selected' %> disabled>Seleccione el Rol</option>
     <% for (const rol of roles) { %>
-      <option value="<%= rol.id %>" <%= (locals.usuario?.rol_id === rol.id) ? 'selected' : '' %>><%= rol.rol %></option>
+      <option value="<%= rol.id %>" <%= (locals.usuario?.rol_id === rol.id) && 'selected'  %> > <%= rol.rol %> </option>
     <% } %>
   </select>
-  <span id="error-rol"><%= (locals.errors && errors.rol) ? errors.rol.msg : null %></span>
+  <span id="error-rol"><%= locals.errors?.rol?.msg %></span>
 </label>
 <label>
   <h4>Contraseña</h4>
-  <input type="password" name="password" id="password" value="<%= locals.usuario ? usuario.password : null %>">
-  <span id="error-password"><%= (locals.errors && errors.password) ? errors.password.msg : null %></span>
+  <input type="password" name="password" id="password" value="<%= locals.usuario?.password  %>">
+  <span id="error-password"><%= locals.errors?.password?.msg %></span>
 </label>
 <%- include(`./submitButton.ejs`) %>
