@@ -1,11 +1,11 @@
 <label>
   <h4>Nombre</h4>
-  <input type="text" name="estado" id="estado" value="<%= locals.estado ? estado.estado : null %>">
-  <span id="error-estado"><%= (locals.errors && errors.nombre) ? errors.nombre.msg : null %></span>
+  <input type="text" name="estado" id="estado" value="<%= locals.estado?.estado %>">
+  <span id="error-estado"><%= locals?.errors?.nombre?.msg  %></span>
 </label>
 <label>
   <h4>Descripción</h4>
-  <textarea name="descripcion" id="descripcion" ><%= locals.estado ? estado.descripcion : "" %></textarea>
-  <span id="error-descripcion"><%= (locals.errors && errors.descripcion) ? errors.descripcion.msg : null %></span>
+  <textarea name="descripcion" id="descripcion" ><%= locals.estado?.descripcion%></textarea>
+  <span id="error-descripcion"><%= locals.errors?.descripcion?.msg %></span>
 </label>
 <%- include(`./submitButton.ejs`) %>
