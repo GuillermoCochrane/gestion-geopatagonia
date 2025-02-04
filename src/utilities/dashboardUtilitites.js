@@ -142,6 +142,47 @@ const dashboardUtilities = {
     }
   },
 
+  
+  formErrorsHandler: async function(modelo, entidad, coleccion, oldData, errors, id = null) {
+    try {
+        // Obtiene datos para la vista
+        let data = await this.dataHandler(modelo, entidad, coleccion, id); 
+        data[entidad] = {};
+        // Itera sobre todas las claves de oldData
+        for (const fieldName in oldData) {
+            // Agrega cada campo ingresado por el usuario al objeto de datos
+            data[entidad][fieldName] = oldData[fieldName];
+        }
+        // Agrega los errores de validación
+        data.errors = errors;
+        // Devuelve el objeto con los datos necesarios para la vista
+        return data; 
+        } catch (error) {
+          console.error(error);
+          return this.errorHandler(error); // Maneja errores internos si ocurre un problema
+        }
+  },
+
+  userErrorhandler: async function(ModeloUsuario, ModeloRol,  oldData, errors, id = null) {
+    try {
+        // Obtiene datos para la vista
+        let data = await this.userData(ModeloUsuario, ModeloRol); 
+        data.usuario = {};
+        // Itera sobre todas las claves de oldData
+        for (const fieldName in oldData) {
+            // Agrega cada campo ingresado por el usuario al objeto de datos
+            data.usuario[fieldName] = oldData[fieldName];
+        }
+        // Agrega los errores de validación
+        data.errors = errors;
+        // Devuelve el objeto con los datos necesarios para la vista
+        return data; 
+        } catch (error) {
+          console.error(error);
+          return this.errorHandler(error); // Maneja errores internos si ocurre un problema
+        }
+  },
+
   createEntity: async function (Modelo, data) {
     try {
       // Almacenamos en entity los datos recibidos al intentar crear la entrada en la base de datos
@@ -176,26 +217,6 @@ const dashboardUtilities = {
       console.error(error); // Registro del error para depuración
       return this.errorHandler(error);
     }
-  },
-
-  formErrorsHandler: async function(modelo, entidad, coleccion, oldData, errors, id = null) {
-    try {
-        // Obtiene datos para la vista
-        let data = await this.dataHandler(modelo, entidad, coleccion, id); 
-        data[entidad] = {};
-        // Itera sobre todas las claves de oldData
-        for (const fieldName in oldData) {
-            // Agrega cada campo ingresado por el usuario al objeto de datos
-            data[entidad][fieldName] = oldData[fieldName];
-        }
-        // Agrega los errores de validación
-        data.errors = errors;
-        // Devuelve el objeto con los datos necesarios para la vista
-        return data; 
-        } catch (error) {
-          console.error(error);
-          return this.errorHandler(error); // Maneja errores internos si ocurre un problema
-        }
   },
 
 }
