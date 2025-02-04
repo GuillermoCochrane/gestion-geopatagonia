@@ -1,3 +1,4 @@
+const { Usuario} = require("../database/models");
 const utilities = {
     // Método para convertir fecha a un objeto con día, mes y año
     getDateParts: function(date){
@@ -69,8 +70,17 @@ const utilities = {
     // Método para convertir en un objeto plano, la información de una instancia de Sequelize 
     plainData: function(data){
       return data.map((register) => register.get({ plain: true }));
-    }
+    },
 
+    // Metodo que verifica si una email es se encuentra en uso
+    checkEmail: async function(email){
+        let user = await Usuario.findAll({
+            where: {
+                email: email
+            }
+        });
+        return user.length > 0;
+    },
 };
 
 module.exports = utilities;
