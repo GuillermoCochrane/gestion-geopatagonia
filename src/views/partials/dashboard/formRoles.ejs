@@ -1,6 +1,6 @@
 <label>
   <h4>Rol</h4>
-  <input type="text" name="rol" id="rol" value="<%= locals.rol ? rol.rol : null %>">
-  <span id="error-rol"><%= (locals.errors && errors.rol) ? errors.rol.msg : null %></span>
+  <input type="text" name="rol" id="rol" value="<%= locals.rol?.rol %>">
+  <span id="error-rol"><%= locals.errors?.rol?.msg %></span>
 </label>
 <%- include(`./submitButton.ejs`) %>
