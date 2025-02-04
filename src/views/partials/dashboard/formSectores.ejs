@@ -1,6 +1,6 @@
 <label>
   <h4>Sector</h4>
-  <input type="text" name="sector" id="sector" value="<%= locals.sector ? sector.sector : null %>">
-  <span id="error-sector"><%= (locals.errors && errors.sector) ? errors.sector.msg : null %></span>
+  <input type="text" name="sector" id="sector" value="<%= locals.sector?.sector %>">
+  <span id="error-sector"><%= locals.errors?.sector?.msg %></span>
 </label>
 <%- include(`./submitButton.ejs`) %>
