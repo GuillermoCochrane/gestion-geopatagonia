@@ -73,7 +73,7 @@ const dashboardController = {
     usuarios: async(req, res) => {
         try{
             let data = await dashboardUtilities.userData(Usuario, Rol);
-            //return res.send(data);
+            // return res.send(data);
             return res.render("dashboard/dashboard", data);
         } catch (error) {
             console.error(error);
@@ -208,15 +208,29 @@ const dashboardController = {
     },
 
     nuevoUsuario: async(req, res) => {
-        try{
-            let usuario = await dashboardUtilities.createEntity(Usuario, req.body);
-            if(usuario.error) return res.render("dashboard/dashboard", usuario);
-            return res.redirect("/dashboard/usuarios");
-        } catch (error) {
-            console.error(error);
-            let data = dashboardUtilities.errorHandler(error); 
-            return res.render("dashboard/dashboard", data);
+        let errors = validationResult(req);
+        if (errors.isEmpty()){
+            try{
+                let usuario = await dashboardUtilities.createEntity(Usuario, req.body);
+                if(usuario.error) return res.render("dashboard/dashboard", usuario);
+                return res.redirect("/dashboard/usuarios");
+            } catch (error) {
+                console.error(error);
+                let data = dashboardUtilities.errorHandler(error); 
+                return res.render("dashboard/dashboard", data);
+            }
+        } else {
+            try{
+                let data = await dashboardUtilities.userErrorhandler(Usuario, Rol, req.body, errors.mapped());
+                if (data.error) return res.render("dashboard/dashboard", data);
+                return res.render("dashboard/dashboard", data);
+            } catch (error) {
+                console.error(error);
+                let data = dashboardUtilities.errorHandler(error); 
+                return res.render("dashboard/dashboard", data);
+            }
         }
+
     },
 
     estado: async(req, res) => {
