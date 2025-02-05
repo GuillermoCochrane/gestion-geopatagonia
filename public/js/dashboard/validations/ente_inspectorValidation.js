@@ -5,8 +5,8 @@ window.addEventListener("load", () => {
 
     const ente_inspectorValidation = () => {
         requiredValidation($ente_inspector);
-        errors.ente_inspector ? null : minlengthValidation($ente_inspector,2);
-        errors.ente_inspector ? null : maxlengthValidation($ente_inspector,60);
+        !errors.ente_inspector && minlengthValidation($ente_inspector,2);
+        !errors.ente_inspector && maxlengthValidation($ente_inspector,60);
     };
 
     $ente_inspector.addEventListener("input",() => ente_inspectorValidation($ente_inspector));
