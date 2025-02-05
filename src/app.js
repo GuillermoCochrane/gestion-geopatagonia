@@ -6,6 +6,7 @@ const methodOverride =  require('method-override'); // Necesario para usar méto
 // Routers
 const mainRoutes = require("./routes/mainRouter");
 const dashboardRoutes = require("./routes/dashboardRouter");
+const utilitiesAPIroutes = require("./routes/API/utilitiesAPIRoute");
 
 // Configuración
 const app = express();
@@ -22,6 +23,7 @@ app.set('views', path.join(__dirname, './views'));
 // Seteo de rutas
 app.use('/', mainRoutes);
 app.use('/dashboard', dashboardRoutes);
+app.use('/api/utilities', utilitiesAPIroutes);
 
 //Error 404
 app.use((req,res,next) =>{
