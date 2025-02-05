@@ -5,8 +5,8 @@ window.addEventListener("load", () => {
 
     const rolValidation = () => {
         requiredValidation($rol);
-        errors.rol ? null : minlengthValidation($rol,2);
-        errors.rol ? null : maxlengthValidation($rol,60);
+        !errors.rol && minlengthValidation($rol,2);
+        !errors.rol && maxlengthValidation($rol,60);
     };
 
     $rol.addEventListener("input",() => rolValidation($rol));
