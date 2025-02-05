@@ -8,8 +8,8 @@ window.addEventListener("load", () => {
 
     const origenlValidation = () => {
         requiredValidation($origen);
-        errors.origen ? null : minlengthValidation($origen,2);
-        errors.origen ? null : maxlengthValidation($origen,100);
+        !errors.origen && minlengthValidation($origen,2);
+        !errors.origen && maxlengthValidation($origen,100);
     };
 
     $origen.addEventListener("input",() => origenlValidation($origen));
