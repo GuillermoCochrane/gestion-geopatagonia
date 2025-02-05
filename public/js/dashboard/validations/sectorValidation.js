@@ -5,8 +5,8 @@ window.addEventListener("load", () => {
 
     const sectorValidation = () => {
         requiredValidation($sector);
-        errors.sector ? null : minlengthValidation($sector,2);
-        errors.sector ? null : maxlengthValidation($sector,100);
+        !errors.sector && minlengthValidation($sector,2);
+        !errors.sector && maxlengthValidation($sector,100);
     };
 
     $sector.addEventListener("input",() => sectorValidation($sector));
