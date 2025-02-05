@@ -1,5 +1,7 @@
 const errors = {};
 
+const baseUrl = window.location.origin;
+
 const inputError = (input) => {
   input.classList.remove("input-ok");
   input.classList.add("input-error");
@@ -61,7 +63,7 @@ const maxlengthValidation = (input,max) => {
   }
 };
 
-const emailValidation = (input) => {
+const isEmailValidation = (input) => {
   let label = input.id;
   let error = document.querySelector( `#error-${label}`);
   if(!validator.isEmail(input.value)){
@@ -82,7 +84,7 @@ const uniqueValidation = async (input) => {
   let label = input.id;
   let error = document.querySelector( `#error-${label}`);
   if(json.data.inUse == true){
-      let errormsg = `${underscoreToSpace(label)} ya se encuentra registrado`;
+      let errormsg = `Este ${underscoreToSpace(label)} no se encuentra disponible`;
       error.innerText = errormsg;
       errors[label] = errormsg;
       inputError(input);
