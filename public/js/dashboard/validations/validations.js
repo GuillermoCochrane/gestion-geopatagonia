@@ -76,6 +76,23 @@ const emailValidation = (input) => {
   }
 };
 
+const uniqueValidation = async (input) => {
+  let data = await fetch(`${baseUrl}/api/utilities/inUseEmail/${input.value}`)
+  let json = await data.json();
+  let label = input.id;
+  let error = document.querySelector( `#error-${label}`);
+  if(json.data.inUse == true){
+      let errormsg = `${underscoreToSpace(label)} ya se encuentra registrado`;
+      error.innerText = errormsg;
+      errors[label] = errormsg;
+      inputError(input);
+  }else{
+      error.innerText = '';
+      inputOK(input);
+      delete errors.input;
+  }
+};
+
 const strongValidation = (input) => {
   let label = input.id;
   let error = document.querySelector( `#error-${label}`);
