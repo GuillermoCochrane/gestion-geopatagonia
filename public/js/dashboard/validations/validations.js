@@ -75,3 +75,18 @@ const emailValidation = (input) => {
       delete errors.input;
   }
 };
+
+const strongValidation = (input) => {
+  let label = input.id;
+  let error = document.querySelector( `#error-${label}`);
+  if(!validator.isStrongPassword(input.value)){
+      let errormsg = `${underscoreToSpace(label)} debe tener al menos una mayúscula, una minúscula, un número y un caracter especial`;
+      error.innerText = errormsg;
+      errors[label] = errormsg;
+      inputError(input);
+  }else{
+      error.innerText = '';
+      inputOK(input);
+      delete errors.input;
+  }
+};
