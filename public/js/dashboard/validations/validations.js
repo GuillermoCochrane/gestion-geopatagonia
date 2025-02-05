@@ -2,6 +2,7 @@ const errors = {};
 
 const baseUrl = window.location.origin;
 
+// Funciones para manejar clases CSS
 const inputError = (input) => {
   input.classList.remove("input-ok");
   input.classList.add("input-error");
@@ -12,10 +13,27 @@ const inputOK = (input) => {
   input.classList.add("input-ok");
 };
 
+// Función para convertir underscores a espacios
 const underscoreToSpace = (string) => {
   return string.includes('_') 
           ? string.replace(/_/g, ' ') 
           : string;
+};
+
+// Función de utilidad para manejar errores
+const handleValidation = (input, isValid, errorMessage) => {
+  const label = input.id;
+  const errorElement = document.querySelector(`#error-${label}`);
+
+  if (!isValid) {
+    errorElement.innerText = errorMessage;
+    errors[label] = errorMessage;
+    inputError(input);
+  } else {
+    errorElement.innerText = '';
+    delete errors[label];
+    inputOK(input);
+  }
 };
 
 const requiredValidation = (input) => {
