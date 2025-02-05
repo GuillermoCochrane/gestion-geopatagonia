@@ -60,3 +60,18 @@ const maxlengthValidation = (input,max) => {
       delete errors.input;
   }
 };
+
+const emailValidation = (input) => {
+  let label = input.id;
+  let error = document.querySelector( `#error-${label}`);
+  if(!validator.isEmail(input.value)){
+      let errormsg = `${underscoreToSpace(label)} no es un email válido`;
+      error.innerText = errormsg;
+      errors[label] = errormsg;
+      inputError(input);
+  }else{
+      error.innerText = '';
+      inputOK(input);
+      delete errors.input;
+  }
+};
