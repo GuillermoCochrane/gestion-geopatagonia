@@ -13,7 +13,7 @@ const inputOK = (input) => {
   input.classList.add("input-ok");
 };
 
-// Función para convertir underscores a espacios
+// Función para convertir " _ " a espacios
 const underscoreToSpace = (string) => {
   return string.includes('_') 
           ? string.replace(/_/g, ' ') 
@@ -21,11 +21,11 @@ const underscoreToSpace = (string) => {
 };
 
 // Función de utilidad para manejar errores
-const handleValidation = (input, isValid, errorMessage) => {
+const handleValidation = (input, validation, errorMessage) => {
   const label = input.id;
   const errorElement = document.querySelector(`#error-${label}`);
 
-  if (!isValid) {
+  if (!validation) {
     errorElement.innerText = errorMessage;
     errors[label] = errorMessage;
     inputError(input);
@@ -36,94 +36,41 @@ const handleValidation = (input, isValid, errorMessage) => {
   }
 };
 
+// Funciones de validación
 const requiredValidation = (input) => {
-  let label = input.id;
-  let error = document.querySelector(`#error-${label}`);
-  if(validator.isEmpty(input.value)){
-      let errormsg = `${underscoreToSpace(label)} es obligatorio`;
-      error.innerText =  errormsg;
-      errors[label] = errormsg;
-      inputError(input);
-  }else{
-      error.innerText = '';
-      delete errors[label];
-      inputOK(input);
-  }
+  const validation = !validator.isEmpty(input.value);
+  const errorMessage = `${underscoreToSpace(input.id)} es obligatorio`;
+  handleValidation(input, validation, errorMessage)
 };
 
 const minlengthValidation = (input,min) => {
-  let label = input.id;
-  let error = document.querySelector( `#error-${label}`);
-  if(!validator.isLength(input.value, {min})){
-      let errormsg = `${underscoreToSpace(label)} debe tener mínimo ${min} caracteres`;
-      error.innerText = errormsg;
-      errors[label] = errormsg;
-      inputError(input);
-  }else{
-      error.innerText = '';
-      inputOK(input);
-      delete errors.input;
-  }
+  const validation = validator.isLength(input.value, { min });
+  const errorMessage = `${underscoreToSpace(input.id)} debe tener mínimo ${min} caracteres`;
+  handleValidation(input, validation, errorMessage);
 };
 
 const maxlengthValidation = (input,max) => {
-  let label = input.id;
-  let error = document.querySelector( `#error-${label}`);
-  if(!validator.isLength(input.value, {max})){
-      let errormsg = `${underscoreToSpace(label)} debe tener máximo ${max} caracteres`;
-      error.innerText = errormsg;
-      errors[label] = errormsg;
-      inputError(input);
-  }else{
-      error.innerText = '';
-      inputOK(input);
-      delete errors.input;
-  }
+  const validation = validator.isLength(input.value, { max });
+  const errorMessage = `${underscoreToSpace(input.id)} debe tener máximo ${max} caracteres`;
+  handleValidation(input, validation, errorMessage);
 };
 
 const isEmailValidation = (input) => {
-  let label = input.id;
-  let error = document.querySelector( `#error-${label}`);
-  if(!validator.isEmail(input.value)){
-      let errormsg = `${underscoreToSpace(label)} no es un email válido`;
-      error.innerText = errormsg;
-      errors[label] = errormsg;
-      inputError(input);
-  }else{
-      error.innerText = '';
-      inputOK(input);
-      delete errors.input;
-  }
+  const validation = validator.isEmail(input.value);
+  const errorMessage = `${underscoreToSpace(input.id)} no es un email válido`;
+  handleValidation(input, validation, errorMessage);
 };
 
 const uniqueValidation = async (input) => {
-  let data = await fetch(`${baseUrl}/api/utilities/inUseEmail/${input.value}`)
-  let json = await data.json();
-  let label = input.id;
-  let error = document.querySelector( `#error-${label}`);
-  if(json.data.inUse == true){
-      let errormsg = `Este ${underscoreToSpace(label)} no se encuentra disponible`;
-      error.innerText = errormsg;
-      errors[label] = errormsg;
-      inputError(input);
-  }else{
-      error.innerText = '';
-      inputOK(input);
-      delete errors.input;
-  }
+  const response = await fetch(`${baseUrl}/api/utilities/inUseEmail/${input.value}`);
+  const json = await response.json();
+  const validation = json.data.inUse === false;
+  const errorMessage = `Este ${underscoreToSpace(input.id)} no se encuentra disponible`;
+  handleValidation(input, validation, errorMessage);
 };
 
 const strongValidation = (input) => {
-  let label = input.id;
-  let error = document.querySelector( `#error-${label}`);
-  if(!validator.isStrongPassword(input.value)){
-      let errormsg = `${underscoreToSpace(label)} debe tener al menos una mayúscula, una minúscula, un número y un caracter especial`;
-      error.innerText = errormsg;
-      errors[label] = errormsg;
-      inputError(input);
-  }else{
-      error.innerText = '';
-      inputOK(input);
-      delete errors.input;
-  }
+  const validation = validator.isStrongPassword(input.value);
+  const errorMessage = `${underscoreToSpace(input.id)} debe tener al menos una mayúscula, una minúscula, un número y un caracter especial`;
+  handleValidation(input, validation, errorMessage);
 };
