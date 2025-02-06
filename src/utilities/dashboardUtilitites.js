@@ -148,7 +148,7 @@ const dashboardUtilities = {
 
       // Procesamos los datos
       let finalData = { ...this.finalData("usuario", "usuarios", usuariosPlanos, id, nombre), roles };
-      delete finalData.usuario.password
+      id && delete finalData.usuario.password
 
       return  finalData;
 
