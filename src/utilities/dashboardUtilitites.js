@@ -113,17 +113,21 @@ const dashboardUtilities = {
     }
   },
 
-  userData: async function(ModeloUsuario, ModeloRol) {
+  userData: async function(ModeloUsuario, ModeloRol, id = null) {
     try {
-      // Obtebemos el usuario
+      // Construir el objeto "where" de manera condicional
+      const where = id ? { id } : {};
+
+      // Obtebemos usuario / usuarios 
       const usuarios = await ModeloUsuario.findAll({
         include: [{
           model: ModeloRol,
           attributes: ["rol"],
           as: "rol"
-        }]
+        }],
+        where
       });
-      // Obtenemos el rol
+      // Obtenemos los roles
       let roles = await ModeloRol.findAll();
       (roles.length === 0) 
             ? roles = [{rol: "No hay roles definidos"}] 
@@ -133,8 +137,11 @@ const dashboardUtilities = {
       let usuariosPlanos = utilities.plainData(usuarios);
       //Damos formato las fechas 
       usuariosPlanos = utilities.multipleDateFormat(usuariosPlanos);
-      // Retornamos los datos procesados
-      return  {...this.finalData("Usuario", "usuarios", usuariosPlanos), roles};
+      // Procesamos los datos
+      let finalData = { ...this.finalData("usuario", "usuarios", usuariosPlanos, id), roles };
+      delete finalData.usuario.password
+
+      return  finalData;
 
     } catch (error) {
       console.error(error); // Registro del error para depuración
