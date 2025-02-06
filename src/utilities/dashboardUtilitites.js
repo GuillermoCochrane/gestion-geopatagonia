@@ -128,6 +128,7 @@ const dashboardUtilities = {
         }],
         where
       });
+
       // Obtenemos los roles
       let roles = await ModeloRol.findAll();
       (roles.length === 0) 
@@ -138,10 +139,13 @@ const dashboardUtilities = {
       let usuariosPlanos = utilities.plainData(usuarios);
       //Damos formato las fechas 
       usuariosPlanos = utilities.multipleDateFormat(usuariosPlanos);
+
+      // Obtenemos el nombre del usuario si es necesario
       let nombre = null;
       if (id) { 
         nombre = usuariosPlanos[0].nombre;
       }
+
       // Procesamos los datos
       let finalData = { ...this.finalData("usuario", "usuarios", usuariosPlanos, id, nombre), roles };
       delete finalData.usuario.password
@@ -154,7 +158,6 @@ const dashboardUtilities = {
     }
   },
 
-  
   formErrorsHandler: async function(modelo, entidad, coleccion, oldData, errors, id = null) {
     try {
         // Obtiene datos para la vista

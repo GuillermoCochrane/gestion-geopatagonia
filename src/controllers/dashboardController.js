@@ -420,7 +420,7 @@ const dashboardController = {
     usuario: async(req, res) => {
         try{
             let data = await dashboardUtilities.userData(Usuario, Rol, req.params.id);
-            // return res.send(data);
+            if(data.error) return res.render("dashboard/dashboard", data);
             return res.render("dashboard/dashboard", data);
         } catch (error) {
             console.error(error);
