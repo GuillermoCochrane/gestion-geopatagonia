@@ -16,7 +16,7 @@ window.addEventListener("load", () => {
       !errors.email && minlengthValidation($email,7);
       !errors.email && maxlengthValidation($email,50);
       !errors.email && isEmailValidation($email);
-      !errors.email && uniqueValidation($email);
+      !errors.email && $form.action.includes("nuevo") && uniqueValidation($email);
   };
 
   const passwordValidation = () => {
