@@ -3,6 +3,6 @@ const router = express.Router();
 const utilitiesAPIController = require("../../controllers/API/utilitiesAPIController");
 
 //Rutas
-router.get("/inUseEmail/:email", utilitiesAPIController.checkEmail);
+router.get("/inUseEmail/:email/;:userName?", utilitiesAPIController.checkEmail);
 
 module.exports = router;

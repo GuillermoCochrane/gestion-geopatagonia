@@ -2,9 +2,10 @@ const utilities = require("../../utilities/utilities");
 
 const utilitiesAPIController = {
     checkEmail: async(req, res) => {
+        const {email, userName} = req.params;
         const endpoint =  "/api/utilities/unique/:email";
         try {
-            let inUse = await utilities.checkEmail(req.params.email);
+            let inUse = await utilities.checkEmail(email, userName);
             let info = {
                 meta: {
                     status : 200,
@@ -12,7 +13,7 @@ const utilitiesAPIController = {
                 },
                 data: {
                     inUse: inUse,
-                    oldData: req.params.email
+                    oldData: email
                 }
             }
             return res.json(info);
