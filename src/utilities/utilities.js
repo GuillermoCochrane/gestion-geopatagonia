@@ -73,13 +73,15 @@ const utilities = {
     },
 
     // Metodo que verifica si una email es se encuentra en uso
-    checkEmail: async function(email){
+    checkEmail: async function(email, userName = null){
         let user = await Usuario.findAll({
             where: {
                 email: email
             }
         });
-        return user.length > 0;
+        let response = user.length > 0;
+        if (userName && response && user[0].nombre == userName) response = false;
+        return response
     },
 };
 
