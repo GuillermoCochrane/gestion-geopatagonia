@@ -61,8 +61,10 @@ const isEmailValidation = (input) => {
   handleValidation(input, validation, errorMessage);
 };
 
-const uniqueValidation = async (input) => {
-  const response = await fetch(`${baseUrl}/api/utilities/inUseEmail/${input.value}`);
+const uniqueValidation = async (input, username = null) => {
+  let endpoint = `${baseUrl}/api/utilities/inUseEmail/${input.value}`;
+  if (username) endpoint += `/${username}`;
+  const response = await fetch(endpoint);
   const json = await response.json();
   const validation = json.data.inUse === false;
   const errorMessage = `Este ${underscoreToSpace(input.id)} no se encuentra disponible`;
