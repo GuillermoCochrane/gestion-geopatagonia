@@ -52,17 +52,18 @@ const dashboardUtilities = {
   },
 
 
-  finalData: function(entidad, coleccion, registros, id = null){
+  finalData: function(entidad, coleccion, registros, id = null, nombre = null){
     const config = this.configData(coleccion);
     const headerData = this.headerData(entidad, coleccion);
     let scripts = this.pageScript;
     scripts = [...scripts, "validator.min", "dashboard/validations/validations", `dashboard/validations/${entidad}Validation`];
     !id && scripts.push("dashboard/sectionhandler");
+    const singleTitle = `Editando ${headerData.entity} : ${nombre ? nombre : registros[0][entidad]}`;
     return {
       ...config,
       dashboardHeader: headerData,
       pageScript: scripts,
-      title: id ? `Editando ${headerData.entity} : ${registros[0][entidad]}` : config.mainLabel,
+      title: id ? singleTitle : config.mainLabel,
       styles: this.styles,
       subSection: id ? "./edition.ejs" : "./subSections.ejs",
       ...(id ? { id, [entidad]: registros[0] } : { [coleccion]: registros })
@@ -137,8 +138,12 @@ const dashboardUtilities = {
       let usuariosPlanos = utilities.plainData(usuarios);
       //Damos formato las fechas 
       usuariosPlanos = utilities.multipleDateFormat(usuariosPlanos);
+      let nombre = null;
+      if (id) { 
+        nombre = usuariosPlanos[0].nombre;
+      }
       // Procesamos los datos
-      let finalData = { ...this.finalData("usuario", "usuarios", usuariosPlanos, id), roles };
+      let finalData = { ...this.finalData("usuario", "usuarios", usuariosPlanos, id, nombre), roles };
       delete finalData.usuario.password
 
       return  finalData;
