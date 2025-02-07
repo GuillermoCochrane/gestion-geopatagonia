@@ -429,6 +429,12 @@ const dashboardController = {
         }
     },
 
+    editarUsuario: async(req, res) => {
+        let usuario = await dashboardUtilities.updateEntity(Usuario, req.body, req.params.id);
+        if(usuario.error) return res.render("dashboard/dashboard", usuario);
+        return res.redirect("/dashboard/usuarios");
+    },
+
     eliminarEstado: async(req, res) => {
         try{
             const data = await dashboardUtilities.deleteData(Estado, "estado", "estados",  req.params.id);
