@@ -1,4 +1,4 @@
-const errors = {};
+let errors = {};
 
 const baseUrl = window.location.origin;
 
