@@ -61,9 +61,9 @@ const isEmailValidation = (input) => {
   handleValidation(input, validation, errorMessage);
 };
 
-const uniqueValidation = async (input, username = null) => {
+const uniqueValidation = async (input, id = null) => {
   let endpoint = `${baseUrl}/api/utilities/inUseEmail/${input.value}`;
-  if (username) endpoint += `/${username}`;
+  if (id) endpoint += `/${id}`;
   const response = await fetch(endpoint);
   const json = await response.json();
   const validation = json.data.inUse === false;
