@@ -1,6 +1,6 @@
 const { body } = require("express-validator");
 const utilities = require("../../utilities/utilities")
-const nombreValidationMDW = [
+const usuarioValidationMDW = [
     body("nombre")
       .notEmpty().withMessage("Debe completar el campo nombre").bail()
       .isLength({min: 2}).withMessage("El campo nombre no puede tener menos de 2 caracteres").bail()
@@ -15,12 +15,13 @@ const nombreValidationMDW = [
       .isLength({max: 50}).withMessage("El campo email no puede tener más de 50 caracteres").bail()
       .isEmail().withMessage("El campo email no es un email válido")
       .custom((value, {req}) =>{
-        let user = utilities.checkEmail(value);
+        let id = req.body.id || null;
+        let user = utilities.checkEmail(value, id);
         if (user){
             throw new Error(`E-mail no válido`);
         }
         return true
-    })
+      })
     ];
     
-module.exports = nombreValidationMDW;
+module.exports = usuarioValidationMDW;
