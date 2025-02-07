@@ -9,6 +9,7 @@ const origenValidation = require("../middlewares/validations/origenValidationMDW
 const sectorValidation = require("../middlewares/validations/sectorValidationMDW");
 const enteValidation = require("../middlewares/validations/enteInspectorValidationMDW");
 const usuarioValidation = require("../middlewares/validations/usuarioValidationMDW");
+const passwordValidation = require("../middlewares/validations/passwordValidationMDW");
 
 //Rutas
 router.get("/", dashboardController.index);
@@ -55,7 +56,8 @@ router.delete("/entes_inspectores/eliminar/:id", dashboardController.enteInspect
 
 //Usuarios
 router.get("/usuarios", dashboardController.usuarios);
-router.post("/usuarios/nuevo", usuarioValidation, dashboardController.nuevoUsuario);
+router.post("/usuarios/nuevo", usuarioValidation, passwordValidation, dashboardController.nuevoUsuario);
 router.get("/usuarios/editar/:id", dashboardController.usuario);
+router.put("/usuarios/editar/:id", usuarioValidation, dashboardController.editarUsuario);
 
 module.exports = router;
