@@ -181,7 +181,7 @@ const dashboardUtilities = {
   userErrorhandler: async function(ModeloUsuario, ModeloRol,  oldData, errors, id = null) {
     try {
         // Obtiene datos para la vista
-        let data = await this.userData(ModeloUsuario, ModeloRol); 
+        let data = await this.userData(ModeloUsuario, ModeloRol, id);
         data.usuario = {};
         // Itera sobre todas las claves de oldData
         for (const fieldName in oldData) {
