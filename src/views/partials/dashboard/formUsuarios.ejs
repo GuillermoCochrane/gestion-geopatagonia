@@ -18,9 +18,15 @@
   </select>
   <span id="error-rol"><%= locals.errors?.rol?.msg %></span>
 </label>
-<label>
-  <h4>Contraseña</h4>
-  <input type="password" name="password" id="password" value="<%= locals.usuario?.password  %>">
-  <span id="error-password"><%= locals.errors?.password?.msg %></span>
-</label>
+
+<% if (locals.usuario?.id) { %>
+  <input type="hidden" name="id" id="id" value="<%= locals.usuario?.id %>">
+<% } else { %>
+  <label>
+    <h4>Contraseña</h4>
+    <input type="password" name="password" id="password" value="<%= locals.usuario?.password  %>">
+    <span id="error-password"><%= locals.errors?.password?.msg %></span>
+  </label>
+<% } %>
+
 <%- include(`./submitButton.ejs`) %>
