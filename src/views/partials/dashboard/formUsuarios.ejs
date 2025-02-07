@@ -20,8 +20,10 @@
 </label>
 
 <% if (locals.usuario?.id) { %>
+  <!-- Modo edición: agregar input oculto con el ID del usuario y no el del password -->
   <input type="hidden" name="id" id="id" value="<%= locals.usuario?.id %>">
 <% } else { %>
+  <!-- Modo creación: mostrar campo de contraseña y no el de id -->
   <label>
     <h4>Contraseña</h4>
     <input type="password" name="password" id="password" value="<%= locals.usuario?.password  %>">

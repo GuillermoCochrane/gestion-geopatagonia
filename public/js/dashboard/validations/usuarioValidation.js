@@ -3,6 +3,7 @@ window.addEventListener("load", () => {
   const $nombre = document.querySelector("#nombre");
   const $email = document.querySelector("#email");
   const $password = document.querySelector("#password");
+  const $id = document.querySelector("#id");
   const $btn = document.querySelector("#dashboard-form button");
 
   const nombreValidation = () => {
@@ -16,7 +17,7 @@ window.addEventListener("load", () => {
       !errors.email && minlengthValidation($email,7);
       !errors.email && maxlengthValidation($email,50);
       !errors.email && isEmailValidation($email);
-      !errors.email && ($form.action.includes("nuevo") ? uniqueValidation($email) : uniqueValidation($email, $nombre.value));
+      !errors.email && ($id ? uniqueValidation($email, $id.value) : uniqueValidation($email));
   };
 
   const passwordValidation = () => {
@@ -29,14 +30,14 @@ window.addEventListener("load", () => {
   $nombre.addEventListener("blur", () => nombreValidation($nombre));
   $email.addEventListener("input",() => emailValidation($email));
   $email.addEventListener("blur", () => emailValidation($email));
-  $password.addEventListener("input",() => passwordValidation($password));
-  $password.addEventListener("blur", () => passwordValidation($password));
+	$password &&	$password.addEventListener("input",() => passwordValidation($password));
+	$password &&	$password.addEventListener("blur", () => passwordValidation($password));	
 
   $btn.addEventListener("click", (e)=>{
       e.preventDefault();
       nombreValidation($nombre);
       emailValidation($email);
-      passwordValidation($password);
+      $password && passwordValidation($password);
       if (Object.keys(errors).length == 0) {
           $form.submit();
       }
