@@ -430,9 +430,29 @@ const dashboardController = {
     },
 
     editarUsuario: async(req, res) => {
-        let usuario = await dashboardUtilities.updateEntity(Usuario, req.body, req.params.id);
-        if(usuario.error) return res.render("dashboard/dashboard", usuario);
-        return res.redirect("/dashboard/usuarios");
+        const errors = validationResult(req)
+        if (errors.isEmpty()){
+            try{
+                let usuario = await dashboardUtilities.updateEntity(Usuario, req.body, req.params.id);
+                if(usuario.error) return res.render("dashboard/dashboard", usuario);
+                return res.redirect("/dashboard/usuarios");
+            } catch (error) {
+                console.error(error);
+                let data = dashboardUtilities.errorHandler(error); 
+                return res.render("dashboard/dashboard", data);
+            }
+        } else {
+            try{
+                let data = await dashboardUtilities.userErrorhandler(Usuario, Rol, req.body, errors.mapped(), req.params.id);
+                if (data.error) return res.render("dashboard/dashboard", data);
+                return res.render("dashboard/dashboard", data);
+            } catch (error) {
+                console.error(error);
+                let data = dashboardUtilities.errorHandler(error); 
+                return res.render("dashboard/dashboard", data);
+            }
+        }
+
     },
 
     eliminarEstado: async(req, res) => {
