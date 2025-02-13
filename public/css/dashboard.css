@@ -8,6 +8,7 @@
   --font: #4b4b4d /* rgb(75, 75, 77) */;
   --logo: #ED3237; /* rgb(237, 50, 55); */
   --logo-secondary:  #A9abae; /* rgb(169, 171, 174); */ 
+  --shadow: rgba(169, 171, 174, 0.4);
   --success: #39b54a;
   --error: orangered;
 }
@@ -71,6 +72,26 @@ header aside figure {
 
 header aside figure img {
   width: 100%;
+}
+
+header button#menu {
+  font-size: 17px;
+  cursor: pointer;
+  height: 45px;
+  width: 45px;
+  padding-inline: 11px;
+  padding-top: 9px;
+  padding-bottom: 8px;
+  margin-inline: 17px;
+  margin-block: auto;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  transition: all 0.7s ease-in-out;
+}
+
+header button#menu:hover {
+  border-radius: 50%;
+  background-color: var(--shadow);
 }
 
 main {
