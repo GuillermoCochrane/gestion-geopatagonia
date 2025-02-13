@@ -51,7 +51,6 @@ const dashboardUtilities = {
     }
   },
 
-
   finalData: function(entidad, coleccion, registros, id = null, nombre = null){
     const config = this.configData(coleccion);
     const headerData = this.headerData(entidad, coleccion);
@@ -198,8 +197,10 @@ const dashboardUtilities = {
         }
   },
 
-  createEntity: async function (Modelo, data) {
+  createEntity: async function (Modelo, data, isUser = false) {
     try {
+      // Si es un usuario, encriptamos la contraseña
+      isUser && (data.password = utilities.hashPassword(data.password));
       // Almacenamos en entity los datos recibidos al intentar crear la entrada en la base de datos
       const entity = await Modelo.create(data);
       // si se crea la entrada, devolvemos el objeto creado
