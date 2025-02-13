@@ -1,4 +1,5 @@
 const { Usuario} = require("../database/models");
+const bcrypt = require("bcryptjs");
 const utilities = {
     // Método para convertir fecha a un objeto con día, mes y año
     getDateParts: function(date){
@@ -82,6 +83,11 @@ const utilities = {
         let response = user.length > 0;
         if (id && response && user[0].id == id) response = false;
         return response
+    },
+
+    // Método para encriptar una contraseña
+    hashPassword: function(password){
+        return bcrypt.hashSync(password, 10);
     },
 };
 
