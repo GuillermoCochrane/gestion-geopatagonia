@@ -210,7 +210,7 @@ const dashboardController = {
         let errors = validationResult(req);
         if (errors.isEmpty()){
             try{
-                let usuario = await dashboardUtilities.createEntity(Usuario, req.body);
+                let usuario = await dashboardUtilities.createEntity(Usuario, req.body, true);
                 if(usuario.error) return res.render("dashboard/dashboard", usuario);
                 return res.redirect("/dashboard/usuarios");
             } catch (error) {
