@@ -574,6 +574,19 @@ const dashboardController = {
             return res.render("dashboard/dashboard", data);
         }
     },
+
+    eliminarUsuario: async(req, res) => {
+        try{
+            const data = await dashboardUtilities.deleteData(Usuario, "usuario", "usuarios",  req.params.id, true);
+            if(data.error) return res.render("dashboard/dashboard", data);
+            return res.render("dashboard/dashboard", data);
+        } catch (error) {
+            console.error(error);
+            let data = dashboardUtilities.errorHandler(error); 
+            return res.render("dashboard/dashboard", data);
+        }
+    },
+
 };
 
 module.exports = dashboardController;
