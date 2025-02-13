@@ -587,6 +587,18 @@ const dashboardController = {
         }
     },
 
+    usuarioEliminado: async(req, res) => {
+        try{
+            const data = await dashboardUtilities.deleteEntity(Usuario, req.params.id);
+            if(data.error) return res.render("dashboard/dashboard", data);
+            return res.redirect("/dashboard/usuarios");
+        } catch (error) {
+            console.error(error);
+            let data = dashboardUtilities.errorHandler(error); 
+            return res.render("dashboard/dashboard", data);
+        }
+    },
+
 };
 
 module.exports = dashboardController;

@@ -60,5 +60,6 @@ router.post("/usuarios/nuevo", usuarioValidation, passwordValidation, dashboardC
 router.get("/usuarios/editar/:id", dashboardController.usuario);
 router.put("/usuarios/editar/:id", usuarioValidation, dashboardController.editarUsuario);
 router.get("/usuarios/eliminar/:id", dashboardController.eliminarUsuario);
+router.delete("/usuarios/eliminar/:id", dashboardController.usuarioEliminado);
 
 module.exports = router;
