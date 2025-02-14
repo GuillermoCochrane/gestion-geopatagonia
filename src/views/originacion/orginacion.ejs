@@ -1,8 +1,9 @@
 <%- include('../partials/head.ejs') %>
 <body>
   <%- include('../partials/header.ejs', {usuario: "Juan Perez"}) %>
-  <main>
+  <main style="display: flex; flex-direction: column;">
     <%- include('../partials/originacion/filtro.ejs') %>
+    <%- include('../partials/originacion/tabla.ejs') %>
   </main>
 </body>
 </html>
