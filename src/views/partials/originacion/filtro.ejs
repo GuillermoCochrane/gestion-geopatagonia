@@ -1,0 +1,101 @@
+<section>
+  <details width="80%">
+    <summary style="display: inline-flex;">
+      <h2>Filtrar Originaciones</h2>
+    </summary>
+    <form action="/originacion/filtrar" method="POST" id="filtroOriginacion">
+      <label>
+        <h3>Fecha de inicio de carga</h3>
+        <input type="date" name="InicioCarga" id="InicioCarga" >
+      </label>
+      <label>
+        <h3>Fecha de fin de carga</h3>
+        <input type="date" name="FinCarga" id="FinCarga" >
+      </label>
+      <label>
+        <h3>Identificador</h3>
+        <input type="text" name="Identificador" id="Identificador" >
+      </label>
+      <label>
+        <h3>Ente Inspector</h3>
+        <select name="EnteInspector" id="EnteInspector">
+          <option value="0">Todos</option>
+          <option value="1">Geopatagonia</option>
+          <option value="2">YPF</option>
+          <option value="3">Petrobras</option>
+          <option value="4">CGC</option>
+        </select>
+      </label>
+      <label>
+        <h3>Sector</h3>
+        <select name="Sector" id="Sector">
+          <option value="0">Todos</option>
+          <option value="1">Agricultura</option>
+          <option value="2">Industria</option>
+          <option value="3">Comercio</option>
+          <option value="4">Transporte</option>
+        </select>
+      </label>
+      <label>
+        <h3>Etapa PAC / Observacion</h3>
+        <select name="Estado" id="Estado">
+          <option value="0">Todos</option>
+          <option value="1">Activo</option>
+          <option value="2">Inactivo</option>
+        </select>
+      </label>
+      <label>
+        <h3>Origen</h3>
+        <select name="Origen" id="Origen">
+          <option value="0">Todos</option>
+          <option value="1">Accidente</option>
+          <option value="2">Auditoría</option>
+          <option value="3">Insepección</option>
+        </select>
+      </label>
+      <label>
+        <h3>Formulario</h3>
+        <select name="Formulario" id="Formulario">
+          <option value="0">Todos</option>
+          <option value="1">Formulario 1</option>
+          <option value="2">Formulario 2</option>
+          <option value="3">Formulario 3</option>
+          <option value="4">Formulario 4</option>
+        </select>
+      </label>
+      <label>
+        <h3>Inciso</h3>
+        <select name="Inciso" id="Inciso">
+          <option value="0">Todos</option>
+          <option value="1">Inciso 1</option>
+          <option value="2">Inciso 2</option>
+          <option value="3">Inciso 3</option>
+          <option value="4">Inciso 4</option>
+        </select>
+      </label>
+      <label>
+        <h3>Equipo</h3>
+        <select name="Equipo" id="Equipo">
+          <option value="0">Todos</option>
+          <option value="1">Equipo 1</option>
+          <option value="2">Equipo 2</option>
+          <option value="3">Equipo 3</option>
+          <option value="4">Equipo 4</option>
+        </select>
+      </label>
+      <label>
+        <h3>Tipo de operación</h3>
+        <select name="TipoOperacion" id="TipoOperacion">
+          <option value="0">Todos</option>
+          <option value="1">Tipo 1</option>
+          <option value="2">Tipo 2</option>
+          <option value="3">Tipo 3</option>
+          <option value="4">Tipo 4</option>
+        </select>
+      </label>
+    </form>
+    <button>
+      Filtrar
+    </button>
+  </details>
+</section>
