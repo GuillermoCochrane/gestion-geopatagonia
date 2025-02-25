@@ -110,9 +110,9 @@ nav.sidebar{
   box-shadow: 0px 2px 10px 1px rgba(130, 130, 130);
   padding-top: 40px;
   position: relative;
-  overflow-y: visible;
+  overflow-y: auto;
   overflow-x: hidden;
-  min-height: 80vh;
+  height: 85vh;
 }
 
 nav.sidebar ul{
