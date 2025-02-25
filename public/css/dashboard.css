@@ -42,7 +42,7 @@ header.fixed {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  min-height: 10vh;
+  height: 15vh;
   z-index: 100;
   background-color: var(--ice);
 }
