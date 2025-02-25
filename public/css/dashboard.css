@@ -147,11 +147,6 @@ main section{
   flex-grow: 1;
 }
 
-main section.managemnet{
-  display: flex;
-  justify-content: flex-start;
-}
-
 main section.managemnet header{
   width: 100%;
   display: flex;
