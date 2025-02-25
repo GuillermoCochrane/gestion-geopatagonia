@@ -94,11 +94,10 @@ header i#menu:hover {
 
 main {
   width: 100%;
-  min-height: 90vh;
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  margin-top: 60px;
+  margin-top: 15vh;
 }
 
 nav.sidebar{
