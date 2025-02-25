@@ -145,6 +145,7 @@ main section{
   overflow-y: auto;
   scroll-behavior: smooth;
   flex-grow: 1;
+  padding-bottom: 30px;
 }
 
 main section.managemnet header{
