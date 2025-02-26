@@ -150,3 +150,48 @@ main section table tr{
 main section table tr:hover{
   background-color: var(--white);
 }
+
+details {
+  border-radius: 5px;
+  width: 80%;
+  border: var(--font) solid 1px;
+  background-color: var(--white);
+}
+
+summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  font-weight: bold;
+  text-align: center;
+  background-color: var(--logo-secondary);
+  color: var(--dark);
+  border-radius: 5px;
+}
+
+summary::after {
+  content: '';
+  width: 18px;
+  height: 10px;
+  background: url('https://uploads.sitepoint.com/wp-content/uploads/2023/10/1697699669arrow.svg') no-repeat;
+  background-size: cover;
+  transition: 0.2s;
+}
+
+details[open] > summary::after {
+  transform: rotate(180deg);
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+details[open] summary {
+  border-radius: 5px 5px 0 0;
+}
+
+details summary h3 {
+  width: 100%;
+}
