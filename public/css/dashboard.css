@@ -148,6 +148,18 @@ main section{
   padding-bottom: 30px;
 }
 
+main section article{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+main section article h2{
+  margin-top: 2em;
+}
+
 main section.managemnet header{
   width: 100%;
   display: flex;
