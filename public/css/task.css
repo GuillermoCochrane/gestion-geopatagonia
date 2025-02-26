@@ -26,6 +26,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 90vh;
+  scroll-behavior: smooth;
 }
 
 header.fixed {
@@ -77,9 +78,75 @@ main {
 
 main section{
   width: 100%;
-  padding-block: 30px;
+  padding-bottom: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+}
+
+main section table{
+  width: 80%;
+  border-collapse: collapse;
+  margin-inline: auto;
+  font-size: 14px;
+}
+
+main section table tr{
+  vertical-align: middle;
+}
+
+main section table th{
+  padding: 10px;
+  background-color: var(--font);
+  color: var(--white);
+}
+
+main section table td{
+  padding: 5px;
+  text-align: center;
+  border: 1px solid var(--font);
+}
+
+main section table td:nth-child(2){
+  min-width: 103px;
+}
+
+main section table td:last-child{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; 
+  border-color: transparent;
+}
+
+main section table td:last-child a{
+  margin: auto;
+  padding: 1em;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main section table td button{
+  margin: auto;
+  padding-inline: 8px;
+  padding-block: 4px;
+  border: 2px transparent solid;
+  background-color: var(--font);
+  color: var(--white);
+  font-size: 14px;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+main section table tr{
+  border: 1px solid var(--font);
+  transition: 0.5s ease-out;
+}
+
+main section table tr:hover{
+  background-color: var(--white);
 }
