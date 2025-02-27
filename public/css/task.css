@@ -197,3 +197,15 @@ details[open] summary {
 details summary h3 {
   width: 100%;
 }
+
+details form{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-inline: 1.5em;
+  margin-block: 1em;
+  background-color: var(--ice);
+  padding: 1em;
+  border-radius: 5px;
+}
