@@ -209,3 +209,9 @@ details form{
   padding: 1em;
   border-radius: 5px;
 }
+
+details form label{
+  width: 25%;
+  min-width: 200px;
+  margin-block: .5em;
+}
