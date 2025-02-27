@@ -154,7 +154,6 @@ main section table tr:hover{
 details {
   border-radius: 5px;
   width: 80%;
-  border: var(--font) solid 1px;
   background-color: var(--font);
   background-image: linear-gradient(45deg, var(--font) 0%, var(--logo-secondary) 100%);
   border-radius: 5px;
@@ -221,4 +220,20 @@ details form label h3{
   width: 100%;
   margin-inline: auto;
   margin-bottom: .5em;
+}
+
+details form label input,
+details form label select{
+  width: 90%;
+  margin-inline: 0;
+  padding-inline: .35em;
+  padding-block: .25em;
+  border: 1px solid transparent;
+  border-radius: 3px;
+}
+
+details form label input:focus,
+details form label select:focus{
+  outline: 2px solid var(--font);
+  outline-offset: 1px;
 }
