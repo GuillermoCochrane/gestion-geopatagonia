@@ -210,8 +210,15 @@ details form{
   border-radius: 5px;
 }
 
+details form aside,
 details form label{
   width: 25%;
   min-width: 200px;
   margin-block: .5em;
+}
+
+details form label h3{
+  width: 100%;
+  margin-inline: auto;
+  margin-bottom: .5em;
 }
