@@ -6,7 +6,7 @@ const originacionController = {
         return res.render("originacion/orginacion",
             {
                 title: "Originaciones", 
-                styles: ["dashboard"],
+                styles: ["task"],
                 pageScript: ["dashboard/dashboard"],
             });
     },
