@@ -238,12 +238,20 @@ details form label select:focus{
   outline-offset: 1px;
 }
 
+main aside,
 details form aside{
   display: flex;
   justify-content: center;
   align-items: flex-end;
 }
 
+main aside{
+  width: 80%;
+  margin-inline: auto;
+  align-items: center;
+}
+
+main aside button,
 details form aside button{
   padding-block: .3em;
   padding-inline: .6em;
@@ -257,8 +265,14 @@ details form aside button{
   transition: all .5s ease-in-out;
 }
 
+main aside button:hover,
 details form aside button:hover{
   background-color: var(--success);
   color: var(--white);
   border: 2px transparent solid;
+}
+
+main aside button {
+  padding-inline: .8em;
+  padding-block: .5em;
 }
