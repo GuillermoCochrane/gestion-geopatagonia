@@ -237,3 +237,22 @@ details form label select:focus{
   outline: 2px solid var(--font);
   outline-offset: 1px;
 }
+
+details form aside{
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+details form aside button{
+  padding-block: .3em;
+  padding-inline: .6em;
+  border: 2px var(--success) solid;
+  background-color: var(--white);
+  color: var(--success);
+  font-size: 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all .5s ease-in-out;
+}
