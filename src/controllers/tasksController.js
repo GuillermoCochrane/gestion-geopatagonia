@@ -1,15 +1,19 @@
 const { Estado, EnteInspector, Origen, Sector, Rol, Usuario } = require("../database/models");
 const { validationResult } = require('express-validator');
 
-const originacionController = {
+const tasksController = {
     index: async (req, res) => {
+        return res.redirect("/tasks/originacion");
+    },
+
+    originacion: async (req, res) => {
         return res.render("originacion/orginacion",
             {
                 title: "Originaciones", 
                 styles: ["task"],
-                pageScript: ["dashboard/dashboard"],
+                pageScript: ["dashboard/dashboard", "task/modalManager"],
             });
     },
 }
 
-module.exports = originacionController;
+module.exports = tasksController;
