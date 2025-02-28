@@ -3,6 +3,12 @@
   <%- include('../partials/header.ejs', {usuario: "Juan Perez"}) %>
   <main>
     <%- include('../partials/originacion/filtro.ejs') %>
+    <aside>
+      <button id="modal-opener">
+        <i class="fa-solid fa-plus"></i>
+        Nueva Carga
+      </button>
+    </aside>
     <%- include('../partials/originacion/tabla.ejs') %>
   </main>
 </body>
