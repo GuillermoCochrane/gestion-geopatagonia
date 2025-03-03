@@ -197,6 +197,7 @@ details summary h3 {
   width: 100%;
 }
 
+dialog form,
 details form{
   display: flex;
   flex-direction: row;
@@ -209,6 +210,8 @@ details form{
   border-radius: 5px;
 }
 
+dialog form aside,
+dialog form label,
 details form aside,
 details form label{
   width: 25%;
@@ -216,12 +219,15 @@ details form label{
   margin-block: .5em;
 }
 
+dialog form label h3,
 details form label h3{
   width: 100%;
   margin-inline: auto;
   margin-bottom: .5em;
 }
 
+dialog form label input,
+dialog form label select,
 details form label input,
 details form label select{
   width: 90%;
@@ -232,6 +238,8 @@ details form label select{
   border-radius: 3px;
 }
 
+dialog form label input:focus,
+dialog form label select:focus,
 details form label input:focus,
 details form label select:focus{
   outline: 2px solid var(--font);
