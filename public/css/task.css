@@ -332,3 +332,19 @@ main dialog header h2{
   text-align: center;
   flex-grow: 1;
 }
+
+main dialog header aside,
+main dialog header button{
+  width: 2em;
+  margin: auto;
+}
+
+main dialog header button{
+  font-size: 1.5em;
+  height: 2em;
+  border-radius: 50%;
+  background-color: var(--logo);
+  color: var(--white);
+  border: none;
+  transition: all 0.5s ease-out;
+}
