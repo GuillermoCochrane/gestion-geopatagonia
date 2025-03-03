@@ -276,3 +276,22 @@ main aside button {
   padding-inline: .8em;
   padding-block: .5em;
 }
+
+main dialog{
+	width: 95%;
+	height: auto;
+	max-height: 95%;
+	margin: auto;
+	border-radius: 14px;
+  background-color: var(--ice);
+  border: none;
+  padding-inline: 1.5em;
+  padding-block: 0.5em;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+main dialog::backdrop {
+  background-color: rgba(75, 75, 77, .9);
+  transition: background-color 0.5s ease-in-out;
+}
