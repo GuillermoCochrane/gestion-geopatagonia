@@ -290,16 +290,14 @@ main dialog{
 	height: auto;
 	max-height: 95%;
 	margin: auto;
-	border-radius: 14px;
+	border-radius: 10px;
 	background-color: var(--ice);
 	border: none;
-	padding-inline: 1.5em;
-	padding-block: 0.5em;
 	overflow-x: hidden;
 	overflow-y: auto;
 	box-shadow: 0px 0px 12px 0px var(--white);
-  scale: 0;
-  transition: scale 0.3s ease-out,
+	scale: 0;
+	transition: scale 0.3s ease-out,
               display 0.3s ease-out allow-discrete;
 }
 
@@ -314,4 +312,23 @@ main dialog[open]{
 main dialog::backdrop {
   background-color: rgba(75, 75, 77, 0.7);
   transition: background-color 0.3s ease-in-out;
+}
+
+main dialog header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-block: .5em;
+  background-color: var(--logo);
+  color: var(--ice);
+  padding-inline: .9em;
+  box-shadow: 0px 0px 10px 0px var(--font);
+}
+
+main dialog header h2{
+  margin: auto;
+  text-align: center;
+  flex-grow: 1;
 }
