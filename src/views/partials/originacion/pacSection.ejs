@@ -1,0 +1,10 @@
+<section>
+<%- include('../buttonsHeader.ejs', {dashboardHeader: {mainLabel: "Originación", newLabel: "Nueva Pac"}}) %>
+  <article>
+    <%- include('./originiacionData.ejs') %>
+    <%- include('./pacTable.ejs') %>
+  </article>
+  <form>
+    <%- include('./pacForm.ejs') %>
+  </form>
+</section>
