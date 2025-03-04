@@ -1,10 +1,10 @@
 window.addEventListener("load", () => {
-  const $form = document.querySelector("#dashboard-form");
+  const $form = document.querySelector("#new-content");
   const $nombre = document.querySelector("#nombre");
   const $email = document.querySelector("#email");
   const $password = document.querySelector("#password");
   const $id = document.querySelector("#id");
-  const $btn = document.querySelector("#dashboard-form button");
+  const $btn = document.querySelector("#new-content button");
 
   const nombreValidation = () => {
       requiredValidation($nombre);

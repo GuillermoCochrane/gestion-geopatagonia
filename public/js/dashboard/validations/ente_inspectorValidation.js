@@ -1,7 +1,7 @@
 window.addEventListener("load", () => {
-    const $form = document.querySelector("#dashboard-form");
+    const $form = document.querySelector("#new-content");
     const $ente_inspector = document.querySelector("#ente_inspector");
-    const $btn = document.querySelector("#dashboard-form button");
+    const $btn = document.querySelector("#new-content button");
 
     const ente_inspectorValidation = () => {
         requiredValidation($ente_inspector);
