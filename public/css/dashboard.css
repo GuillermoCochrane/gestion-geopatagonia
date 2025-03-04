@@ -262,7 +262,7 @@ main section.managemnet table#main-content tr:hover{
   background-color: var(--white);
 }
 
-main section.managemnet form#dashboard-form{
+main section.managemnet form#new-content{
   padding-block: 1em;
   margin-inline: auto;
   display: flex;
@@ -276,27 +276,27 @@ main section.managemnet form#dashboard-form{
   font-size: 15px;
 }
 
-main section.managemnet form#dashboard-form.hidden{
+main section.managemnet form#new-content.hidden{
   display: none;
 }
 
-main section.managemnet form#dashboard-form label{
+main section.managemnet form#new-content label{
   display: flex;
   flex-direction: column;
   width: 100%;
   margin-bottom: 15px;
 }
 
-main section.managemnet form#dashboard-form label h4{
+main section.managemnet form#new-content label h4{
   font-size: 18px;
   margin-bottom: 5px;
   padding-inline: 3px;
   font-weight: bold;
 }
 
-main section.managemnet form#dashboard-form select,
-main section.managemnet form#dashboard-form textarea,
-main section.managemnet form#dashboard-form input{
+main section.managemnet form#new-content select,
+main section.managemnet form#new-content textarea,
+main section.managemnet form#new-content input{
   width: 100%;
   padding-block: 3px;
   padding-inline: 5px;
@@ -307,31 +307,31 @@ main section.managemnet form#dashboard-form input{
 }
 
 
-main section.managemnet form#dashboard-form select.input-error,
-main section.managemnet form#dashboard-form textarea.input-error,
-main section.managemnet form#dashboard-form input.input-error{
+main section.managemnet form#new-content select.input-error,
+main section.managemnet form#new-content textarea.input-error,
+main section.managemnet form#new-content input.input-error{
   color: var(--logo);
   border-color: var(--logo);
 }
 
-main section.managemnet form#dashboard-form select.input-ok,
-main section.managemnet form#dashboard-form textarea.input-ok,
-main section.managemnet form#dashboard-form input.input-ok{
+main section.managemnet form#new-content select.input-ok,
+main section.managemnet form#new-content textarea.input-ok,
+main section.managemnet form#new-content input.input-ok{
   color: var(--success);
   border-color: var(--success);
 }
 
-main section.managemnet form#dashboard-form textarea{
+main section.managemnet form#new-content textarea{
   resize: none;
   field-sizing: content;
 }
 
-main section.managemnet form#dashboard-form input:focus{
+main section.managemnet form#new-content input:focus{
   outline: 2px solid var(--font);
   outline-offset: 1px;
 }
 
-main section.managemnet form#dashboard-form span{
+main section.managemnet form#new-content span{
   font-size: 14px;
   display: inline-block;
   padding-inline: 3px;
@@ -340,14 +340,14 @@ main section.managemnet form#dashboard-form span{
   margin-inline: auto;
 }
 
-main section.managemnet form#dashboard-form aside{
+main section.managemnet form#new-content aside{
   margin-block: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
 
-main section.managemnet form#dashboard-form button{
+main section.managemnet form#new-content button{
   width: 40%;
   padding-block: 10px;
   border: 2px transparent solid;
@@ -359,7 +359,7 @@ main section.managemnet form#dashboard-form button{
   margin-inline: auto;
 }
 
-main section.managemnet form#dashboard-form button.delete,
+main section.managemnet form#new-content button.delete,
 main section.managemnet table#main-content td button.delete{
   background-color: var(--ice);
   color: var(--logo);
@@ -367,13 +367,13 @@ main section.managemnet table#main-content td button.delete{
   transition: all 0.7s ease-out;
 }
 
-main section.managemnet form#dashboard-form button.delete:hover,
+main section.managemnet form#new-content button.delete:hover,
 main section.managemnet table#main-content td button.delete:hover{
   background-color: var(--logo);
   color: var(--white);
   border-color: transparent;
 }
 
-main section.managemnet form#dashboard-form.confirm-delete{
+main section.managemnet form#new-content.confirm-delete{
   background-color: transparent;
 }
