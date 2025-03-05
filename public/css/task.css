@@ -347,6 +347,7 @@ main dialog header button{
   color: var(--white);
   border: none;
   transition: all 0.5s ease-out;
+  cursor: pointer;
 }
 
 main dialog header button:hover{
@@ -395,6 +396,12 @@ main dialog section header nav button.inactive{
   background-color: var(--white);
   color: var(--font);
   border: 2px var(--font) solid;
+}
+
+main dialog section header nav button:hover,
+main dialog section header nav button.inactive:hover{
+  text-shadow: unset;
+  scale: unset;
 }
 
 main dialog section header h2{
