@@ -442,6 +442,17 @@ main dialog section article aside ul li h4{
   font-size: 18px;
 }
 
+main dialog section article table{
+  width: 100%;
+}
+
+main dialog section article table td:last-child {
+  display: table-cell;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid var(--font);
+}
+
 main dialog section form.hidden,
 main dialog section article.hidden{
   display: none;
