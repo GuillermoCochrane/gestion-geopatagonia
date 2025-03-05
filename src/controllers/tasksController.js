@@ -11,7 +11,7 @@ const tasksController = {
             {
                 title: "Originaciones", 
                 styles: ["task"],
-                pageScript: ["dashboard/dashboard", "task/modalManager"],
+                pageScript: ["dashboard/dashboard", "task/modalManager", "sectionhandler"],
             });
     },
 }
