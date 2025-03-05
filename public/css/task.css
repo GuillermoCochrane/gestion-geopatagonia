@@ -400,3 +400,8 @@ main dialog section header h2{
   all: unset;
   font-size: 22px;
 }
+
+main dialog section form.hidden,
+main dialog section article.hidden{
+  display: none;
+}
