@@ -374,7 +374,7 @@ main dialog section header nav{
   justify-content: space-between;
   align-items: center;
   padding-inline: 20px;
-  padding-block: 25px;
+  padding-block: 20px;
 }
 
 main dialog section header nav button{
@@ -399,6 +399,11 @@ main dialog section header nav button.inactive{
 main dialog section header h2{
   all: unset;
   font-size: 22px;
+}
+
+main dialog section article{
+  margin-inline: auto;
+  margin-block: 20px;
 }
 
 main dialog section form.hidden,
