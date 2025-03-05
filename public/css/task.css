@@ -350,7 +350,8 @@ main dialog header button{
 }
 
 main dialog header button:hover{
-  box-shadow: 0px 0px 10px 0px var(--ice);
+  text-shadow: 0 0 5px var(--ice);
+  scale: 1.2;
 }
 
 main dialog section{
