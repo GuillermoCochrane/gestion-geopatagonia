@@ -226,6 +226,7 @@ details form label h3{
   margin-bottom: .5em;
 }
 
+dialog form label textarea,
 dialog form label input,
 dialog form label select,
 details form label input,
@@ -238,12 +239,18 @@ details form label select{
   border-radius: 3px;
 }
 
+dialog form label textarea:focus,
 dialog form label input:focus,
 dialog form label select:focus,
 details form label input:focus,
 details form label select:focus{
   outline: 2px solid var(--font);
   outline-offset: 1px;
+}
+
+dialog form label textarea{
+  resize: none;
+  field-sizing: content;
 }
 
 main aside,
