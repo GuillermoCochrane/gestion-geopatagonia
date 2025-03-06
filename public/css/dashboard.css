@@ -86,6 +86,12 @@ header aside a {
   transition: all 0.5s ease-in-out;
 }
 
+header aside a:hover {
+  background-color: var(--logo);
+  color: var(--white);
+  border: 2px solid transparent;
+}
+
 header i#menu {
   font-size: 22px;
   cursor: pointer;
