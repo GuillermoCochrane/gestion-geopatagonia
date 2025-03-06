@@ -519,3 +519,9 @@ main dialog section form label.checkbox input:checked::before {
 main dialog section form label.checkbox input:focus {
   outline: transparent;
 }
+
+main dialog section form label input.input-file{
+  padding-inline: 0.5em;
+  background-color: var(--white);
+  cursor: pointer;
+}
