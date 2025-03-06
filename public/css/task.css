@@ -70,6 +70,19 @@ header aside figure img {
   width: 100%;
 }
 
+header aside a {
+  color: var(--logo);
+  text-decoration: none;
+  padding-inline: 10px;
+  padding-block: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.3em;
+  border: 2px solid var(--logo);
+  text-align: center;
+  transition: all 0.5s ease-in-out;
+}
+
 main {
   width: 100%;
   margin-top: 15vh;
