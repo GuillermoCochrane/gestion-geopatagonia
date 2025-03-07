@@ -2,11 +2,13 @@
   <header>
     <aside>
     </aside>
-    <h2>Nueva originacion</h2>
+    <h2>Nueva Originación</h2>
     <button id="modal-closer">
       <i class="fa-solid fa-xmark"></i>
     </button>
   </header>
-  <%- include('./originacionForm.ejs') %>
+  <form action="/task/originacion/nueva" method="POST" id="nuevaOriginacion">
+    <%- include('./originacionForm.ejs') %>
+  </form>
   <%- include('./pacSection.ejs') %>
 </dialog>
