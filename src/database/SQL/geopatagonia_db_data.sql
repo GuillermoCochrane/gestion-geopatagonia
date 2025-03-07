@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `geopatagonia_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
-USE `geopatagonia_db`;
 -- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
 -- Host: localhost    Database: geopatagonia_db
@@ -109,6 +107,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (1,'Guillermo Cochrane','guilleac81@gmail.com','hashed_password_1',5,'2025-03-07 22:55:41','2025-03-07 22:57:40'),(2,'Carlos Rodriguez','CarlosRodriguez80@geopatagonia.com','$2a$10$1YYCPcDYYmMpW2L.vi0qquKHqBbC6NlnXjFuIJDeOF117BeqWr6aK',4,'2025-03-07 23:01:34','2025-03-07 23:01:34'),(3,'José Pérez','JosePerez72@geopatagonia.com','$2a$10$F97cO7Qv3Thw80HnpARvMeCKNJJ.ahq.dQ18xNdWeB2iI8SEPxde2',4,'2025-03-07 23:02:23','2025-03-07 23:02:23'),(4,'Roberto Gonzalez','RobertoGonzalez66@geopatagonia.com','$2a$10$.UMKoIuFx0IFe06B9PdxDOO6Q3OjRy4AmBXT2aDNMDMHqB5VxIc9C',4,'2025-03-07 23:02:56','2025-03-07 23:02:56');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -121,4 +120,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-27 19:10:38
+-- Dump completed on 2025-03-07 20:04:47
