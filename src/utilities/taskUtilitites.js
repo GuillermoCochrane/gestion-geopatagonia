@@ -1,3 +1,4 @@
+const { where } = require("sequelize");
 const utilities = require("./utilities");
 
 const taskUtilities = {
@@ -5,13 +6,32 @@ const taskUtilities = {
 
   pageScript: ["task/modalManager", "sectionhandler"],
 
-  originacionData: function(){
+  headerData: function(title){
     return {
-      title: "Originaciones",
+      title: title,
       styles: this.styles,
       pageScript: this.pageScript,
     }
   },
+
+  originationFormData: async function(Origen, Obervador, EnteInspector, Sector){
+    try {
+      let OrigenData = await Origen.findAll();
+      let EnteInspectorData = await EnteInspector.findAll();
+      let SectorData = await Sector.findAll();
+      let ObervadorData = await Obervador.findAll({where: { rol_id: 4}});
+      return {
+        origenes: OrigenData,
+        observadores: ObervadorData,
+        enteInspectores: EnteInspectorData,
+        sectores: SectorData,
+      }
+    } catch (error) {
+      console.error(error); // Registro del error para depuración
+      return error;
+    }
+  }
+
 }
 
 module.exports = taskUtilities;
