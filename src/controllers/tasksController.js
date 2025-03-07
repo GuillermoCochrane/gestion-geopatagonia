@@ -1,5 +1,6 @@
 const { Estado, EnteInspector, Origen, Sector, Rol, Usuario } = require("../database/models");
 const { validationResult } = require('express-validator');
+const utilities = require("../utilities/taskUtilitites");
 
 const tasksController = {
     index: async (req, res) => {
@@ -7,12 +8,8 @@ const tasksController = {
     },
 
     originacion: async (req, res) => {
-        return res.render("originacion/orginacion",
-            {
-                title: "Originaciones", 
-                styles: ["task"],
-                pageScript: ["dashboard/dashboard", "task/modalManager", "sectionhandler"],
-            });
+        let data = utilities.originacionData();
+        return res.render("originacion/orginacion", data);
     },
 }
 
