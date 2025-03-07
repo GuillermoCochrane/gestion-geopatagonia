@@ -167,6 +167,15 @@ main section{
   padding-bottom: 30px;
 }
 
+main section.error{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  min-height: 90vh;
+  height: max-content;
+}
+
 main section article{
   display: flex;
   flex-direction: column;
