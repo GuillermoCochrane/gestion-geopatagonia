@@ -31,6 +31,7 @@ const taskUtilities = {
       sectorData = this.dataFormatter(sectorData);
       let obervadorData = await Obervador.findAll({where: { rol_id: 4}});
       obervadorData = this.dataFormatter(obervadorData);
+      obervadorData = utilities.passwordRemover(obervadorData);
 
       return {
         origenes: origenData,

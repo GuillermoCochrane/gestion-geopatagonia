@@ -89,6 +89,13 @@ const utilities = {
     hashPassword: function(password){
         return bcrypt.hashSync(password, 10);
     },
+
+    passwordRemover: function(users){
+      for (const user of users) {
+        delete user.password;
+      }
+      return users;
+    },
 };
 
 module.exports = utilities;
