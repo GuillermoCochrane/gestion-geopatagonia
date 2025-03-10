@@ -8,9 +8,14 @@ const tasksController = {
     },
 
     originacion: async (req, res) => {
-        let data = utilities.originacionData();
+        let data = await utilities.originacionData(Origen, Usuario, EnteInspector, Sector);
         return res.render("originacion/orginacion", data);
     },
+
+    nuevaOriginacion: async (req, res) => {
+        console.log(req.body);
+        return res.send(req.body);
+    }
 }
 
 module.exports = tasksController;
