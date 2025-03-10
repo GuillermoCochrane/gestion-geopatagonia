@@ -30,8 +30,20 @@ const taskUtilities = {
       console.error(error); // Registro del error para depuración
       return error;
     }
-  }
+  },
 
+  originacionData: async function(Origen, Obervador, EnteInspector, Sector){
+    let data = this.headerData("Originaciones");
+    let formData = {};
+    try {
+      formData = await this.originationFormData(Origen, Obervador, EnteInspector, Sector);
+    } catch (error) {
+      console.error(error); // Registro del error para depuración
+      return error;
+    }
+    data.formData = formData;
+    return data;
+  },
 }
 
 module.exports = taskUtilities;
