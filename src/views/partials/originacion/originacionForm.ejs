@@ -1,0 +1,70 @@
+<label>
+  <h3>Fecha de observación</h3>
+  <input type="date" name="fecha" id="fecha">
+</label>
+<label>
+  <h3>Lugar</h3>
+  <input type="text" name="lugar" id="lugar">
+</label>
+<label>
+  <h3>Origen</h3>
+  <select name="origen" id="origen">
+    <option value="" selected disabled>Seleccione el Origen</option>
+    <% if (locals?.formData?.origenes?.length > 0) { %>
+      <% for (const origen of locals?.formData?.origenes) { %>
+        <option value="<%= origen.id %>"> <%= origen.origen %> </option>
+      <% } %>
+    <% } else { %>
+      <option value="0">No hay origenes definidas</option>
+    <% } %>
+  </select>
+</label>
+<label>
+  <h3>Observador</h3>
+  <select name="observador" id="observador">
+    <option value="" selected disabled>Seleccione el Observador</option>
+    <% if (locals?.formData?.observadores?.length > 0) { %>
+      <% for (const observador of locals?.formData?.observadores) { %>
+        <option value="<%= observador.id %>"> <%= observador.nombre %> </option>
+      <% } %>
+    <% } else { %>
+      <option value="0">No hay observadores definidos</option>
+    <% } %>
+  </select>
+</label>
+<label>
+  <h3>Ente Inspector</h3>
+  <select name="EnteInspector" id="EnteInspector">
+    <option value="" selected disabled>Seleccione el Ente Inspector</option>
+    <% if (locals?.formData?.enteInspectores?.length > 0) { %>
+      <% for (const enteInspector of locals?.formData?.enteInspectores) { %>
+        <% console.log(enteInspector) %>
+        <option value="<%= enteInspector.id %>"> <%= enteInspector.ente_inspector %> </option>
+      <% } %>
+    <% } else { %>
+      <option value="0">No hay entes inspectores definidos</option>
+    <% } %>
+  </select>
+</label>
+<label>
+  <h3>Sector</h3>
+  <select name="Sector" id="Sector">
+    <option value="" selected disabled>Seleccione el Sector</option>
+    <% if (locals?.formData?.sectores?.length > 0) { %>
+      <% for (const sector of locals?.formData?.sectores) { %>
+        <option value="<%= sector.id %>"> <%= sector.sector %> </option>
+      <% } %>
+    <% } else { %>
+      <option value="0">No hay sectores definidos</option>
+    <% } %>
+  </select>
+</label>
+<label>
+  <h3>Adjunto</h3>
+  <input type="file" name="adjunto" id="adjunto" >
+</label>
+<aside>
+  <button>
+    Guardar
+  </button>
+</aside>
