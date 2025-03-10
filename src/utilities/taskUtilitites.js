@@ -4,7 +4,7 @@ const utilities = require("./utilities");
 const taskUtilities = {
   styles: ["task"],
 
-  pageScript: ["task/modalManager", "sectionhandler"],
+  pageScript: ["task/modalManager"],
 
   headerData: function(title){
     return {
