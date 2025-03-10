@@ -1,4 +1,4 @@
-<dialog id="modal">
+<dialog id="modal"  <%= locals?.OriginationSaved && "open" %>> </dialog>>
   <header>
     <aside>
     </aside>
@@ -7,8 +7,11 @@
       <i class="fa-solid fa-xmark"></i>
     </button>
   </header>
-  <form action="/task/originacion/nueva" method="POST" id="nuevaOriginacion">
-    <%- include('./originacionForm.ejs') %>
-  </form>
-  <%- include('./pacSection.ejs') %>
+  <% if (locals?.OriginationSaved) { %>
+    <%- include('./pacSection.ejs') %>
+  <% } else { %>
+    <form action="/task/originacion/nueva" method="POST" id="nuevaOriginacion">
+      <%- include('./originacionForm.ejs') %>
+    </form>
+  <% } %>
 </dialog>
