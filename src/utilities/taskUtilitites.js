@@ -14,17 +14,29 @@ const taskUtilities = {
     }
   },
 
+  dataFormatter: function(data){
+    let dataFormatted = utilities.plainData(data);
+    if (data.length === 0) return [];
+    dataFormatted = utilities.multipleDateFormat(dataFormatted);
+    return dataFormatted;
+  },
+
   originationFormData: async function(Origen, Obervador, EnteInspector, Sector){
     try {
-      let OrigenData = await Origen.findAll();
-      let EnteInspectorData = await EnteInspector.findAll();
-      let SectorData = await Sector.findAll();
-      let ObervadorData = await Obervador.findAll({where: { rol_id: 4}});
+      let origenData = await Origen.findAll();
+      origenData = this.dataFormatter(origenData);
+      let enteInspectorData = await EnteInspector.findAll();
+      enteInspectorData = this.dataFormatter(enteInspectorData);
+      let sectorData = await Sector.findAll();
+      sectorData = this.dataFormatter(sectorData);
+      let obervadorData = await Obervador.findAll({where: { rol_id: 4}});
+      obervadorData = this.dataFormatter(obervadorData);
+
       return {
-        origenes: OrigenData,
-        observadores: ObervadorData,
-        enteInspectores: EnteInspectorData,
-        sectores: SectorData,
+        origenes: origenData,
+        observadores: obervadorData,
+        enteInspectores: enteInspectorData,
+        sectores: sectorData,
       }
     } catch (error) {
       console.error(error); // Registro del error para depuración
