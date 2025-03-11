@@ -1,6 +1,6 @@
 <label>
   <h3>Fecha de observación</h3>
-  <input type="date" name="fecha" id="fecha">
+  <input type="date" name="fecha_de_observacion" id="fecha">
 </label>
 <label>
   <h3>Lugar</h3>
@@ -8,7 +8,7 @@
 </label>
 <label>
   <h3>Origen</h3>
-  <select name="origen" id="origen">
+  <select name="origen_id" id="origen">
     <option value="" selected disabled>Seleccione el Origen</option>
     <% if (locals?.formData?.origenes?.length > 0) { %>
       <% for (const origen of locals?.formData?.origenes) { %>
@@ -21,7 +21,7 @@
 </label>
 <label>
   <h3>Observador</h3>
-  <select name="observador" id="observador">
+  <select name="observador_id" id="observador">
     <option value="" selected disabled>Seleccione el Observador</option>
     <% if (locals?.formData?.observadores?.length > 0) { %>
       <% for (const observador of locals?.formData?.observadores) { %>
@@ -34,7 +34,7 @@
 </label>
 <label>
   <h3>Ente Inspector</h3>
-  <select name="EnteInspector" id="EnteInspector">
+  <select name="ente_inspector_id" id="enteInspector">
     <option value="" selected disabled>Seleccione el Ente Inspector</option>
     <% if (locals?.formData?.enteInspectores?.length > 0) { %>
       <% for (const enteInspector of locals?.formData?.enteInspectores) { %>
@@ -47,7 +47,7 @@
 </label>
 <label>
   <h3>Sector</h3>
-  <select name="Sector" id="Sector">
+  <select name="sector_id" id="sector">
     <option value="" selected disabled>Seleccione el Sector</option>
     <% if (locals?.formData?.sectores?.length > 0) { %>
       <% for (const sector of locals?.formData?.sectores) { %>
