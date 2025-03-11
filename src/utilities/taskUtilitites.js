@@ -58,6 +58,23 @@ const taskUtilities = {
     return data;
   },
 
+  createOriginacion: async function (Originacion, AdjuntoOriginacion, data, file) {
+    try {
+      // Crear la originación
+      data.estado = data.estado || 1; // Estado por defecto (1)
+      const originacion = await Originacion.create(data);
+      // Si se subió un archivo, guardarlo en la base de datos
+      if (file) {
+        await this.createAdjunto(AdjuntoOriginacion, file, 'originacion_id', originacion.id);
+      }
+      // Devolver la originación creada
+      return originacion;
+    } catch (error) {
+      console.error(error); // Registro del error para depuración
+      throw error; // Lanzar el error para manejarlo en el controlador
+    }
+  },
+
   createAdjunto: async function (Adjunto, file, key, id) {
     try {
       // Construir el objeto de datos para el adjunto
