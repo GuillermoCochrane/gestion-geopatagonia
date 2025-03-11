@@ -57,6 +57,24 @@ const taskUtilities = {
     data.formData = formData;
     return data;
   },
+
+  createAdjunto: async function (Adjunto, file, key, id) {
+    try {
+      // Construir el objeto de datos para el adjunto
+      const data = {
+        nombre: file.originalname,
+        archivo: file.path, // Ruta del archivo en el servidor
+        descripcion: '-', // Descripción por defecto
+        [key]: id, // Asociar el adjunto a la entidad usando el ID proporcionado
+      };
+      // Crear el adjunto en la base de datos
+      const adjunto = await Adjunto.create(data);
+      return adjunto;
+    } catch (error) {
+      console.error(error); // Registro del error para depuración
+      throw error; // Lanzar el error para manejarlo en el controlador
+    }
+  },
 }
 
 module.exports = taskUtilities;
