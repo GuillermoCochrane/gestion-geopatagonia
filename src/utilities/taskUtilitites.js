@@ -61,7 +61,7 @@ const taskUtilities = {
   createOriginacion: async function (Originacion, AdjuntoOriginacion, data, file) {
     try {
       // Crear la originación
-      data.estado = data.estado || 1; // Estado por defecto (1)
+      data.estado_id = data.estado_id || 1; // Estado por defecto (1)
       const originacion = await Originacion.create(data);
       // Si se subió un archivo, guardarlo en la base de datos
       if (file) {
