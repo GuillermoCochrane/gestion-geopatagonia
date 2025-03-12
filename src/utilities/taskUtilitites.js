@@ -64,11 +64,14 @@ const taskUtilities = {
       data.estado_id = data.estado_id || 1; // Estado por defecto (1)
       const originacion = await Originacion.create(data);
       // Si se subió un archivo, guardarlo en la base de datos
+      let adjunto = {};
       if (file) {
-        await this.createAdjunto(AdjuntoOriginacion, file, 'originacion_id', originacion.id);
+        adjunto = await this.createAdjunto(AdjuntoOriginacion, file, 'originacion_id', originacion.id);
+      } else{
+        adjunto.descripcion = "La originación no tiene adjuntos";
       }
       // Devolver la originación creada
-      return originacion;
+      return {originacion, adjunto};
     } catch (error) {
       console.error(error); // Registro del error para depuración
       throw error; // Lanzar el error para manejarlo en el controlador
