@@ -6,6 +6,8 @@ const taskUtilities = {
 
   pageScript: ["task/modalManager"],
 
+  validationScripts: ["validations", "validator.min"],
+
   headerData: function(title){
     return {
       title: title,
