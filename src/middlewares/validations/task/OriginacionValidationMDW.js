@@ -1,4 +1,6 @@
-const{body} = require("express-validator");
+const { body } = require("express-validator");
+const path = require("path");
+
 const originacionValidationMDW = [
     body("fecha_de_observacion")
       .notEmpty().withMessage("Debe completar la fecha").bail()
