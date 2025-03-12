@@ -1,5 +1,5 @@
 const { body } = require("express-validator");
-const utilities = require("../../utilities/utilities")
+const utilities = require("../../../utilities/utilities")
 const usuarioValidationMDW = [
     body("nombre")
       .notEmpty().withMessage("Debe completar el campo nombre").bail()

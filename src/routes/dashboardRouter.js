@@ -3,13 +3,13 @@ const router = express.Router();
 const dashboardController = require("../controllers/dashboardController");
 
 //Middlewares
-const estadosValidation = require("../middlewares/validations/estadoValidationMDW");
-const rolValidation = require("../middlewares/validations/rolValidationMDW");
-const origenValidation = require("../middlewares/validations/origenValidationMDW");
-const sectorValidation = require("../middlewares/validations/sectorValidationMDW");
-const enteValidation = require("../middlewares/validations/enteInspectorValidationMDW");
-const usuarioValidation = require("../middlewares/validations/usuarioValidationMDW");
-const passwordValidation = require("../middlewares/validations/passwordValidationMDW");
+const estadosValidation = require("../middlewares/validations/dashboard/estadoValidationMDW");
+const rolValidation = require("../middlewares/validations/dashboard/rolValidationMDW");
+const origenValidation = require("../middlewares/validations/dashboard/origenValidationMDW");
+const sectorValidation = require("../middlewares/validations/dashboard/sectorValidationMDW");
+const enteValidation = require("../middlewares/validations/dashboard/enteInspectorValidationMDW");
+const usuarioValidation = require("../middlewares/validations/dashboard/usuarioValidationMDW");
+const passwordValidation = require("../middlewares/validations/dashboard/passwordValidationMDW");
 
 //Rutas
 router.get("/", dashboardController.index);
