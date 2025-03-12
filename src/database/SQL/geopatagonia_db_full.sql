@@ -203,7 +203,7 @@ DROP TABLE IF EXISTS `originaciones`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `originaciones` (
-  `id` int(100) unsigned NOT NULL,
+  `id` int(100) unsigned NOT NULL AUTO_INCREMENT,
   `fecha_de_observacion` date NOT NULL,
   `lugar` varchar(60) NOT NULL,
   `ente_inspector_id` int(100) unsigned NOT NULL,
@@ -329,4 +329,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-03-07 20:03:50
+-- Dump completed on 2025-03-11 21:23:01
