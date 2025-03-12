@@ -30,7 +30,20 @@ const originacionValidationMDW = [
       .notEmpty().withMessage("Debe seleccionar el sector").bail()
       .isInt({ min: 1 }).withMessage("Debe seleccionar un sector válido"),
     body("adjunto")
-      .notEmpty().withMessage("Debe seleccionar el adjunto").bail(),
+      .custom((value, { req }) => {
+        if (req.file) {
+          const allowed = [".png", ".jpg", ".pdf"];
+          const extension = path.extname(req.file.originalname).toLowerCase();
+          const msg = allowed
+              .map((ext) => `"${ext}"`) // Agregar comillas a cada extensión
+              .join(", ") // Unir con comas
+              .replace(/, ([^,]*)$/, " y $1"); // Agrega "y" antes de la última extensión
+          if (!allowed.includes(extension)) {
+            throw new Error(`Solo se permiten archivos ${msg}`);
+          }
+        }
+        return true;
+      }),
 ];
 
 module.exports = originacionValidationMDW;
