@@ -83,9 +83,9 @@ const taskUtilities = {
       // Construir el objeto de datos para el adjunto
       const data = {
         nombre: file.originalname,
-        archivo: file.path, // Ruta del archivo en el servidor
-        descripcion: '-', // Descripción por defecto
-        [key]: id, // Asociar el adjunto a la entidad usando el ID proporcionado
+        archivo: `/documents/originacion/${file.originalname}`, 
+        descripcion: '-',
+        [key]: id, //Asociar el adjunto a la entidad usando el ID proporcionado
       };
       // Crear el adjunto en la base de datos
       const adjunto = await Adjunto.create(data);
