@@ -1,4 +1,3 @@
-const { where } = require("sequelize");
 const utilities = require("./utilities");
 
 const taskUtilities = {
