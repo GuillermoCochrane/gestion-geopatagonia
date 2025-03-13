@@ -13,9 +13,8 @@ const tasksController = {
     },
 
     nuevaOriginacion: async (req, res) => {
-        const originacionErrors = validationResult(req);
-        console.log(originacionErrors);
-        if (originacionErrors.isEmpty()) {
+        const errors = validationResult(req);
+        if (errors.isEmpty()) {
             try {
                 // Crear la originación y el adjunto (si lo hay)
                 const originacion = await utilities.createOriginacion(Originacion,AdjuntoOriginacion, req.body, req.file);
@@ -27,8 +26,11 @@ const tasksController = {
                 return res.send({error: error.message,});
             }
         } else {
-            const old = req.body;
-            return res.send({old: old, originacioErrors: originacionErrors});
+            let data = await utilities.originacionData(Origen, Usuario, EnteInspector, Sector);
+            data.oldData = req.body;
+            data.originacionErrors = errors.mapped();
+            // return res.send(data);
+            return res.render("originacion/orginacion", data);
         }
     },
 }
