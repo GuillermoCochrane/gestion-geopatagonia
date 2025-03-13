@@ -1,66 +1,129 @@
 <label>
   <h3>Fecha de observación</h3>
-  <input type="date" name="fecha_de_observacion" id="fecha">
+  <input 
+        type="date" 
+        name="fecha_de_observacion" 
+        id="fecha" 
+        value="<%= locals.oldData?.fecha_de_observacion %>"
+  >
+  <span id="error-fecha_de_observacion"><%= locals.originacionErrors?.fecha_de_observacion?.msg  %></span>
 </label>
 <label>
   <h3>Lugar</h3>
-  <input type="text" name="lugar" id="lugar">
+  <input 
+        type="text" 
+        name="lugar" 
+        id="lugar" 
+        value="<%= locals.oldData?.lugar %>"
+  >
+  <span id="error-lugar"><%= locals.originacionErrors?.lugar?.msg  %></span>
 </label>
 <label>
   <h3>Origen</h3>
   <select name="origen_id" id="origen">
-    <option value="" selected disabled>Seleccione el Origen</option>
+    <option 
+          value="" 
+          <%= (!locals.oldData?.origen_id) && 'selected' %> 
+          disabled
+    >
+      Seleccione el Origen
+    </option>
     <% if (locals?.formData?.origenes?.length > 0) { %>
       <% for (const origen of locals?.formData?.origenes) { %>
-        <option value="<%= origen.id %>"> <%= origen.origen %> </option>
+        <option 
+              value="<%= origen.id %>" 
+              <%= (locals.oldData?.origen_id === origen.id) && 'selected'%>
+        > 
+          <%= origen.origen %> 
+        </option>
       <% } %>
     <% } else { %>
       <option value="0">No hay origenes definidas</option>
     <% } %>
   </select>
+  <span id="error-origen"><%= locals.originacionErrors?.origen_id?.msg %></span>
 </label>
 <label>
   <h3>Observador</h3>
   <select name="observador_id" id="observador">
-    <option value="" selected disabled>Seleccione el Observador</option>
+    <option 
+          value="" 
+          <%= (!locals.oldData?.observador_id) && 'selected' %> 
+          disabled
+    >
+      Seleccione el Observador
+    </option>
     <% if (locals?.formData?.observadores?.length > 0) { %>
       <% for (const observador of locals?.formData?.observadores) { %>
-        <option value="<%= observador.id %>"> <%= observador.nombre %> </option>
+        <option 
+              value="<%= observador.id %>" 
+              <%= (locals.oldData?.observador_id === observador.id) && 'selected'  %>
+        > 
+          <%= observador.nombre %>
+        </option>
       <% } %>
     <% } else { %>
       <option value="0">No hay observadores definidos</option>
     <% } %>
   </select>
+  <span id="error-observador"><%= locals.originacionErrors?.observador_id?.msg %></span>
 </label>
 <label>
   <h3>Ente Inspector</h3>
   <select name="ente_inspector_id" id="enteInspector">
-    <option value="" selected disabled>Seleccione el Ente Inspector</option>
+    <option 
+          value="" 
+          <%= (!locals.oldData?.ente_inspector_id) && 'selected' %> 
+          disabled
+    >
+      Seleccione el Ente Inspector
+    </option>
     <% if (locals?.formData?.enteInspectores?.length > 0) { %>
       <% for (const enteInspector of locals?.formData?.enteInspectores) { %>
-        <option value="<%= enteInspector.id %>"> <%= enteInspector.ente_inspector %> </option>
+        <option 
+              value="<%= enteInspector.id %>" 
+              <%= (locals.oldData?.ente_inspector_id === enteInspector.id) && 'selected'  %>
+        > 
+          <%= enteInspector.ente_inspector %>
+        </option>
       <% } %>
     <% } else { %>
       <option value="0">No hay entes inspectores definidos</option>
     <% } %>
   </select>
+  <span id="error-ente_inspector">
+    <%= locals.originacionErrors?.ente_insperctor_id?.msg %>
+  </span>
 </label>
 <label>
   <h3>Sector</h3>
   <select name="sector_id" id="sector">
-    <option value="" selected disabled>Seleccione el Sector</option>
+    <option 
+        value="" 
+        <%= (!locals.oldData?.sector_id) && 'selected' %> 
+        disabled
+    >
+      Seleccione el Sector
+    </option>
     <% if (locals?.formData?.sectores?.length > 0) { %>
       <% for (const sector of locals?.formData?.sectores) { %>
-        <option value="<%= sector.id %>"> <%= sector.sector %> </option>
+        <option 
+            value="<%= sector.id %>" 
+            <%= (locals.oldData?.sector_id === sector.id) && 'selected'  %>
+        > 
+          <%= sector.sector %> 
+        </option>
       <% } %>
     <% } else { %>
       <option value="0">No hay sectores definidos</option>
     <% } %>
   </select>
+  <span id="error-sector"><%= locals.originacionErrors?.sector_id?.msg %></span>
 </label>
 <label>
   <h3>Adjunto</h3>
   <input type="file" name="adjunto" id="adjunto" >
+  <span id="error-adjunto"><%= locals.originacionErrors?.adjunto?.msg %></span>
 </label>
 <aside>
   <button>
