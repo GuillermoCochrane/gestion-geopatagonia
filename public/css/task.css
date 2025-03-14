@@ -544,3 +544,13 @@ main dialog section form label input.input-file{
   background-color: var(--white);
   cursor: pointer;
 }
+
+main dialog form label span {
+  font-size: 14px;
+  display: inline-block;
+  padding-inline: .25em;
+  margin-block: .5em;
+  color: var(--logo);
+  width: 90%;
+  margin-inline: auto;
+}
