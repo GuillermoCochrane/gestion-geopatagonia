@@ -48,6 +48,7 @@ const taskUtilities = {
 
   originacionData: async function(Origen, Obervador, EnteInspector, Sector){
     let data = this.headerData("Originaciones");
+    data.pageScript = [...data.pageScript, ...this.validationScripts, "task/validations/originacionValidation"];
     let formData = {};
     try {
       formData = await this.originationFormData(Origen, Obervador, EnteInspector, Sector);
