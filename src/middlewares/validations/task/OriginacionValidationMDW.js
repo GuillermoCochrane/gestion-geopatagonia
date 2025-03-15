@@ -13,19 +13,10 @@ const originacionValidationMDW = [
             parseInt(partesFecha[1]) - 1, // Mes (JavaScript cuenta desde 0)
             parseInt(partesFecha[2]) // Día
         );
-    
-        const fechaActual = new Date();
-    
-        console.log("Fecha ingresada (original):", value);
-        console.log("Fecha ingresada (reconstruida en local):", fechaIngresada.toISOString());
-    
+        const fechaActual = new Date();    
         // Eliminar la hora en ambas fechas
         fechaIngresada.setHours(0, 0, 0, 0);
         fechaActual.setHours(0, 0, 0, 0);
-    
-        console.log("Fecha ingresada (sin hora local):", fechaIngresada.toISOString());
-        console.log("Fecha actual (sin hora local):", fechaActual.toISOString());
-    
         // Comparar fechas sin hora
         if (fechaIngresada < fechaActual) {
             throw new Error("La fecha no puede ser anterior a hoy");
