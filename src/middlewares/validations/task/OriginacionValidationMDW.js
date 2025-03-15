@@ -6,12 +6,29 @@ const originacionValidationMDW = [
       .notEmpty().withMessage("Debe completar la fecha").bail()
       .isDate().withMessage("La fecha debe ser válida").bail()
       .custom((value) => {
-        const fechaIngresada = new Date(value);
+        // Convertir la fecha ingresada de forma correcta en la zona horaria local
+        const partesFecha = value.split("-"); // Divide "YYYY-MM-DD" en partes
+        const fechaIngresada = new Date(
+            parseInt(partesFecha[0]), // Año
+            parseInt(partesFecha[1]) - 1, // Mes (JavaScript cuenta desde 0)
+            parseInt(partesFecha[2]) // Día
+        );
+    
         const fechaActual = new Date();
-        // Comparar solo la fecha (ignorando la hora)
+    
+        console.log("Fecha ingresada (original):", value);
+        console.log("Fecha ingresada (reconstruida en local):", fechaIngresada.toISOString());
+    
+        // Eliminar la hora en ambas fechas
+        fechaIngresada.setHours(0, 0, 0, 0);
         fechaActual.setHours(0, 0, 0, 0);
+    
+        console.log("Fecha ingresada (sin hora local):", fechaIngresada.toISOString());
+        console.log("Fecha actual (sin hora local):", fechaActual.toISOString());
+    
+        // Comparar fechas sin hora
         if (fechaIngresada < fechaActual) {
-          throw new Error('La fecha no puede ser anterior a hoy');
+            throw new Error("La fecha no puede ser anterior a hoy");
         }
         return true;
       }),
