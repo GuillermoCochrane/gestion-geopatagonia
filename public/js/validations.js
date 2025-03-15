@@ -76,3 +76,10 @@ const strongValidation = (input) => {
   const errorMessage = `${underscoreToSpace(input.id)} debe tener al menos una mayúscula, una minúscula, un número y un caracter especial`;
   handleValidation(input, validation, errorMessage);
 };
+
+const isDateValidation = (input, format = 'YYYY-MM-DD') => {
+  // Validar que el valor sea una fecha válida en el formato especificado
+  const validation = validator.isDate(input.value, format);
+  const errorMessage = `${underscoreToSpace(input.id)} no es una fecha válida`;
+  handleValidation(input, validation, errorMessage);
+};
