@@ -83,3 +83,29 @@ const isDateValidation = (input, format = 'YYYY-MM-DD') => {
   const errorMessage = `${underscoreToSpace(input.id)} no es una fecha válida`;
   handleValidation(input, validation, errorMessage);
 };
+
+const isDateNotPastValidation = (input) => {
+  // Dividir la fecha en partes (año, mes, día)
+  const partesFecha = input.value.split("-");
+
+  // Crear la fecha ingresada y la actual
+  const fechaIngresada = new Date(
+    parseInt(partesFecha[0]), // Año
+    parseInt(partesFecha[1]) - 1, // Mes (JavaScript cuenta desde 0)
+    parseInt(partesFecha[2]) // Día
+  );
+  const fechaActual = new Date();
+
+  // Reiniciar la hora en ambas fechas para comparar solo la fecha
+  fechaIngresada.setHours(0, 0, 0, 0);
+  fechaActual.setHours(0, 0, 0, 0);
+
+  // Validar que la fecha ingresada no sea anterior a la fecha actual
+  const validation = fechaIngresada >= fechaActual;
+
+  // Mensaje de error
+  const errorMessage = `${underscoreToSpace(input.id)} no puede ser anterior a hoy`;
+
+  // Manejar la validación
+  handleValidation(input, validation, errorMessage);
+};
