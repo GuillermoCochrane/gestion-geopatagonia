@@ -254,7 +254,7 @@ details form label select{
   margin-inline: 0;
   padding-inline: .35em;
   padding-block: .25em;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   border-radius: 3px;
 }
 
@@ -543,6 +543,18 @@ main dialog section form label input.input-file{
   padding-inline: 0.5em;
   background-color: var(--white);
   cursor: pointer;
+}
+
+main dialog form label select.input-error,
+main dialog form label input.input-error {
+  color: var(--logo);
+  border-color: var(--logo);
+}
+
+main dialog form label select.input-ok,
+main dialog form label input.input-ok {
+  color: var(--success);
+  border-color: var(--success);
 }
 
 main dialog form label span {
