@@ -4,6 +4,7 @@ window.addEventListener("load", () => {
     const $lugar = document.querySelector("#lugar");
     const $origen = document.querySelector("#origen_id");
 	const $observador = document.querySelector("#observador_id");
+    const $insperctor = document.querySelector("#ente_inspector_id");
     const $btn = document.querySelector("#nueva-originacion button");
 
     console.log("Script de validación de originación iniciado"); // Log de inicio del script
@@ -28,6 +29,10 @@ window.addEventListener("load", () => {
 		requiredValidation($observador);
 	};
 
+    const insperctorValidation = () => {
+        requiredValidation($insperctor);
+    };
+
     // Listeners simplificados: no hace falta el callback, ya que la función al no tener parametros se ejecuta directamente
     $fecha.addEventListener("input", fechaValidation); 
     $fecha.addEventListener("blur", fechaValidation);
@@ -37,6 +42,8 @@ window.addEventListener("load", () => {
     $origen.addEventListener("blur", origenValidation);
 	$observador.addEventListener("input", observadorValidation);
 	$observador.addEventListener("blur", observadorValidation);
+    $insperctor.addEventListener("input", insperctorValidation);
+    $insperctor.addEventListener("blur", insperctorValidation);
 
     $btn.addEventListener("click", (e) => {
         e.preventDefault();
@@ -45,6 +52,7 @@ window.addEventListener("load", () => {
         lugarValidation();
         origenValidation();
 		observadorValidation();
+        insperctorValidation();
 
         if (Object.keys(errors).length == 0) {
             $form.submit();
