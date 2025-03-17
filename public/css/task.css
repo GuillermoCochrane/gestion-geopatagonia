@@ -235,7 +235,7 @@ details form aside,
 details form label{
   width: 25%;
   min-width: 200px;
-  margin-block: .5em;
+  margin-top: .5em;
 }
 
 dialog form label h3,
@@ -549,8 +549,9 @@ main dialog form label span {
   font-size: 14px;
   display: inline-block;
   padding-inline: .25em;
-  margin-block: .5em;
+  margin-top: .5em;
   color: var(--logo);
   width: 90%;
   margin-inline: auto;
+  min-height: 2em;
 }
