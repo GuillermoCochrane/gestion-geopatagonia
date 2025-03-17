@@ -8,7 +8,7 @@ window.addEventListener("load", () => {
     const fechaValidation = () => {
 		requiredValidation($fecha);  
 		!errors.fecha_de_observacion && isDateValidation($fecha);
-		!errors.fecha_de_observacion && isDateNotPastValidation($fecha);
+		!errors.fecha_de_observacion && notOlderValidation($fecha);
     };
 
     $fecha.addEventListener("input", () => fechaValidation($fecha));

@@ -36,6 +36,16 @@ const handleValidation = (input, validation, errorMessage) => {
   }
 };
 
+const splitDate = (date) =>{
+    // Dividir la fecha en partes (año, mes, día)
+    const partesFecha = date.split("-");
+    return {
+        año: parseInt(partesFecha[0]),
+        mes: parseInt(partesFecha[1]) - 1, // Mes (JavaScript cuenta desde 0)
+        dia: parseInt(partesFecha[2]), // Día
+    }
+}
+
 // Funciones de validación
 const requiredValidation = (input) => {
   const validation = !validator.isEmpty(input.value);
@@ -82,11 +92,7 @@ const isDateValidation = (input) => {
   const datePattern = /^\d{4}-\d{2}-\d{2}$/; // Expresión regular para YYYY-MM-DD
   const isValidFormat = datePattern.test(input.value); // Verificar el formato
 
-  // Validar manualmente que la fecha sea válida
-  const partesFecha = input.value.split("-");
-  const año = parseInt(partesFecha[0]);
-  const mes = parseInt(partesFecha[1]) - 1; // Mes en JavaScript va de 0 a 11
-  const dia = parseInt(partesFecha[2]);
+  const {año, mes, dia} = splitDate(input.value);
 
   const fechaIngresada = new Date(año, mes, dia);
   const isValidDate = (
@@ -101,18 +107,11 @@ const isDateValidation = (input) => {
   handleValidation(input, validation, errorMessage);
 };
 
-const isDateNotPastValidation = (input) => {
-  // Dividir la fecha en partes (año, mes, día)
-  const partesFecha = input.value.split("-");
-
+const notOlderValidation = (input) => {
+  const {año, mes, dia} = splitDate(input.value);   // Dividir la fecha en partes (año, mes, día)
   // Crear la fecha ingresada y la actual
-  const fechaIngresada = new Date(
-    parseInt(partesFecha[0]), // Año
-    parseInt(partesFecha[1]) - 1, // Mes (JavaScript cuenta desde 0)
-    parseInt(partesFecha[2]) // Día
-  );
+  const fechaIngresada = new Date(año, mes, dia);
   const fechaActual = new Date();
-
   // Reiniciar la hora en ambas fechas para comparar solo la fecha
   fechaIngresada.setHours(0, 0, 0, 0);
   fechaActual.setHours(0, 0, 0, 0);
@@ -120,7 +119,6 @@ const isDateNotPastValidation = (input) => {
   // Validar que la fecha ingresada no sea anterior a la fecha actual
   const validation = fechaIngresada >= fechaActual;
 
-  // Mensaje de error
   const errorMessage = `${underscoreToSpace(input.id)} no puede ser anterior a hoy`;
 
   // Manejar la validación
