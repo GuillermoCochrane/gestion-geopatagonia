@@ -77,9 +77,26 @@ const strongValidation = (input) => {
   handleValidation(input, validation, errorMessage);
 };
 
-const isDateValidation = (input, format = 'YYYY-MM-DD') => {
-  // Validar que el valor sea una fecha válida en el formato especificado
-  const validation = validator.isDate(input.value, format);
+const isDateValidation = (input) => {
+  // Validar que el valor sea una fecha válida en el formato YYYY-MM-DD
+  const datePattern = /^\d{4}-\d{2}-\d{2}$/; // Expresión regular para YYYY-MM-DD
+  const isValidFormat = datePattern.test(input.value); // Verificar el formato
+
+  // Validar manualmente que la fecha sea válida
+  const partesFecha = input.value.split("-");
+  const año = parseInt(partesFecha[0]);
+  const mes = parseInt(partesFecha[1]) - 1; // Mes en JavaScript va de 0 a 11
+  const dia = parseInt(partesFecha[2]);
+
+  const fechaIngresada = new Date(año, mes, dia);
+  const isValidDate = (
+    fechaIngresada.getFullYear() === año &&
+    fechaIngresada.getMonth() === mes &&
+    fechaIngresada.getDate() === dia
+  );
+
+  // Combinar ambas validaciones
+  const validation = isValidFormat && isValidDate;
   const errorMessage = `${underscoreToSpace(input.id)} no es una fecha válida`;
   handleValidation(input, validation, errorMessage);
 };
