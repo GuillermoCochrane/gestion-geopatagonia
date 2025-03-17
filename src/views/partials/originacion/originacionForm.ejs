@@ -20,7 +20,7 @@
 </label>
 <label>
   <h3>Origen</h3>
-  <select name="origen_id" id="origen">
+  <select name="origen_id" id="origen_id">
     <option 
           value="" 
           <%= (!locals.oldData?.origen_id) && 'selected' %> 
@@ -41,11 +41,11 @@
       <option value="0">No hay origenes definidas</option>
     <% } %>
   </select>
-  <span id="error-origen"><%= locals.originacionErrors?.origen_id?.msg %></span>
+  <span id="error-origen_id"><%= locals.originacionErrors?.origen_id?.msg %></span>
 </label>
 <label>
   <h3>Observador</h3>
-  <select name="observador_id" id="observador">
+  <select name="observador_id" id="observador_id">
     <option 
           value="" 
           <%= (!locals.oldData?.observador_id) && 'selected' %> 
@@ -66,11 +66,11 @@
       <option value="0">No hay observadores definidos</option>
     <% } %>
   </select>
-  <span id="error-observador"><%= locals.originacionErrors?.observador_id?.msg %></span>
+  <span id="error-observador_id"><%= locals.originacionErrors?.observador_id?.msg %></span>
 </label>
 <label>
   <h3>Ente Inspector</h3>
-  <select name="ente_inspector_id" id="enteInspector">
+  <select name="ente_inspector_id" id="ente_inspector_id">
     <option 
           value="" 
           <%= (!locals.oldData?.ente_inspector_id) && 'selected' %> 
@@ -91,13 +91,13 @@
       <option value="0">No hay entes inspectores definidos</option>
     <% } %>
   </select>
-  <span id="error-ente_inspector">
+  <span id="error-ente_inspector_id">
     <%= locals.originacionErrors?.ente_insperctor_id?.msg %>
   </span>
 </label>
 <label>
   <h3>Sector</h3>
-  <select name="sector_id" id="sector">
+  <select name="sector_id" id="sector_id">
     <option 
         value="" 
         <%= (!locals.oldData?.sector_id) && 'selected' %> 
@@ -118,7 +118,7 @@
       <option value="0">No hay sectores definidos</option>
     <% } %>
   </select>
-  <span id="error-sector"><%= locals.originacionErrors?.sector_id?.msg %></span>
+  <span id="error-sector_id"><%= locals.originacionErrors?.sector_id?.msg %></span>
 </label>
 <label>
   <h3>Adjunto</h3>
