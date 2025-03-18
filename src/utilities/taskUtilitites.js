@@ -6,6 +6,11 @@ const taskUtilities = {
   pageScript: ["task/modalManager"],
 
   validationScripts: ["validations", "validator.min"],
+  
+  dashboardHeader: {
+    mainLabel: "Originación", 
+    newLabel: "Nueva Pac"
+  },
 
   headerData: function(title){
     return {
@@ -69,7 +74,7 @@ const taskUtilities = {
       let adjunto = {};
       if (file) {
         adjunto = await this.createAdjunto(AdjuntoOriginacion, file, 'originacion_id', originacion.id);
-      } else{
+      } else {
         adjunto.descripcion = "La originación no tiene adjuntos";
       }
       // Devolver la originación creada
