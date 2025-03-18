@@ -14,6 +14,6 @@ const originacionValidation = require("../middlewares/validations/task/Originaci
 
 router.get('/', tasksController.index);
 router.get('/originacion', tasksController.originacion);
-router.post('/originacion/nueva', upload.single("adjunto"), originacionValidation, tasksController.nuevaOriginacion);
+router.post('/originacion/', upload.single("adjunto"), originacionValidation, tasksController.nuevaOriginacion);
 
 module.exports = router;

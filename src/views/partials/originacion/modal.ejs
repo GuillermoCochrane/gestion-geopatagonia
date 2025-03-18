@@ -10,7 +10,7 @@
   <% if (locals?.OriginationSaved) { %>
     <%- include('./pacSection.ejs') %>
   <% } else { %>
-    <form action="/tasks/originacion/nueva" method="POST" id="nueva-originacion" enctype="multipart/form-data">
+    <form action="/tasks/originacion/" method="POST" id="nueva-originacion" enctype="multipart/form-data">
       <%- include('./originacionForm.ejs') %>
     </form>
   <% } %>
