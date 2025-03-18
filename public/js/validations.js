@@ -137,8 +137,8 @@ const extentionValidation = (input, allowedExtensions) => {
   const fileName = input.value; 
   const fileExtention = fileName.split('.').pop()?.toLowerCase(); // Extrae la extensión y la convierte a minúsculas
 
- // Verifica si la extensión está en la lista de permitidas
-  const validation = fileExtention && allowedExtensions.includes(fileExtention);
+ // Valida la extensión solo si se ha adjuntado un archivo
+  const validation = !fileExtention ||  allowedExtensions.includes(fileExtention);
 
   const errorMessage = `Solo se permiten archivos ${allowedExtensions.join(', ')}`;
   handleValidation(input, validation, errorMessage);
