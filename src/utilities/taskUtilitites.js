@@ -66,19 +66,20 @@ const taskUtilities = {
   },
 
   singleOriginationData: async function(Originacion, Origen, Observador, EnteInspector, Sector, Adjunto, id){
+    const exclude = {exclude:['created_at', 'updated_at']}
+    const observadorExclude = {exclude:['created_at', 'updated_at', "password"]}
     try {
-      let data = Originacion.findAll({
+      const data = Originacion.findAll({
         where: {id: id},
         include: [
-          { model: Origen, as: "origen"},
-          { model: Observador, as: "observador"},
-          { model: EnteInspector, as: "ente_inspector"},
-          { model: Sector, as: "sector"},
-          { model: Adjunto, as: "adjuntos" },
+          { model: Origen, as: "origen", attributes: exclude },
+          { model: Observador, as: "observador", attributes: observadorExclude },
+          { model: EnteInspector, as: "ente_inspector", attributes: exclude },
+          { model: Sector, as: "sector", attributes: exclude },
+          { model: Adjunto, as: "adjuntos", attributes: exclude },
         ]
-      });
-      let dataFormatted = utilities.plainData(data);
-      return dataFormatted;
+      });      
+      return data;
     } catch (error) {
       console.error(error); // Registro del error para depuración
       throw error;
