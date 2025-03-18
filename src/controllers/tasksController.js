@@ -7,7 +7,7 @@ const tasksController = {
         return res.redirect("/tasks/originacion");
     },
 
-    originacion: async (req, res) => {
+    originaciones: async (req, res) => {
         let data = await utilities.originacionData(Origen, Usuario, EnteInspector, Sector);
         return res.render("originacion/orginacion", data);
     },
@@ -29,9 +29,13 @@ const tasksController = {
             let data = await utilities.originacionData(Origen, Usuario, EnteInspector, Sector);
             data.oldData = req.body;
             data.originacionErrors = errors.mapped();
-            // return res.send(data);
             return res.render("originacion/orginacion", data);
         }
+    },
+
+    originacion: async (req, res) => {
+        let data = await utilities.singleOriginationData(Originacion, Origen, Usuario, EnteInspector, Sector, AdjuntoOriginacion, req.params.id);
+        return res.send( data );
     },
 }
 
