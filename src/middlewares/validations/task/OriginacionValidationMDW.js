@@ -33,7 +33,7 @@ const originacionValidationMDW = [
     body("observador_id")
       .notEmpty().withMessage("Debe seleccionar el observador").bail()
       .isInt({ min: 1 }).withMessage("Debe seleccionar un observador válido"),
-    body("ente_insperctor_id")
+    body("ente_inspector_id")
       .notEmpty().withMessage("Debe seleccionar el ente inspector").bail()
       .isInt({ min: 1 }).withMessage("Debe seleccionar un ente inspector válido"),
     body("sector_id")
