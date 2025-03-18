@@ -39,6 +39,10 @@ window.addEventListener("load", () => {
         requiredValidation($sector);
     };
 
+    const adjuntoValidation = () => {
+        extentionValidation($adjunto, ["jpg", "png", "pdf"]);
+    };
+
     // Listeners simplificados: no hace falta el callback, ya que la función al no tener parametros se ejecuta directamente
     $fecha.addEventListener("input", fechaValidation); 
     $fecha.addEventListener("blur", fechaValidation);
@@ -52,6 +56,8 @@ window.addEventListener("load", () => {
     $insperctor.addEventListener("blur", insperctorValidation);
     $sector.addEventListener("input", sectorValidation);
     $sector.addEventListener("blur", sectorValidation);
+    $adjunto.addEventListener("input", adjuntoValidation);
+    $adjunto.addEventListener("blur", adjuntoValidation);
 
     $btn.addEventListener("click", (e) => {
         e.preventDefault();
@@ -62,6 +68,7 @@ window.addEventListener("load", () => {
 		observadorValidation();
         insperctorValidation();
         sectorValidation();
+        adjuntoValidation();
 
         if (Object.keys(errors).length == 0) {
             $form.submit();
