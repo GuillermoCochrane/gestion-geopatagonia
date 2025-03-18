@@ -65,6 +65,26 @@ const taskUtilities = {
     return data;
   },
 
+  singleOriginationData: async function(Originacion, Origen, Observador, EnteInspector, Sector, Adjunto, id){
+    try {
+      let data = Originacion.findAll({
+        where: {id: id},
+        include: [
+          { model: Origen, as: "origen"},
+          { model: Observador, as: "observador"},
+          { model: EnteInspector, as: "ente_inspector"},
+          { model: Sector, as: "sector"},
+          { model: Adjunto, as: "adjuntos" },
+        ]
+      });
+      let dataFormatted = utilities.plainData(data);
+      return dataFormatted;
+    } catch (error) {
+      console.error(error); // Registro del error para depuración
+      throw error;
+    }
+  },
+
   createOriginacion: async function (Originacion, AdjuntoOriginacion, data, file) {
     try {
       // Crear la originación
