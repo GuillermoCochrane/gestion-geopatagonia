@@ -1,4 +1,4 @@
-const { Estado, EnteInspector, Origen, Sector, Rol, Usuario, AdjuntoOriginacion, Originacion } = require("../database/models");
+const { Estado, EnteInspector, Origen, Sector, Rol, Usuario, AdjuntoOriginacion, Originacion, ObservacionPAC } = require("../database/models");
 const { validationResult } = require('express-validator');
 const utilities = require("../utilities/taskUtilitites");
 
@@ -34,7 +34,7 @@ const tasksController = {
     },
 
     originacion: async (req, res) => {
-        let data = await utilities.singleOriginationData(Originacion, Origen, Usuario, EnteInspector, Sector, AdjuntoOriginacion, req.params.id);
+        let data = await utilities.singleOriginationData(Originacion, Origen, Usuario, EnteInspector, Sector, AdjuntoOriginacion, ObservacionPAC, req.params.id);
         return res.send( data );
     },
 }
