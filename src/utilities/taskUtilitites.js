@@ -65,11 +65,11 @@ const taskUtilities = {
     return data;
   },
 
-  singleOriginationData: async function(Originacion, Origen, Observador, EnteInspector, Sector, Adjunto, id){
+  singleOriginationData: async function(Originacion, Origen, Observador, EnteInspector, Sector, Adjunto, ObservacionPAC, id){
     const exclude = {exclude:['created_at', 'updated_at']}
     const observadorExclude = {exclude:['created_at', 'updated_at', "password"]}
     try {
-      const data = Originacion.findAll({
+      const data = await Originacion.findAll({
         where: {id: id},
         include: [
           { model: Origen, as: "origen", attributes: exclude },
@@ -77,6 +77,7 @@ const taskUtilities = {
           { model: EnteInspector, as: "ente_inspector", attributes: exclude },
           { model: Sector, as: "sector", attributes: exclude },
           { model: Adjunto, as: "adjuntos", attributes: exclude },
+          { model: ObservacionPAC, as: "observaciones_pacs", attributes: ['id', 'inciso', 'descripcion', 'fecha_requerida', 'referencia', 'fecha_negociable', 'requiere_analisis', 'responsable_id', 'originacion_id', 'estado_id'] },
         ]
       });      
       return data;
