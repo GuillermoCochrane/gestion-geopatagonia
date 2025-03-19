@@ -17,9 +17,10 @@ const tasksController = {
         if (errors.isEmpty()) {
             try {
                 // Crear la originación y el adjunto (si lo hay)
-                const originacion = await utilities.createOriginacion(Originacion,AdjuntoOriginacion, req.body, req.file);
+                const data = await utilities.originationPACData(Originacion, Origen, Usuario, EnteInspector, Sector, ObservacionPAC, AdjuntoOriginacion, req.body, req.file);
                 // Devolver la respuesta
-                return res.send(originacion);
+                // return res.send(data);
+                return res.render("originacion/orginacion", data);
             } catch (error) {
                 console.error(error);
                 //En caso de error, devolvemos la respuesta
