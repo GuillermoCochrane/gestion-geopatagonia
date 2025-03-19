@@ -54,12 +54,12 @@ INSERT INTO `estados` VALUES (1,'Abierta',NULL,'2025-01-09 22:55:31','2025-01-09
 UNLOCK TABLES;
 
 --
--- Dumping data for table `observaciónes_pacs`
+-- Dumping data for table `observaciones_pacs`
 --
 
-LOCK TABLES `observaciónes_pacs` WRITE;
-/*!40000 ALTER TABLE `observaciónes_pacs` DISABLE KEYS */;
-/*!40000 ALTER TABLE `observaciónes_pacs` ENABLE KEYS */;
+LOCK TABLES `observaciones_pacs` WRITE;
+/*!40000 ALTER TABLE `observaciones_pacs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `observaciones_pacs` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -120,4 +120,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-03-07 20:04:47
+-- Dump completed on 2025-03-19 17:44:15

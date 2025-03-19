@@ -34,7 +34,7 @@ CREATE TABLE `adjuntos_observacion_pac` (
   `observacion_pac_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `adjuntos_observaciones_pacs_id_idx` (`observacion_pac_id`),
-  CONSTRAINT `adjuntos_observaciones_pacs_id` FOREIGN KEY (`observacion_pac_id`) REFERENCES `observaciónes_pacs` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+  CONSTRAINT `adjuntos_observaciones_pacs_id` FOREIGN KEY (`observacion_pac_id`) REFERENCES `observaciones_pacs` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -131,13 +131,13 @@ INSERT INTO `estados` VALUES (1,'Abierta',NULL,'2025-01-09 22:55:31','2025-01-09
 UNLOCK TABLES;
 
 --
--- Table structure for table `observaciónes_pacs`
+-- Table structure for table `observaciones_pacs`
 --
 
-DROP TABLE IF EXISTS `observaciónes_pacs`;
+DROP TABLE IF EXISTS `observaciones_pacs`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `observaciónes_pacs` (
+CREATE TABLE `observaciones_pacs` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `inciso` smallint(5) unsigned DEFAULT NULL,
   `descripcion` varchar(300) NOT NULL,
@@ -161,12 +161,12 @@ CREATE TABLE `observaciónes_pacs` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `observaciónes_pacs`
+-- Dumping data for table `observaciones_pacs`
 --
 
-LOCK TABLES `observaciónes_pacs` WRITE;
-/*!40000 ALTER TABLE `observaciónes_pacs` DISABLE KEYS */;
-/*!40000 ALTER TABLE `observaciónes_pacs` ENABLE KEYS */;
+LOCK TABLES `observaciones_pacs` WRITE;
+/*!40000 ALTER TABLE `observaciones_pacs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `observaciones_pacs` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -329,4 +329,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-03-11 21:23:01
+-- Dump completed on 2025-03-19 17:42:50
