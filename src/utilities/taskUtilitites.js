@@ -65,7 +65,24 @@ const taskUtilities = {
     return data;
   },
 
-  singleOriginationData: async function(Originacion, Origen, Observador, EnteInspector, Sector, Adjunto, ObservacionPAC, id){
+  originationPACData: async function(Originacion, Origen, Observador, EnteInspector, Sector, ObservacionPAC, AdjuntoOriginacion, formData, file){
+    let data = this.headerData("Originaciones");
+    data.pageScript = [...data.pageScript, ...this.validationScripts]; // ? agregaremos luego validaciones de PACs
+    data.dashboardHeader = this.dashboardHeader;
+    try {
+      const originacion = await this.createOriginacion(Originacion,AdjuntoOriginacion, formData, file); // Creación de la originación que devuelve un objeto con la originación y el adjunto
+      const newOriginationData = await this.singleOriginationData(Originacion, Origen, Observador, EnteInspector, Sector, AdjuntoOriginacion, ObservacionPAC, originacion.originacion.id); // Obtener los datos de la originación
+      //Datos adicionales para el el renderizado de la vista
+      data.OriginationSaved = true;
+      data.originacionData = newOriginationData;
+      return data;
+    } catch (error) {
+      console.error(error); // Registro del error para depuración
+      throw error;
+    }
+  },
+
+  singleOriginationData: async function(Originacion, Origen, Observador, EnteInspector, Sector, AdjuntoOriginacion, ObservacionPAC, id){
     const exclude = {exclude:['created_at', 'updated_at']}
     const observadorExclude = {exclude:['created_at', 'updated_at', "password"]}
     try {
@@ -76,7 +93,7 @@ const taskUtilities = {
           { model: Observador, as: "observador", attributes: observadorExclude },
           { model: EnteInspector, as: "ente_inspector", attributes: exclude },
           { model: Sector, as: "sector", attributes: exclude },
-          { model: Adjunto, as: "adjuntos", attributes: exclude },
+          { model: AdjuntoOriginacion, as: "adjuntos", attributes: exclude },
           { model: ObservacionPAC, as: "observaciones_pacs", attributes: ['id', 'inciso', 'descripcion', 'fecha_requerida', 'referencia', 'fecha_negociable', 'requiere_analisis', 'responsable_id', 'originacion_id', 'estado_id'] },
         ]
       });      
