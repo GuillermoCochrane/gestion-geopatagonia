@@ -97,7 +97,7 @@ const taskUtilities = {
           { model: ObservacionPAC, as: "observaciones_pacs", attributes: ['id', 'inciso', 'descripcion', 'fecha_requerida', 'referencia', 'fecha_negociable', 'requiere_analisis', 'responsable_id', 'originacion_id', 'estado_id'] },
         ]
       });      
-      return data;
+      return utilities.plainData(data)[0];
     } catch (error) {
       console.error(error); // Registro del error para depuración
       throw error;
