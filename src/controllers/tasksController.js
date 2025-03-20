@@ -35,8 +35,13 @@ const tasksController = {
     },
 
     originacion: async (req, res) => {
-        let data = await utilities.singleOriginationData(Originacion, Origen, Usuario, EnteInspector, Sector, AdjuntoOriginacion, ObservacionPAC, req.params.id);
-        return res.send( data );
+        try{
+            const data = await utilities.originationPACData(Originacion, Origen, Usuario, EnteInspector, Sector, ObservacionPAC, AdjuntoOriginacion, req.body, req.file, req.params.id);
+            return res.render("originacion/orginacion", data);
+        } catch (error) {
+            console.error(error);
+            return res.send({error: error.message,});
+        }
     },
 }
 
