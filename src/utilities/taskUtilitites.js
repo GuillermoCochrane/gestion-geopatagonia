@@ -65,14 +65,16 @@ const taskUtilities = {
     return data;
   },
 
-  originationPACData: async function(Originacion, Origen, Observador, EnteInspector, Sector, ObservacionPAC, AdjuntoOriginacion, formData, file){
+  originationPACData: async function(Originacion, Origen, Observador, EnteInspector, Sector, ObservacionPAC, AdjuntoOriginacion, formData, file, id){
     let data = this.headerData("Originaciones");
     data.pageScript = [...data.pageScript, ...this.validationScripts, "sectionhandler"]; // ? agregaremos luego validaciones de PACs
-    console.log(data)
     data.dashboardHeader = this.dashboardHeader;
     try {
-      const originacion = await this.createOriginacion(Originacion,AdjuntoOriginacion, formData, file); // Creación de la originación que devuelve un objeto con la originación y el adjunto
-      const newOriginationData = await this.singleOriginationData(Originacion, Origen, Observador, EnteInspector, Sector, AdjuntoOriginacion, ObservacionPAC, originacion.originacion.id); // Obtener los datos de la originación
+      if (!id) {
+        const originacion = await this.createOriginacion(Originacion,AdjuntoOriginacion, formData, file); // Creación de la originación que devuelve un objeto con la originación y el adjunto
+        id = originacion.originacion.id;
+      }
+      const newOriginationData = await this.singleOriginationData(Originacion, Origen, Observador, EnteInspector, Sector, AdjuntoOriginacion, ObservacionPAC, id); // Obtener los datos de la originación
       newOriginationData.fecha_de_observacion = utilities.formatDateDisplay(newOriginationData.fecha_de_observacion);
       //Datos adicionales para el el renderizado de la vista
       data.OriginationSaved = true;
