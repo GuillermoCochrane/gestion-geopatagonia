@@ -79,8 +79,8 @@ const taskUtilities = {
       const newOriginationData = await this.singleOriginationData(Originacion, Origen, Observador, EnteInspector, Sector, AdjuntoOriginacion, ObservacionPAC, id); 
       newOriginationData.fecha_de_observacion = utilities.formatDateDisplay(newOriginationData.fecha_de_observacion);
       //Datos del trartador para el formulario de PACs
-      const trartador = await Observador.findAll({where: { rol_id: 3}});
-      trartador = this.dataFormatter(obervadorData);
+      let trartador = await Observador.findAll({where: { rol_id: 3}});
+      trartador = this.dataFormatter(trartador);
       //Datos adicionales para el el renderizado de la vista
       data.OriginationSaved = true;
       data.originacionData = newOriginationData;
