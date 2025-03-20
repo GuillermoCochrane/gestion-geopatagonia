@@ -9,7 +9,7 @@ const taskUtilities = {
   
   dashboardHeader: {
     mainLabel: "Originación", 
-    newLabel: "Nueva Pac"
+    newLabel: "Nueva Obervación / PAC"
   },
 
   headerData: function(title){
