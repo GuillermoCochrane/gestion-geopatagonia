@@ -70,15 +70,21 @@ const taskUtilities = {
     data.pageScript = [...data.pageScript, ...this.validationScripts, "sectionhandler"]; // ? agregaremos luego validaciones de PACs
     data.dashboardHeader = this.dashboardHeader;
     try {
+      // Creación de la originación, si no se pasa el id de una originación existente
       if (!id) {
         const originacion = await this.createOriginacion(Originacion,AdjuntoOriginacion, formData, file); // Creación de la originación que devuelve un objeto con la originación y el adjunto
         id = originacion.originacion.id;
       }
-      const newOriginationData = await this.singleOriginationData(Originacion, Origen, Observador, EnteInspector, Sector, AdjuntoOriginacion, ObservacionPAC, id); // Obtener los datos de la originación
+      // Obtener los datos de la originación
+      const newOriginationData = await this.singleOriginationData(Originacion, Origen, Observador, EnteInspector, Sector, AdjuntoOriginacion, ObservacionPAC, id); 
       newOriginationData.fecha_de_observacion = utilities.formatDateDisplay(newOriginationData.fecha_de_observacion);
+      //Datos del trartador para el formulario de PACs
+      const trartador = await Observador.findAll({where: { rol_id: 3}});
+      trartador = this.dataFormatter(obervadorData);
       //Datos adicionales para el el renderizado de la vista
       data.OriginationSaved = true;
       data.originacionData = newOriginationData;
+      data.trartadorData = trartador;
       return data;
     } catch (error) {
       console.error(error); // Registro del error para depuración
