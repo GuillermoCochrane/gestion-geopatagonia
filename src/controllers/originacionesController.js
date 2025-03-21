@@ -39,6 +39,10 @@ const originacionesController = {
             return res.send({error: error.message,});
         }
     },
+
+    nuevaObservacionPAC: async (req, res) => {
+        return res.send(req.body);
+    },
 }
 
 module.exports = originacionesController;
