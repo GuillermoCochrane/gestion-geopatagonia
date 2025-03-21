@@ -82,7 +82,7 @@ const taskUtilities = {
       let trartador = await Usuario.findAll({where: { rol_id: 3}});
       trartador = this.dataFormatter(trartador);
       //Datos adicionales para el el renderizado de la vista
-      data.OriginationSaved = true;
+      data.oldData = {originacion_id: id};
       data.originacionData = newOriginationData;
       data.tratadorData = trartador;
       return data;
