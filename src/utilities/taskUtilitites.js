@@ -65,7 +65,7 @@ const taskUtilities = {
     return data;
   },
 
-  originationPACData: async function(Originacion, Origen, Observador, EnteInspector, Sector, ObservacionPAC, AdjuntoOriginacion, formData, file, id){
+  originationPACData: async function(Originacion, Origen, Usuario, EnteInspector, Sector, ObservacionPAC, AdjuntoOriginacion, formData, file, id){
     let data = this.headerData("Originaciones");
     data.pageScript = [...data.pageScript, ...this.validationScripts, "sectionhandler"]; // ? agregaremos luego validaciones de PACs
     data.dashboardHeader = this.dashboardHeader;
@@ -76,15 +76,15 @@ const taskUtilities = {
         id = originacion.originacion.id;
       }
       // Obtener los datos de la originación
-      const newOriginationData = await this.singleOriginationData(Originacion, Origen, Observador, EnteInspector, Sector, AdjuntoOriginacion, ObservacionPAC, id); 
+      const newOriginationData = await this.singleOriginationData(Originacion, Origen, Usuario, EnteInspector, Sector, AdjuntoOriginacion, ObservacionPAC, id); 
       newOriginationData.fecha_de_observacion = utilities.formatDateDisplay(newOriginationData.fecha_de_observacion);
       //Datos del trartador para el formulario de PACs
-      let trartador = await Observador.findAll({where: { rol_id: 3}});
+      let trartador = await Usuario.findAll({where: { rol_id: 3}});
       trartador = this.dataFormatter(trartador);
       //Datos adicionales para el el renderizado de la vista
       data.OriginationSaved = true;
       data.originacionData = newOriginationData;
-      data.trartadorData = trartador;
+      data.tratadorData = trartador;
       return data;
     } catch (error) {
       console.error(error); // Registro del error para depuración
