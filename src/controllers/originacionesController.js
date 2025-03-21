@@ -2,10 +2,7 @@ const { Estado, EnteInspector, Origen, Sector, Rol, Usuario, AdjuntoOriginacion,
 const { validationResult } = require('express-validator');
 const utilities = require("../utilities/taskUtilitites");
 
-const tasksController = {
-    index: async (req, res) => {
-        return res.redirect("/tasks/originacion");
-    },
+const originacionesController = {
 
     originaciones: async (req, res) => {
         let data = await utilities.originacionData(Origen, Usuario, EnteInspector, Sector);
@@ -19,7 +16,6 @@ const tasksController = {
                 // Crear la originación y el adjunto (si lo hay)
                 const data = await utilities.originationPACData(Originacion, Origen, Usuario, EnteInspector, Sector, ObservacionPAC, AdjuntoOriginacion, req.body, req.file);
                 // Devolver la respuesta
-                // return res.send(data);
                 return res.render("originacion/orginacion", data);
             } catch (error) {
                 console.error(error);
@@ -45,4 +41,4 @@ const tasksController = {
     },
 }
 
-module.exports = tasksController;
+module.exports = originacionesController;
