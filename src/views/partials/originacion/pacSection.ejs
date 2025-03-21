@@ -4,7 +4,7 @@
     <%- include('./originiacionData.ejs') %>
     <%- include('./pacTable.ejs') %>
   </article>
-  <form id="new-content" class="hidden">
+  <form id="new-content" class="hidden" action="/originacion/observacionPAC" method="POST" enctype="multipart/form-data">
     <%- include('./pacForm.ejs') %>
   </form>
 </section>

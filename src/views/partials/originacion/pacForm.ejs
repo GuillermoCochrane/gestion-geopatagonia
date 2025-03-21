@@ -52,16 +52,6 @@
     <% } %>
   </select>
 </label>
-<label>
-  <h3>Referencia</h3>
-  <input 
-    type="text" 
-    name="referencia" 
-    id="referencia" 
-    value="<%= locals.oldData?.referencia %>"
-  >
-  <span id="error-referencia"><%= locals.PACErrors?.referencia?.msg %></span>
-</label>
 <label class="checkbox">
   <h3>¿Requiere Análisis?</h3>
   <input 
@@ -71,6 +61,16 @@
     <%= (locals?.oldData?.requiere_analisis) && 'checked' %>
   >
   <span id="error-requiere_analisis"><%= locals.PACErrors?.requiere_analisis?.msg %></span>
+</label>
+<label>
+  <h3>Referencia</h3>
+  <input 
+    type="text" 
+    name="referencia" 
+    id="referencia" 
+    value="<%= locals.oldData?.referencia %>"
+  >
+  <span id="error-referencia"><%= locals.PACErrors?.referencia?.msg %></span>
 </label>
 <label>
   <h3>Descripción</h3>
