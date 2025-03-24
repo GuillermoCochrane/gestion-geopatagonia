@@ -32,7 +32,7 @@ const obsPACValidationMDW = [
       return true;
     }),
   body("referencia")
-    .if(body('requiere_analisis').equals(true)) // Si `requiere_analisis` es true, entonces `referencia` es obligatoria
+    .if((value, { req }) => req.body.requiere_analisis === "on") // Si `requiere_analisis` esta marcado, entonces `referencia` es obligatoria
     .notEmpty().withMessage("Debe completar la referencia")
     .bail()
     .isLength({ min: 2, max: 100 }).withMessage("La referencia debe tener entre 2 y 100 caracteres")
