@@ -1,10 +1,10 @@
 <section>
 <%- include('../buttonsHeader.ejs') %>
-  <article id="main-content">
+  <article id="main-content" class="<%= locals.PACErrors ? "hidden" : "" %>">
     <%- include('./originiacionData.ejs') %>
     <%- include('./pacTable.ejs') %>
   </article>
-  <form id="new-content" class="hidden" action="/originacion/observacionPAC" method="POST" enctype="multipart/form-data">
+  <form id="new-content" action="/originacion/observacionPAC" method="POST" enctype="multipart/form-data" class="<%= locals.PACErrors ? "" : "hidden" %>">
     <%- include('./pacForm.ejs') %>
   </form>
 </section>
