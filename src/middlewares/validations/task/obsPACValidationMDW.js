@@ -32,8 +32,11 @@ const obsPACValidationMDW = [
       return true;
     }),
   body("referencia")
-    .notEmpty().withMessage("Debe completar la referencia").bail()
-    .isLength({ min: 2 }).withMessage("La referencia debe tener al menos 2 caracteres").bail()
+    .if(body('requiere_analisis').equals(true)) // Si `requiere_analisis` es true, entonces `referencia` es obligatoria
+    .notEmpty().withMessage("Debe completar la referencia")
+    .bail()
+    .isLength({ min: 2, max: 100 }).withMessage("La referencia debe tener entre 2 y 100 caracteres")
+    .optional({ nullable: true })// Si `requiere_analisis` es false, el campo es opcional
     .isLength({ max: 100 }).withMessage("La referencia no puede tener más de 100 caracteres"),
   body("responsable_id")
     .notEmpty().withMessage("Debe seleccionar el responsable").bail()
