@@ -29,15 +29,19 @@ const originacionValidationMDW = [
       .isLength({max: 60}).withMessage("El lugar no puede tener más de 60 caracteres"),
     body("origen_id")
       .notEmpty().withMessage("Debe seleccionar el origen").bail()
+      .toInt()
       .isInt({ min: 1 }).withMessage("Debe seleccionar un origen válido"),
     body("observador_id")
       .notEmpty().withMessage("Debe seleccionar el observador").bail()
+      .toInt()
       .isInt({ min: 1 }).withMessage("Debe seleccionar un observador válido"),
     body("ente_inspector_id")
       .notEmpty().withMessage("Debe seleccionar el ente inspector").bail()
+      .toInt()
       .isInt({ min: 1 }).withMessage("Debe seleccionar un ente inspector válido"),
     body("sector_id")
       .notEmpty().withMessage("Debe seleccionar el sector").bail()
+      .toInt()
       .isInt({ min: 1 }).withMessage("Debe seleccionar un sector válido"),
     body("adjunto")
       .custom((value, { req }) => {
