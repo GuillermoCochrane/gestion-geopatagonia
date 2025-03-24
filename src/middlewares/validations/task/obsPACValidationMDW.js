@@ -40,9 +40,11 @@ const obsPACValidationMDW = [
     .isLength({ max: 100 }).withMessage("La referencia no puede tener más de 100 caracteres"),
   body("responsable_id")
     .notEmpty().withMessage("Debe seleccionar el responsable").bail()
+    .toInt()
     .isInt({ min: 1 }).withMessage("Debe seleccionar un responsable válido"),
   body("estado_id")
     .notEmpty().withMessage("Debe seleccionar el observador").bail()
+    .toInt()
     .isInt({ min: 1 }).withMessage("Debe seleccionar un estado válido"),
 ];
 
