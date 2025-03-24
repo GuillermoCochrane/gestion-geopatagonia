@@ -11,13 +11,16 @@ const upload = require("../middlewares/multer/originacionMulterMDW");
 const uploading = require("../middlewares/multer/obsPACMulterMDW");
 
 //? Validaciones
+// validaciones de formularios de originaciones
 const originacionValidation = require("../middlewares/validations/task/OriginacionValidationMDW");
+// validaciones de formularios de observaciones o PACs
+const obsPACValidation = require("../middlewares/validations/task/obsPACValidationMDW");
 
 //* Rutas
 
 router.get('/', originacionesController.originaciones);
 router.post('/', upload.single("adjunto"), originacionValidation, originacionesController.nuevaOriginacion);
-router.post('/observacionPAC', uploading.single("adjunto"), originacionValidation, originacionesController.nuevaObservacionPAC);
-router.get('/:id', originacionesController.originacion);
+router.post('/observacionPAC', uploading.single("adjunto"), obsPACValidation, originacionesController.nuevaObservacionPAC);
+router.get('/:id', originacionesController.originacion); //Proximo paso, agregar validaciones
 
 module.exports = router;

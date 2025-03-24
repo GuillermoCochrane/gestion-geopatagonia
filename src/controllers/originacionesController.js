@@ -41,7 +41,23 @@ const originacionesController = {
     },
 
     nuevaObservacionPAC: async (req, res) => {
-        return res.send(req.body);
+        const errors = validationResult(req);
+        try{
+            if (errors.isEmpty()) {
+                return res.send("Observacion / PAC procesada correctamente");
+            } else {
+                let data = await utilities.originationPACData(Originacion, Origen, Usuario, EnteInspector, Sector, ObservacionPAC, AdjuntoOriginacion, req.body, req.file, req.body.originacion_id);
+                data.oldData = req.body;
+                data.PACErrors = errors.mapped();
+                //let data = {oldData: req.body, originacionErrors: errors.mapped()};
+                console.log(data);
+                //return res.send(data);
+                return res.render("originacion/orginacion", data);
+            }
+        } catch (error) {
+            console.error(error);
+            return res.send({error: error.message,});
+        }
     },
 }
 
