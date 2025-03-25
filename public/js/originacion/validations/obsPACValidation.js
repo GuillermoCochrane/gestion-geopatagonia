@@ -39,6 +39,12 @@ window.addEventListener("load", () => {
     !errors.referencia && maxlengthValidation($referencia, 100);
   };
 
+  const descripcionValidation = () => {
+    requiredValidation($descripcion);
+    !errors.descripcion && minlengthValidation($descripcion, 2);
+    !errors.descripcion && maxlengthValidation($descripcion, 300);
+  };
+
   // Listeners 
   $inciso.addEventListener("input", incisoValidation);
   $inciso.addEventListener("blur", incisoValidation);
@@ -49,6 +55,8 @@ window.addEventListener("load", () => {
   $referencia.addEventListener("input", referenciaValidation);
   $referencia.addEventListener("blur", referenciaValidation);
   $requiere.addEventListener("change", referenciaValidation);
+  $descripcion.addEventListener("input", descripcionValidation);
+  $descripcion.addEventListener("blur", descripcionValidation);
 
   $btn.addEventListener("click", (e) => {
     e.preventDefault();
@@ -57,6 +65,7 @@ window.addEventListener("load", () => {
     fechaValidation();
     responsableValidation();
     referenciaValidation();
+    descripcionValidation();
 
     if (Object.keys(errors).length == 0) {
       $form.submit();
