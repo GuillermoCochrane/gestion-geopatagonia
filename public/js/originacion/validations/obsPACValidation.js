@@ -23,6 +23,22 @@ window.addEventListener("load", () => {
     requiredValidation($responsable);
   };
 
+  const referenciaValidation = () => {
+    // Si requiere análisis, validamos campos
+    if ($requiere.checked) {
+      // 1. Validar que no esté vacío
+      if (requiredValidation($referencia)) {
+        // 2. Si no está vacío, validar mínimo 2 caracteres
+        minlengthValidation($referencia, 2)
+      }
+    } else {
+      // Si NO requiere análisis, limpiamos errores
+      handleValidation($referencia, true, "");
+    }
+    // 3. Validar máximo 100 caracteres (si no hay errores previos)
+    !errors.referencia && maxlengthValidation($referencia, 100);
+  };
+
   // Listeners 
   $inciso.addEventListener("input", incisoValidation);
   $inciso.addEventListener("blur", incisoValidation);
@@ -30,6 +46,9 @@ window.addEventListener("load", () => {
   $fecha.addEventListener("blur", fechaValidation);
   $responsable.addEventListener("input", responsableValidation);
   $responsable.addEventListener("blur", responsableValidation);
+  $referencia.addEventListener("input", referenciaValidation);
+  $referencia.addEventListener("blur", referenciaValidation);
+  $requiere.addEventListener("change", referenciaValidation);
 
   $btn.addEventListener("click", (e) => {
     e.preventDefault();
@@ -37,6 +56,7 @@ window.addEventListener("load", () => {
     incisoValidation();
     fechaValidation();
     responsableValidation();
+    referenciaValidation();
 
     if (Object.keys(errors).length == 0) {
       $form.submit();
