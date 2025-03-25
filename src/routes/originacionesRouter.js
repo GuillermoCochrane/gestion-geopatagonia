@@ -12,9 +12,9 @@ const uploading = require("../middlewares/multer/obsPACMulterMDW");
 
 //? Validaciones
 // validaciones de formularios de originaciones
-const originacionValidation = require("../middlewares/validations/task/OriginacionValidationMDW");
+const originacionValidation = require("../middlewares/validations/originaciones/OriginacionValidationMDW");
 // validaciones de formularios de observaciones o PACs
-const obsPACValidation = require("../middlewares/validations/task/obsPACValidationMDW");
+const obsPACValidation = require("../middlewares/validations/originaciones/obsPACValidationMDW");
 
 //* Rutas
 
