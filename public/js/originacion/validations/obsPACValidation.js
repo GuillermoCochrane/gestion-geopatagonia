@@ -13,14 +13,23 @@ window.addEventListener("load", () => {
     maxlengthValidation($inciso, 5);
   };
 
+  const fechaValidation = () => {
+    requiredValidation($fecha);
+    !errors.fecha_requerida && isDateValidation($fecha);
+    !errors.fecha_requerida && notOlderValidation($fecha);
+  };
+
   // Listeners 
   $inciso.addEventListener("input", incisoValidation);
   $inciso.addEventListener("blur", incisoValidation);
+  $fecha.addEventListener("input", fechaValidation);
+  $fecha.addEventListener("blur", fechaValidation);
 
   $btn.addEventListener("click", (e) => {
     e.preventDefault();
 
     incisoValidation();
+    fechaValidation();
 
     if (Object.keys(errors).length == 0) {
       $form.submit();
