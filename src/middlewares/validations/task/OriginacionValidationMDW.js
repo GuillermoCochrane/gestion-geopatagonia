@@ -4,25 +4,7 @@ const path = require("path");
 const originacionValidationMDW = [
     body("fecha_de_observacion")
       .notEmpty().withMessage("Debe completar la fecha").bail()
-      .isDate().withMessage("La fecha debe ser válida").bail()
-      .custom((value) => {
-        // Convertir la fecha ingresada de forma correcta en la zona horaria local
-        const partesFecha = value.split("-"); // Divide "YYYY-MM-DD" en partes
-        const fechaIngresada = new Date(
-            parseInt(partesFecha[0]), // Año
-            parseInt(partesFecha[1]) - 1, // Mes (JavaScript cuenta desde 0)
-            parseInt(partesFecha[2]) // Día
-        );
-        const fechaActual = new Date();    
-        // Eliminar la hora en ambas fechas
-        fechaIngresada.setHours(0, 0, 0, 0);
-        fechaActual.setHours(0, 0, 0, 0);
-        // Comparar fechas sin hora
-        if (fechaIngresada < fechaActual) {
-            throw new Error("La fecha no puede ser anterior a hoy");
-        }
-        return true;
-      }),
+      .isDate().withMessage("La fecha debe ser válida"),
     body("lugar")
       .notEmpty().withMessage("Debe completar el lugar").bail()
       .isLength({min: 2}).withMessage("El lugar debe ser de al menos de 2 caracteres").bail()
