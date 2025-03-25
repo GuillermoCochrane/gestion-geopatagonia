@@ -14,7 +14,6 @@ window.addEventListener("load", () => {
     const fechaValidation = () => {
         requiredValidation($fecha);  
         !errors.fecha_de_observacion && isDateValidation($fecha);
-        !errors.fecha_de_observacion && notOlderValidation($fecha);
     };
 
     const lugarValidation = () => {
