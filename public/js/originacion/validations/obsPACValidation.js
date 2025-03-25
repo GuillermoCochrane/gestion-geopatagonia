@@ -19,17 +19,24 @@ window.addEventListener("load", () => {
     !errors.fecha_requerida && notOlderValidation($fecha);
   };
 
+  const responsableValidation = () => {
+    requiredValidation($responsable);
+  };
+
   // Listeners 
   $inciso.addEventListener("input", incisoValidation);
   $inciso.addEventListener("blur", incisoValidation);
   $fecha.addEventListener("input", fechaValidation);
   $fecha.addEventListener("blur", fechaValidation);
+  $responsable.addEventListener("input", responsableValidation);
+  $responsable.addEventListener("blur", responsableValidation);
 
   $btn.addEventListener("click", (e) => {
     e.preventDefault();
 
     incisoValidation();
     fechaValidation();
+    responsableValidation();
 
     if (Object.keys(errors).length == 0) {
       $form.submit();
