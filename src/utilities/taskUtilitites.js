@@ -67,7 +67,7 @@ const taskUtilities = {
 
   originationPACData: async function(Originacion, Origen, Usuario, EnteInspector, Sector, ObservacionPAC, AdjuntoOriginacion, formData, file, id){
     let data = this.headerData("Originaciones");
-    data.pageScript = [...data.pageScript, ...this.validationScripts, "sectionhandler"]; // ? agregaremos luego validaciones de PACs
+    data.pageScript = [...data.pageScript, ...this.validationScripts, "sectionhandler", "originacion/validations/obsPACValidation"]; 
     data.dashboardHeader = this.dashboardHeader;
     try {
       // Creación de la originación, si no se pasa el id de una originación existente
