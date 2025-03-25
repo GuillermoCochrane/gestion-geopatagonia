@@ -3,7 +3,7 @@ const utilities = require("./utilities");
 const taskUtilities = {
   styles: ["task"],
 
-  pageScript: ["task/modalManager"],
+  pageScript: ["originacion/modalManager"],
 
   validationScripts: ["validations", "validator.min"],
   
@@ -53,7 +53,7 @@ const taskUtilities = {
 
   originacionData: async function(Origen, Obervador, EnteInspector, Sector){
     let data = this.headerData("Originaciones");
-    data.pageScript = [...data.pageScript, ...this.validationScripts, "task/validations/originacionValidation"];
+    data.pageScript = [...data.pageScript, ...this.validationScripts, "originacion/validations/originacionValidation"];
     let formData = {};
     try {
       formData = await this.originationFormData(Origen, Obervador, EnteInspector, Sector);
