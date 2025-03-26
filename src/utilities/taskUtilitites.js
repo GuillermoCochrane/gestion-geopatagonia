@@ -123,8 +123,6 @@ const taskUtilities = {
       let adjunto = {};
       if (file) {
         adjunto = await this.createAdjunto(AdjuntoOriginacion, file, 'originacion_id', originacion.id);
-      } else {
-        adjunto.descripcion = "La originación no tiene adjuntos";
       }
       // Devolver la originación creada
       return {originacion, adjunto};
@@ -145,6 +143,24 @@ const taskUtilities = {
       };
       // Crear el adjunto en la base de datos
       const adjunto = await Adjunto.create(data);
+      return adjunto;
+    } catch (error) {
+      console.error(error); // Registro del error para depuración
+      throw error; // Lanzar el error para manejarlo en el controlador
+    }
+  },
+
+  createAdjuntoObservacionPAC: async function (AdjuntoObservacionPAC, file, key, id) {
+    try {
+      // Construir el objeto de datos para el adjunto
+      const data = {
+        nombre: file.originalname,
+        archivo: `/documents/observacion_pac/${file.originalname}`, 
+        descripcion: '-',
+        [key]: id, //Asociar el adjunto a la entidad usando el ID proporcionado
+      };
+      // Crear el adjunto en la base de datos
+      const adjunto = await AdjuntoObservacionPAC.create(data);
       return adjunto;
     } catch (error) {
       console.error(error); // Registro del error para depuración
