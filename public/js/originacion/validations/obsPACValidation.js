@@ -45,6 +45,10 @@ window.addEventListener("load", () => {
     !errors.descripcion && maxlengthValidation($descripcion, 300);
   };
 
+  const adjuntoValidation = () => {
+    extentionValidation($adjunto, ["jpg", "png", "pdf"]);
+  };
+
   // Listeners 
   $inciso.addEventListener("input", incisoValidation);
   $inciso.addEventListener("blur", incisoValidation);
@@ -57,6 +61,8 @@ window.addEventListener("load", () => {
   $requiere.addEventListener("change", referenciaValidation);
   $descripcion.addEventListener("input", descripcionValidation);
   $descripcion.addEventListener("blur", descripcionValidation);
+  $adjunto.addEventListener("input", adjuntoValidation);
+  $adjunto.addEventListener("blur", adjuntoValidation);
 
   $btn.addEventListener("click", (e) => {
     e.preventDefault();
@@ -66,6 +72,7 @@ window.addEventListener("load", () => {
     responsableValidation();
     referenciaValidation();
     descripcionValidation();
+    adjuntoValidation();
 
     if (Object.keys(errors).length == 0) {
       $form.submit();
