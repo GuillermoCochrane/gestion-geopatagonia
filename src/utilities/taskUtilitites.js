@@ -146,7 +146,7 @@ const taskUtilities = {
       // Si se subió un archivo, guardarlo en la base de datos
       let adjunto = {};
       if (file) {
-        adjunto = await this.createAdjunto(AdjuntoObservacionPAC, file, 'observacion_pac_id', observacion.id);
+        adjunto = await this.createAdjunto(AdjuntoObservacionPAC, file, 'observacion_pac_id', observacion.id, true);
       }
       // Devolver la observación creada
       return {observacion, adjunto};
@@ -156,35 +156,20 @@ const taskUtilities = {
     }
   },
 
-  createAdjunto: async function (Adjunto, file, key, id) {
+  createAdjunto: async function (ModeloAdjunto, file, key, id, observacion = false) {
     try {
+      const archivo = observacion 
+        ? `/documents/observacion_pac/${file.originalname}`  // ← TRUE: Observación/PAC
+        : `/documents/originacion/${file.originalname}`;     // ← FALSE: Originación
       // Construir el objeto de datos para el adjunto
       const data = {
         nombre: file.originalname,
-        archivo: `/documents/originacion/${file.originalname}`, 
+        archivo: archivo, 
         descripcion: '-',
         [key]: id, //Asociar el adjunto a la entidad usando el ID proporcionado
       };
       // Crear el adjunto en la base de datos
-      const adjunto = await Adjunto.create(data);
-      return adjunto;
-    } catch (error) {
-      console.error(error); // Registro del error para depuración
-      throw error; // Lanzar el error para manejarlo en el controlador
-    }
-  },
-
-  createAdjuntoObservacionPAC: async function (AdjuntoObservacionPAC, file, key, id) {
-    try {
-      // Construir el objeto de datos para el adjunto
-      const data = {
-        nombre: file.originalname,
-        archivo: `/documents/observacion_pac/${file.originalname}`, 
-        descripcion: '-',
-        [key]: id, //Asociar el adjunto a la entidad usando el ID proporcionado
-      };
-      // Crear el adjunto en la base de datos
-      const adjunto = await AdjuntoObservacionPAC.create(data);
+      const adjunto = await ModeloAdjunto.create(data);
       return adjunto;
     } catch (error) {
       console.error(error); // Registro del error para depuración
