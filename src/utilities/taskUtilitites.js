@@ -65,7 +65,7 @@ const taskUtilities = {
     return data;
   },
 
-  originationPACData: async function(Originacion, Origen, Usuario, EnteInspector, Sector, ObservacionPAC, AdjuntoOriginacion, formData, file, id){
+  originationPACData: async function(Originacion, Origen, Usuario, EnteInspector, Sector, ObservacionPAC, AdjuntoOriginacion, AdjuntoObservacionPAC, formData, file, id, nuevaObservacionPAC){
     let data = this.headerData("Originaciones");
     data.pageScript = [...data.pageScript, ...this.validationScripts, "sectionhandler", "originacion/validations/obsPACValidation"]; 
     data.dashboardHeader = this.dashboardHeader;
@@ -75,6 +75,12 @@ const taskUtilities = {
         const originacion = await this.createOriginacion(Originacion,AdjuntoOriginacion, formData, file); // Creación de la originación que devuelve un objeto con la originación y el adjunto
         id = originacion.originacion.id;
       }
+      // Creación de la observación / PAC, si esta indicado en la variable nuevaObservacionPAC
+      if (nuevaObservacionPAC) {
+        const observacion = await this.createObservacionPAC(ObservacionPAC, AdjuntoObservacionPAC, formData, file);
+        console.log(observacion);
+      }
+
       // Obtener los datos de la originación
       const newOriginationData = await this.singleOriginationData(Originacion, Origen, Usuario, EnteInspector, Sector, AdjuntoOriginacion, ObservacionPAC, id); 
       newOriginationData.fecha_de_observacion = utilities.formatDateDisplay(newOriginationData.fecha_de_observacion);
