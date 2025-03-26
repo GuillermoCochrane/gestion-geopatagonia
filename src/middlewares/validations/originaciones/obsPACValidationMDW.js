@@ -42,10 +42,6 @@ const obsPACValidationMDW = [
     .notEmpty().withMessage("Debe completar la descripción").bail()
     .isLength({ min: 2 }).withMessage("La descripción debe tener al menos 2 caracteres").bail()
     .isLength({ max: 300 }).withMessage("La descripción no puede tener más de 300 caracteres"),
-  body("estado_id")
-    .notEmpty().withMessage("Debe seleccionar el observador").bail()
-    .toInt()
-    .isInt({ min: 1 }).withMessage("Debe seleccionar un estado válido"),
   body("adjunto")
     .custom((value, { req }) => {
       if (req.file) {
