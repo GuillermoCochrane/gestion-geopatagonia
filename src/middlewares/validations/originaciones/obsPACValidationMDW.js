@@ -6,10 +6,6 @@ const obsPACValidationMDW = [
   body("inciso")
     .optional() //hace que la campon no sea obligatorio
     .isLength({ max: 5 }).withMessage("El inciso no puede tener más de 5 caracteres"),
-  body("descripcion")
-    .notEmpty().withMessage("Debe completar la descripción").bail()
-    .isLength({ min: 2 }).withMessage("La descripción debe tener al menos 2 caracteres").bail()
-    .isLength({ max: 300 }).withMessage("La descripción no puede tener más de 300 caracteres"),
   body("fecha_requerida")
     .notEmpty().withMessage("Debe completar la fecha").bail()
     .isDate().withMessage("La fecha debe ser válida").bail()
@@ -31,21 +27,40 @@ const obsPACValidationMDW = [
       }
       return true;
     }),
+    body("responsable_id")
+    .notEmpty().withMessage("Debe seleccionar el responsable").bail()
+    .toInt()
+    .isInt({ min: 1 }).withMessage("Debe seleccionar un responsable válido"),
   body("referencia")
     .if((value, { req }) => req.body.requiere_analisis === "on") // Si `requiere_analisis` esta marcado, entonces `referencia` es obligatoria
     .notEmpty().withMessage("Debe completar la referencia")
     .bail()
-    .isLength({ min: 2, max: 100 }).withMessage("La referencia debe tener entre 2 y 100 caracteres")
+    .isLength({ min: 2 }).withMessage("La referencia debe tener al menos 2 caracteres").bail()
     .optional({ nullable: true })// Si `requiere_analisis` es false, el campo es opcional
     .isLength({ max: 100 }).withMessage("La referencia no puede tener más de 100 caracteres"),
-  body("responsable_id")
-    .notEmpty().withMessage("Debe seleccionar el responsable").bail()
-    .toInt()
-    .isInt({ min: 1 }).withMessage("Debe seleccionar un responsable válido"),
+  body("descripcion")
+    .notEmpty().withMessage("Debe completar la descripción").bail()
+    .isLength({ min: 2 }).withMessage("La descripción debe tener al menos 2 caracteres").bail()
+    .isLength({ max: 300 }).withMessage("La descripción no puede tener más de 300 caracteres"),
   body("estado_id")
     .notEmpty().withMessage("Debe seleccionar el observador").bail()
     .toInt()
     .isInt({ min: 1 }).withMessage("Debe seleccionar un estado válido"),
+  body("adjunto")
+    .custom((value, { req }) => {
+      if (req.file) {
+        const allowed = [".png", ".jpg", ".pdf"];
+        const extension = path.extname(req.file.originalname).toLowerCase();
+        const msg = allowed
+            .map((ext) => `"${ext}"`) // Agregar comillas a cada extensión
+            .join(", ") // Unir con comas
+            .replace(/, ([^,]*)$/, " y $1"); // Agrega "y" antes de la última extensión
+        if (!allowed.includes(extension)) {
+          throw new Error(`Solo se permiten archivos ${msg}`);
+        }
+      }
+      return true;
+    }),
 ];
 
 module.exports = obsPACValidationMDW;
