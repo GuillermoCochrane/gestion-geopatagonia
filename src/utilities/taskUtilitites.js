@@ -132,6 +132,24 @@ const taskUtilities = {
     }
   },
 
+  createObservacionPAC: async function (ObservacionPAC, AdjuntoObservacionPAC, data, file) {
+    try {
+      // Crear la observación / PAC
+      data.estado_id = data.estado_id || 1; // Estado por defecto (1)
+      const observacion = await ObservacionPAC.create(data);
+      // Si se subió un archivo, guardarlo en la base de datos
+      let adjunto = {};
+      if (file) {
+        adjunto = await this.createAdjunto(AdjuntoObservacionPAC, file, 'observacion_pac_id', observacion.id);
+      }
+      // Devolver la observación creada
+      return {observacion, adjunto};
+    } catch (error) {
+      console.error(error); // Registro del error para depuración
+      throw error; // Lanzar el error para manejarlo en el controlador
+    }
+  },
+
   createAdjunto: async function (Adjunto, file, key, id) {
     try {
       // Construir el objeto de datos para el adjunto
