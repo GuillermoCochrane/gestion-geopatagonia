@@ -46,7 +46,7 @@ const originacionesController = {
             if (errors.isEmpty()) {
                 return res.send("Observacion / PAC procesada correctamente");
             } else {
-                let data = await utilities.originationPACData(Originacion, Origen, Usuario, EnteInspector, Sector, ObservacionPAC, AdjuntoOriginacion, AdjuntoObservacionPAC, req.body, req.file, req.body.originacion_id);
+                let data = await utilities.originationPACData({}, null, req.body.originacion_id);
                 data.oldData = req.body;
                 data.PACErrors = errors.mapped();
                 return res.render("originacion/orginacion", data);
