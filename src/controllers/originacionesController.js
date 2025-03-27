@@ -31,7 +31,7 @@ const originacionesController = {
 
     originacion: async (req, res) => {
         try{
-            const data = await utilities.originationPACData(Originacion, Origen, Usuario, EnteInspector, Sector, ObservacionPAC, AdjuntoOriginacion, AdjuntoObservacionPAC, req.body, req.file, req.params.id);
+            const data = await utilities.originationPACData({}, null, req.params.id);
             data.PACErrors = true;
             return res.render("originacion/orginacion", data);
         } catch (error) {
