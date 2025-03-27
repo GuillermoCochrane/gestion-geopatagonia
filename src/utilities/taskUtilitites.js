@@ -73,13 +73,12 @@ const taskUtilities = {
     try {
       // Creación de la originación, si no se pasa el id de una originación existente
       if (!id) {
-        const originacion = await this.createOriginacion(formData, file); // Creación de la originación que devuelve un objeto con la originación y el adjunto
-        id = originacion.originacion.id;
+        const originacion = await this.createRegistro(formData, file); // Creación de la originación que devuelve un objeto con la originación y el adjunto
+        id = originacion.registro.id;
       }
       // Creación de la observación / PAC, si esta indicado en la variable nuevaObservacionPAC
       if (nuevaObservacionPAC) {
-        const observacion = await this.createObservacionPAC(formData, file);
-        console.log(observacion);
+          await this.createRegistro(formData, file, true);
       }
 
       // Obtener los datos de la originación
@@ -123,36 +122,22 @@ const taskUtilities = {
     }
   },
 
-  createOriginacion: async function (data, file) {
+  createRegistro: async function (data, file, observacion = false) {
     try {
-      // Crear la originación
+      // Definimos modelo dependiendo del valor de observacion
+      const Modelo = observacion 
+        ? ObservacionPAC 
+        : Originacion;
+      // Crear la entrada
       data.estado_id = data.estado_id || 1; // Estado por defecto (1)
-      const originacion = await Originacion.create(data);
+      const registro = await Modelo.create(data);
       // Si se subió un archivo, guardarlo en la base de datos
       let adjunto = {};
       if (file) {
-        adjunto = await this.createAdjunto( file, originacion.id);
+        adjunto = await this.createAdjunto(file, registro.id, observacion);
       }
-      // Devolver la originación creada
-      return {originacion, adjunto};
-    } catch (error) {
-      console.error(error); // Registro del error para depuración
-      throw error; // Lanzar el error para manejarlo en el controlador
-    }
-  },
-
-  createObservacionPAC: async function (data, file) {
-    try {
-      // Crear la observación / PAC
-      data.estado_id = data.estado_id || 1; // Estado por defecto (1)
-      const observacion = await ObservacionPAC.create(data);
-      // Si se subió un archivo, guardarlo en la base de datos
-      let adjunto = {};
-      if (file) {
-        adjunto = await this.createAdjunto(file, observacion.id, true);
-      }
-      // Devolver la observación creada
-      return {observacion, adjunto};
+      // Devolver el registro creado
+      return {registro, adjunto};
     } catch (error) {
       console.error(error); // Registro del error para depuración
       throw error; // Lanzar el error para manejarlo en el controlador
