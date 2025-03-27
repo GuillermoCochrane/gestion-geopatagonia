@@ -19,11 +19,10 @@ const originacionesController = {
                 return res.render("originacion/orginacion", data);
             } catch (error) {
                 console.error(error);
-                //En caso de error, devolvemos la respuesta
                 return res.send({error: error.message,});
             }
         } else {
-            let data = await utilities.originacionData(Origen, Usuario, EnteInspector, Sector);
+            let data = await utilities.originacionData();
             data.oldData = req.body;
             data.originacionErrors = errors.mapped();
             return res.render("originacion/orginacion", data);
