@@ -1,11 +1,11 @@
-const { Estado, EnteInspector, Origen, Sector, Rol, Usuario, AdjuntoOriginacion, Originacion, ObservacionPAC } = require("../database/models");
 const { validationResult } = require('express-validator');
-const utilities = require("../utilities/taskUtilitites");
+const utilities = require("../utilities/originacionUtilitites");
 
+// refatorizar eliminando los modelos, que se hace en utilities
 const originacionesController = {
 
     originaciones: async (req, res) => {
-        let data = await utilities.originacionData(Origen, Usuario, EnteInspector, Sector);
+        let data = await utilities.originacionData();
         return res.render("originacion/orginacion", data);
     },
 
@@ -14,7 +14,7 @@ const originacionesController = {
         if (errors.isEmpty()) {
             try {
                 // Crear la originación y el adjunto (si lo hay)
-                const data = await utilities.originationPACData(Originacion, Origen, Usuario, EnteInspector, Sector, ObservacionPAC, AdjuntoOriginacion, req.body, req.file);
+                const data = await utilities.originationPACData(req.body, req.file);
                 // Devolver la respuesta
                 return res.render("originacion/orginacion", data);
             } catch (error) {
@@ -32,7 +32,8 @@ const originacionesController = {
 
     originacion: async (req, res) => {
         try{
-            const data = await utilities.originationPACData(Originacion, Origen, Usuario, EnteInspector, Sector, ObservacionPAC, AdjuntoOriginacion, req.body, req.file, req.params.id);
+            const data = await utilities.originationPACData(Originacion, Origen, Usuario, EnteInspector, Sector, ObservacionPAC, AdjuntoOriginacion, AdjuntoObservacionPAC, req.body, req.file, req.params.id);
+            data.PACErrors = true;
             return res.render("originacion/orginacion", data);
         } catch (error) {
             console.error(error);
@@ -46,12 +47,9 @@ const originacionesController = {
             if (errors.isEmpty()) {
                 return res.send("Observacion / PAC procesada correctamente");
             } else {
-                let data = await utilities.originationPACData(Originacion, Origen, Usuario, EnteInspector, Sector, ObservacionPAC, AdjuntoOriginacion, req.body, req.file, req.body.originacion_id);
+                let data = await utilities.originationPACData(Originacion, Origen, Usuario, EnteInspector, Sector, ObservacionPAC, AdjuntoOriginacion, AdjuntoObservacionPAC, req.body, req.file, req.body.originacion_id);
                 data.oldData = req.body;
                 data.PACErrors = errors.mapped();
-                //let data = {oldData: req.body, originacionErrors: errors.mapped()};
-                console.log(data);
-                //return res.send(data);
                 return res.render("originacion/orginacion", data);
             }
         } catch (error) {
