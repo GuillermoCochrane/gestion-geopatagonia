@@ -6,7 +6,7 @@ const originacionesController = {
 
     originaciones: async (req, res) => {
         let data = await utilities.originacionData();
-        return res.render("originacion/orginacion", data);
+        return res.render("originacion/originacion", data);
     },
 
     nuevaOriginacion: async (req, res) => {
@@ -15,7 +15,7 @@ const originacionesController = {
             try {
                 // Crear la originación y el adjunto (si lo hay)
                 const data = await utilities.originationPACData(req.body, req.file);
-                return res.render("originacion/orginacion", data);
+                return res.render("originacion/originacion", data);
             } catch (error) {
                 console.error(error);
                 return res.send({error: error.message,});
@@ -24,7 +24,7 @@ const originacionesController = {
             let data = await utilities.originacionData();
             data.oldData = req.body;
             data.originacionErrors = errors.mapped();
-            return res.render("originacion/orginacion", data);
+            return res.render("originacion/originacion", data);
         }
     },
 
@@ -32,7 +32,7 @@ const originacionesController = {
         try{
             const data = await utilities.originationPACData({}, null, req.params.id);
             data.PACErrors = true;
-            return res.render("originacion/orginacion", data);
+            return res.render("originacion/originacion", data);
         } catch (error) {
             console.error(error);
             return res.send({error: error.message,});
@@ -45,12 +45,12 @@ const originacionesController = {
             if (errors.isEmpty()) {
                 // Crear la observación y el adjunto (si lo hay)
                 const data = await utilities.originationPACData(req.body, req.file, req.body.originacion_id, true);
-                return res.render("originacion/orginacion", data);
+                return res.render("originacion/originacion", data);
             } else {
                 let data = await utilities.originationPACData({}, null, req.body.originacion_id);
                 data.oldData = req.body;
                 data.PACErrors = errors.mapped();
-                return res.render("originacion/orginacion", data);
+                return res.render("originacion/originacion", data);
             }
         } catch (error) {
             console.error(error);
