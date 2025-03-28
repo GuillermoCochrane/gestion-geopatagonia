@@ -142,7 +142,7 @@ CREATE TABLE `observaciones_pacs` (
   `inciso` smallint(5) unsigned DEFAULT NULL,
   `descripcion` varchar(300) NOT NULL,
   `fecha_requerida` date NOT NULL,
-  `referencia` varchar(100) NOT NULL,
+  `referencia` varchar(100) DEFAULT NULL,
   `fecha_negociable` tinyint(1) unsigned DEFAULT 0,
   `requiere_analisis` tinyint(1) unsigned DEFAULT 0,
   `responsable_id` int(10) unsigned NOT NULL,
@@ -307,7 +307,7 @@ CREATE TABLE `usuarios` (
   UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `fk_usuarios_roles_idx` (`rol_id`),
   CONSTRAINT `fk_usuarios_roles` FOREIGN KEY (`rol_id`) REFERENCES `roles` (`id`) ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -329,4 +329,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-03-19 17:42:50
+-- Dump completed on 2025-03-28 19:07:35

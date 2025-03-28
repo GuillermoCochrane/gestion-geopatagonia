@@ -41,14 +41,11 @@ module.exports = function(sequelize, DataTypes) {
     referencia: {
       // Referencia de la observación, máximo 100 caracteres, obligatorio
       type: DataTypes.STRING(100),
-      allowNull: false,
+      allowNull: true,
       validate: {
         len: {
-          args: [1, 100],
-          msg: 'La referencia de la observación debe tener entre 1 y 100 caracteres.',
-        },
-        notEmpty: {
-          msg: 'El campo "referencia" no puede estar vacío.',
+          args: [0, 100],
+          msg: 'La referencia de la observación no puede exceder los 100 caracteres.',
         },
       },
     },
