@@ -15,7 +15,6 @@ const originacionesController = {
             try {
                 // Crear la originación y el adjunto (si lo hay)
                 const data = await utilities.originationPACData(req.body, req.file);
-                // Devolver la respuesta
                 return res.render("originacion/orginacion", data);
             } catch (error) {
                 console.error(error);
@@ -44,7 +43,9 @@ const originacionesController = {
         const errors = validationResult(req);
         try{
             if (errors.isEmpty()) {
-                return res.send("Observacion / PAC procesada correctamente");
+                // Crear la observación y el adjunto (si lo hay)
+                const data = await utilities.originationPACData(req.body, req.file, req.body.originacion_id, true);
+                return res.render("originacion/orginacion", data);
             } else {
                 let data = await utilities.originationPACData({}, null, req.body.originacion_id);
                 data.oldData = req.body;
