@@ -66,7 +66,7 @@ const taskUtilities = {
     return data;
   },
 
-  originationPACData: async function(formData, file, id, nuevaObservacionPAC){
+  originacionPACData: async function(formData, file, id, nuevaObservacionPAC){
     let data = this.headerData("Originaciones");
     data.pageScript = [...data.pageScript, ...this.validationScripts, "sectionhandler", "originacion/validations/obsPACValidation"]; 
     data.dashboardHeader = this.dashboardHeader;
@@ -82,8 +82,11 @@ const taskUtilities = {
       }
 
       // Obtener los datos de la originación
-      const newOriginationData = await this.singleOriginationData(id); 
+      const newOriginationData = await this.singleOriginacionData(id); 
       newOriginationData.fecha_de_observacion = utilities.formatDateDisplay(newOriginationData.fecha_de_observacion);
+
+      // Obtener las observaciones / PACs de la originación
+      const observacionesPACs = await this.observacionesPACs(id);
 
       //Datos del tratador para el formulario de PACs
       let tratador = await Usuario.findAll({where: { rol_id: 3}});
@@ -93,6 +96,7 @@ const taskUtilities = {
       data.oldData = {originacion_id: id};
       data.originacionData = newOriginationData;
       data.tratadorData = tratador;
+      data.observacionesPACs = observacionesPACs;
       return data;
     } catch (error) {
       console.error(error); // Registro del error para depuración
@@ -100,7 +104,7 @@ const taskUtilities = {
     }
   },
 
-  singleOriginationData: async function(id){
+  singleOriginacionData: async function(id){
     const exclude = {exclude:['created_at', 'updated_at']}
     const observadorExclude = {exclude:['created_at', 'updated_at', "password"]}
     try {
@@ -116,6 +120,24 @@ const taskUtilities = {
         ]
       });      
       return utilities.plainData(data)[0];
+    } catch (error) {
+      console.error(error); // Registro del error para depuración
+      throw error;
+    }
+  },
+
+  observacionesPACs: async function(id){
+    const exclude = {exclude:['created_at', 'updated_at']}
+    const responsableExclude = {exclude:['created_at', 'updated_at', "password"]}
+    try {
+      const data = await ObservacionPAC.findAll({
+        where: {originacion_id: id},
+        include: [
+          { model: Usuario, as: "responsable", attributes: responsableExclude},
+          { model: Estado, as: "estado", attributes: exclude},
+        ]
+      });
+      return data;
     } catch (error) {
       console.error(error); // Registro del error para depuración
       throw error;
