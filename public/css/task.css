@@ -545,12 +545,14 @@ main dialog section form label input.input-file{
   cursor: pointer;
 }
 
+  main dialog form label textarea.input-error,
 main dialog form label select.input-error,
 main dialog form label input.input-error {
   color: var(--logo);
   border-color: var(--logo);
 }
 
+main dialog form label textarea.input-ok,
 main dialog form label select.input-ok,
 main dialog form label input.input-ok {
   color: var(--success);
