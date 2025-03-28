@@ -39,7 +39,7 @@ module.exports = function(sequelize, DataTypes) {
 
   Origen.associate = function (models) {
 
-    Origen.hasMany(models.ObservacionPAC, {
+    Origen.hasMany(models.Originacion, {
       // Un origen puede tener muchas observaciones
       as: 'originaciones',
       foreignKey: 'origen_id',
