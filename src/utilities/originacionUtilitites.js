@@ -28,7 +28,7 @@ const taskUtilities = {
     return dataFormatted;
   },
 
-  originationFormData: async function(){
+  originacionFormData: async function(){
     try {
       let origenData = await Origen.findAll();
       origenData = this.dataFormatter(origenData);
@@ -48,7 +48,7 @@ const taskUtilities = {
       }
     } catch (error) {
       console.error(error); // Registro del error para depuración
-      return error;
+      throw error;
     }
   },
 
@@ -57,10 +57,10 @@ const taskUtilities = {
     data.pageScript = [...data.pageScript, ...this.validationScripts, "originacion/validations/originacionValidation"];
     let formData = {};
     try {
-      formData = await this.originationFormData();
+      formData = await this.originacionFormData();
     } catch (error) {
       console.error(error); // Registro del error para depuración
-      return error;
+      throw error;
     }
     data.formData = formData;
     return data;
