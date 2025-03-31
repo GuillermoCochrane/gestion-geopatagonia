@@ -86,7 +86,9 @@ const taskUtilities = {
       newOriginationData.fecha_de_observacion = utilities.formatDateDisplay(newOriginationData.fecha_de_observacion);
 
       // Obtener las observaciones / PACs de la originación
-      const observacionesPACs = await this.observacionesPACs(id);
+      let observacionesPACs = await this.observacionesPACs(id);
+      observacionesPACs = utilities.plainData(observacionesPACs);
+      observacionesPACs = utilities.multipleDateFormat(observacionesPACs, ['fecha_requerida']);
 
       //Datos del tratador para el formulario de PACs
       let tratador = await Usuario.findAll({where: { rol_id: 3}});
