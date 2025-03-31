@@ -30,8 +30,7 @@ const originacionesController = {
 
     originacion: async (req, res) => {
         try{
-            const data = await utilities.originacionPACData({}, null, req.params.id);
-            data.PACErrors = true;
+            const data = await utilities.originacionPACData({}, null, req.params.id); 
             return res.render("originacion/originacion", data);
         } catch (error) {
             console.error(error);

@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
 
     inciso: {
       // Inciso al que pertenece la observación, obligatorio
-      type: DataTypes.SMALLINT,
+      type: DataTypes.STRING(5),
       allowNull: false,
     },
 

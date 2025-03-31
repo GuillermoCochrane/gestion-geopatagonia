@@ -139,7 +139,7 @@ DROP TABLE IF EXISTS `observaciones_pacs`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `observaciones_pacs` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `inciso` smallint(5) unsigned DEFAULT NULL,
+  `inciso` varchar(5) DEFAULT NULL,
   `descripcion` varchar(300) NOT NULL,
   `fecha_requerida` date NOT NULL,
   `referencia` varchar(100) DEFAULT NULL,
@@ -329,4 +329,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-03-28 19:07:35
+-- Dump completed on 2025-03-31 18:50:35
