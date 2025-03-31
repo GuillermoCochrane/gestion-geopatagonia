@@ -32,11 +32,19 @@ const utilities = {
       return `${year}-${month}-${day}`;
     },
 
-    // Método para devolver una lista de fechas en formato dd / mm / yyyy
-    multipleDateFormat: function(dates){
-      for(const date of dates){
+    // Método para devolver una lista de fechas en formato dd / mm / yyyy , para created_at, updated_at y otros campos que se pasen como parámetro
+    multipleDateFormat: function(dates, fieldsToFormat = []){
+      for(let date of dates){
         date.created_at = this.formatDateDisplay(date.created_at);
         date.updated_at = this.formatDateDisplay(date.updated_at);
+
+        // Campos adicionales (si existen en el objeto)
+        fieldsToFormat.forEach(field => {
+          if (date[field] != null) { // Verifica que el campo exista y no sea null/undefined
+            date[field] = this.formatDateDisplay(date[field]);
+          }
+        });
+
       }
       return dates;
     },
