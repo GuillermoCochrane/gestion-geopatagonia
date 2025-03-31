@@ -59,6 +59,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `observaciones_pacs` WRITE;
 /*!40000 ALTER TABLE `observaciones_pacs` DISABLE KEYS */;
+INSERT INTO `observaciones_pacs` VALUES (1,'R','la descripcion es obligatoria','2025-04-03','Referencia del incidente',1,1,6,1,1,'2025-03-31 22:18:20','2025-03-31 22:18:20'),(2,'R','Plan de accion correctiva del incidente','2025-04-04','Referencia del incidente',1,1,5,1,1,'2025-03-31 22:20:18','2025-03-31 22:20:18'),(3,'B','Chequeo del PAC','2025-05-10','',1,0,7,1,1,'2025-03-31 22:21:42','2025-03-31 22:21:42');
 /*!40000 ALTER TABLE `observaciones_pacs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,4 +122,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-03-21 17:48:26
+-- Dump completed on 2025-03-31 19:24:22

@@ -35,7 +35,7 @@ CREATE TABLE `adjuntos_observacion_pac` (
   PRIMARY KEY (`id`),
   KEY `adjuntos_observaciones_pacs_id_idx` (`observacion_pac_id`),
   CONSTRAINT `adjuntos_observaciones_pacs_id` FOREIGN KEY (`observacion_pac_id`) REFERENCES `observaciones_pacs` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,7 +157,7 @@ CREATE TABLE `observaciones_pacs` (
   CONSTRAINT `fk_op_estado_id` FOREIGN KEY (`estado_id`) REFERENCES `estados` (`id`) ON UPDATE NO ACTION,
   CONSTRAINT `fk_op_originacion_id` FOREIGN KEY (`originacion_id`) REFERENCES `originaciones` (`id`) ON UPDATE NO ACTION,
   CONSTRAINT `fk_op_responsable_id` FOREIGN KEY (`responsable_id`) REFERENCES `usuarios` (`id`) ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,6 +166,7 @@ CREATE TABLE `observaciones_pacs` (
 
 LOCK TABLES `observaciones_pacs` WRITE;
 /*!40000 ALTER TABLE `observaciones_pacs` DISABLE KEYS */;
+INSERT INTO `observaciones_pacs` VALUES (1,'R','la descripcion es obligatoria','2025-04-03','Referencia del incidente',1,1,6,1,1,'2025-03-31 22:18:20','2025-03-31 22:18:20'),(2,'R','Plan de accion correctiva del incidente','2025-04-04','Referencia del incidente',1,1,5,1,1,'2025-03-31 22:20:18','2025-03-31 22:20:18'),(3,'B','Chequeo del PAC','2025-05-10','',1,0,7,1,1,'2025-03-31 22:21:42','2025-03-31 22:21:42');
 /*!40000 ALTER TABLE `observaciones_pacs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -330,4 +331,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-03-31 18:54:20
+-- Dump completed on 2025-03-31 19:23:59
