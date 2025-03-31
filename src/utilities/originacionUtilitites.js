@@ -78,7 +78,10 @@ const taskUtilities = {
       }
       // Creación de la observación / PAC, si esta indicado en la variable nuevaObservacionPAC
       if (nuevaObservacionPAC) {
-          await this.createRegistro(formData, file, true);
+        //Cambio de valores de fecha_negociable y requiere_analisis a booleanos
+        formData.fecha_negociable ? formData.fecha_negociable = true : formData.fecha_negociable = false;
+        formData.requiere_analisis ? formData.requiere_analisis = true : formData.requiere_analisis = false
+        await this.createRegistro(formData, file, true);
       }
 
       // Obtener los datos de la originación
