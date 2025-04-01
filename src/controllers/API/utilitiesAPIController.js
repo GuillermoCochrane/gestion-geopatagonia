@@ -1,4 +1,5 @@
 const utilities = require("../../utilities/utilities");
+const originacionUtilities = require("../../utilities/originacionUtilitites");
 
 const utilitiesAPIController = {
     checkEmail: async(req, res) => {
@@ -29,6 +30,35 @@ const utilitiesAPIController = {
         }
     },
 
+    deleteOrigination: async(req, res) => {
+        const {id} = req.params;
+        const endpoint =  "/api/utilities/deleteOrigination/:id";
+        try {
+            await originacionUtilities.deleteRegistro(id);
+            let info = {
+                meta: {
+                    status : 200,
+                    url: endpoint,
+                },
+                data: {
+                    source: "Originaicion",
+                    id: id,
+                    deleted: true,
+                    message: "Originación eliminada correctamente",
+                }
+            }
+            res.json(info);
+        } catch (error) {
+            let info = {
+                meta: {
+                    status : 400,
+                    url: endpoint,
+                },
+                errors: "error interno del servidor",
+            }
+            return res.json(info);
+        }
+    },
 };
 
 module.exports = utilitiesAPIController;
