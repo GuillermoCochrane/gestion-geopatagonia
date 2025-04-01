@@ -201,6 +201,23 @@ const taskUtilities = {
       throw error; // Lanzar el error para manejarlo en el controlador
     }
   },
+
+  deleteRegistro: async function (id, observacion = false) {
+    try {
+      // Definimos modelo dependiendo del valor de observacion
+      const Modelo = observacion 
+        ? ObservacionPAC 
+        : Originacion;
+      // Eliminar la entrada del modelo correspondiente
+      await Modelo.destroy({
+        where: {id: id}
+      });
+      return true;
+    } catch (error) {
+      console.error(error); // Registro del error para depuración
+      throw error; // Lanzar el error para manejarlo en el controlador
+    }
+  },
 }
 
 module.exports = taskUtilities;
