@@ -1,10 +1,30 @@
 <section>
-<%- include('../buttonsHeader.ejs') %>
-  <article id="main-content" class="<%= locals.PACErrors ? "hidden" : "" %>">
-    <%- include('./originiacionData.ejs') %>
-    <%- include('./pacTable.ejs') %>
-  </article>
-  <form id="new-content" action="/originacion/observacionPAC" method="POST" enctype="multipart/form-data" class="<%= locals.PACErrors ? "" : "hidden" %>">
-    <%- include('./pacForm.ejs') %>
-  </form>
+  <div id="pac-section">
+    <%- include('../buttonsHeader.ejs') %>
+    <article id="main-content" class="<%= locals.PACErrors ? "hidden" : "" %>">
+      <%- include('./originiacionData.ejs') %>
+      <%- include('./pacTable.ejs') %>
+    </article>
+    <form id="new-content" action="/originacion/observacionPAC" method="POST" enctype="multipart/form-data" class="<%= locals.PACErrors ? "" : "hidden" %>">
+      <%- include('./pacForm.ejs') %>
+    </form>
+  </div>
+  <div id="confirm-pac-delete" class="hidden">
+    <article>
+      <h2>No hay observaciones registradas</h2>
+      <h3>Se eliminará la originación. ¿Estás seguro?</h3>
+      <nav>
+        <button id="pac-delete" type="submit" class="btn btn-primary">Eliminar</button>
+        <button id="pac-cancel" type="button" class="btn btn-secondary">Cancelar</button>
+      </nav>
+    </article>
+  </div>
+  <div id="pac-delete-success" class="hidden">
+    <article>
+      <h2>La observación se eliminó correctamente</h2>
+      <nav>
+        <button id="pac-delete-close" type="button" class="btn btn-primary">Cerrar</button>
+      </nav>
+    </article>
+  </div>
 </section>
