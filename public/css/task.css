@@ -385,19 +385,7 @@ main dialog section{
   all: unset;
 }
 
-main dialog section div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 90vh;
-}
-
-main dialog section div.hidden {
-  display: none;
-}
-
-main dialog section div header{
+main dialog section header{
   all: unset;
   width: 100%;
   display: flex;
@@ -406,8 +394,8 @@ main dialog section div header{
   min-height: 80px;
 }
 
-main dialog section div article nav,
-main dialog section div header nav{
+main dialog section article nav,
+main dialog section header nav{
   all: unset;
   width: 39%;
   display: flex;
@@ -417,8 +405,8 @@ main dialog section div header nav{
   padding-inline: 20px;
   padding-block: 20px;
 }
-main dialog section div article nav button,
-main dialog section div header nav button{
+main dialog section article nav button,
+main dialog section header nav button{
   all: unset;
   padding-block: 8px;
   padding-inline: 12px;
@@ -432,30 +420,30 @@ main dialog section div header nav button{
   margin-inline: auto;
 }
 
-main dialog section div header nav button.inactive{
+main dialog section header nav button.inactive{
   background-color: var(--white);
   color: var(--font);
   border: 2px var(--font) solid;
 }
 
-main dialog section div header nav button:hover,
-main dialog section div header nav button.inactive:hover{
+main dialog section header nav button:hover,
+main dialog section header nav button.inactive:hover{
   text-shadow: unset;
   scale: unset;
 }
 
-main dialog section div header h2{
+main dialog section header h2{
   all: unset;
   font-size: 22px;
 }
 
-main dialog section div article{
+main dialog section article{
   margin-inline: auto;
   margin-block: 20px;
   width: 90%;
 }
 
-main dialog section div article aside{
+main dialog section article aside{
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -464,7 +452,7 @@ main dialog section div article aside{
   border-radius: 10px;
 }
 
-main dialog section div article aside ul{
+main dialog section article aside ul{
   list-style: none;
   padding-inline: 0;
   flex-grow: 1;
@@ -473,46 +461,46 @@ main dialog section div article aside ul{
   flex-wrap: wrap;
 }
 
-main dialog section div article aside ul li{
+main dialog section article aside ul li{
   margin-inline: 1em;
   min-width: 240px;
   padding-block: .8em;
   font-size: 15px;
 }
 
-main dialog section div article aside ul li h4{
+main dialog section article aside ul li h4{
   margin-bottom: .3em;
   font-size: 18px;
 }
 
-main dialog section div article table{
+main dialog section article table{
   width: 100%;
 }
 
-main dialog section div article table td:last-child {
+main dialog section article table td:last-child {
   display: table-cell;
   padding: 5px;
   text-align: center;
   border: 1px solid var(--font);
 }
 
-main dialog section div form.hidden,
-main dialog section div article.hidden{
+main dialog section form.hidden,
+main dialog section article.hidden{
   display: none;
 }
 
-main dialog section div form{
+main dialog section form{
   width: 80%;
   margin-inline: auto;
   margin-block: 20px;
 }
 
-main dialog section div form label.checkbox{
+main dialog section form label.checkbox{
 	max-width: 300px;
 	min-width: 70px;
 }
 
-main dialog section div form label.checkbox input{
+main dialog section form label.checkbox input{
 	all: unset;
 	appearance: none;
 	margin-right: 0.3em;
@@ -527,7 +515,7 @@ main dialog section div form label.checkbox input{
 	transition: 0.25s linear background;
 }
 
-main dialog section div form label.checkbox input::before{
+main dialog section form label.checkbox input::before{
 	content: "";
 	display: block;
 	width: 1rem;
@@ -542,18 +530,18 @@ main dialog section div form label.checkbox input::before{
 	transform: translateX(0rem);
 }
 
-main dialog section div form label.checkbox input:checked {
+main dialog section form label.checkbox input:checked {
   background: var(--logo);
 }
-main dialog section div form label.checkbox input:checked::before {
+main dialog section form label.checkbox input:checked::before {
   transform: translateX(1rem);
 }
 
-main dialog section div form label.checkbox input:focus {
+main dialog section form label.checkbox input:focus {
   outline: transparent;
 }
 
-main dialog section div form label input.input-file{
+main dialog section form label input.input-file{
   padding-inline: 0.5em;
   background-color: var(--white);
   cursor: pointer;
@@ -584,13 +572,22 @@ main dialog form label span {
   min-height: 2em;
 }
 
-main dialog div#confirm-pac-delete article,
-main dialog div#pac-delete-success article{
+article#pac-error,
+article#confirm-pac-delete,
+article#pac-delete-success{
+  position: fixed; 
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  z-index: 1000;
   width: 40%;
-  margin-inline: auto;
+  min-width: 300px;
+  max-width: 500px;
   padding-inline: 25px;
   padding-block: 10px;
+  background-color: var(--ice);
   box-shadow: 0px 0px 10px 0px var(--font);
+  /* box-shadow: 0 0 20px rgba(75, 75, 77, 0.5); */ 
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -599,18 +596,39 @@ main dialog div#pac-delete-success article{
   border-top: var(--logo) 20px solid;
 }
 
-main dialog div#confirm-pac-delete article h2,
-main dialog div#confirm-pac-delete article h3,
-main dialog div#pac-delete-success article h2,
-main dialog div#pac-delete-success article h3{
+article#pac-error.hidden,
+article#confirm-pac-delete.hidden,
+article#pac-delete-success.hidden{
+  display: none;
+}
+
+article#pac-error h2,
+article#pac-error h3,
+article#confirm-pac-delete h2,
+article#confirm-pac-delete h3,
+article#pac-delete-success h2,
+article#pac-delete-success h3{
   margin-bottom: 1em;
   margin-inline: auto;
   text-align: center;
 }
 
-main dialog section div article nav {
+article#pac-error nav,
+article#confirm-pac-delete nav,
+article#pac-delete-success nav{
   width: 70%;
   padding-block: 10px;
   display: flex;
   justify-content: space-between;
+}
+
+#pac-delete{
+  background-color: var(--white);
+  color: var(--logo);
+  border-color: var(--logo);
+}
+
+#pac-delete:hover{
+  background-color: var(--logo);
+  color: var(--white);
 }
