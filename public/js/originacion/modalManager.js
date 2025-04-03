@@ -2,8 +2,7 @@ window.addEventListener("load", () => {
   const modal = document.querySelector("#modal");
   const modalCloser = document.querySelector("#modal-closer");
   const modalOpener = document.querySelector("#modal-opener");
-  const noObservacionesPACs = document.querySelector("#pac-section article");
-  const pacSection = document.querySelector("#pac-section");
+  const noObservacionesPACs = document.querySelector("#main-content");
   const confirmDelete = document.querySelector("#confirm-pac-delete");
   const deleteSuccess = document.querySelector("#pac-delete-success");
   const pacError = document.querySelector("#pac-error");
@@ -23,10 +22,15 @@ window.addEventListener("load", () => {
   //Función para cambiar el estado de la secciones
   const sectionHandler = function(state) {
     //! agregar transiciones al cambio de secciones
-    pacSection.classList.toggle("hidden", state !== STATES.MAIN);
     confirmDelete.classList.toggle("hidden", state !== STATES.CONFIRM);
     deleteSuccess.classList.toggle("hidden", state !== STATES.SUCCESS);
-    pacError.classList.toggle("hidden", state !== STATES.ERROR); 
+    pacError.classList.toggle("hidden", state !== STATES.ERROR);
+    
+    if (state === STATES.MAIN) {
+      confirmDelete.classList.add("hidden");
+      deleteSuccess.classList.add("hidden");
+      pacError.classList.add("hidden");
+    }
   };
 
   //Función para limpiar los listeners
