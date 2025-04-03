@@ -6,21 +6,25 @@ window.addEventListener("load", () => {
   const pacSection = document.querySelector("#pac-section");
   const confirmDelete = document.querySelector("#confirm-pac-delete");
   const deleteSuccess = document.querySelector("#pac-delete-success");
+  const pacError = document.querySelector("#pac-error");
   const deleteButton = document.querySelector("#pac-delete");
   const cancelButton = document.querySelector("#pac-cancel");
   const closeButton = document.querySelector("#pac-delete-close");
+  const errorButton = document.querySelector("#pac-error-close");
 
   const STATES = {
     MAIN: 1,
     CONFIRM: 2, 
-    SUCCESS: 3
+    SUCCESS: 3,
+    ERROR: 4
   }
 
   const sectionHandler = function(state) {
+    //! agregar transiciones al cambio de secciones
     pacSection.classList.toggle("hidden", state !== STATES.MAIN);
     confirmDelete.classList.toggle("hidden", state !== STATES.CONFIRM);
     deleteSuccess.classList.toggle("hidden", state !== STATES.SUCCESS);
-    // añadir errorSection.classList.toggle("hidden", state !== STATES.ERROR); mas adelante
+    pacError.classList.toggle("hidden", state !== STATES.ERROR); 
   };
 
   // Abrir el modal con el botón
@@ -34,6 +38,7 @@ window.addEventListener("load", () => {
       sectionHandler(2);
       // Esperar la respuesta del usuario
       const userConfirmed = await new Promise((resolve) => {
+        //! agregar limpieza de eventos (adaptar de deepseek)
         deleteButton.onclick = () => {
           resolve(true);
         };
@@ -48,9 +53,8 @@ window.addEventListener("load", () => {
       if (userConfirmed) {
         const originacionId = modal?.dataset?.originacionId;
         const endpoint = `${baseUrl}/api/utilities/deleteOrigination/${originacionId}`;
-        const errorMessage = "Ocurrió un error al eliminar. Por favor intente nuevamente.";
         
-        // agregar spinner mientra se resuelve la promesa
+        //! agregar spinner mientra se resuelve la promesa
         try {
           const response = await fetch(endpoint, {
             method: "DELETE",
@@ -71,12 +75,17 @@ window.addEventListener("load", () => {
               }, 500);
             };
           } else {
-            throw new Error(errorMessage);
+            sectionHandler(4);
+            errorButton.onclick = () => {
+              sectionHandler(1);
+            };
           }
         } catch (error) {
           console.error(error);
-          // Aquí podrías mostrar otro modal de error si lo deseas
-          alert(errorMessage); // Temporal, puedes reemplazar esto también
+          sectionHandler(4);
+          errorButton.onclick = () => {
+            sectionHandler(1);
+          };
         }
       }
     } else {
