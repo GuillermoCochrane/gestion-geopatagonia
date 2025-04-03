@@ -12,6 +12,7 @@ window.addEventListener("load", () => {
   const closeButton = document.querySelector("#pac-delete-close");
   const errorButton = document.querySelector("#pac-error-close");
 
+  //Estados de la sección
   const STATES = {
     MAIN: 1,
     CONFIRM: 2, 
@@ -19,6 +20,7 @@ window.addEventListener("load", () => {
     ERROR: 4
   }
 
+  //Función para cambiar el estado de la secciones
   const sectionHandler = function(state) {
     //! agregar transiciones al cambio de secciones
     pacSection.classList.toggle("hidden", state !== STATES.MAIN);
@@ -27,27 +29,46 @@ window.addEventListener("load", () => {
     pacError.classList.toggle("hidden", state !== STATES.ERROR); 
   };
 
+  //Función para limpiar los listeners
+  const clearAllListeners = () => {
+    deleteButton.onclick = null;
+    cancelButton.onclick = null;
+    closeButton.onclick = null;
+    errorButton.onclick = null;
+    modalOpener.removeEventListener("click", openModal);
+  };
+
+  //Función para manejar la confirmación de eliminación
+  const showConfirmation = async () => {
+    clearAllListeners();
+    sectionHandler(STATES.CONFIRM);
+    
+    return new Promise((resolve) => {
+      deleteButton.onclick = () => {
+        clearAllListeners();
+        resolve(true);
+      };
+      
+      cancelButton.onclick = () => {
+        clearAllListeners();
+        sectionHandler(STATES.MAIN);
+        resolve(false);
+      };
+    });
+  };
+
+  //Función para abrir el modal
+  const openModal = () => modal.showModal();
+
   // Abrir el modal con el botón
-  modalOpener.addEventListener("click", () => modal.showModal());
+  modalOpener.addEventListener("click", openModal);
 
   // Cerrar el modal con el botón
   modalCloser.addEventListener("click", async () => {
     // Verificar si hay observaciones PACs
     if (noObservacionesPACs) {
       // Mostrar seccion de confirmación
-      sectionHandler(2);
-      // Esperar la respuesta del usuario
-      const userConfirmed = await new Promise((resolve) => {
-        //! agregar limpieza de eventos (adaptar de deepseek)
-        deleteButton.onclick = () => {
-          resolve(true);
-        };
-        cancelButton.onclick = () => {
-          // Ocultar confirmación y mostrar sección principal
-          sectionHandler(1);
-          resolve(false);
-        };
-      });
+      const userConfirmed = await showConfirmation();
 
       // Si se confirma, eliminar la originación
       if (userConfirmed) {
@@ -66,7 +87,10 @@ window.addEventListener("load", () => {
           
           // Si la solicitud se ha realizado correctamente
           if (json?.data?.deleted) {
-            sectionHandler(3);
+            // Mostrar sección de confirmación
+            sectionHandler(STATES.SUCCESS);
+            // Limpiar los listeners
+            clearAllListeners();
             // Configurar el botón de cierre
             closeButton.onclick = () => {
               modal.close();
@@ -75,16 +99,14 @@ window.addEventListener("load", () => {
               }, 500);
             };
           } else {
-            sectionHandler(4);
-            errorButton.onclick = () => {
-              sectionHandler(1);
-            };
+            throw new Error("Error en la respuesta del servidor");
           }
         } catch (error) {
           console.error(error);
-          sectionHandler(4);
+          sectionHandler(STATES.ERROR);
           errorButton.onclick = () => {
-            sectionHandler(1);
+            clearAllListeners();
+            sectionHandler(STATES.MAIN);
           };
         }
       }
