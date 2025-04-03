@@ -605,6 +605,7 @@ main dialog div#pac-delete-success article h2,
 main dialog div#pac-delete-success article h3{
   margin-bottom: 1em;
   margin-inline: auto;
+  text-align: center;
 }
 
 main dialog section div article nav {
