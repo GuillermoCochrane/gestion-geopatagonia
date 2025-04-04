@@ -66,13 +66,16 @@ const taskUtilities = {
     let data = this.headerData("Originaciones");
     data.pageScript = [...data.pageScript, ...this.validationScripts, "originacion/validations/originacionValidation"];
     let formData = {};
+    let pacTableData = [];
     try {
       formData = await this.originacionFormData();
+      pacTableData = await this.allPACsData();
     } catch (error) {
       console.error(error); // Registro del error para depuración
       throw error;
     }
     data.formData = formData;
+    data.pacTableData = pacTableData;
     return data;
   },
 
@@ -106,7 +109,7 @@ const taskUtilities = {
       //Datos del tratador para el formulario de PACs
       let tratador = await Usuario.findAll({where: { rol_id: 3}});
       tratador = this.dataFormatter(tratador);
-    
+
       //Datos adicionales para el el renderizado de la vista
       data.oldData = {originacion_id: id};
       data.originacionData = newOriginationData;
@@ -140,7 +143,6 @@ const taskUtilities = {
   },
 
   observacionesPACs: async function(id){
-
     try {
       const data = await ObservacionPAC.findAll({
         where: {originacion_id: id},
@@ -227,7 +229,6 @@ const taskUtilities = {
   },
 
   allPACsData: async function() {
-
     const originacionIncludes = [
       { model: Origen, as: 'origen', attributes: this.excludeTimestamps() },
       { model: Usuario, as: 'observador', attributes: this.excludePassword() },
@@ -243,7 +244,8 @@ const taskUtilities = {
         ],
         order: [['fecha_requerida', 'DESC']]
       });
-      return utilities.plainData(resultados); 
+      let data = utilities.plainData(resultados);
+      return data; 
     } catch (error) {
       console.error(error);
       throw error;
