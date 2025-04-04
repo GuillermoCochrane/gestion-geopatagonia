@@ -14,41 +14,31 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>CB1234</td>
-        <td>10 / 01 / 2022</td>
-        <td>22 / 07 / 2022</td>
-        <td>Rotura de la vía de acceso</td>
-        <td>Accidente</td>
-        <td>Roberto González</td>
-        <td>Martin Rodríguez</td>
-        <td>En Curso</td>
-        <td>
-          <a href="/originacion/editar/1">
-            <i class="fas fa-edit"></i>
-          </a>
-          <a href="/originacion/eliminar/1">
-            <i class="fas fa-trash"></i>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>DZ3618</td>
-        <td>06 / 04 / 2023</td>
-        <td>15 / 06 / 2023</td>
-        <td>Engranaje de transmisión Flojo</td>
-        <td>Inspección</td>
-        <td>Carlos Hernández</td>
-        <td>Jose Luis García</td>
-        <td>Verificado</td>
-        <td>
-          <a href="/originacion/editar/1">
-            <i class="fas fa-edit"></i>
-          </a>
-          <a href="/originacion/eliminar/1">
-            <i class="fas fa-trash"></i>
-          </a>
-        </td>
+      <% if (!locals.pacTableData || locals.pacTableData.length === 0) { %>
+        <tr>
+          <td colspan="9">No hay observaciones o PACs registradas</td>
+        </tr>
+      <% } else { %>
+        <% for (const rowData of locals?.pacTableData) { %>
+          <tr>
+            <td><%= rowData?.id %></td>
+            <td><%= rowData?.fecha_requerida %></td>
+            <td><%= rowData?.originacion?.fecha_de_observacion %></td>
+            <td><%= rowData?.descripcion %></td>
+            <td><%= rowData?.responsable?.nombre %></td>
+            <td><%= rowData?.originacion?.observador?.nombre %></td>
+            <td><%= rowData?.estado?.estado %></td>
+            <td>
+              <a href="/originacion/editar/<%= rowData?.id %>">
+                <i class="fas fa-edit"></i>
+              </a>
+              <a href="/originacion/eliminar/<%= rowData?.id %>">
+                <i class="fas fa-trash"></i>
+              </a>
+            </td>
+          </tr>
+        <% } %>
+      <% } %>
     </tbody>
   </table>
 </section>
