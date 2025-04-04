@@ -218,6 +218,31 @@ const taskUtilities = {
       throw error; // Lanzar el error para manejarlo en el controlador
     }
   },
+
+  allPACsData: async function() {
+    const exclude = {exclude:['created_at', 'updated_at']}
+    const userExclude = {exclude:['created_at', 'updated_at', "password"]}
+    const originacionIncludes = [
+      { model: Origen, as: 'origen', attributes: exclude },
+      { model: Usuario, as: 'observador', attributes: userExclude },
+      { model: Sector, as: 'sector', attributes: exclude },
+      { model: EnteInspector, as: 'ente_inspector', attributes: exclude },
+    ];
+    try {
+      const resultados = await ObservacionPAC.findAll({
+        include: [
+          { model: Originacion, as: 'originacion', include: originacionIncludes },
+          { model: Usuario, as: 'responsable', attributes: userExclude },
+          { model: Estado, as: 'estado', attributes: exclude }
+        ],
+        order: [['fecha_requerida', 'DESC']]
+      });
+      return utilities.plainData(resultados); 
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
 }
 
 module.exports = taskUtilities;
