@@ -10,18 +10,18 @@ window.addEventListener("load", () => {
   const cancelButton = document.querySelector("#pac-cancel");
   const closeButton = document.querySelector("#pac-delete-close");
   const errorButton = document.querySelector("#pac-error-close");
+  const spinner = document.querySelector("#spinner-modal");
 
-  //Estados de la sección
+  // Estados de la sección
   const STATES = {
     MAIN: 1,
     CONFIRM: 2, 
     SUCCESS: 3,
     ERROR: 4
-  }
+  };
 
-  //Función para cambiar el estado de la secciones
+  // Función para cambiar el estado de las secciones
   const sectionHandler = function(state) {
-    //! agregar transiciones al cambio de secciones
     confirmDelete.classList.toggle("hidden", state !== STATES.CONFIRM);
     deleteSuccess.classList.toggle("hidden", state !== STATES.SUCCESS);
     pacError.classList.toggle("hidden", state !== STATES.ERROR);
@@ -33,7 +33,7 @@ window.addEventListener("load", () => {
     }
   };
 
-  //Función para limpiar los listeners
+  // Función para limpiar los listeners
   const clearAllListeners = () => {
     deleteButton.onclick = null;
     cancelButton.onclick = null;
@@ -42,7 +42,7 @@ window.addEventListener("load", () => {
     modalOpener.removeEventListener("click", openModal);
   };
 
-  //Función para manejar la confirmación de eliminación
+  // Función para manejar la confirmación de eliminación
   const showConfirmation = async () => {
     clearAllListeners();
     sectionHandler(STATES.CONFIRM);
@@ -61,7 +61,7 @@ window.addEventListener("load", () => {
     });
   };
 
-  //Función para abrir el modal
+  // Función para abrir el modal
   const openModal = () => modal.showModal();
 
   // Abrir el modal con el botón
@@ -69,33 +69,24 @@ window.addEventListener("load", () => {
 
   // Cerrar el modal con el botón
   modalCloser.addEventListener("click", async () => {
-    // Verificar si hay observaciones PACs
     if (noObservacionesPACs) {
-      // Mostrar seccion de confirmación
       const userConfirmed = await showConfirmation();
 
-      // Si se confirma, eliminar la originación
       if (userConfirmed) {
         const originacionId = modal?.dataset?.originacionId;
         const endpoint = `${baseUrl}/api/utilities/deleteOrigination/${originacionId}`;
-        
-        //! agregar spinner mientra se resuelve la promesa
+
+        // Mostrar spinner con retraso garantizado
+        spinner.classList.remove("hidden");
+        await new Promise(resolve => setTimeout(resolve, 800)); // 800ms de visibilidad
+
         try {
-          const response = await fetch(endpoint, {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
+          const response = await fetch(endpoint, { method: "DELETE" });
           const json = await response.json();
           
-          // Si la solicitud se ha realizado correctamente
           if (json?.data?.deleted) {
-            // Mostrar sección de confirmación
             sectionHandler(STATES.SUCCESS);
-            // Limpiar los listeners
-            clearAllListeners();
-            // Configurar el botón de cierre
+            
             closeButton.onclick = () => {
               modal.close();
               setTimeout(() => {
@@ -107,15 +98,13 @@ window.addEventListener("load", () => {
           }
         } catch (error) {
           console.error(error);
+          spinner.classList.add("hidden");
           sectionHandler(STATES.ERROR);
-          errorButton.onclick = () => {
-            clearAllListeners();
-            sectionHandler(STATES.MAIN);
-          };
+        } finally {
+          spinner.classList.add("hidden");
         }
       }
     } else {
-      // Si no hay observaciones, cerrar el modal directamente
       modal.close();
       setTimeout(() => {
         window.location.href = "/originacion/";
@@ -123,7 +112,7 @@ window.addEventListener("load", () => {
     }
   });
 
-  // Verificar si hay errores de validación al cargar la página
+  // Verificar errores de validación al cargar
   const hasErrors = modal.dataset.hasErrors === "true";
   if (hasErrors) {
     modal.showModal();
