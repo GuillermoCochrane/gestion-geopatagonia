@@ -14,6 +14,7 @@
       </tr>
     </thead>
     <tbody>
+      <% console.log(locals.pacTableData) %>
       <% if (!locals.pacTableData || locals.pacTableData.length === 0) { %>
         <tr>
           <td colspan="9">No hay observaciones o PACs registradas</td>
@@ -25,6 +26,7 @@
             <td><%= rowData?.fecha_requerida %></td>
             <td><%= rowData?.originacion?.fecha_de_observacion %></td>
             <td><%= rowData?.descripcion %></td>
+            <td><%= rowData?.originacion?.origen?.origen %></td>
             <td><%= rowData?.responsable?.nombre %></td>
             <td><%= rowData?.originacion?.observador?.nombre %></td>
             <td><%= rowData?.estado?.estado %></td>
