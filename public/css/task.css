@@ -572,13 +572,14 @@ main dialog form label span {
   min-height: 2em;
 }
 
+/*? estado inicial (oculto) */
 article#pac-error,
 article#confirm-pac-delete,
-article#pac-delete-success{
-  position: fixed; 
+article#pac-delete-success {
+  position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); 
+  transform: translate(-50%, -50%);
   z-index: 1000;
   width: 40%;
   min-width: 300px;
@@ -587,19 +588,41 @@ article#pac-delete-success{
   padding-block: 10px;
   background-color: var(--ice);
   box-shadow: 0px 0px 10px 0px var(--font);
-  /* box-shadow: 0 0 20px rgba(75, 75, 77, 0.5); */ 
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
   border-top: var(--logo) 20px solid;
+  /* Estado inicial (oculto) */
+  opacity: 0;
+  display: none; 
+  transition: 
+    opacity 0.5s ease-out,
+    display 0.5s ease-out allow-discrete;
 }
 
+/*? etiqueta .hidden que se aplica al estado oculto */
 article#pac-error.hidden,
 article#confirm-pac-delete.hidden,
-article#pac-delete-success.hidden{
+article#pac-delete-success.hidden {
+  /* transicion a ocultar */
   display: none;
+  opacity: 0;
+}
+
+/*? etiqueta :not(.hidden) que se aplica al estado visible */
+article#pac-error:not(.hidden),
+article#confirm-pac-delete:not(.hidden),
+article#pac-delete-success:not(.hidden) {
+  /* Estado final (visible) */
+  opacity: 1;
+  display: flex; 
+  transition: opacity 0.5s ease-out;
+  @starting-style {
+    opacity: 0;
+    display: flex;
+  }
 }
 
 article#pac-error h2,
