@@ -13,6 +13,16 @@ const taskUtilities = {
     newLabel: "Nueva Observación / PAC"
   },
 
+  timestamps: ["created_at", "updated_at"],
+
+  excludeTimestamps: function(){
+    return {exclude: this.timestamps}
+  },
+
+  excludePassword: function(){
+    return {exclude:[...this.timestamps, "password"]}
+  },
+
   headerData: function(title){
     return {
       title: title,
@@ -110,17 +120,15 @@ const taskUtilities = {
   },
 
   singleOriginacionData: async function(id){
-    const exclude = {exclude:['created_at', 'updated_at']}
-    const observadorExclude = {exclude:['created_at', 'updated_at', "password"]}
     try {
       const data = await Originacion.findAll({
         where: {id: id},
         include: [
-          { model: Origen, as: "origen", attributes: exclude },
-          { model: Usuario, as: "observador", attributes: observadorExclude },
-          { model: EnteInspector, as: "ente_inspector", attributes: exclude },
-          { model: Sector, as: "sector", attributes: exclude },
-          { model: AdjuntoOriginacion, as: "adjuntos", attributes: exclude },
+          { model: Origen, as: "origen", attributes: this.excludeTimestamps() },
+          { model: Usuario, as: "observador", attributes: this.excludePassword() },
+          { model: EnteInspector, as: "ente_inspector", attributes: this.excludeTimestamps() },
+          { model: Sector, as: "sector", attributes: this.excludeTimestamps() },
+          { model: AdjuntoOriginacion, as: "adjuntos", attributes: this.excludeTimestamps() },
           { model: ObservacionPAC, as: "observaciones_pacs", attributes: ['id', 'inciso', 'descripcion', 'fecha_requerida', 'referencia', 'fecha_negociable', 'requiere_analisis', 'responsable_id', 'originacion_id', 'estado_id'] },
         ]
       });      
@@ -132,14 +140,13 @@ const taskUtilities = {
   },
 
   observacionesPACs: async function(id){
-    const exclude = {exclude:['created_at', 'updated_at']}
-    const responsableExclude = {exclude:['created_at', 'updated_at', "password"]}
+
     try {
       const data = await ObservacionPAC.findAll({
         where: {originacion_id: id},
         include: [
-          { model: Usuario, as: "responsable", attributes: responsableExclude},
-          { model: Estado, as: "estado", attributes: exclude},
+          { model: Usuario, as: "responsable", attributes: this.excludePassword()},
+          { model: Estado, as: "estado", attributes: this.excludeTimestamps()},
         ]
       });
       return data;
@@ -220,20 +227,19 @@ const taskUtilities = {
   },
 
   allPACsData: async function() {
-    const exclude = {exclude:['created_at', 'updated_at']}
-    const userExclude = {exclude:['created_at', 'updated_at', "password"]}
+
     const originacionIncludes = [
-      { model: Origen, as: 'origen', attributes: exclude },
-      { model: Usuario, as: 'observador', attributes: userExclude },
-      { model: Sector, as: 'sector', attributes: exclude },
-      { model: EnteInspector, as: 'ente_inspector', attributes: exclude },
+      { model: Origen, as: 'origen', attributes: this.excludeTimestamps() },
+      { model: Usuario, as: 'observador', attributes: this.excludePassword() },
+      { model: Sector, as: 'sector', attributes: this.excludeTimestamps() },
+      { model: EnteInspector, as: 'ente_inspector', attributes: this.excludeTimestamps() },
     ];
     try {
       const resultados = await ObservacionPAC.findAll({
         include: [
           { model: Originacion, as: 'originacion', include: originacionIncludes },
-          { model: Usuario, as: 'responsable', attributes: userExclude },
-          { model: Estado, as: 'estado', attributes: exclude }
+          { model: Usuario, as: 'responsable', attributes: this.excludePassword() },
+          { model: Estado, as: 'estado', attributes: this.excludeTimestamps() }
         ],
         order: [['fecha_requerida', 'DESC']]
       });
