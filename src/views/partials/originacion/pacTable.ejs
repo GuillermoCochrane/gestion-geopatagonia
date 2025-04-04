@@ -16,7 +16,7 @@
     </tr>
   </thead>
   <tbody>
-    <% if (locals?.observacionesPACs?.length === 0) { %>
+    <% if ( !locals.observacionesPACs || locals.observacionesPACs.length === 0) { %>
       <tr>
         <td colspan="7" id="noObservacionesPACs">
           No hay observaciones / PACs para esta originación
