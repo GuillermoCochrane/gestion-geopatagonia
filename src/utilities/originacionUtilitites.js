@@ -238,13 +238,15 @@ const taskUtilities = {
     try {
       const resultados = await ObservacionPAC.findAll({
         include: [
-          { model: Originacion, as: 'originacion', include: originacionIncludes },
+          { model: Originacion, as: 'originacion', include: originacionIncludes, attributes: this.excludeTimestamps() },
           { model: Usuario, as: 'responsable', attributes: this.excludePassword() },
           { model: Estado, as: 'estado', attributes: this.excludeTimestamps() }
         ],
+        attributes: this.excludeTimestamps(),
         order: [['fecha_requerida', 'DESC']]
       });
       let data = utilities.plainData(resultados);
+      data = utilities.multipleDateFormat(data, ['fecha_requerida'], [{ parentObject: 'originacion', dateField: 'fecha_de_observacion' }]);
       return data; 
     } catch (error) {
       console.error(error);
