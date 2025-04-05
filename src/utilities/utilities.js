@@ -19,7 +19,7 @@ const utilities = {
     // Método para devolver la fecha en formato dd / mm / yyyy
     formatDateDisplay: function(date){
       const { day, month, year } = this.getDateParts(date);
-      if (!day || !month || !year) return 'Fecha inválida';
+      if (!day || !month || !year) return ;
   
       return `${day}/${month}/${year}`;
     },
@@ -32,21 +32,29 @@ const utilities = {
       return `${year}-${month}-${day}`;
     },
 
-    // Método para devolver una lista de fechas en formato dd / mm / yyyy , para created_at, updated_at y otros campos que se pasen como parámetro
-    multipleDateFormat: function(dates, fieldsToFormat = []){
-      for(let date of dates){
-        date.created_at = this.formatDateDisplay(date.created_at);
-        date.updated_at = this.formatDateDisplay(date.updated_at);
+    // Método para devolver una lista de fechas en formato dd / mm / yyyy , para timestamps, propiedades que se pasen como parámetro y propiedades anidadas
+    multipleDateFormat: function(records, fields = [], nestedFields = []) {
+      for (const record of records) {
 
-        // Campos adicionales (si existen en el objeto)
-        fieldsToFormat.forEach(field => {
-          if (date[field] != null) { // Verifica que el campo exista y no sea null/undefined
-            date[field] = this.formatDateDisplay(date[field]);
+        // 1. Timestamps
+        if (record.created_at) record.created_at = this.formatDateDisplay(record.created_at);
+        if (record.updated_at) record.updated_at = this.formatDateDisplay(record.updated_at);
+
+        // 2. Parámetros directos
+        for (const field of fields) {
+          if (record[field] != null) {
+            record[field] = this.formatDateDisplay(record[field]);
           }
-        });
+        }
 
+        // 3. Parámetros anidados
+        for (const { parentObject, dateField } of nestedFields) {
+          if (record[parentObject]?.[dateField] != null) {
+            record[parentObject][dateField] = this.formatDateDisplay(record[parentObject][dateField]);
+          }
+        }
       }
-      return dates;
+      return records;
     },
 
     // Método para cambiar una cadena de texto a con "_" a espacios o a "" y poner las primeras letras en mayúsculas
