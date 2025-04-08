@@ -2,7 +2,7 @@ window.addEventListener("load", () => {
   const modal = document.querySelector("#modal");
   const modalCloser = document.querySelector("#modal-closer");
   const modalOpener = document.querySelector("#modal-opener");
-  const noObservacionesPACs = document.querySelector("#main-content");
+  const noObservacionesPACs = document.querySelector("#noObservacionesPACs");
   const confirmDelete = document.querySelector("#confirm-pac-delete");
   const deleteSuccess = document.querySelector("#pac-delete-success");
   const pacError = document.querySelector("#pac-error");
@@ -69,6 +69,7 @@ window.addEventListener("load", () => {
 
   // Cerrar el modal con el botón
   modalCloser.addEventListener("click", async () => {
+    console.log(noObservacionesPACs);
     if (noObservacionesPACs) {
       const userConfirmed = await showConfirmation();
 
