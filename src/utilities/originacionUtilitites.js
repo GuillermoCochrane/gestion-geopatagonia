@@ -270,7 +270,8 @@ const taskUtilities = {
     }
   },
 
-  allPACsData: async function() {
+  allPACsData: async function(id = null) {
+    const where = id ? { id } : {};
     const originacionIncludes = [
       { model: Origen, as: 'origen', attributes: this.excludeTimestamps() },
       { model: Usuario, as: 'observador', attributes: this.excludePassword() },
@@ -285,7 +286,7 @@ const taskUtilities = {
           { model: Estado, as: 'estado', attributes: this.excludeTimestamps() }
         ],
         attributes: this.excludeTimestamps(),
-        order: [['fecha_requerida', 'DESC']]
+        where,
       });
       let data = utilities.plainData(resultados);
       data = utilities.multipleDateFormat(data, ['fecha_requerida'], [{ parentObject: 'originacion', dateField: 'fecha_de_observacion' }]);
