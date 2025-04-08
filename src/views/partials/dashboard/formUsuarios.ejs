@@ -26,7 +26,10 @@
   <!-- Modo creación: mostrar campo de contraseña y no el de id -->
   <label>
     <h4>Contraseña</h4>
-    <input type="password" name="password" id="password" value="<%= locals.usuario?.password  %>">
+    <div class="password-container">
+      <input type="password" name="password" id="password" value="<%= locals.usuario?.password  %>">
+      <i id="toggle-icon" class="fa-regular fa-eye"></i>
+    </div>
     <span id="error-password"><%= locals.errors?.password?.msg %></span>
   </label>
 <% } %>
