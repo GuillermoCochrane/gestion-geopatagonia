@@ -1,5 +1,4 @@
 <section>
-  <!-- <div id="pac-section"> -->
     <%- include('../buttonsHeader.ejs') %>
     <article id="main-content" class="<%= locals.PACErrors ? "hidden" : "" %>">
       <%- include('./originiacionData.ejs') %>
@@ -8,27 +7,9 @@
     <form id="new-content" action="/originacion/observacionPAC" method="POST" enctype="multipart/form-data" class="<%= locals.PACErrors ? "" : "hidden" %>">
       <%- include('./pacForm.ejs') %>
     </form>
-    <article id="confirm-pac-delete" class="hidden">
-      <h2>No hay observaciones registradas</h2>
-      <h3>Se eliminará la originación. ¿Estás seguro?</h3>
-      <nav>
-        <button id="pac-delete" >Eliminar</button>
-        <button id="pac-cancel" >Cancelar</button>
-      </nav>
-    </article>
-    <article id="pac-delete-success" class="hidden">
-      <h2>La observación se eliminó correctamente</h2>
-      <nav>
-        <button id="pac-delete-close">Cerrar</button>
-      </nav>
-    </article>
-    <article id="pac-error" class="hidden">
-      <h2>Ocurrió un error al eliminar.</h2>
-      <h3>Por favor intente nuevamente.</h3>
-      <nav>
-        <button id="pac-error-close">Cerrar</button>
-      </nav>
-    </article>
+    <%- include('./pacPopUp.ejs', {popUp: locals?.confirmPopUp}) %>
+    <%- include('./pacPopUp.ejs', {popUp: locals?.successPopUp}) %>
+    <%- include('./pacPopUp.ejs', {popUp: locals?.errorPopUp}) %>
     <article id="spinner-modal" class="hidden">
       <figure class="spinner-figure">
         <div class="spinner"></div>
