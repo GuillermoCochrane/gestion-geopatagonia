@@ -15,6 +15,45 @@ const taskUtilities = {
 
   timestamps: ["created_at", "updated_at"],
 
+  confirmPopUp: {
+    id: "confirm-pac-delete",
+    title: "No hay observaciones registradas",
+    text: "Se eliminará la originación. ¿Estás seguro?",
+    buttons: [
+      {
+        id: "pac-delete",
+        text: "Eliminar"       
+      },
+      {
+        id: "pac-cancel",
+        text: "Cancelar"
+      }
+    ]
+  },
+
+  successPopUp: {
+    id: "pac-delete-success",
+    title: "La observación se eliminó correctamente",
+    buttons: [
+      {
+        id: "pac-delete-close",
+        text: "Cerrar"
+      }
+    ]
+  },
+
+  errorPopUp: {
+    id: "pac-error",
+    title: "Ocurrió un error al eliminar",
+    text: "Por favor intente nuevamente",
+    buttons: [
+      {
+        id: "pac-error-close",
+        text: "Cerrar"
+      }
+    ]
+  },
+
   excludeTimestamps: function(){
     return {exclude: this.timestamps}
   },
@@ -115,6 +154,9 @@ const taskUtilities = {
       data.originacionData = newOriginationData;
       data.tratadorData = tratador;
       data.observacionesPACs = observacionesPACs;
+      data.confirmPopUp = this.confirmPopUp;
+      data.successPopUp = this.successPopUp;
+      data.errorPopUp = this.errorPopUp;
       return data;
     } catch (error) {
       console.error(error); // Registro del error para depuración
