@@ -322,6 +322,20 @@ main section.managemnet form#new-content label h4{
   font-weight: bold;
 }
 
+main  section.managemnet form#new-content label div.password-container{
+  display: flex;
+  align-items: center;
+}
+
+main  section.managemnet form#new-content label div.password-container i{
+  width: 0;
+  transform: translateX(-27px);
+  color: var(--font);
+  font-size: 1.1em;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
 main section.managemnet form#new-content select,
 main section.managemnet form#new-content textarea,
 main section.managemnet form#new-content input{
