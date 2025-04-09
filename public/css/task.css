@@ -144,6 +144,18 @@ main section table td .actions-container{
   margin: auto;
 }
 
+main section table td .actions-container a{
+  margin: auto;
+  margin-inline: 3px;
+  min-height: 40px;
+  min-width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 2px solid var(--font);
+}
+
 main section table td button{
   margin: auto;
   padding-inline: 8px;
