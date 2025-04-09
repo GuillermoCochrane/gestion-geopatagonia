@@ -156,6 +156,27 @@ main section table td .actions-container a{
   border: 2px solid var(--font);
 }
 
+main section table td .actions-container a:has(i.fa-magnifying-glass),
+main section table td .actions-container a:has(i.fa-user-pen),
+main section table td .actions-container a:has(i.fa-file-arrow-rotate-left){
+  border-color: var(--success);
+  color: var(--success)
+}
+
+main section table td .actions-container a:has(i.fa-file-arrow-down){
+  color: var(--logo);
+  border-color: var(--logo);
+}
+
+main section table td .actions-container a:has(i.fa-plus){
+  color: var(--info);
+  border-color: var(--info)
+}
+
+main section table td .actions-container a i.fa-user-pen::before{
+  margin-left: 4px;
+}
+
 main section table td button{
   margin: auto;
   padding-inline: 8px;
