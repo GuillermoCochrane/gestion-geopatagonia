@@ -8,6 +8,7 @@
   --shadow: rgba(169, 171, 174, 0.4);
   --success: #39b54a;
   --error: orangered;
+  --info: #4b9bd9;
 }
 
 * {
@@ -131,21 +132,16 @@ main section table td:nth-child(2){
   min-width: 103px;
 }
 
-main section table td:last-child{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center; 
-  border-color: transparent;
+main section table td:nth-child(4){
+  min-width: 153px;
 }
 
-main section table td:last-child a{
-  margin: auto;
-  padding: 1em;
-  min-height: 100%;
+main section table td .actions-container{
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
+  margin: auto;
 }
 
 main section table td button{
