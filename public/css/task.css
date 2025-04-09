@@ -160,17 +160,37 @@ main section table td .actions-container a:has(i.fa-magnifying-glass),
 main section table td .actions-container a:has(i.fa-user-pen),
 main section table td .actions-container a:has(i.fa-file-arrow-rotate-left){
   border-color: var(--success);
-  color: var(--success)
+  color: var(--success);
+  transition: all 0.5s ease-in-out;
+}
+
+main section table td .actions-container a:has(i.fa-magnifying-glass):hover,
+main section table td .actions-container a:has(i.fa-user-pen):hover,
+main section table td .actions-container a:has(i.fa-file-arrow-rotate-left):hover{
+/*   background-color: var(--success);
+  color: var(--white);
+  border-color: transparent; */
+  box-shadow: 0 0 10px var(--success)
 }
 
 main section table td .actions-container a:has(i.fa-file-arrow-down){
   color: var(--logo);
   border-color: var(--logo);
+  transition: all 0.5s ease-in-out;
+}
+
+main section table td .actions-container a:has(i.fa-file-arrow-down):hover{
+  box-shadow: 0 0 10px var(--logo)
 }
 
 main section table td .actions-container a:has(i.fa-plus){
   color: var(--info);
-  border-color: var(--info)
+  border-color: var(--info);
+  transition: all 0.5s ease-in-out;
+}
+
+main section table td .actions-container a:has(i.fa-plus):hover{
+  box-shadow: 0 0 10px var(--info)
 }
 
 main section table td .actions-container a i.fa-user-pen::before{
