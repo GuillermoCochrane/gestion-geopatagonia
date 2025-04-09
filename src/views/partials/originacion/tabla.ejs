@@ -31,22 +31,37 @@
             <td><%= rowData?.estado?.estado %></td>
             <td>
               <div class="actions-container">
-                <a href="/originacion/ver/<%= rowData?.id %>">
-                  <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+                <a 
+                  href="/originacion/ver/<%= rowData?.id %>"
+                  title="Visualizar"
+                  >
+                    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
                 </a>
-                <a href="/originacion/exportar/<%= rowData?.id %>">
-                  <i class="fa-solid fa-file-arrow-down fa-lg"></i>
+                <a 
+                  href="/originacion/exportar/<%= rowData?.id %>"
+                  title="Exportar"
+                  >
+                    <i class="fa-solid fa-file-arrow-down fa-lg"></i>
                 </a>
-                <a href="/originacion/agregar/<%= rowData?.id %>">
-                  <i class="fa-solid fa-plus fa-lg"></i>
+                <a 
+                  href="/originacion/agregar/<%= rowData?.id %>"
+                  title="Añadir tarea"
+                  >
+                    <i class="fa-solid fa-plus fa-lg"></i>
                 </a>
                 <% if (rowData?.estado?.id !== 6 && rowData?.estado?.id !== 8) { %>
-                  <a href="/originacion/modificar/<%= rowData?.id %>">
-                    <i class="fa-solid fa-user-pen fa-lg"></i>
+                  <a 
+                    href="/originacion/modificar/<%= rowData?.id %>"
+                    title="Cambiar el responsable"
+                    >
+                      <i class="fa-solid fa-user-pen fa-lg"></i>
                   </a>
                 <% } else { %>
-                  <a href="/originacion/reabrir/<%= rowData?.id %>">
-                    <i class="fa-solid fa-arrow-rotate-left fa-lg fa-rotate-90"></i>
+                  <a 
+                    href="/originacion/reabrir/<%= rowData?.id %>"
+                    title="Reabrir"
+                    >
+                      <i class="fa-solid fa-arrow-rotate-left fa-lg fa-rotate-90"></i>
                   </a>
                 <% } %>
               </div>
