@@ -1,0 +1,82 @@
+<section>
+  <%- include('../partials/dashboard/navBar.ejs') %>
+  <!-- cambiar la barra de navegación -->
+  <div class="data-container">
+    <article>
+      <h2>Datos de la originacion: <%= locals?.pacData?.originacion?.id %></h2>
+      <ul>
+        <li>
+          <h3>Fecha de la observación: </h3>
+          <p><%= locals?.pacData?.originacion?.fecha_de_observacion %></p>
+        </li>
+        <li>
+          <h3>Lugar: </h3>
+          <p><%= locals?.pacData?.originacion?.lugar %></p>
+        </li>
+        <li>
+          <h3>Origen: </h3>
+          <p><%= locals?.pacData?.origen?.origen %></p>
+        </li>
+        <li>
+          <h3>Observador: </h3>
+          <p><%= locals?.pacData?.observador?.nombre %></p>
+        </li>
+        <li>
+          <h3>Ente Inspector: </h3>
+          <p><%= locals?.pacData?.ente_inspector?.ente_inspector %></p>
+        </li>
+        <li>
+          <h3>Sector: </h3>
+          <p><%= locals?.pacData?.sector?.sector %></p>
+        </li>
+        <li>
+          <h3>Adjuntos: </h3>
+          <p> - </p>
+        </li>
+      </ul>
+    </article>
+    <article>
+      <h2>Datos de la observación / PAC: <%= locals?.pacData?.id %></h2>
+      <ul>
+        <li>
+          <h3>Item: </h3>
+          <p><%= locals?.pacData?.inciso %></p>
+        </li>
+        <li>
+          <h3>Fecha requerida: </h3>
+          <p><%= locals?.pacData?.fecha_requerida %></p>
+        </li>
+        <li>
+          <h3>Fecha Negociable: </h3>
+          <p><%= locals?.pacData?.fecha_negociable = true ? 'Si' : 'No' %></p>
+        </li>
+        <li>
+          <h3>Requiere analisis: </h3>
+          <p><%= locals?.pacData?.requiereAnalisis === true ? 'Si' : 'No' %></p>
+        </li>
+        <li>
+          <h3>Referencia: </h3>
+          <p><%= locals?.pacData?.referencia %></p>
+        </li>
+        <li>
+          <h3>Responsable tratamiento: </h3>
+          <p><%= locals?.pacData?.responsable?.nombre %></p>
+        </li>
+        <li>
+          <h3>Estado: </h3>
+          <p><%= locals?.pacData?.estado?.estado %></p>
+        </li>
+        <li>
+          <h3>Descripcion: </h3>
+          <p><%= locals?.pacData?.descripcion %></p>
+        </li>
+        <li>
+          <h3>Adjuntos: </h3>
+          <p> - </p>
+        </li>
+      </ul>
+    </article>
+  </div>
+</section>
+<!-- Fecha de la observación, lugar, Origen,  adjuntos, observador, ente inspector, Sector -->
+<!-- item, fecha requerida, referencia, requiere analisis, Responsable tratamiento, adjuntos, descripcion,  -->
