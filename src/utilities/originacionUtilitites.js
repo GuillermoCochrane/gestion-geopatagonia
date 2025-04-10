@@ -31,6 +31,8 @@ const taskUtilities = {
     ]
   },
 
+  mainSubsection: "./main.ejs",
+
   successPopUp: {
     id: "pac-delete-success",
     title: "La observación se eliminó correctamente",
@@ -115,6 +117,7 @@ const taskUtilities = {
     }
     data.formData = formData;
     data.pacTableData = pacTableData;
+    data.subSection = this.mainSubsection;
     return data;
   },
 
@@ -157,6 +160,7 @@ const taskUtilities = {
       data.confirmPopUp = this.confirmPopUp;
       data.successPopUp = this.successPopUp;
       data.errorPopUp = this.errorPopUp;
+      data.subSection = this.mainSubsection;
       return data;
     } catch (error) {
       console.error(error); // Registro del error para depuración
