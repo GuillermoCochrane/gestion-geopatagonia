@@ -38,27 +38,27 @@
                     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
                 </a>
                 <a 
-                  href="/originacion/observacionPAC/exportar/<%= rowData?.id %>"
+                  href="/originacion/observacionPAC/<%= rowData?.id %>/exportar"
                   title="Exportar"
                   >
                     <i class="fa-solid fa-file-arrow-down fa-lg"></i>
                 </a>
                 <a 
-                  href="/originacion/observacionPAC/agregar/<%= rowData?.id %>"
+                  href="/originacion/observacionPAC/<%= rowData?.id %>/agregar"
                   title="Añadir tarea"
                   >
                     <i class="fa-solid fa-plus fa-lg"></i>
                 </a>
                 <% if (rowData?.estado?.id !== 6 && rowData?.estado?.id !== 8) { %>
                   <a 
-                    href="/originacion/observacionPAC/modificar/<%= rowData?.id %>"
+                    href="/originacion/observacionPAC/<%= rowData?.id %>/modificar"
                     title="Cambiar el responsable"
                     >
                       <i class="fa-solid fa-user-pen fa-lg"></i>
                   </a>
                 <% } else { %>
                   <a 
-                    href="/originacion/observacionPAC/reabrir/<%= rowData?.id %>"
+                    href="/originacion/observacionPAC/<%= rowData?.id %>/reabrir"
                     title="Reabrir"
                     >
                       <i class="fa-solid fa-arrow-rotate-left fa-lg fa-rotate-90"></i>
