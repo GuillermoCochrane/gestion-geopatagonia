@@ -2,39 +2,39 @@
   <h2>Datos de la observación / PAC: <%= locals?.pacData?.id %></h2>
   <ul>
     <li>
-      <h3>Item: </h3>
+      <h4>Item: </h4>
       <p><%= locals?.pacData?.inciso %></p>
     </li>
     <li>
-      <h3>Fecha requerida: </h3>
+      <h4>Fecha requerida: </h4>
       <p><%= locals?.pacData?.fecha_requerida %></p>
     </li>
     <li>
-      <h3>Fecha Negociable: </h3>
+      <h4>Fecha Negociable: </h4>
       <p><%= locals?.pacData?.fecha_negociable == true ? 'Si' : 'No' %></p>
     </li>
     <li>
-      <h3>Requiere analisis: </h3>
+      <h4>Requiere analisis: </h4>
       <p><%= locals?.pacData?.requiereAnalisis === true ? 'Si' : 'No' %></p>
     </li>
     <li>
-      <h3>Referencia: </h3>
+      <h4>Referencia: </h4>
       <p><%= locals?.pacData?.referencia %></p>
     </li>
     <li>
-      <h3>Responsable tratamiento: </h3>
+      <h4>Responsable tratamiento: </h4>
       <p><%= locals?.pacData?.responsable?.nombre %></p>
     </li>
     <li>
-      <h3>Estado: </h3>
+      <h4>Estado: </h4>
       <p><%= locals?.pacData?.estado?.estado %></p>
     </li>
     <li>
-      <h3>Descripcion: </h3>
+      <h4>Descripcion: </h4>
       <p><%= locals?.pacData?.descripcion %></p>
     </li>
     <li>
-      <h3>Adjuntos: </h3>
+      <h4>Adjuntos: </h4>
       <p> - </p>
     </li>
   </ul>
