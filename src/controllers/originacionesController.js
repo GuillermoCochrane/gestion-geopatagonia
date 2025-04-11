@@ -56,6 +56,27 @@ const originacionesController = {
             return res.send({error: error.message,});
         }
     },
+
+    observacionesPACs: async (req, res) => {
+        // para testear
+        try{
+            const data = await utilities.allPACsData();
+            return res.send(data);
+        } catch (error) {
+            console.error(error);
+            return res.send({error: error.message,});
+        }
+    },
+
+    observacionPAC: async (req, res) => {
+        try{
+            const data = await utilities.pacData(req.params.id);
+            return res.render("originacion/originacion", data);
+        } catch (error) {
+            console.error(error);
+            return res.send({error: error.message,});
+        }
+    },
 }
 
 module.exports = originacionesController;
