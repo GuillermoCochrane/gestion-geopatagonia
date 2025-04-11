@@ -14,6 +14,8 @@ const taskUtilities = {
   },
 
   timestamps: ["created_at", "updated_at"],
+  
+  mainSubsection: "./main.ejs",
 
   confirmPopUp: {
     id: "confirm-pac-delete",
@@ -30,8 +32,6 @@ const taskUtilities = {
       }
     ]
   },
-
-  mainSubsection: "./main.ejs",
 
   successPopUp: {
     id: "pac-delete-success",
@@ -295,6 +295,19 @@ const taskUtilities = {
       let data = utilities.plainData(resultados);
       data = utilities.multipleDateFormat(data, ['fecha_requerida'], [{ parentObject: 'originacion', dateField: 'fecha_de_observacion' }]);
       return data; 
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
+
+  pacData: async function(id){
+    try{
+      let data = this.headerData("Observacion / PAC");
+      data.subSection  = "./actions.ejs";
+      const allPACDatadata = await this.allPACsData(id);
+      data.pacData = allPACDatadata[0];
+      return data;
     } catch (error) {
       console.error(error);
       throw error;
