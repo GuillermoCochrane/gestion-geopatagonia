@@ -1,0 +1,9 @@
+window.addEventListener("load", () => {
+  const sidebar = document.querySelector("#sidebar");
+  const toggleBtn = document.querySelector("#toggle");
+
+  toggleBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("collapsed");
+  });
+
+})
