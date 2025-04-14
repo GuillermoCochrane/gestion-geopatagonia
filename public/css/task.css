@@ -139,7 +139,7 @@ body.pac-actions main section aside.sidebar.collapsed {
 body.pac-actions main section aside.sidebar button.toggle {
   all: unset;
   background: #333;
-  color: white;
+  color: var(--logo-secondary);
   border: none;
   padding-block: 15px;
   padding-inline: 15px;
@@ -152,10 +152,12 @@ body.pac-actions main section aside.sidebar button.toggle {
   white-space: nowrap;
   text-align: center;
   margin: auto;
+  border-bottom: 2px solid var(--logo-secondary);
+  transition: all 0.5s ease-in-out;
 }
 
 body.pac-actions main section aside.sidebar button.toggle:hover {
-  background: var(--logo);
+  background: var(--font)
 }
 
 body.pac-actions main section aside.sidebar button.toggle i {
@@ -194,13 +196,6 @@ body.pac-actions main section aside.sidebar nav.sidebar-nav a {
   white-space: nowrap;
   overflow: hidden;
 }
-
-/* body.pac-actions main section aside.sidebar nav.sidebar-nav a:hover {
-body.pac-actions main section aside.sidebar nav.sidebar-nav a:hover i.fa-arrow-rotate-left,
-  background: #34495e;
-
-  body.pac-actions main section aside.sidebar nav.sidebar-nav a i.fa-file-arrow-down,
-} */
 
 body.pac-actions main section aside.sidebar nav.sidebar-nav a i {
   font-size: 1.2rem;
