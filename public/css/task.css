@@ -30,7 +30,7 @@ body {
   scroll-behavior: smooth;
 }
 
-body.actions-container {
+body.pac-actions{
   overflow-y: hidden;
 }
 
@@ -109,30 +109,148 @@ main section{
   justify-content: space-evenly;
 }
 
-body.actions-container main section {
+body.pac-actions main section {
   display: flex;
   flex-direction: row;
   align-items: stretch;
   padding-block: 0;
 }
 
-body.actions-container main section nav.sidebar {
-  width: 16%;
-  display: flex;
-  flex-direction: column;
-  padding-left: 1.5rem;
+body.pac-actions main section aside.sidebar {
+  all: unset;
   color: var(--white);
   background-color: var(--font);
   box-shadow: 0px 2px 10px 1px rgba(130, 130, 130);
-  padding-top: 20px;
   position: relative;
   overflow-y: auto;
   overflow-x: hidden;
   height: 85vh;
+  width: 249px;
+  transition: width 0.3s ease-in-out;
+  flex-shrink: 0; 
   /* adaptar estilos del ejemplo */
 }
 
-body.actions-container main section .data-container{
+body.pac-actions main section aside.sidebar.collapsed {
+  width: 70px;
+}
+
+/* Botón de toggle */
+body.pac-actions main section aside.sidebar button.toggle {
+  all: unset;
+  background: #333;
+  color: white;
+  border: none;
+  padding-block: 15px;
+  padding-inline: 15px;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  text-align: center;
+  margin: auto;
+}
+
+body.pac-actions main section aside.sidebar button.toggle:hover {
+  background: var(--logo);
+}
+
+body.pac-actions main section aside.sidebar button.toggle i {
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+body.pac-actions main section aside.sidebar.collapsed button.toggle i {
+  margin: auto;
+}
+
+body.pac-actions main section aside.sidebar.collapsed button.toggle {
+  justify-content: center;
+  padding-inline: 0;
+}
+
+body.pac-actions main section aside.sidebar.collapsed button.toggle span {
+  display: inline-block;
+  width: 0;
+  opacity: 0;
+  transition: opacity 0.1s, width 0s 0.3s;
+}
+
+/* Enlaces */
+body.pac-actions main section aside.sidebar nav.sidebar-nav {
+  padding: 20px 0;
+}
+
+body.pac-actions main section aside.sidebar nav.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  padding-inline: 12px;
+  padding-block: 5px;
+  color: white;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* body.pac-actions main section aside.sidebar nav.sidebar-nav a:hover {
+body.pac-actions main section aside.sidebar nav.sidebar-nav a:hover i.fa-arrow-rotate-left,
+  background: #34495e;
+
+  body.pac-actions main section aside.sidebar nav.sidebar-nav a i.fa-file-arrow-down,
+} */
+
+body.pac-actions main section aside.sidebar nav.sidebar-nav a i {
+  font-size: 1.2rem;
+  margin-right: 15px;
+  flex-shrink: 0;
+  width: 20px;
+  min-height: 40px;
+  min-width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: var(--font);
+  border: 2px solid transparent;
+  background-color: var(--white);
+}
+
+body.pac-actions main section aside.sidebar nav.sidebar-nav a:hover i.fa-magnifying-glass,
+body.pac-actions main section aside.sidebar nav.sidebar-nav a:hover i.fa-user-pen,
+body.pac-actions main section aside.sidebar nav.sidebar-nav a:hover i.fa-arrow-rotate-left{
+  background-color: var(--success);
+  color: var(--white);
+}
+
+
+body.pac-actions main section aside.sidebar nav.sidebar-nav a:hover i.fa-file-arrow-down {
+  background-color: var(--logo);
+  color: var(--white);
+}
+
+body.pac-actions main section aside.sidebar nav.sidebar-nav a:hover i.fa-plus{
+  background-color: var(--info);
+  color: var(--white);
+}
+
+body.pac-actions main section aside.sidebar nav.sidebar-nav a span {
+  font-size: 1.4em;
+  opacity: 1;
+  transition: opacity 0.2s 0.15s, width 0s;
+}
+
+body.pac-actions main section aside.sidebar.collapsed nav.sidebar-nav a span {
+  opacity: 0;
+  width: 0;
+  transition: opacity 0.1s, width 0s 0.3s;
+}
+
+/* Contenido principal de acciones */
+
+body.pac-actions main section .data-container{
   height: 85vh;
   overflow-x: hidden;
   overflow-y: auto;
@@ -191,10 +309,12 @@ main section table td .actions-container a{
   border-radius: 50%;
   border: 2px solid var(--font);
 }
-
+body.pac-actions main section aside.sidebar nav.sidebar-nav a i.fa-magnifying-glass,
+body.pac-actions main section aside.sidebar nav.sidebar-nav a i.fa-user-pen,
+body.pac-actions main section aside.sidebar nav.sidebar-nav a i.fa-arrow-rotate-left,
 main section table td .actions-container a:has(i.fa-magnifying-glass),
 main section table td .actions-container a:has(i.fa-user-pen),
-main section table td .actions-container a:has(i.fa-file-arrow-rotate-left){
+main section table td .actions-container a:has(i.fa-arrow-rotate-left){
   border-color: var(--success);
   color: var(--success);
   transition: all 0.5s ease-in-out;
@@ -202,13 +322,11 @@ main section table td .actions-container a:has(i.fa-file-arrow-rotate-left){
 
 main section table td .actions-container a:has(i.fa-magnifying-glass):hover,
 main section table td .actions-container a:has(i.fa-user-pen):hover,
-main section table td .actions-container a:has(i.fa-file-arrow-rotate-left):hover{
-/*   background-color: var(--success);
-  color: var(--white);
-  border-color: transparent; */
+main section table td .actions-container a:has(i.fa-arrow-rotate-left):hover{
   box-shadow: 0 0 10px var(--success)
 }
 
+body.pac-actions main section aside.sidebar nav.sidebar-nav a i.fa-file-arrow-down,
 main section table td .actions-container a:has(i.fa-file-arrow-down){
   color: var(--logo);
   border-color: var(--logo);
@@ -219,6 +337,7 @@ main section table td .actions-container a:has(i.fa-file-arrow-down):hover{
   box-shadow: 0 0 10px var(--logo)
 }
 
+body.pac-actions main section aside.sidebar nav.sidebar-nav a i.fa-plus,
 main section table td .actions-container a:has(i.fa-plus){
   color: var(--info);
   border-color: var(--info);
@@ -229,6 +348,7 @@ main section table td .actions-container a:has(i.fa-plus):hover{
   box-shadow: 0 0 10px var(--info)
 }
 
+body.pac-actions main section aside.sidebar nav.sidebar-nav a i.fa-user-pen::before,
 main section table td .actions-container a i.fa-user-pen::before{
   margin-left: 4px;
 }
