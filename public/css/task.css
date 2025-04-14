@@ -30,6 +30,10 @@ body {
   scroll-behavior: smooth;
 }
 
+body.actions-container {
+  overflow-y: hidden;
+}
+
 header.fixed {
   padding: 10px;
   top: 0;
@@ -103,6 +107,38 @@ main section{
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+}
+
+body.actions-container main section {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  padding-block: 0;
+}
+
+body.actions-container main section nav.sidebar {
+  width: 16%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 1.5rem;
+  color: var(--white);
+  background-color: var(--font);
+  box-shadow: 0px 2px 10px 1px rgba(130, 130, 130);
+  padding-top: 20px;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 85vh;
+  /* adaptar estilos del ejemplo */
+}
+
+body.actions-container main section .data-container{
+  height: 85vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  flex-grow: 1;
+  padding-block: 30px;
 }
 
 main section table{
@@ -454,6 +490,7 @@ main dialog section header nav{
   padding-inline: 20px;
   padding-block: 20px;
 }
+
 main dialog section article nav button,
 main dialog section header nav button{
   all: unset;
