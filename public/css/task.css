@@ -128,7 +128,6 @@ body.pac-actions main section aside.sidebar {
   width: 249px;
   transition: width 0.3s ease-in-out;
   flex-shrink: 0; 
-  /* adaptar estilos del ejemplo */
 }
 
 body.pac-actions main section aside.sidebar.collapsed {
@@ -150,19 +149,26 @@ body.pac-actions main section aside.sidebar button.toggle {
   display: flex;
   align-items: center;
   white-space: nowrap;
-  text-align: center;
   margin: auto;
+  box-sizing: border-box;
   border-bottom: 2px solid var(--logo-secondary);
   transition: all 0.5s ease-in-out;
 }
 
 body.pac-actions main section aside.sidebar button.toggle:hover {
-  background: var(--font)
+  background: var(--font);
+  color: var(--ice);
 }
 
 body.pac-actions main section aside.sidebar button.toggle i {
   margin-right: 15px;
   flex-shrink: 0;
+}
+
+body.pac-actions main section aside.sidebar button.toggle span{
+  padding-right: 30px;
+  margin: auto;
+  text-align: center;
 }
 
 body.pac-actions main section aside.sidebar.collapsed button.toggle i {
@@ -176,9 +182,11 @@ body.pac-actions main section aside.sidebar.collapsed button.toggle {
 
 body.pac-actions main section aside.sidebar.collapsed button.toggle span {
   display: inline-block;
+  margin: 0;
+  padding-right: 0;
   width: 0;
   opacity: 0;
-  transition: opacity 0.1s, width 0s 0.3s;
+  transition: opacity 0.1s, width 0s 0.3s, padding-right 0.3s, margin 0.3s;
 }
 
 /* Enlaces */
@@ -195,6 +203,7 @@ body.pac-actions main section aside.sidebar nav.sidebar-nav a {
   text-decoration: none;
   white-space: nowrap;
   overflow: hidden;
+  cursor: pointer;
 }
 
 body.pac-actions main section aside.sidebar nav.sidebar-nav a i {
@@ -810,6 +819,7 @@ article#pac-delete-success {
   align-items: center;
   justify-content: space-evenly;
   border-top: var(--logo) 20px solid;
+
   /* Estado inicial (oculto) */
   opacity: 0;
   display: none; 
