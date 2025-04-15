@@ -17,6 +17,8 @@ window.addEventListener("load", () => {
   const $modify = document.querySelector("#modify-modal");
   const $reopen = document.querySelector("#reopen-modal");
 
+  // dataset
+  const $dataContainer = document.querySelector("#data-container");
   // Función para abrir el modal
   const openModal = function(modal) {
     modal.showModal();
@@ -37,4 +39,11 @@ window.addEventListener("load", () => {
   $modifyClose && $modifyClose.addEventListener("click", () => closeModal($modify));
   $reopenClose && $reopenClose.addEventListener("click", () => closeModal($reopen));
 
+
+  // Abre el modal correspodiente, si hay una acción en el dataset
+  if($dataContainer.dataset.action) {
+    const action = $dataContainer.dataset.action;
+    const $modal = document.querySelector(`#${action}-modal`);
+    openModal($modal);
+  }
 })
