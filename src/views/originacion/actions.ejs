@@ -1,10 +1,26 @@
 <section>
   <%- include('../partials/originacion/actionsNavBar.ejs') %>
-  <!-- cambiar la barra de navegación -->
-  <div class="data-container">
+  <div class="data-container" data-action="<%= locals?.action %>" id="data-container">
     <%- include('../partials/originacion/actionOriginationData.ejs') %>
     <%- include('../partials/originacion/actionPacData.ejs') %>
+    <dialog id="export-modal">
+      <h2>Exportar PAC</h2>
+      <button id="export-close">Cerrar</button>
+    </dialog>
+    <dialog id="add-modal">
+      <h2>Agregar Tarea</h2>
+      <button id="add-close">Cerrar</button>
+    </dialog>
+    <% if (locals?.pacData?.estado?.id !== 6 && locals?.pacData?.estado?.id !== 8) { %>
+      <dialog id="modify-modal">
+        <h2>Cambiar Responsable</h2>
+        <button id="modify-close">Cerrar</button>
+      </dialog>
+    <% } else { %>
+      <dialog id="reopen-modal">
+        <h2>Volver a abrir</h2>
+        <button id="reopen-close">Cerrar</button>
+      </dialog>
+    <% } %>
   </div>
 </section>
-<!-- Fecha de la observación, lugar, Origen,  adjuntos, observador, ente inspector, Sector -->
-<!-- item, fecha requerida, referencia, requiere analisis, Responsable tratamiento, adjuntos, descripcion,  -->
