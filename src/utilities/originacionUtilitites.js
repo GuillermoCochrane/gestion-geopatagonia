@@ -304,7 +304,7 @@ const taskUtilities = {
   pacData: async function(id){
     try{
       let data = this.headerData("Observacion / PAC");
-      data.pageScript = [ "originacion/sidebarManager" ];
+      data.pageScript = [ "originacion/sidebarManager", "originacion/actionsModalManager" ];
       data.subSection  = "./actions.ejs";
       data.subSectionStyles = "pac-actions";
       const allPACDatadata = await this.allPACsData(id);
