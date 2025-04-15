@@ -4,25 +4,24 @@
     <span>Menú</span>
   </button>
   <nav class="sidebar-nav">
-    <a id="actions-home" title="Visualizar">
-      <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-      <span>Visualizar</span>
-    </a>
-    <a id="actions-export" title="Exportar">
+    <a id="export-action" title="Exportar">
       <i class="fa-solid fa-file-arrow-down fa-lg"></i>
       <span>Exportar</span>
     </a>
-    <a id="actions-add" title="Añadir tarea">
+    <a id="add-action" title="Añadir tarea">
       <i class="fa-solid fa-plus fa-lg"></i>
       <span>Añadir tarea</span>
     </a>
-    <a id="actions-modify" title="Cambiar Responsable">
-      <i class="fa-solid fa-user-pen fa-lg"></i>
-      <span>Cambiar Responsable</span>
-    </a>
-    <a id="action-reopen" title="Reabrir">
-      <i class="fa-solid fa-arrow-rotate-left fa-lg fa-rotate-90"></i>
-      <span>Reabrir</span>
-    </a>
+    <% if (locals?.pacData?.estado?.id !== 6 && locals?.pacData?.estado?.id !== 8) { %>
+      <a id="modify-action" title="Cambiar responsable">
+        <i class="fa-solid fa-user-pen fa-lg"></i>
+        <span>Cambiar Responsable</span>
+      </a>
+    <% } else { %>
+      <a id="reopen-action" title="Reabrir">
+        <i class="fa-solid fa-arrow-rotate-left fa-lg fa-rotate-90"></i>
+        <span>Reabrir</span>
+      </a>
+    <% } %>
   </nav>
 </aside>
