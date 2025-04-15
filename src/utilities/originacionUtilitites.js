@@ -301,12 +301,13 @@ const taskUtilities = {
     }
   },
 
-  pacData: async function(id){
+  pacData: async function(id, action){
     try{
       let data = this.headerData("Observacion / PAC");
       data.pageScript = [ "originacion/sidebarManager", "originacion/actionsModalManager" ];
       data.subSection  = "./actions.ejs";
       data.subSectionStyles = "pac-actions";
+      data.action = action;
       const allPACDatadata = await this.allPACsData(id);
       data.pacData = allPACDatadata[0];
       return data;

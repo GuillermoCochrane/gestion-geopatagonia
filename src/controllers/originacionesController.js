@@ -70,7 +70,7 @@ const originacionesController = {
 
     observacionPAC: async (req, res) => {
         try{
-            const data = await utilities.pacData(req.params.id);
+            const data = await utilities.pacData(req.params.id, req.params.accion);
             return res.render("originacion/originacion", data);
         } catch (error) {
             console.error(error);
