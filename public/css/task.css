@@ -615,6 +615,7 @@ main dialog section header nav{
   padding-block: 20px;
 }
 
+main section .data-container dialog nav button,
 main dialog section article nav button,
 main dialog section header nav button{
   all: unset;
@@ -862,6 +863,7 @@ article#pac-delete-success h3{
   text-align: center;
 }
 
+main section .data-container dialog nav,
 article#pac-error nav,
 article#confirm-pac-delete nav,
 article#pac-delete-success nav{
@@ -896,14 +898,12 @@ article#spinner-modal {
   z-index: 2000; 
 }
 
-
 article#spinner-modal .spinner-figure {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
 }
-
 
 article#spinner-modal .spinner {
   width: 50px;
@@ -917,6 +917,30 @@ article#spinner-modal .spinner {
 article#spinner-modal figcaption {
   color: var(--font); 
   font-weight: bold;
+}
+
+main section .data-container dialog{
+  width: 35%;
+  height: fit-content;
+  padding-inline: 1.5em;
+  padding-block:  0.7em;
+  border-top: var(--logo) 20px solid;
+
+}
+
+main section .data-container dialog h2{
+  margin-inline: 0.5em;
+  text-align: center;
+}
+
+main section .data-container dialog form{
+  padding-block: 0;
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+main section .data-container dialog nav{
+  margin: auto;
 }
 
 /* ===== ANIMACIÓN ===== */
