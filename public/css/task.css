@@ -939,8 +939,16 @@ main section .data-container dialog form{
   margin-bottom: 0;
 }
 
+main section .data-container dialog label {
+  min-width: 300px;
+}
+
 main section .data-container dialog label h3{
   margin-bottom: 0.7em;
+}
+
+main section .data-container dialog label select{
+  width: 100%;
 }
 
 main section .data-container dialog nav{
