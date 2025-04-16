@@ -12,10 +12,7 @@
       <button id="add-close">Cerrar</button>
     </dialog>
     <% if (locals?.pacData?.estado?.id !== 6 && locals?.pacData?.estado?.id !== 8) { %>
-      <dialog id="modify-modal">
-        <h2>Cambiar Responsable</h2>
-        <button id="modify-close">Cerrar</button>
-      </dialog>
+      <%- include('../partials/originacion/actionModifyModal.ejs') %>
     <% } else { %>
       <dialog id="reopen-modal">
         <h2>Volver a abrir</h2>

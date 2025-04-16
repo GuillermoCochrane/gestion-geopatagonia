@@ -308,6 +308,7 @@ const taskUtilities = {
       data.subSection  = "./actions.ejs";
       data.subSectionStyles = "pac-actions";
       data.action = action;
+      data.responsables = await Usuario.findAll({where: { rol_id: 3}});
       const allPACDatadata = await this.allPACsData(id);
       data.pacData = allPACDatadata[0];
       return data;

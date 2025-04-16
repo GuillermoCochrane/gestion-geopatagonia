@@ -1,0 +1,20 @@
+<dialog id="modify-modal">
+  <h2>Cambiar Responsable</h2>
+  <form action="originacion/observacionPAC/Modify/<%= locals?.pacData?.id %>" method="post" id="modify-form">
+    <label>
+      <h3>Responsable:</h3>
+      <select name="responsable" id="responsable">
+        <% for (const responsable of locals?.responsables) { %>
+          <option value="<%= responsable.id %>" <%= responsable.id === locals?.pacData?.responsable?.id ? 'selected' : '' %>>
+            <%= responsable.nombre %>
+          </option>
+        <% } %>
+      </select>
+      <span id="error-responsable"><%= locals.PACErrors?.responsable_id?.msg %></span>
+    </label>
+  </form>
+  <nav>
+    <button id="modify-save" form="modify-form" type="submit">Guardar</button>
+    <button id="modify-close" type="button">Cancelar</button>
+  </nav>
+</dialog>
