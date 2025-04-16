@@ -939,8 +939,23 @@ main section .data-container dialog form{
   margin-bottom: 0;
 }
 
+main section .data-container dialog label h3{
+  margin-bottom: 0.7em;
+}
+
 main section .data-container dialog nav{
   margin: auto;
+}
+
+main section .data-container dialog nav button#modify-save{
+  border: 2px var(--success) solid;
+  background-color: var(--white);
+  color: var(--success);
+}
+
+main section .data-container dialog nav button#modify-save:hover{
+  background-color: var(--success);
+  color: var(--white);
 }
 
 /* ===== ANIMACIÓN ===== */
