@@ -79,9 +79,16 @@ const originacionesController = {
     },
 
     modificarResponsablePAC: async (req, res) => {
+        const errors = validationResult(req);
         try{
+            if (errors.isEmpty()) {
             await utilities.modifyPACResponsable(req.params.id, req.body);
             return res.redirect(`/originacion/observacionPAC/${req.params.id}`);
+            } else {
+                let data = await utilities.pacData(req.params.id, "modify");
+                data.PACErrors = errors.mapped();
+                return res.render("originacion/originacion", data);
+            }
         } catch (error) {
             console.error(error);
             return res.send({error: error.message,});
