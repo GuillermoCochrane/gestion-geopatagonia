@@ -304,7 +304,7 @@ const taskUtilities = {
   pacData: async function(id, action){
     try{
       let data = this.headerData("Observacion / PAC");
-      data.pageScript = [ "originacion/sidebarManager", "originacion/actionsModalManager" ];
+      data.pageScript = [ ...this.validationScripts, "originacion/sidebarManager", "originacion/actionsModalManager", "originacion/validations/modifyResponsableValidation" ];
       data.subSection  = "./actions.ejs";
       data.subSectionStyles = "pac-actions";
       data.action = action;

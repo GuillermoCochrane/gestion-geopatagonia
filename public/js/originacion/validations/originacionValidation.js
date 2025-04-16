@@ -9,8 +9,6 @@ window.addEventListener("load", () => {
     const $adjunto = document.querySelector("#adjunto");
     const $btn = document.querySelector("#nueva-originacion button");
 
-    console.log("Script de validación de originación iniciado"); // Log de inicio del script
-
     const fechaValidation = () => {
         requiredValidation($fecha);  
         !errors.fecha_de_observacion && isDateValidation($fecha);
