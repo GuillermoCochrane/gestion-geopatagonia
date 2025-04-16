@@ -316,7 +316,20 @@ const taskUtilities = {
       console.error(error);
       throw error;
     }
+  },
+
+  modifyPACResponsable: async function(id, data){
+    try{
+      const modifiedData = await ObservacionPAC.update(data, {
+        where: {id: id},
+      });
+      return modifiedData;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
+
 }
 
 module.exports = taskUtilities;
