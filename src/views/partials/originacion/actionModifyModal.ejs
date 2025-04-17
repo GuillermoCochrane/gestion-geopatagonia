@@ -3,10 +3,16 @@
   <form action="/originacion/observacionPAC/modify/<%= locals?.pacData?.id %>?_method=PUT" method="post" id="modify-form">
     <label>
       <select name="responsable_id" id="responsable_id">
-        <% for (const responsable of locals?.responsables) { %>
-          <option value="<%= responsable.id %>" <%= responsable.id === locals?.pacData?.responsable_id ? '' : '' %>>
-            <%= responsable.nombre %>
-          </option>
+        <% if (locals) { %>
+          <% for (const responsable of locals?.responsables) { %>
+            <option value="<%= responsable.id %>" <%= responsable.id === locals?.pacData?.responsable_id ? '' : '' %>>
+              <%= responsable.nombre %>
+            </option>
+          <% } %>
+        <% } else { %>
+            <option value="" disabled selected>
+              No hay Responsables disponibles
+            </option>
         <% } %>
       </select>
       <span id="error-responsable_id">
