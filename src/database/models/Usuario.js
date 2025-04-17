@@ -102,6 +102,14 @@ module.exports = function(sequelize, DataTypes) {
       onDelete: 'RESTRICT',
       onUpdate: 'NO ACTION'
     });
+
+    Usuario.hasMany(models.Accion, {
+      // Una usuario puede tener (ser ejecutor de) muchas acciones
+      as: 'acciones',
+      foreignKey: 'ejecutor_id',
+      onDelete: 'RESTRICT',
+      onUpdate: 'NO ACTION'
+    });
   };
 
   return Usuario;

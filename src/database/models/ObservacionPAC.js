@@ -127,6 +127,13 @@ module.exports = function(sequelize, DataTypes) {
       onUpdate: 'NO ACTION'
     });
     
+    ObservacionPAC.hasMany(models.Accion, {
+      // Una observación puede tener muchas acciones
+      as: 'acciones',
+      foreignKey: 'observacion_pac_id',
+      onDelete: 'RESTRICT',
+      onUpdate: 'NO ACTION'
+    });
   };
 
   return ObservacionPAC;
