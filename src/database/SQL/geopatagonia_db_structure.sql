@@ -27,7 +27,7 @@ DROP TABLE IF EXISTS `acciones`;
 CREATE TABLE `acciones` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `accion` varchar(300) NOT NULL,
-  `fecha_realizacion` date NOT NULL,
+  `fecha_realizacion` date,
   `ejecutor_id` int(10) unsigned NOT NULL,
   `observacion_pac_id` int(10) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),

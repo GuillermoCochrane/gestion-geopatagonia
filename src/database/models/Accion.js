@@ -28,12 +28,7 @@ module.exports = function(sequelize, DataTypes) {
     fecha_realizacion: {
       // Fecha de realización de la acción, obligatorio
       type: DataTypes.DATEONLY,
-      allowNull: false,
-      validate: {
-        notEmpty: {
-          msg: 'El campo "fecha_realizacion" no puede estar vacío.',
-        },
-      },
+      allowNull: true,
     },
 
     ejecutor_id: {
