@@ -7,10 +7,7 @@
       <h2>Exportar PAC</h2>
       <button id="export-close">Cerrar</button>
     </dialog>
-    <dialog id="add-modal">
-      <h2>Agregar Tarea</h2>
-      <button id="add-close">Cerrar</button>
-    </dialog>
+    <%- include('../partials/originacion/actionAddModal.ejs') %>
     <% if (locals?.pacData?.estado?.id !== 6 && locals?.pacData?.estado?.id !== 8) { %>
       <%- include('../partials/originacion/actionModifyModal.ejs') %>
     <% } else { %>

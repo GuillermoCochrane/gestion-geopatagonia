@@ -1,0 +1,39 @@
+<dialog id="add-modal">
+  <h2>Agregar Tarea</h2>
+  <form action="/originacion/observacionPAC/addAction/<%= locals?.pacData?.id %>" method="post" id="add-form">
+    <label>Responsable</h3>
+      <select name="ejecutor_id" id="ejecutor_id">
+        <% if (locals.ejecutores && locals.ejecutores?.length !== 0) { %>
+          <% for (const ejecutor of locals?.ejecutores) { %>
+            <option value="<%= ejecutor.id %>" <%= ejecutor.id === locals?.oldData?.responsable_id ? 'selected' : '' %>>
+              <%= ejecutor.nombre %>
+            </option>
+          <% } %>
+        <% } else { %>
+            <option value="" disabled selected>
+              No hay ejecutores disponibles
+            </option>
+        <% } %>
+      </select>
+      <span id="error-ejecutor_id">
+        <%= locals.PACErrors?.ejecutor_id?.msg %>
+      </span>
+    </label>
+    <label>
+      <h3>Acción Inmediata</h3>
+      <textarea name="accion" id="accion" ><%= locals?.oldData?.accion_inmediata %></textarea>
+      <span id="error-accion">
+        <%= locals.PACErrors?.accion_inmediata?.msg %>
+      </span>
+    </label>
+  </form>
+  <nav>
+    <button id="add-save"  type="submit" form="modify-form">
+      Agregar
+    </button>
+    <button id="add-close">
+      Cerrar
+    </button>
+  </nav>
+</dialog>
+
