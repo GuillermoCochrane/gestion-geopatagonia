@@ -5,7 +5,7 @@
       <select name="responsable_id" id="responsable_id">
         <% if (locals) { %>
           <% for (const responsable of locals?.responsables) { %>
-            <option value="<%= responsable.id %>" <%= responsable.id === locals?.pacData?.responsable_id ? '' : '' %>>
+            <option value="<%= responsable.id %>" <%= responsable.id === locals?.pacData?.responsable_id ? 'selected' : '' %>>
               <%= responsable.nombre %>
             </option>
           <% } %>
