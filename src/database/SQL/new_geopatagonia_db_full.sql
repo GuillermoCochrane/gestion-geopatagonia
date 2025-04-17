@@ -18,6 +18,30 @@ USE `geopatagonia_db`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `acciones`
+--
+
+DROP TABLE IF EXISTS `acciones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `acciones` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `accion` varchar(300) NOT NULL,
+  `fecha_realizacion` date NOT NULL,
+  `ejecutor_id` int(10) unsigned NOT NULL,
+  `observacion_pac_id` int(10) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `fk_op_ejecutor_id_idx` (`ejecutor_id`),
+  KEY `fk_op_observacion_pac_id_idx` (`observacion_pac_id`),
+  CONSTRAINT `fk_op_ejecutor_id` FOREIGN KEY (`ejecutor_id`) REFERENCES `usuarios` (`id`),
+  CONSTRAINT `fk_op_observacion_pac_id` FOREIGN KEY (`observacion_pac_id`) REFERENCES `observaciones_pacs` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+--
 -- Table structure for table `adjuntos_observacion_pac`
 --
 
