@@ -1,7 +1,8 @@
 <dialog id="add-modal">
   <h2>Agregar Tarea</h2>
   <form action="/originacion/observacionPAC/addAction/<%= locals?.pacData?.id %>" method="post" id="add-form">
-    <label>Responsable</h3>
+    <label>
+      <h3>Responsable</h3>
       <select name="ejecutor_id" id="ejecutor_id">
         <% if (locals.ejecutores && locals.ejecutores?.length !== 0) { %>
           <% for (const ejecutor of locals?.ejecutores) { %>
