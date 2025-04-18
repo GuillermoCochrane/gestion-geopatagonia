@@ -1,0 +1,28 @@
+<section>
+  <table>
+    <thead>
+      <tr>
+        <th>Identificador</th>
+        <th>Responsable de ejecución</th>
+        <th>Fecha de Realización</th>
+        <th>Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (!locals.actionsTableData || locals.actionsTableData.length === 0) { %>
+        <tr>
+          <td colspan="4">No hay acciones registradas</td>
+        </tr>
+      <% } else { %>
+        <% for (const action of locals?.actionsTableData) { %>
+          <tr>
+            <td><%= action?.id %></td>
+            <td><%= action?.accion %></td>
+            <td><%= action?.fecha_realizacion ? action?.fecha_realizacion : '-' %></td>
+            <td><%= action?.ejecutor?.nombre %></td>
+          </tr>
+        <% } %>
+      <% } %>
+    </tbody>
+  </table>
+</section>
