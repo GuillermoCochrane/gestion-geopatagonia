@@ -664,14 +664,27 @@ main dialog section article aside{
   border-radius: 10px;
 }
 
-main section .data-container article{
+main section .data-container details{
   margin-inline: auto;
+  margin-bottom: 2em;
   width: 80%;
   box-shadow: 0px 0px 12px 0px var(--logo-secondary);
+  border-radius: 10px;
 }
 
-main section .data-container article h2{
-  margin-block: .7em;
+main section .data-container details[open]{
+  padding-bottom: .5em;
+}
+
+main section .data-container article{
+  width: fit-content;
+  background-color: var(--ice);
+  margin-inline: 20px;
+  border-radius: 8px;
+}
+
+main section .data-container details h3{
+  font-size: 1.4em;
   text-align: center;
 }
 

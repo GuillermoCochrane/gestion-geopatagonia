@@ -1,33 +1,37 @@
-<article>
-  <h2>Datos de la originacion: <%= locals?.pacData?.originacion?.id %></h2>
-  <ul>
-    <li>
-      <h4>Fecha de la observación: </h4>
-      <p><%= locals?.pacData?.originacion?.fecha_de_observacion %></p>
-    </li>
-    <li>
-      <h4>Lugar: </h4>
-      <p><%= locals?.pacData?.originacion?.lugar %></p>
-    </li>
-    <li>
-      <h4>Origen: </h4>
-      <p><%= locals?.pacData?.originacion?.origen?.origen %></p>
-    </li>
-    <li>
-      <h4>Observador: </h4>
-      <p><%= locals?.pacData?.originacion?.observador?.nombre %></p>
-    </li>
-    <li>
-      <h4>Ente Inspector: </h4>
-      <p><%= locals?.pacData?.originacion?.ente_inspector?.ente_inspector %></p>
-    </li>
-    <li>
-      <h4>Sector: </h4>
-      <p><%= locals?.pacData?.originacion?.sector?.sector %></p>
-    </li>
-    <li>
-      <h4>Adjuntos: </h4>
-      <p> - </p>
-    </li>
-  </ul>
-</article>
+<details open>
+  <summary>
+    <h3>Datos de Originación: <%= locals?.pacData?.originacion?.id %></h3>
+  </summary>
+  <article>
+    <ul>
+      <li>
+        <h4>Fecha de la observación: </h4>
+        <p><%= locals?.pacData?.originacion?.fecha_de_observacion %></p>
+      </li>
+      <li>
+        <h4>Lugar: </h4>
+        <p><%= locals?.pacData?.originacion?.lugar %></p>
+      </li>
+      <li>
+        <h4>Origen: </h4>
+        <p><%= locals?.pacData?.originacion?.origen?.origen %></p>
+      </li>
+      <li>
+        <h4>Observador: </h4>
+        <p><%= locals?.pacData?.originacion?.observador?.nombre %></p>
+      </li>
+      <li>
+        <h4>Ente Inspector: </h4>
+        <p><%= locals?.pacData?.originacion?.ente_inspector?.ente_inspector %></p>
+      </li>
+      <li>
+        <h4>Sector: </h4>
+        <p><%= locals?.pacData?.originacion?.sector?.sector %></p>
+      </li>
+      <li>
+        <h4>Adjuntos: </h4>
+        <p> - </p>
+      </li>
+    </ul>
+  </article>
+</details>
