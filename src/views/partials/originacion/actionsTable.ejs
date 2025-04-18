@@ -9,17 +9,17 @@
       </tr>
     </thead>
     <tbody>
-      <% if (!locals.actionsTableData || locals.actionsTableData.length === 0) { %>
+      <% if (!locals.pacData?.acciones || locals.pacData?.acciones.length === 0) { %>
         <tr>
           <td colspan="4">No hay acciones registradas</td>
         </tr>
       <% } else { %>
-        <% for (const action of locals?.actionsTableData) { %>
+        <% for (const action of locals?.pacData?.acciones) { %>
           <tr>
             <td><%= action?.id %></td>
-            <td><%= action?.accion %></td>
-            <td><%= action?.fecha_realizacion ? action?.fecha_realizacion : '-' %></td>
             <td><%= action?.ejecutor?.nombre %></td>
+            <td><%= action?.fecha_realizacion ? action?.fecha_realizacion : '-' %></td>
+            <td><%= action?.accion %></td>
           </tr>
         <% } %>
       <% } %>
