@@ -282,12 +282,16 @@ const taskUtilities = {
       { model: Sector, as: 'sector', attributes: this.excludeTimestamps() },
       { model: EnteInspector, as: 'ente_inspector', attributes: this.excludeTimestamps() },
     ];
+    const accionIncludes = [
+      { model: Usuario, as: 'ejecutor', attributes: this.excludePassword() },
+    ];
     try {
       const resultados = await ObservacionPAC.findAll({
         include: [
           { model: Originacion, as: 'originacion', include: originacionIncludes, attributes: this.excludeTimestamps() },
           { model: Usuario, as: 'responsable', attributes: this.excludePassword() },
-          { model: Estado, as: 'estado', attributes: this.excludeTimestamps() }
+          { model: Estado, as: 'estado', attributes: this.excludeTimestamps() },
+          { model: Accion, as: 'acciones', include: accionIncludes, attributes: this.excludeTimestamps() },
         ],
         attributes: this.excludeTimestamps(),
         where,
