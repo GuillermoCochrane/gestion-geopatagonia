@@ -94,6 +94,16 @@ const originacionesController = {
             return res.send({error: error.message,});
         }
     },
+
+    agregarAccion: async (req, res) => {
+        try{
+            await utilities.createAccion(req.params.id, req.body);
+            return res.redirect(`/originacion/observacionPAC/${req.params.id}`);
+        } catch (error) {
+            console.error(error);
+            return res.send({error: error.message});
+        }
+    },
 }
 
 module.exports = originacionesController;

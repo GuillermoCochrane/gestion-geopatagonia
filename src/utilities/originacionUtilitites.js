@@ -1,4 +1,4 @@
-const { Estado, EnteInspector, Origen, Sector, Rol, Usuario, AdjuntoOriginacion, AdjuntoObservacionPAC, Originacion, ObservacionPAC } = require("../database/models");
+const { Estado, EnteInspector, Origen, Sector, Rol, Usuario, AdjuntoOriginacion, AdjuntoObservacionPAC, Originacion, ObservacionPAC, Accion } = require("../database/models");
 const utilities = require("./utilities");
 
 const taskUtilities = {
@@ -329,7 +329,18 @@ const taskUtilities = {
       console.error(error);
       throw error;
     }
-  }
+  },
+
+  createAccion: async function(id, data){
+    data.observacion_pac_id = id;
+    try{
+      const newAccion = await Accion.create(data);
+      return newAccion;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
 
 }
 
