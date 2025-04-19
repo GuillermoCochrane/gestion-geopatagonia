@@ -17,6 +17,8 @@ const originacionValidation = require("../middlewares/validations/originaciones/
 const obsPACValidation = require("../middlewares/validations/originaciones/obsPACValidationMDW");
 // validaciones de formularios  cambio de responsables
 const responsableValidation = require("../middlewares/validations/originaciones/responsableValidation");
+// validaciones de formularios de acciones
+const accionValidation = require("../middlewares/validations/originaciones/accionValidation");
 
 //* Rutas
 
@@ -24,7 +26,7 @@ router.get('/', originacionesController.originaciones);
 router.post('/', upload.single("adjunto"), originacionValidation, originacionesController.nuevaOriginacion);
 router.post('/observacionPAC', uploading.single("adjunto"), obsPACValidation, originacionesController.nuevaObservacionPAC);
 router.get('/observacionPAC', originacionesController.observacionesPACs); // Ruta de prueba
-router.post('/observacionPAC/addAction/:id', responsableValidation, originacionesController.agregarAccion);
+router.post('/observacionPAC/addAction/:id', accionValidation, responsableValidation, originacionesController.agregarAccion);
 router.put('/observacionPAC/modify/:id', responsableValidation, originacionesController.modificarResponsablePAC);
 router.get('/observacionPAC/:id/:accion?', originacionesController.observacionPAC);
 router.get('/:id', originacionesController.originacion); //Proximo paso, agregar validaciones
