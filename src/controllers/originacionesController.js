@@ -96,9 +96,17 @@ const originacionesController = {
     },
 
     agregarAccion: async (req, res) => {
+        const errors = validationResult(req);
+        console.log(errors);
         try{
-            await utilities.createAccion(req.params.id, req.body);
-            return res.redirect(`/originacion/observacionPAC/${req.params.id}`);
+            if (errors.isEmpty()) {
+                await utilities.createAccion(req.params.id, req.body);
+                return res.redirect(`/originacion/observacionPAC/${req.params.id}`);
+            } else {
+                let data = await utilities.pacData(req.params.id, "add");
+                data.PACErrors = errors.mapped();
+                return res.render("originacion/originacion", data);
+            }
         } catch (error) {
             console.error(error);
             return res.send({error: error.message});
