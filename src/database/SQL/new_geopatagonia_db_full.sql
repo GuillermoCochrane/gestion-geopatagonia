@@ -1,33 +1,16 @@
 CREATE DATABASE  IF NOT EXISTS `geopatagonia_db` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 USE `geopatagonia_db`;
 -- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
---
--- Host: localhost    Database: geopatagonia_db
--- ------------------------------------------------------
--- Server version	5.5.5-10.4.32-MariaDB
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `acciones`
 --
 
 DROP TABLE IF EXISTS `acciones`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `acciones` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `accion` varchar(300) NOT NULL,
-  `fecha_realizacion` date,
+  `fecha_realizacion` date DEFAULT NULL,
   `ejecutor_id` int(10) unsigned NOT NULL,
   `observacion_pac_id` int(10) unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
@@ -38,16 +21,12 @@ CREATE TABLE `acciones` (
   CONSTRAINT `fk_op_ejecutor_id` FOREIGN KEY (`ejecutor_id`) REFERENCES `usuarios` (`id`),
   CONSTRAINT `fk_op_observacion_pac_id` FOREIGN KEY (`observacion_pac_id`) REFERENCES `observaciones_pacs` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
 
 --
 -- Table structure for table `adjuntos_observacion_pac`
 --
 
 DROP TABLE IF EXISTS `adjuntos_observacion_pac`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `adjuntos_observacion_pac` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
@@ -59,25 +38,13 @@ CREATE TABLE `adjuntos_observacion_pac` (
   PRIMARY KEY (`id`),
   KEY `adjuntos_observaciones_pacs_id_idx` (`observacion_pac_id`),
   CONSTRAINT `adjuntos_observaciones_pacs_id` FOREIGN KEY (`observacion_pac_id`) REFERENCES `observaciones_pacs` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `adjuntos_observacion_pac`
---
-
-LOCK TABLES `adjuntos_observacion_pac` WRITE;
-/*!40000 ALTER TABLE `adjuntos_observacion_pac` DISABLE KEYS */;
-/*!40000 ALTER TABLE `adjuntos_observacion_pac` ENABLE KEYS */;
-UNLOCK TABLES;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Table structure for table `adjuntos_originaciones`
 --
 
 DROP TABLE IF EXISTS `adjuntos_originaciones`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `adjuntos_originaciones` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
@@ -90,41 +57,26 @@ CREATE TABLE `adjuntos_originaciones` (
   KEY `fk_adjuntos_originacion_id_idx` (`originacion_id`),
   CONSTRAINT `fk_adjuntos_originacion_id` FOREIGN KEY (`originacion_id`) REFERENCES `originaciones` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `adjuntos_originaciones`
---
-
-LOCK TABLES `adjuntos_originaciones` WRITE;
-/*!40000 ALTER TABLE `adjuntos_originaciones` DISABLE KEYS */;
-/*!40000 ALTER TABLE `adjuntos_originaciones` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `entes_inspectores`
 --
 
 DROP TABLE IF EXISTS `entes_inspectores`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `entes_inspectores` (
   `id` int(100) unsigned NOT NULL AUTO_INCREMENT,
   `ente_inspector` varchar(100) NOT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `entes_inspectores`
 --
 
 LOCK TABLES `entes_inspectores` WRITE;
-/*!40000 ALTER TABLE `entes_inspectores` DISABLE KEYS */;
 INSERT INTO `entes_inspectores` VALUES (1,'GeoPatagonia','2025-01-09 22:19:38','2025-01-09 22:19:38'),(2,'YPF','2025-01-09 22:20:08','2025-01-09 22:20:08'),(3,'Pan American Energy','2025-01-09 22:20:45','2025-01-09 22:20:45'),(4,'Tecpetrol','2025-01-09 22:21:06','2025-01-09 22:21:06'),(5,'CGC','2025-01-09 22:21:20','2025-01-09 22:21:20'),(6,'Chevron','2025-01-09 22:21:37','2025-01-09 22:21:37'),(7,'Petrobras','2025-01-09 22:21:46','2025-01-09 22:21:46');
-/*!40000 ALTER TABLE `entes_inspectores` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -132,8 +84,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `estados`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `estados` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `estado` varchar(60) NOT NULL,
@@ -141,17 +91,14 @@ CREATE TABLE `estados` (
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `estados`
 --
 
 LOCK TABLES `estados` WRITE;
-/*!40000 ALTER TABLE `estados` DISABLE KEYS */;
-INSERT INTO `estados` VALUES (1,'Abierta',NULL,'2025-01-09 22:55:31','2025-01-09 22:55:31'),(2,'No tratado',NULL,'2025-01-09 22:55:54','2025-01-09 22:55:54'),(3,'En Curso',NULL,'2025-01-09 22:56:07','2025-01-09 22:56:07'),(4,'Con Acciones Vencidas',NULL,'2025-01-09 22:56:24','2025-01-09 22:56:24'),(5,'Vencidas',NULL,'2025-01-09 22:56:34','2025-01-09 22:56:34'),(6,'Cerrado',NULL,'2025-01-09 22:56:49','2025-01-09 22:56:49'),(7,'No Verificadas',NULL,'2025-01-09 22:57:07','2025-01-09 22:57:07'),(8,'Verificado No Efecitvo',NULL,'2025-01-09 22:57:33','2025-01-09 22:57:33'),(9,'Verificado Efecitvo',NULL,'2025-01-09 22:57:44','2025-01-09 22:57:44');
-/*!40000 ALTER TABLE `estados` ENABLE KEYS */;
+INSERT INTO `estados` VALUES (1,'Abierta',NULL,'2025-01-09 22:55:31','2025-01-09 22:55:31'),(2,'No tratado',NULL,'2025-01-09 22:55:54','2025-01-09 22:55:54'),(3,'En Curso',NULL,'2025-01-09 22:56:07','2025-01-09 22:56:07'),(4,'Con Acciones Vencidas',NULL,'2025-01-09 22:56:24','2025-01-09 22:56:24'),(5,'Vencidas',NULL,'2025-01-09 22:56:34','2025-01-09 22:56:34'),(6,'Cerrado',NULL,'2025-01-09 22:56:49','2025-01-09 22:56:49'),(7,'No Verificadas',NULL,'2025-01-09 22:57:07','2025-01-09 22:57:07'),(8,'Verificado No Efectivo',NULL,'2025-01-09 22:57:33','2025-01-09 22:57:33'),(9,'Verificado Efectivo',NULL,'2025-01-09 22:57:44','2025-01-09 22:57:44');
 UNLOCK TABLES;
 
 --
@@ -159,8 +106,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `observaciones_pacs`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `observaciones_pacs` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `inciso` varchar(5) DEFAULT NULL,
@@ -181,17 +126,14 @@ CREATE TABLE `observaciones_pacs` (
   CONSTRAINT `fk_op_estado_id` FOREIGN KEY (`estado_id`) REFERENCES `estados` (`id`) ON UPDATE NO ACTION,
   CONSTRAINT `fk_op_originacion_id` FOREIGN KEY (`originacion_id`) REFERENCES `originaciones` (`id`) ON UPDATE NO ACTION,
   CONSTRAINT `fk_op_responsable_id` FOREIGN KEY (`responsable_id`) REFERENCES `usuarios` (`id`) ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `observaciones_pacs`
 --
 
 LOCK TABLES `observaciones_pacs` WRITE;
-/*!40000 ALTER TABLE `observaciones_pacs` DISABLE KEYS */;
-INSERT INTO `observaciones_pacs` VALUES (1,'R','la descripcion es obligatoria','2025-04-03','Referencia del incidente',1,1,6,1,1,'2025-03-31 22:18:20','2025-03-31 22:18:20'),(2,'R','Plan de accion correctiva del incidente','2025-04-04','Referencia del incidente',1,1,5,1,1,'2025-03-31 22:20:18','2025-03-31 22:20:18'),(3,'B','Chequeo del PAC','2025-05-10','',1,0,7,1,1,'2025-03-31 22:21:42','2025-03-31 22:21:42');
-/*!40000 ALTER TABLE `observaciones_pacs` ENABLE KEYS */;
+INSERT INTO `observaciones_pacs` VALUES (1,'R','la descripcion es obligatoria','2025-04-03','Referencia del incidente',1,1,6,1,1,'2025-03-31 22:18:20','2025-04-18 21:03:34'),(2,'R','Plan de accion correctiva del incidente','2025-04-04','Referencia del incidente',1,1,5,1,1,'2025-03-31 22:20:18','2025-03-31 22:20:18'),(3,'B','Chequeo del PAC','2025-05-10','',1,0,7,1,1,'2025-03-31 22:21:42','2025-03-31 22:21:42');
 UNLOCK TABLES;
 
 --
@@ -199,25 +141,20 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `origenes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `origenes` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `origen` varchar(100) NOT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `origenes`
 --
 
 LOCK TABLES `origenes` WRITE;
-/*!40000 ALTER TABLE `origenes` DISABLE KEYS */;
-INSERT INTO `origenes` VALUES (1,'Accidente','2025-01-09 22:32:59','2025-01-09 22:32:59'),(2,'Rotura de equipo','2025-01-09 22:33:09','2025-01-09 22:33:09'),(3,'Flata de insumos','2025-01-09 22:33:17','2025-01-09 22:33:17'),(4,'Problemas climaticos','2025-01-09 22:33:45','2025-01-09 22:33:45');
-/*!40000 ALTER TABLE `origenes` ENABLE KEYS */;
+INSERT INTO `origenes` VALUES (1,'Accidente','2025-01-09 22:32:59','2025-01-09 22:32:59'),(2,'Rotura de equipo','2025-01-09 22:33:09','2025-01-09 22:33:09'),(3,'Falta de insumos','2025-01-09 22:33:17','2025-01-09 22:33:17'),(4,'Problemas climaticos','2025-01-09 22:33:45','2025-01-09 22:33:45');
 UNLOCK TABLES;
 
 --
@@ -225,8 +162,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `originaciones`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `originaciones` (
   `id` int(100) unsigned NOT NULL AUTO_INCREMENT,
   `fecha_de_observacion` date NOT NULL,
@@ -249,17 +184,14 @@ CREATE TABLE `originaciones` (
   CONSTRAINT `fk_originacion_observador_id` FOREIGN KEY (`observador_id`) REFERENCES `usuarios` (`id`) ON UPDATE NO ACTION,
   CONSTRAINT `fk_originacion_origen_id` FOREIGN KEY (`origen_id`) REFERENCES `origenes` (`id`) ON UPDATE NO ACTION,
   CONSTRAINT `fk_originacion_sector_id` FOREIGN KEY (`sector_id`) REFERENCES `sectores` (`id`) ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `originaciones`
 --
 
 LOCK TABLES `originaciones` WRITE;
-/*!40000 ALTER TABLE `originaciones` DISABLE KEYS */;
-INSERT INTO `originaciones` VALUES (1,'2025-03-22','Cordoba',1,1,4,2,1,'2025-03-21 20:29:56','2025-03-21 20:29:56');
-/*!40000 ALTER TABLE `originaciones` ENABLE KEYS */;
+INSERT INTO `originaciones` VALUES (1,'2025-03-22','Cordoba',1,1,4,2,1,'2025-03-21 20:29:56','2025-03-21 20:29:56'),(2,'2025-03-24','Catamarca',2,1,3,5,1,'2025-03-31 22:54:48','2025-03-31 22:54:48');
 UNLOCK TABLES;
 
 --
@@ -267,25 +199,20 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `roles`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `roles` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `rol` varchar(60) NOT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `roles`
 --
 
 LOCK TABLES `roles` WRITE;
-/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
 INSERT INTO `roles` VALUES (1,'Ejecutor','2025-01-09 22:00:04','2025-01-09 22:00:04'),(2,'Originador','2025-01-09 22:00:27','2025-01-09 22:00:27'),(3,'Tratador','2025-01-09 22:00:49','2025-01-09 22:00:49'),(4,'Observador','2025-01-09 22:01:06','2025-01-09 22:01:06'),(5,'Administrador','2025-01-23 20:03:04','2025-01-23 20:03:04');
-/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -293,25 +220,20 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `sectores`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sectores` (
   `id` int(100) unsigned NOT NULL AUTO_INCREMENT,
   `sector` varchar(100) NOT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `sectores`
 --
 
 LOCK TABLES `sectores` WRITE;
-/*!40000 ALTER TABLE `sectores` DISABLE KEYS */;
 INSERT INTO `sectores` VALUES (1,'SMAC','2025-01-09 22:41:20','2025-01-09 22:41:20'),(2,'Coiled Tubing','2025-01-09 22:42:21','2025-01-09 22:42:21'),(3,'Cementación y Estimulación','2025-01-09 22:42:35','2025-01-09 22:42:35'),(4,'Control Geológico','2025-01-09 22:42:48','2025-01-09 22:42:48'),(5,'Wireline','2025-01-09 22:43:04','2025-01-09 22:43:04');
-/*!40000 ALTER TABLE `sectores` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -319,8 +241,6 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `usuarios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuarios` (
   `id` int(100) unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
@@ -333,26 +253,12 @@ CREATE TABLE `usuarios` (
   UNIQUE KEY `email_UNIQUE` (`email`),
   KEY `fk_usuarios_roles_idx` (`rol_id`),
   CONSTRAINT `fk_usuarios_roles` FOREIGN KEY (`rol_id`) REFERENCES `roles` (`id`) ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `usuarios`
 --
 
 LOCK TABLES `usuarios` WRITE;
-/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Guillermo Cochrane','guilleac81@gmail.com','hashed_password_1',5,'2025-03-07 22:55:41','2025-03-07 22:57:40'),(2,'Carlos Rodriguez','CarlosRodriguez80@geopatagonia.com','$2a$10$1YYCPcDYYmMpW2L.vi0qquKHqBbC6NlnXjFuIJDeOF117BeqWr6aK',4,'2025-03-07 23:01:34','2025-03-07 23:01:34'),(3,'José Pérez','JosePerez72@geopatagonia.com','$2a$10$F97cO7Qv3Thw80HnpARvMeCKNJJ.ahq.dQ18xNdWeB2iI8SEPxde2',4,'2025-03-07 23:02:23','2025-03-07 23:02:23'),(4,'Roberto Gonzalez','RobertoGonzalez66@geopatagonia.com','$2a$10$.UMKoIuFx0IFe06B9PdxDOO6Q3OjRy4AmBXT2aDNMDMHqB5VxIc9C',4,'2025-03-07 23:02:56','2025-03-07 23:02:56'),(5,'Ricardo Martinez','RicardoMartinez83@geopatagonia.com','$2a$10$Y6DM6BbVP00h4h9ZSEBWM.y1Lt42OwPM52D.3iEZJYO9oyV9l3RY2',3,'2025-03-21 20:24:27','2025-03-21 20:24:27'),(6,'Alberto Hernandez','AlbertoHernandez77@geopatagonia.com','$2a$10$tyhWb/HETCe48B01HpPyneL/HqAQkRmKpx8qH47wKSmwI//IUuSpW',3,'2025-03-21 20:26:41','2025-03-21 20:26:41'),(7,'Matias Fernandez','MatiasFernandez92@geopatagonia.com','$2a$10$mpLuJs4gQkquXSYw3Pq7delV88yfouMMIfUEJF1XTvKxERYK2JCZS',3,'2025-03-21 20:28:13','2025-03-21 20:28:13');
-/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+INSERT INTO `usuarios` VALUES (1,'Guillermo Cochrane','guilleac81@gmail.com','hashed_password_1',5,'2025-03-07 22:55:41','2025-03-07 22:57:40'),(2,'Carlos Rodriguez','CarlosRodriguez80@geopatagonia.com','$2a$10$1YYCPcDYYmMpW2L.vi0qquKHqBbC6NlnXjFuIJDeOF117BeqWr6aK',4,'2025-03-07 23:01:34','2025-03-07 23:01:34'),(3,'José Pérez','JosePerez72@geopatagonia.com','$2a$10$F97cO7Qv3Thw80HnpARvMeCKNJJ.ahq.dQ18xNdWeB2iI8SEPxde2',4,'2025-03-07 23:02:23','2025-03-07 23:02:23'),(4,'Roberto Gonzalez','RobertoGonzalez66@geopatagonia.com','$2a$10$.UMKoIuFx0IFe06B9PdxDOO6Q3OjRy4AmBXT2aDNMDMHqB5VxIc9C',4,'2025-03-07 23:02:56','2025-03-07 23:02:56'),(5,'Ricardo Martinez','RicardoMartinez83@geopatagonia.com','$2a$10$Y6DM6BbVP00h4h9ZSEBWM.y1Lt42OwPM52D.3iEZJYO9oyV9l3RY2',3,'2025-03-21 20:24:27','2025-03-21 20:24:27'),(6,'Alberto Hernandez','AlbertoHernandez77@geopatagonia.com','$2a$10$tyhWb/HETCe48B01HpPyneL/HqAQkRmKpx8qH47wKSmwI//IUuSpW',3,'2025-03-21 20:26:41','2025-03-21 20:26:41'),(7,'Matias Fernandez','MatiasFernandez92@geopatagonia.com','$2a$10$mpLuJs4gQkquXSYw3Pq7delV88yfouMMIfUEJF1XTvKxERYK2JCZS',3,'2025-03-21 20:28:13','2025-03-21 20:28:13'),(8,'Fernando Ramirez','FernandoRamirez78@geopatagonial.com','$2a$10$OZbAMsgasbOTWRs7eJDbqOMl/Y5pfPlTVnsqsSSY/z5wpmwyQHDBm',1,'2025-04-19 22:47:00','2025-04-19 22:47:00'),(9,'Facundo Gutierrez','FacundoGutierrez84@geopatagonial.com','$2a$10$gTf5FKguT7zJPzlUkTljgeREsklFlUE3vXi1wtdW9rrvwAJkj12xq',1,'2025-04-19 22:48:07','2025-04-19 22:48:07'),(10,'Javier Sanchez','JavierSanchez74@geopatagonial.com','$2a$10$T.tNZSyszYxoT7U/G.iPv.POiANt/6yIT0M3kMJTkjU/JRSqihsUK',1,'2025-04-19 22:50:17','2025-04-19 22:50:17'),(11,'German Mendez','GermanMendez82@geopatagonia.com','$2a$10$D/QAfDvxnskKl3XIkKRyu.7M/ICCi5didjz//GY0CTzpiG.Byg2ky',2,'2025-04-19 22:52:03','2025-04-19 22:52:03'),(12,'Mariano Lopez','MarianoLopez95@geopatagonia.com','$2a$10$Gx.u4g8JFB0513Iw7HXbB.SjC0UZ9vCWk/i.bnJNHooEIFF2VaGMy',2,'2025-04-19 23:06:24','2025-04-19 23:06:24'),(13,'Martin Gallardo','MartinGallardo84@geopatagonia.com','$2a$10$8Ft./BvJRxTS2qgeRG7.U.iOoX9lhfsLswu6iATCXAYdX19VPX/w6',2,'2025-04-19 23:09:15','2025-04-19 23:09:15');
 UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2025-03-31 19:23:59
