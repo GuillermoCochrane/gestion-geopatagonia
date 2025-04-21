@@ -375,6 +375,11 @@ main section table tr{
   transition: 0.5s ease-out;
 }
 
+main section table tr.closed{
+  color: var(--logo);
+  background-color: rgba(237, 50, 55, 0.3);
+}
+
 main section table tr:hover{
   background-color: var(--white);
 }

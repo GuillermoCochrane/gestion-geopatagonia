@@ -20,7 +20,7 @@
         </tr>
       <% } else { %>
         <% for (const rowData of locals?.pacTableData) { %>
-          <tr class="<%= (rowData?.estado?.id === 6 || rowData?.estado?.id === 8) ? 'error' : '' %>">
+          <tr class="<%= (rowData?.estado?.id === 6 || rowData?.estado?.id === 9) ? 'closed' : '' %>">
             <td><%= rowData?.id %></td>
             <td><%= rowData?.fecha_requerida %></td>
             <td><%= rowData?.originacion?.fecha_de_observacion %></td>
@@ -49,7 +49,7 @@
                   >
                     <i class="fa-solid fa-plus fa-lg"></i>
                 </a>
-                <% if (rowData?.estado?.id !== 6 && rowData?.estado?.id !== 8) { %>
+                <% if (rowData?.estado?.id !== 6 && rowData?.estado?.id !== 9) { %>
                   <a 
                     href="/originacion/observacionPAC/<%= rowData?.id %>/modify"
                     title="Cambiar el responsable"
