@@ -15,9 +15,9 @@ const inputOK = (input) => {
 
 //! Función para convertir " _ " a espacios
 const underscoreToSpace = (string) => {
-  return string.includes('_') 
-          ? string.replace(/_/g, ' ') 
-          : string;
+  return string.replace(/_/g, ' ') // Reemplazar "_" por " "
+                .replace(/ id/gi, '') // Eliminar " id" del string (case sensitive)
+                .trim(); // Eliminar espacios en blanco al inicio y final
 };
 
 //! Función de utilidad para manejar errores
