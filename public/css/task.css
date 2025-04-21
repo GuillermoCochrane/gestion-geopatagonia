@@ -975,6 +975,7 @@ main section .data-container dialog nav{
   margin: auto;
 }
 
+main section .data-container dialog nav button#export-save,
 main section .data-container dialog nav button#reopen-save,
 main section .data-container dialog nav button#add-save,
 main section .data-container dialog nav button#modify-save{
@@ -983,6 +984,7 @@ main section .data-container dialog nav button#modify-save{
   color: var(--success);
 }
 
+main section .data-container dialog nav button#export-save:hover,
 main section .data-container dialog nav button#reopen-save:hover,
 main section .data-container dialog nav button#add-save:hover,
 main section .data-container dialog nav button#modify-save:hover{

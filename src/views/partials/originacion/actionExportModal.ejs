@@ -1,0 +1,12 @@
+<dialog id="export-modal">
+  <h2>¿Esta seguro de que desea exportar esta <%= title  %>?</h2>
+  <form action="/originacion/observacionPAC/export/<%= locals?.pacData?.id %>" method="post" id="export-form"></form>
+  <nav>
+    <button id="export-save"  type="submit" form="export-form">
+      Exportar
+    </button>
+    <button id="export-close" type="button">
+      Cancelar
+    </button>
+  </nav>
+</dialog>

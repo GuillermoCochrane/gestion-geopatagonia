@@ -4,10 +4,7 @@
     <%- include('../partials/originacion/actionOriginationData.ejs') %>
     <%- include('../partials/originacion/actionPacData.ejs') %>
     <%- include('../partials/originacion/actionsTable.ejs') %>
-    <dialog id="export-modal">
-      <h2>Exportar PAC</h2>
-      <button id="export-close">Cerrar</button>
-    </dialog>
+    <%- include('../partials/originacion/actionExportModal.ejs') %>
     <%- include('../partials/originacion/actionAddModal.ejs') %>
     <% if (locals?.pacData?.estado?.id !== 6 && locals?.pacData?.estado?.id !== 8) { %>
       <%- include('../partials/originacion/actionModifyModal.ejs') %>
