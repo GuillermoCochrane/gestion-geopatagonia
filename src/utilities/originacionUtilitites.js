@@ -298,6 +298,7 @@ const taskUtilities = {
       });
       let data = utilities.plainData(resultados);
       data = utilities.multipleDateFormat(data, ['fecha_requerida'], [{ parentObject: 'originacion', dateField: 'fecha_de_observacion' }]);
+      data[0].acciones = utilities.multipleDateFormat(data[0].acciones, ['fecha_realizacion']);
       return data; 
     } catch (error) {
       console.error(error);
