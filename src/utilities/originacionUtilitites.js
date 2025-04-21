@@ -307,14 +307,15 @@ const taskUtilities = {
 
   pacData: async function(id, action){
     try{
-      let data = this.headerData("Observacion / PAC");
+      const allPACDatadata = await this.allPACsData(id);
+      const title = allPACDatadata[0].requiere_analisis ? "PAC" : "Observación";
+      let data = this.headerData(title);
       data.pageScript = [ ...this.validationScripts, "originacion/sidebarManager", "originacion/actionsModalManager", "originacion/validations/modifyResponsableValidation", "originacion/validations/addActionValidation" ];
       data.subSection  = "./actions.ejs";
       data.subSectionStyles = "pac-actions";
       data.action = action;
       data.responsables = await Usuario.findAll({where: { rol_id: 3}});
-      data.ejecutores = await Usuario.findAll({where: { rol_id: 3}}); //deber ir rol_id: 1 (ejecutores) en lugar de tratadores
-      const allPACDatadata = await this.allPACsData(id);
+      data.ejecutores = await Usuario.findAll({where: { rol_id: 1}}); 
       data.pacData = allPACDatadata[0];
       return data;
     } catch (error) {
