@@ -152,6 +152,59 @@ const utilities = {
         console.error("Error generando PDF:", error);
         throw error;
       }
+    },
+
+    generateURLPDF: async function(url) {
+      try {
+        // Configuración de Puppeteer con opciones mejoradas
+        const browser = await puppeteer.launch({
+          headless: "new",
+          args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage'
+          ]
+        });
+    
+        const page = await browser.newPage();
+        
+        // Configuración importante para el renderizado
+        await page.setViewport({
+          width: 1280,
+          height: 1024,
+          deviceScaleFactor: 1
+        });
+    
+        // Navegación a la URL con opciones de espera
+        await page.goto(url, {
+          waitUntil: "networkidle0",
+          timeout: 60000 // 60 segundos de timeout
+        });
+    
+        // Opcional: Esperar a que un selector específico esté presente
+        await page.waitForSelector('#pdf-content-ready', { timeout: 30000 });
+    
+        // Generar PDF con configuraciones profesionales
+        const pdf = await page.pdf({
+          format: "A4",
+          printBackground: true,
+          margin: {
+            top: "20mm",
+            bottom: "20mm",
+            left: "15mm",
+            right: "15mm"
+          },
+          preferCSSPageSize: true, // Respeta @page en CSS
+          timeout: 60000 // Timeout para la generación del PDF
+        });
+    
+        await browser.close();
+        return pdf;
+    
+      } catch (error) {
+        console.error("Error generando PDF:", error);
+        throw error;
+      }
     }
 };
 
