@@ -52,9 +52,20 @@ const utilities = {
         }
 
         // 3. Parámetros anidados
-        for (const { parentObject, dateField } of nestedFields) {
-          if (record[parentObject]?.[dateField] != null) {
-            record[parentObject][dateField] = this.formatDateDisplay(record[parentObject][dateField]);
+        for (const nestedField of nestedFields) {
+          let { parentObject, dateField } = nestedField;
+          const parent = record[parentObject];
+          
+          if (Array.isArray(parent)) {
+            // Si el paramtro anidado es ARRAY: procesamos cada elemento
+            for (const item of parent) {
+              if (item && item[dateField] != null) {
+                item[dateField] = this.formatDateDisplay(item[dateField]);
+              }
+            }
+          } else if (parent && parent[dateField] != null) {
+            // Si parametro anidado es OBJETO: procesamiento normal
+            parent[dateField] = this.formatDateDisplay(parent[dateField]);
           }
         }
       }
@@ -129,14 +140,14 @@ const utilities = {
         await page.setContent(html, { waitUntil: "networkidle0" });
 
         //Generamos el pdf
-        const pdfBuffer = await page.pdf({
+        const pdf = await page.pdf({
           format: "A4",
           printBackground: true,
         });
 
         //Cerramos el navegador
         await browser.close();
-        return pdfBuffer;
+        return pdf;
       } catch (error) {
         console.error("Error generando PDF:", error);
         throw error;
