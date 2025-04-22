@@ -26,6 +26,7 @@ router.get('/', originacionesController.originaciones);
 router.post('/', upload.single("adjunto"), originacionValidation, originacionesController.nuevaOriginacion);
 router.post('/observacionPAC', uploading.single("adjunto"), obsPACValidation, originacionesController.nuevaObservacionPAC);
 router.get('/observacionPAC', originacionesController.observacionesPACs); // Ruta de prueba
+router.get('/observacionPAC/pdf/:id', originacionesController.observacionPacPdf);
 router.post('/observacionPAC/addAction/:id', accionValidation, originacionesController.agregarAccion);
 router.post('/observacionPAC/export/:id',  originacionesController.exportar);
 router.put('/observacionPAC/modify/:id', responsableValidation, originacionesController.modificarResponsablePAC);

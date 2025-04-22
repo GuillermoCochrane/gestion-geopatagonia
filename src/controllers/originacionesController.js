@@ -112,6 +112,21 @@ const originacionesController = {
             return res.send({error: error.message});
         }
     },
+
+    observacionPacPdf: async function(req, res){
+        try{
+            let data = await utilities.allPACsData(req.params.id);
+            console.log(data[0]);
+            res.render("pdf/pacExport", data[0]);
+        } catch (error) {
+            console.error(error);
+            return res.send({error: error.message});
+        }
+    },
+
+    exportar: async function(req, res){
+        res.send("Exportado");
+    },
 }
 
 module.exports = originacionesController;
