@@ -1,5 +1,9 @@
 const { Usuario} = require("../database/models");
 const bcrypt = require("bcryptjs");
+const puppeteer = require("puppeteer");
+const ejs = require("ejs");
+const path = require("path");
+
 const utilities = {
     // Método para convertir fecha a un objeto con día, mes y año
     getDateParts: function(date){
@@ -112,6 +116,32 @@ const utilities = {
       }
       return users;
     },
+
+    generatePDF: async function(template, data) {
+      try {
+        //Creamos el archivo html a partir del template
+        const templatePath = path.join(__dirname, "../views/pdf", `${template}.ejs`);
+        const html = await ejs.renderFile(templatePath, data);
+
+        //Lanzamos el navegador y cargamos el html
+        const browser = await puppeteer.launch({ headless: "new" });
+        const page = await browser.newPage();
+        await page.setContent(html, { waitUntil: "networkidle0" });
+
+        //Generamos el pdf
+        const pdfBuffer = await page.pdf({
+          format: "A4",
+          printBackground: true,
+        });
+
+        //Cerramos el navegador
+        await browser.close();
+        return pdfBuffer;
+      } catch (error) {
+        console.error("Error generando PDF:", error);
+        throw error;
+      }
+    }
 };
 
 module.exports = utilities;
