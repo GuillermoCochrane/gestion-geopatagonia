@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <title>Observación PAC - GeoPatagonia</title>
+  <style>
+    /* Base de tu CSS con ajustes para PDF */
+    :root {
+      --white: #fff;
+      --ice: #ebebeb;
+      --font: #4b4b4d;
+      --logo: #ED3237;
+      --logo-secondary: #A9abae;
+      --shadow: rgba(169, 171, 174, 0.4);
+      --success: #39b54a;
+      --error: orangered;
+      --info: #4b9bd9;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      color: var(--font);
+      margin: 0;
+      padding: 20px;
+      line-height: 1.5;
+    }
+
+    /* Encabezado */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid var(--logo);
+    }
+
+    .logo {
+      height: 70px;
+    }
+
+    .titulo-principal {
+      color: var(--logo);
+      margin: 0;
+      font-size: 1.8rem;
+      text-align: center;
+      flex-grow: 1;
+    }
+
+    /* Secciones */
+    seccion {
+      margin-bottom: 25px;
+      page-break-inside: avoid;
+    }
+
+    .seccion-titulo {
+      background-color: var(--font);
+      color: var(--white);
+      padding: 8px 15px;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      border-radius: 4px;
+    }
+
+    /* Tablas */
+    .tabla-datos {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+    }
+
+    .tabla-datos th, .tabla-datos td {
+      padding: 8px;
+      border: 1px solid var(--logo-secondary);
+      text-align: left;
+    }
+
+    .tabla-datos th {
+      background-color: var(--font);
+      color: var(--white);
+    }
+
+    /* Ajustes específicos para PDF */
+    @page {
+      size: A4;
+      margin: 15mm;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 class="titulo-principal">Observación PAC</h1>
+    <img class="logo" src="/img/logo.png" alt="Logo GeoPatagonia">
+  </header>
+
+  <!-- Sección: Datos de Originación -->
+  <section>
+    <h2 class="seccion-titulo">Datos de Originación</h2>
+    <table class="tabla-datos">
+      <tr>
+        <th>Fecha de la observación:</th>
+        <td><%= originacion.fecha_de_observacion %></td>
+        <th>Lugar:</th>
+        <td><%= originacion.lugar %></td>
+      </tr>
+      <tr>
+        <th>Origen:</th>
+        <td><%= originacion.origen.origen %></td>
+        <th>Observador:</th>
+        <td><%= originacion.observador.nombre %></td>
+      </tr>
+      <tr>
+        <th>Ente Inspector:</th>
+        <td><%= originacion.ente_inspector.ente_inspector %></td>
+        <th>Sector:</th>
+        <td><%= originacion.sector.sector %></td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- Sección: Datos de Observación -->
+  <section>
+    <h2 class="seccion-titulo">Datos de Observación</h2>
+    
+    <table class="tabla-datos">
+      <tr>
+        <th>Item:</th>
+        <td><%= inciso %></td>
+        <th>Fecha requerida:</th>
+        <td><%= fecha_requerida %></td>
+      </tr>
+      <tr>
+        <th>Fecha negociable:</th>
+        <td><%= fecha_negociable ? 'Sí' : 'No' %></td>
+        <th>Requiere análisis:</th>
+        <td><%= requiere_analisis ? 'Sí' : 'No' %></td>
+      </tr>
+      <tr>
+        <th>Responsable:</th>
+        <td><%= responsable.nombre %></td>
+        <th>Estado:</th>
+        <td><%= estado.estado %></td>
+      </tr>
+      <tr>
+        <th>Descripción:</th>
+        <td colspan="3"><%= descripcion %></td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- Sección: Acciones -->
+  <section>
+    <h2 class="seccion-titulo">Acciones</h2>
+    
+    <div class="acciones-list">
+      <% acciones.forEach(accion => { %>
+        <div class="accion-item">
+          <strong>Identificador:</strong> <%= accion.id %><br>
+          <strong>Responsable de ejecución:</strong> <%= accion.ejecutor.nombre %><br>
+          <strong>Fecha de Realización:</strong> <%= new Date(accion.fecha_realizacion).toLocaleDateString() %><br>
+          <strong>Acción:</strong> <%= accion.accion %>
+        </div>
+      <% }); %>
+    </div>
+  </section>
+
+</body>
+</html>
