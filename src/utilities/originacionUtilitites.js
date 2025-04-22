@@ -295,10 +295,10 @@ const taskUtilities = {
         ],
         attributes: this.excludeTimestamps(),
         where,
+        order: [['id', 'ASC']],
       });
       let data = utilities.plainData(resultados);
-      data = utilities.multipleDateFormat(data, ['fecha_requerida'], [{ parentObject: 'originacion', dateField: 'fecha_de_observacion' }]);
-      data[0].acciones = utilities.multipleDateFormat(data[0].acciones, ['fecha_realizacion']);
+      data = utilities.multipleDateFormat(data, ['fecha_requerida'], [{ parentObject: 'originacion', dateField: 'fecha_de_observacion' }, { parentObject: 'acciones', dateField: 'fecha_realizacion' }]);
       return data; 
     } catch (error) {
       console.error(error);
