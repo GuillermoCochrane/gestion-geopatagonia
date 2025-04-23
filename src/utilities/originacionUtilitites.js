@@ -348,6 +348,17 @@ const taskUtilities = {
     }
   },
 
+  exportPDF: async function(id, host, protocol){
+    try{
+      if (!id ||!host || !protocol) throw new Error("Datos insuficientes para generar el PDF");
+      const baseUrl = `${protocol}://${host}`;
+      const pdf = await utilities.generateURLPDF(`${baseUrl}/observacionPAC/pdf/${id}`);
+      return pdf;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
 }
 
 module.exports = taskUtilities;
