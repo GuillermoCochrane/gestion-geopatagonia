@@ -171,7 +171,7 @@ const utilities = {
         // Navegación a la URL con opciones de espera
         await page.goto(url, {
           waitUntil: "networkidle0",
-          timeout: 30000 // 30 segundos de timeout
+          timeout: 60000 // 60 segundos de timeout
         });
 
         // Generar PDF con configuraciones profesionales
