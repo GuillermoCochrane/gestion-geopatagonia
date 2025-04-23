@@ -1,18 +1,45 @@
 window.addEventListener("load", () => {
   const $exportForm = document.querySelector("#export-form");
   const $export = document.querySelector("#export-modal");
+  const $exportStart = document.querySelector("#export-start");
+  const $exportSpinner = document.querySelector("#export-spinner");
+  const $exportError = document.querySelector("#export-error");
+  const $exportErrorClose = document.querySelector("#export-error-close");
+
+  // Estados del modal
+  const STATES = {
+    START: 1,
+    SPINNER: 2,
+    ERROR: 3
+  };
+
+  //Funcion para  manejar los estados del modal
+  const sectionHandler = function(state) {
+    $exportStart.classList.toggle("hidden", state !== STATES.START);
+    $exportSpinner.classList.toggle("hidden", state !== STATES.SPINNER);
+    $exportError.classList.toggle("hidden", state !== STATES.ERROR);
+  }
+
+  $exportErrorClose.addEventListener("click", () => {
+    closeModal($export);
+    sectionHandler(STATES.START);
+  });
 
   $exportForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const id = $exportForm.dataset.id;
+    sectionHandler(STATES.SPINNER);
 
     try {
       const response = await fetch(`${baseUrl}/originacion/observacionPAC/export/${id}`, {
         method: "POST"
       });
 
-      if (!response.ok) throw new Error("Error al generar el PDF");
+      if (!response.ok) {
+        sectionHandler(STATES.ERROR);
+        return;
+      }
 
       // Guardamos el PDF en un blob
       const blob = await response.blob();
@@ -28,9 +55,10 @@ window.addEventListener("load", () => {
 
       // 🔒 Cerramos el modal manualmente
       closeModal($export);
+      sectionHandler(STATES.START);
     } catch (err) {
       console.error(err);
-      alert("Hubo un error al exportar el PDF.");
+      sectionHandler(STATES.ERROR);
     }
   });
 })
