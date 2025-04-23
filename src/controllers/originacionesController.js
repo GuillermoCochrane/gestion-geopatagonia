@@ -116,7 +116,6 @@ const originacionesController = {
     observacionPacPdf: async function(req, res){
         try{
             let data = await utilities.allPACsData(req.params.id);
-            console.log(data[0]);
             res.render("pdf/pacExport", data[0]);
         } catch (error) {
             console.error(error);
@@ -125,7 +124,22 @@ const originacionesController = {
     },
 
     exportar: async function(req, res){
-        res.send("Exportado");
+        try{
+            // Obtener datos de la solicitud 
+            const host = req.get("host");
+            const protocol = req.protocol;
+
+            // Generamos el PDF
+            const pdf = await utilities.exportPDF(req.params.id, host, protocol);
+            res.setHeader("Content-Type", "application/pdf");
+            res.setHeader("Content-Disposition", `attachment; filename=pac-${req.params.id}.pdf`);
+            
+            // enviamos el PDF listo para descargar
+            res.end(pdf);
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
     },
 }
 
