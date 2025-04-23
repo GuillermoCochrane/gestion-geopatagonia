@@ -665,8 +665,11 @@ main dialog section article aside{
   flex-direction: column;
   width: 100%;
   margin-block: .9em;
-  border: 2px solid var(--logo-secondary);
   border-radius: 10px;
+}
+
+main section article aside{
+  border: 2px solid var(--logo-secondary);
 }
 
 main section .data-container details{
@@ -686,6 +689,10 @@ main section .data-container article{
   background-color: var(--ice);
   margin-inline: 20px;
   border-radius: 8px;
+}
+
+main section .data-container dialog article{
+  margin-inline: auto;
 }
 
 main section .data-container details h3{
@@ -728,6 +735,7 @@ main dialog section article table td:last-child {
   border: 1px solid var(--font);
 }
 
+main section dialog article.hidden,
 main dialog section form.hidden,
 main dialog section article.hidden{
   display: none;
@@ -916,6 +924,7 @@ article#spinner-modal {
   z-index: 2000; 
 }
 
+article#export-spinner .spinner-figure,
 article#spinner-modal .spinner-figure {
   display: flex;
   flex-direction: column;
@@ -923,15 +932,17 @@ article#spinner-modal .spinner-figure {
   gap: 1rem;
 }
 
+article#export-spinner .spinner,
 article#spinner-modal .spinner {
   width: 50px;
   height: 50px;
-  border: 4px solid var(--ice); 
-  border-top-color: var(--logo); 
+  border: 4px solid var(--logo); 
+  border-top-color: var(--ice); 
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
+article#export-spinner figcaption,
 article#spinner-modal figcaption {
   color: var(--font); 
   font-weight: bold;
