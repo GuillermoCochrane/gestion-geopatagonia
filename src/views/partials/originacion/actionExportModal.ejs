@@ -1,12 +1,27 @@
 <dialog id="export-modal">
-  <h2>¿Esta seguro de que desea exportar esta <%= title  %>?</h2>
-  <form action="/originacion/observacionPAC/export/<%= locals?.pacData?.id %>" method="post" id="export-form"></form>
-  <nav>
-    <button id="export-save"  type="submit" form="export-form">
-      Exportar
-    </button>
-    <button id="export-close" type="button">
-      Cancelar
-    </button>
-  </nav>
+  <article id="export-start">
+    <h2>¿Esta seguro de que desea exportar esta <%= title  %>?</h2>
+    <form id="export-form" data-id="<%= locals?.pacData?.id %>"></form>
+    <nav>
+      <button id="export-save"  type="submit" form="export-form">
+        Exportar
+      </button>
+      <button id="export-close" type="button">
+        Cancelar
+      </button>
+    </nav>
+  </article>
+  <article id="export-spinner" class="hidden">
+    <figure class="spinner-figure">
+      <div class="spinner"></div>
+      <figcaption>Generando PDF..</figcaption>
+    </figure>
+  </article>
+  <article id="export-error" class="hidden">
+    <h2>Error al exportar el PDF</h2>
+    <p>Hubo un error al generar el PDF. Por favor, inténtelo de nuevo.</p>
+    <nav>
+      <button type="button" id="export-error-close">Cerrar</button>
+    </nav>
+  </article>
 </dialog>
