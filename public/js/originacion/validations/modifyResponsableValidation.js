@@ -8,10 +8,10 @@ window.addEventListener("load", () => {
   };
 
   // Listeners 
-  $responsable.addEventListener("input", responsableValidation);
-  $responsable.addEventListener("blur", responsableValidation);
+  $responsable && $responsable.addEventListener("input", responsableValidation);
+  $responsable && $responsable.addEventListener("blur", responsableValidation);
 
-  $btn.addEventListener("click", (e) => {
+  $btn && $btn.addEventListener("click", (e) => {
     e.preventDefault();
     responsableValidation();
     if (Object.keys(errors).length == 0) {
