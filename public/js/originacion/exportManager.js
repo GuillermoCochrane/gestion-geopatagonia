@@ -4,13 +4,15 @@ window.addEventListener("load", () => {
   const $exportStart = document.querySelector("#export-start");
   const $exportSpinner = document.querySelector("#export-spinner");
   const $exportError = document.querySelector("#export-error");
+  const $exportSuccess = document.querySelector("#export-success");
   const $exportErrorClose = document.querySelector("#export-error-close");
 
   // Estados del modal
   const STATES = {
     START: 1,
     SPINNER: 2,
-    ERROR: 3
+    ERROR: 3,
+    SUCCESS: 4,
   };
 
   //Funcion para  manejar los estados del modal
@@ -18,10 +20,11 @@ window.addEventListener("load", () => {
     $exportStart.classList.toggle("hidden", state !== STATES.START);
     $exportSpinner.classList.toggle("hidden", state !== STATES.SPINNER);
     $exportError.classList.toggle("hidden", state !== STATES.ERROR);
+    $exportSuccess.classList.toggle("hidden", state !== STATES.SUCCESS);
   }
 
   $exportErrorClose.addEventListener("click", () => {
-    closeModal($export);
+    $export.close();
     sectionHandler(STATES.START);
   });
 
@@ -32,9 +35,10 @@ window.addEventListener("load", () => {
     sectionHandler(STATES.SPINNER);
 
     try {
-      const response = await fetch(`${baseUrl}/originacion/observacionPAC/export/${id}`, {
-        method: "POST"
-      });
+      const [response] = await Promise.all([
+        fetch(`${baseUrl}/originacion/observacionPAC/export/${id}`, { method: "POST" }),
+        new Promise(resolve => setTimeout(resolve, 1000)) // Espera mínima de 1 segundo
+      ]);
 
       if (!response.ok) {
         sectionHandler(STATES.ERROR);
@@ -53,9 +57,13 @@ window.addEventListener("load", () => {
       a.remove();                            // Eliminamos el enlace del body del documento 
       window.URL.revokeObjectURL(url);       // Liberamos la memoria del URL del blob
 
-      // 🔒 Cerramos el modal manualmente
-      closeModal($export);
-      sectionHandler(STATES.START);
+      // Mostramos el mensaje de éxito y cerramos el modal a los 2 segundos
+      sectionHandler(STATES.SUCCESS);
+      setTimeout(() => {
+        $export.close();
+        sectionHandler(STATES.START);
+      }, 2500);
+
     } catch (err) {
       console.error(err);
       sectionHandler(STATES.ERROR);

@@ -695,9 +695,15 @@ main section .data-container dialog article{
   margin-inline: auto;
 }
 
+main section .data-container dialog article h2,
 main section .data-container details h3{
   font-size: 1.4em;
   text-align: center;
+}
+
+main section .data-container dialog article p{
+  margin-block: 1em;
+  font-size: 1.2em;
 }
 
 main section .data-container article ul,
@@ -946,6 +952,7 @@ article#export-spinner figcaption,
 article#spinner-modal figcaption {
   color: var(--font); 
   font-weight: bold;
+  font-size: 1.3em;
 }
 
 main section .data-container dialog{
