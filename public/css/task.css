@@ -968,7 +968,7 @@ main section .data-container dialog{
 }
 
 main dialog#select-originacion-modal{
-  width: 60%;
+  width: 40%;
 } 
 
 main dialog#select-originacion-modal h2,
