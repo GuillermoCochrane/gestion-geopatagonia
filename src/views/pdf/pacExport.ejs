@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <link rel="icon" type="image/png" href="/img/icon.png">
-  <title>Observación PAC - GeoPatagonia</title>
+  <title><%= requiere_analisis ? 'PAC' : 'Observación' %> - GeoPatagonia</title>
   <style>
-    /* Base de tu CSS con ajustes para PDF */
     :root {
       --white: #fff;
       --ice: #ebebeb;
@@ -34,19 +33,11 @@
       align-items: center;
       margin-bottom: 20px;
       padding-bottom: 15px;
-      border-bottom: 2px solid var(--logo);
     }
 
-    .logo {
+    img.logo {
+      margin-inline: auto;
       height: 70px;
-    }
-
-    .titulo-principal {
-      color: var(--logo);
-      margin: 0;
-      font-size: 1.8rem;
-      text-align: center;
-      flex-grow: 1;
     }
 
     /* Secciones */
@@ -55,7 +46,7 @@
       page-break-inside: avoid;
     }
 
-    .seccion-titulo {
+    h2 {
       background-color: var(--font);
       color: var(--white);
       padding: 8px 15px;
@@ -65,19 +56,20 @@
     }
 
     /* Tablas */
-    .tabla-datos {
+    table {
       width: 100%;
       border-collapse: collapse;
       margin: 10px 0;
     }
 
-    .tabla-datos th, .tabla-datos td {
+    table th, 
+    table td {
       padding: 8px;
       border: 1px solid var(--logo-secondary);
       text-align: left;
     }
 
-    .tabla-datos th {
+    table th {
       background-color: var(--font);
       color: var(--white);
     }
@@ -91,14 +83,13 @@
 </head>
 <body>
   <header>
-    <h1 class="titulo-principal">Observación PAC</h1>
     <img class="logo" src="/img/logo.png" alt="Logo GeoPatagonia">
   </header>
 
   <!-- Sección: Datos de Originación -->
   <section>
-    <h2 class="seccion-titulo">Datos de Originación</h2>
-    <table class="tabla-datos">
+    <h2>Datos de Originación</h2>
+    <table>
       <tr>
         <th>Fecha de la observación:</th>
         <td><%= originacion.fecha_de_observacion %></td>
@@ -122,24 +113,23 @@
 
   <!-- Sección: Datos de Observación -->
   <section>
-    <h2 class="seccion-titulo">Datos de Observación</h2>
-    
-    <table class="tabla-datos">
+    <h2>Datos de <%= requiere_analisis ? 'PAC' : 'Observación' %></h2>
+    <table>
       <tr>
         <th>Item:</th>
         <td><%= inciso %></td>
-        <th>Fecha requerida:</th>
-        <td><%= fecha_requerida %></td>
+        <th>Responsable:</th>
+        <td><%= responsable.nombre %></td>
       </tr>
       <tr>
-        <th>Fecha negociable:</th>
-        <td><%= fecha_negociable ? 'Sí' : 'No' %></td>
+        <th>Fecha requerida:</th>
+        <td><%= fecha_requerida %></td>
         <th>Requiere análisis:</th>
         <td><%= requiere_analisis ? 'Sí' : 'No' %></td>
       </tr>
       <tr>
-        <th>Responsable:</th>
-        <td><%= responsable.nombre %></td>
+        <th>Fecha negociable:</th>
+        <td><%= fecha_negociable ? 'Sí' : 'No' %></td>
         <th>Estado:</th>
         <td><%= estado.estado %></td>
       </tr>
@@ -152,18 +142,36 @@
 
   <!-- Sección: Acciones -->
   <section>
-    <h2 class="seccion-titulo">Acciones</h2>
-    
-    <div class="acciones-list">
-      <% acciones.forEach(accion => { %>
-        <div class="accion-item">
-          <strong>Identificador:</strong> <%= accion.id %><br>
-          <strong>Responsable de ejecución:</strong> <%= accion.ejecutor.nombre %><br>
-          <strong>Fecha de Realización:</strong> <%= new Date(accion.fecha_realizacion).toLocaleDateString() %><br>
-          <strong>Acción:</strong> <%= accion.accion %>
-        </div>
-      <% }); %>
-    </div>
+    <h2>Acciones</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Identificador</th>
+          <th>Responsable de ejecución</th>
+          <th>Fecha de Realización</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody id="acciones-list">
+        <% if (locals?.acciones?.length !== 0) { %>
+          <% for (const accion of acciones) { %>
+            <tr>
+              <td><%= accion.id %></td>
+              <td><%= accion.ejecutor.nombre %></td>
+              <td><%= accion.fecha_realizacion %></td>
+              <td><%= accion.accion %></td>
+            </tr>
+          <% } %>
+        <% } else { %>
+            <tr>
+              <td colspan="4">No hay acciones registradas</td>  
+            </tr>
+        <% } %>
+      </tbody>
+      <tbody></tbody>
+    </table>
+
   </section>
 
 </body>
