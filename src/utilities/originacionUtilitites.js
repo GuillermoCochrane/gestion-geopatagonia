@@ -120,7 +120,7 @@ const taskUtilities = {
     data.formData = formData;
     data.pacTableData = pacTableData;
     data.subSection = this.mainSubsection;
-    data.originacionData = originacionData;
+    data.originacionSelectData = originacionData;
     return data;
   },
 
@@ -166,7 +166,7 @@ const taskUtilities = {
       data.successPopUp = this.successPopUp;
       data.errorPopUp = this.errorPopUp;
       data.subSection = this.mainSubsection;
-      data.originacionData = originacionData;
+      data.originacionSelectData = originacionData;
       return data;
     } catch (error) {
       console.error(error); // Registro del error para depuración

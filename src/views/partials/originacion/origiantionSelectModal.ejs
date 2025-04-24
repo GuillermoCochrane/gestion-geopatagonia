@@ -3,9 +3,9 @@
   <form  id="originacion-select-form">
     <label>
       <select name="originacion_id" id="originacion_id">
-        <% if (locals?.originacionData && locals?.originacionData?.length !== 0) { %>
+        <% if (locals?.originacionSelectData && locals?.originacionSelectData?.length !== 0) { %>
           <option value="" disabled selected>Selecione una originación</option>
-          <% for (const originacion of locals?.originacionData) { %>
+          <% for (const originacion of locals?.originacionSelectData) { %>
             <option value="<%= originacion.id %>">
               (<%= originacion.fecha_de_observacion %> ) - 
               <%= originacion.origen.origen %> - 
