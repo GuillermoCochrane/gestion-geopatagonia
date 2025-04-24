@@ -1,0 +1,37 @@
+<dialog id="select-originacion-modal">
+  <h2>Seleccionar Originación</h2>
+  <form  id="originacion-select-form">
+    <label>
+      <select name="originacion_id" id="originacion_id">
+        <% if (locals?.originacionData && locals?.originacionData?.length !== 0) { %>
+          <option value="" disabled selected>Selecione una originación</option>
+          <% for (const originacion of locals?.originacionData) { %>
+            <% console.log(originacion);%>
+            <option value="<%= originacion.id %>"  %>>
+              (<%= originacion.fecha_de_observacion %> ) - 
+              <%= originacion.origen.origen %> - 
+              <%= originacion.lugar %> - 
+              <%= originacion.sector.sector %> - 
+              <%= originacion.ente_inspector.ente_inspector %>  
+            </option>
+          <% } %>
+        <% } else { %>
+          <option value="" disabled selected>
+            No hay originaciones disponibles
+          </option>
+        <% } %>
+      </select>
+      <span id="error-responsable_id">
+        <%= locals.PACErrors?.responsable_id?.msg %>
+      </span>
+    </label>
+  </form>
+  <nav>
+    <button id="originacion-select"  type="submit" form="modify-form">
+      Seleccionar
+    </button>
+    <button id="originacion-close" type="button">
+      Cancelar
+    </button>
+  </nav>
+</dialog>
