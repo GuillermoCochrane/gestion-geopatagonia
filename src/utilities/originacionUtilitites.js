@@ -155,6 +155,8 @@ const taskUtilities = {
       let tratador = await Usuario.findAll({where: { rol_id: 3}});
       tratador = this.dataFormatter(tratador);
 
+      let originacionData = await this.allOriginacionsData();
+
       //Datos adicionales para el el renderizado de la vista
       data.oldData = {originacion_id: id};
       data.originacionData = newOriginationData;
@@ -164,6 +166,7 @@ const taskUtilities = {
       data.successPopUp = this.successPopUp;
       data.errorPopUp = this.errorPopUp;
       data.subSection = this.mainSubsection;
+      data.originacionData = originacionData;
       return data;
     } catch (error) {
       console.error(error); // Registro del error para depuración
