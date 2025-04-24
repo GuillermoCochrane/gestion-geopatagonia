@@ -4,7 +4,7 @@ const utilities = require("./utilities");
 const taskUtilities = {
   styles: ["task"],
 
-  pageScript: ["originacion/modalManager"],
+  pageScript: ["originacion/modalManager", "originacion/selectModalManager"],
 
   validationScripts: ["validations", "validator.min"],
   
