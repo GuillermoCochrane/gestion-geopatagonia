@@ -497,6 +497,7 @@ main aside{
   width: 80%;
   margin-inline: auto;
   align-items: center;
+  justify-content: space-evenly;
 }
 
 main aside button,
