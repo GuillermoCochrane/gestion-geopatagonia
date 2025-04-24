@@ -108,9 +108,11 @@ const taskUtilities = {
     data.pageScript = [...data.pageScript, ...this.validationScripts, "originacion/validations/originacionValidation"];
     let formData = {};
     let pacTableData = [];
+    let originacionData = [];
     try {
       formData = await this.originacionFormData();
       pacTableData = await this.allPACsData();
+      originacionData = await this.allOriginacionsData();
     } catch (error) {
       console.error(error); // Registro del error para depuración
       throw error;
@@ -118,6 +120,7 @@ const taskUtilities = {
     data.formData = formData;
     data.pacTableData = pacTableData;
     data.subSection = this.mainSubsection;
+    data.originacionData = originacionData;
     return data;
   },
 
@@ -300,6 +303,29 @@ const taskUtilities = {
       let data = utilities.plainData(resultados);
       data = utilities.multipleDateFormat(data, ['fecha_requerida'], [{ parentObject: 'originacion', dateField: 'fecha_de_observacion' }, { parentObject: 'acciones', dateField: 'fecha_realizacion' }]);
       return data; 
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
+
+  allOriginacionsData: async function(){
+    const originacionIncludes = [
+      { model: Origen, as: 'origen', attributes: this.excludeTimestamps() },
+      { model: Usuario, as: 'observador', attributes: this.excludePassword() },
+      { model: Sector, as: 'sector', attributes: this.excludeTimestamps() },
+      { model: EnteInspector, as: 'ente_inspector', attributes: this.excludeTimestamps() },
+    ];
+    try {
+      const originaciones = await Originacion.findAll({
+        include: originacionIncludes,
+        attributes: this.excludeTimestamps(),
+        order: [['id', 'ASC']],
+      });
+
+      let data = utilities.plainData(originaciones);
+      data = utilities.multipleDateFormat(data, ['fecha_de_observacion']);
+      return data;
     } catch (error) {
       console.error(error);
       throw error;
