@@ -621,6 +621,7 @@ main dialog section header nav{
   padding-block: 20px;
 }
 
+main dialog#select-originacion-modal nav button,
 main section .data-container dialog nav button,
 main dialog section article nav button,
 main dialog section header nav button{
@@ -896,6 +897,7 @@ article#pac-delete-success h3{
   text-align: center;
 }
 
+main dialog#select-originacion-modal nav,
 main section .data-container dialog nav,
 article#pac-error nav,
 article#confirm-pac-delete nav,
@@ -956,44 +958,69 @@ article#spinner-modal figcaption {
   font-size: 1.3em;
 }
 
+main dialog#select-originacion-modal,
 main section .data-container dialog{
   width: 35%;
   height: fit-content;
   padding-inline: 1.5em;
   padding-block:  0.7em;
   border-top: var(--logo) 20px solid;
-
 }
 
+main dialog#select-originacion-modal{
+  width: 60%;
+} 
+
+main dialog#select-originacion-modal h2,
 main section .data-container dialog h2{
   margin-inline: 0.5em;
   text-align: center;
 }
 
+main dialog#select-originacion-modal form,
 main section .data-container dialog form{
+  width: 90%;
+  margin-inline: auto;
   padding-block: 0;
   justify-content: center;
   margin-bottom: 0;
 }
 
+main dialog#select-originacion-modal label,
 main section .data-container dialog label {
   min-width: 300px;
 }
 
+main dialog#select-originacion-modal label{
+  width: auto;
+}
+
+main dialog#select-originacion-modal label h3,
 main section .data-container dialog label h3{
   margin-bottom: 0.7em;
 }
 
+main dialog#select-originacion-modal label select,
 main section .data-container dialog label input,
 main section .data-container dialog label textarea,
 main section .data-container dialog label select{
   width: 100%;
 }
 
+main dialog#select-originacion-modal label select option,
+main dialog#select-originacion-modal label select option:disabled{
+  width: 100%;
+  margin: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+main dialog#select-originacion-modal nav,
 main section .data-container dialog nav{
   margin: auto;
 }
 
+main dialog#select-originacion-modal nav button#originacion-select,
 main section .data-container dialog nav button#export-save,
 main section .data-container dialog nav button#reopen-save,
 main section .data-container dialog nav button#add-save,
@@ -1003,6 +1030,7 @@ main section .data-container dialog nav button#modify-save{
   color: var(--success);
 }
 
+main dialog#select-originacion-modal nav button#originacion-select:hover,
 main section .data-container dialog nav button#export-save:hover,
 main section .data-container dialog nav button#reopen-save:hover,
 main section .data-container dialog nav button#add-save:hover,
