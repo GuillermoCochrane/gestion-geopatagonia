@@ -5,6 +5,17 @@ const ejs = require("ejs");
 const path = require("path");
 
 const utilities = {
+
+    // Datos para vista de error 404
+    errorData: {
+      title:	"Error 404",
+      styles: ["error"],
+      pageScript: ["errorButton"],
+      mainTitle: "Error 404",
+      secondaryTitle: "Página no encontrada",
+      message: "La dirección a la que intenta acceder no existe o ha sido modificada.",
+    },
+
     // Método para convertir fecha a un objeto con día, mes y año
     getDateParts: function(date){
       // Si no se recibe fecha, devolver objeto vacío
