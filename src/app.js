@@ -2,7 +2,7 @@
 const express = require("express");
 const path = require("path");
 const methodOverride =  require('method-override'); // Necesario para usar métodos PUT y DELETE
-
+const utilities = require("./utilities/utilities");
 // Routers
 const mainRoutes = require("./routes/mainRouter");
 const dashboardRoutes = require("./routes/dashboardRouter");
@@ -29,7 +29,7 @@ app.use('/api/utilities', utilitiesAPIRoutes);
 
 //Error 404
 app.use((req,res,next) =>{
-    res.status(404).send("Error 404 - Página no encontrada")
+    res.status(404).render("error", utilities.errorData)
 })
 
 //Levanatando el servidor
