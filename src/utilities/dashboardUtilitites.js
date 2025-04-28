@@ -6,13 +6,20 @@ const dashboardUtilities = {
 
   pageScript: ["dashboard/dashboard"],
 
+
+  errorPageScript: function(){
+    return [...this.pageScript, "errorButton"];
+  },
+
   errorInfo: function(errormsg){
     return {
-      subSection: "./error.ejs",
+      subSection: "../partials/errorManager.ejs",
       title: "Error",
       styles: this.styles,
-      pageScript: this.pageScript,
+      pageScript: this.errorPageScript(),
       error: true,
+      mainTitle: "Error 404",
+      secondaryTitle: "Recurso no encontrado",
       message: `No hay ${errormsg} disponibles en la base de datos.`,
       errorData: null,
     }
@@ -20,7 +27,9 @@ const dashboardUtilities = {
 
   errorHandler: function(error){
     let errorData = this.errorInfo();
-    errorData.message = "Error interno del servidor.";
+    errorData.mainTitle = "Error 500";
+    errorData.secondaryTitle = "Se ha producido el siguiente error:";
+    errorData.message = "Error interno del servidor. Por favor, inténtalo más tarde.";
     errorData.errorData = error.message || error;
     return errorData;
   },
