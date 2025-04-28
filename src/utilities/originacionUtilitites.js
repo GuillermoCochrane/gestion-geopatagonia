@@ -217,7 +217,7 @@ const taskUtilities = {
         ? ObservacionPAC 
         : Originacion;
       // Crear la entrada
-      data.estado_id = data.estado_id || 1; // Estado por defecto (1)
+      observacion && (data.estado_id = data.estado_id || 1); // Estado por defecto (1) para observaciones o PACs
       const registro = await Modelo.create(data);
       // Si se subió un archivo, guardarlo en la base de datos
       let adjunto = {};
