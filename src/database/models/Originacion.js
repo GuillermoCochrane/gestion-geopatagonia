@@ -55,12 +55,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
     },
-
-    estado_id: {
-      // ID del estado al que pertenece la observación, obligatorio
-      type: DataTypes.INTEGER.UNSIGNED,
-      allowNull: false,
-    },
   };
 
   let config = {
@@ -79,14 +73,6 @@ module.exports = function(sequelize, DataTypes) {
       // Una originación puede tener a un solo usuario (como observador)
       as: 'observador',
       foreignKey: 'observador_id',
-      onDelete: 'RESTRICT',
-      onUpdate: 'NO ACTION'
-    });
-
-    Originacion.belongsTo(models.Estado, {
-      // Una originación puede tener a un solo estado
-      as: 'estado',
-      foreignKey: 'estado_id',
       onDelete: 'RESTRICT',
       onUpdate: 'NO ACTION'
     });
