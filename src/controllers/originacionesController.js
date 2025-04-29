@@ -17,20 +17,20 @@ const originacionesController = {
 
     nuevaOriginacion: async (req, res) => {
         const errors = validationResult(req);
-        if (errors.isEmpty()) {
-            try {
+        try {
+            if (errors.isEmpty()) {
                 // Crear la originación y el adjunto (si lo hay)
                 const data = await utilities.originacionPACData(req.body, req.file);
                 return res.render("originacion/originacion", data);
-            } catch (error) {
-                console.error(error);
-                const data = utilities.errordata(error);
+            } else {
+                let data = await utilities.originacionData();
+                data.oldData = req.body;
+                data.originacionErrors = errors.mapped();
                 return res.render("originacion/originacion", data);
-            }
-        } else {
-            let data = await utilities.originacionData();
-            data.oldData = req.body;
-            data.originacionErrors = errors.mapped();
+            } 
+        } catch (error) {
+            console.error(error);
+            const data = utilities.errordata(error);
             return res.render("originacion/originacion", data);
         }
     },
