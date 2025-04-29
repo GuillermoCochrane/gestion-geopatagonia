@@ -121,7 +121,8 @@ const originacionesController = {
             }
         } catch (error) {
             console.error(error);
-            return res.send({error: error.message});
+            const data = utilities.errordata(error);
+            return res.render("originacion/originacion", data);
         }
     },
 
@@ -131,7 +132,8 @@ const originacionesController = {
             res.render("pdf/pacExport", data[0]);
         } catch (error) {
             console.error(error);
-            return res.send({error: error.message});
+            const data = utilities.errordata(error);
+            return res.render("originacion/originacion", data);
         }
     },
 
