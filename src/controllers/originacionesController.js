@@ -5,8 +5,14 @@ const utilities = require("../utilities/originacionUtilitites");
 const originacionesController = {
 
     originaciones: async (req, res) => {
-        let data = await utilities.originacionData();
-        return res.render("originacion/originacion", data);
+        try{
+            let data = await utilities.originacionData();
+            return res.render("originacion/originacion", data);
+        } catch (error) {
+            console.error(error);
+            const data = utilities.errordata(error);
+            return res.render("originacion/originacion", data);
+        }
     },
 
     nuevaOriginacion: async (req, res) => {
@@ -18,7 +24,8 @@ const originacionesController = {
                 return res.render("originacion/originacion", data);
             } catch (error) {
                 console.error(error);
-                return res.send({error: error.message,});
+                const data = utilities.errordata(error);
+                return res.render("originacion/originacion", data);
             }
         } else {
             let data = await utilities.originacionData();
@@ -30,11 +37,12 @@ const originacionesController = {
 
     originacion: async (req, res) => {
         try{
-            const data = await utilities.originacionPACData({}, null, req.params.id); 
+            const data = await utilities.originacionPACData({}, null, req.params.id);
             return res.render("originacion/originacion", data);
         } catch (error) {
             console.error(error);
-            return res.send({error: error.message,});
+            const data = utilities.errordata(error);
+            return res.render("originacion/originacion", data);
         }
     },
 
@@ -53,7 +61,8 @@ const originacionesController = {
             }
         } catch (error) {
             console.error(error);
-            return res.send({error: error.message,});
+            const data = utilities.errordata(error);
+            return res.render("originacion/originacion", data);
         }
     },
 
@@ -64,7 +73,8 @@ const originacionesController = {
             return res.send(data);
         } catch (error) {
             console.error(error);
-            return res.send({error: error.message,});
+            const data = utilities.errordata(error);
+            return res.render("originacion/originacion", data);
         }
     },
 
@@ -74,7 +84,8 @@ const originacionesController = {
             return res.render("originacion/originacion", data);
         } catch (error) {
             console.error(error);
-            return res.send({error: error.message,});
+            const data = utilities.errordata(error);
+            return res.render("originacion/originacion", data);
         }
     },
 
@@ -91,7 +102,8 @@ const originacionesController = {
             }
         } catch (error) {
             console.error(error);
-            return res.send({error: error.message,});
+            const data = utilities.errordata(error);
+            return res.render("originacion/originacion", data);
         }
     },
 
