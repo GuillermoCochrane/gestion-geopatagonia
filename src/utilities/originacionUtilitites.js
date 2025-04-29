@@ -64,6 +64,19 @@ const taskUtilities = {
     return {exclude:[...this.timestamps, "password"]}
   },
 
+  errordata: function(error){
+    return {
+      styles: this.styles,
+      pageScript: ["errorButton"],
+      subSection: "../partials/errorManager.ejs",
+      title: "Error 500",
+      mainTitle: "Error 500",
+      secondaryTitle: "Error interno del servidor",
+      message: error.message,
+      mainError: "mainError",
+    };
+  },
+
   headerData: function(title){
     return {
       title: title,
