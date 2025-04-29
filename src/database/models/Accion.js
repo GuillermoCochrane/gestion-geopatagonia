@@ -56,6 +56,14 @@ module.exports = function(sequelize, DataTypes) {
 
   Accion.associate = function (models) {
 
+    Accion.hasMany(models.AdjuntoAccion, {
+      // Una acción puede tener muchos adjuntos
+      as: 'adjuntos',
+      foreignKey: 'accion_id',
+      onDelete: 'CASCADE',
+      onUpdate: 'NO ACTION'
+    });
+
     Accion.belongsTo(models.ObservacionPAC, {
       // Una acción puede pertenecer a una observación
       as: 'observacion_pac',
