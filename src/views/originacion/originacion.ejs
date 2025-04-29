@@ -1,7 +1,7 @@
 <%- include('../partials/head.ejs') %>
 <body class="<%= locals.subSectionStyles ? locals.subSectionStyles : '' %>">
   <%- include('../partials/header.ejs', {usuario: "Juan Perez"}) %>
-  <main>
+  <main class="<%= locals.mainError ? locals.mainError : '' %>">
     <%- include(subSection) %>
   </main>
 </body>
