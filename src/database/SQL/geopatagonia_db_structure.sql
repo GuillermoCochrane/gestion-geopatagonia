@@ -41,6 +41,27 @@ CREATE TABLE `acciones` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `adjuntos_acciones`
+--
+
+DROP TABLE IF EXISTS `adjuntos_acciones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `adjuntos_acciones` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL,
+  `archivo` varchar(200) NOT NULL,
+  `descripcion` varchar(300) DEFAULT '-',
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
+  `accion_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `adjuntos_acciones_accion_id_idx` (`accion_id`),
+  CONSTRAINT `adjuntos_acciones_accion_id` FOREIGN KEY (`accion_id`) REFERENCES `acciones` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `adjuntos_observacion_pac`
 --
 
@@ -253,4 +274,4 @@ CREATE TABLE `usuarios` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-28 17:12:28
+-- Dump completed on 2025-04-29 18:44:59
