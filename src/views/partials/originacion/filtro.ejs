@@ -19,18 +19,13 @@
         <h3>Identificador</h3>
         <select name="id">
           <option value="">Todos</option>
-          <% if (locals?.formData?.originaciones?.length > 0) { %>
-            <% for (const originacion of locals?.formData?.originaciones) { %>
-              <option 
-                    value="<%= originacion.id %>" 
-                    <%= (locals.oldData?.id === originacion.id) && 'selected'  %>
-              > 
-                <%= originacion.id %>
-              </option>
-            <% } %>
-          <% } else { %>
-            <option value="0">No hay originaciones definidas</option>
-          <% } %>
+          <%- include('./dinamicFormOptions.ejs', {
+            options: locals?.formData && locals?.formData?.originaciones,
+            selected: locals?.oldData && locals?.oldData?.id,
+            keyLabel: 'id',
+            keyValue: 'id',
+            emptyMessage: 'No hay originaciones definidas'
+          }) %>
         </select>
       </label>
 
@@ -38,18 +33,13 @@
         <h3>Ente Inspector</h3>
         <select name="ente_inspector_id">
           <option value="">Todos</option>
-          <% if (locals?.formData?.enteInspectores?.length > 0) { %>
-            <% for (const enteInspector of locals?.formData?.enteInspectores) { %>
-              <option 
-                    value="<%= enteInspector.id %>" 
-                    <%= (locals.oldData?.ente_inspector_id === enteInspector.id) && 'selected'  %>
-              > 
-                <%= enteInspector.ente_inspector %>
-              </option>
-            <% } %>
-          <% } else { %>
-            <option value="0">No hay entes inspectores definidos</option>
-          <% } %>
+          <%- include('./dinamicFormOptions.ejs', {
+            options: locals?.formData && locals?.formData?.enteInspectores,
+            selected: locals?.oldData && locals?.oldData?.ente_inspector_id,
+            keyLabel: 'ente_inspector',
+            keyValue: 'id',
+            emptyMessage: 'No hay entes inspectores definidos'
+          }) %>
         </select>
       </label>
 
@@ -57,18 +47,13 @@
         <h3>Sector</h3>
         <select name="sector_id">
           <option value="">Todos</option>
-          <% if (locals?.formData?.sectores?.length > 0) { %>
-            <% for (const sector of locals?.formData?.sectores) { %>
-              <option 
-                  value="<%= sector.id %>" 
-                  <%= (locals.oldData?.sector_id === sector.id) && 'selected'  %>
-              > 
-                <%= sector.sector %> 
-              </option>
-            <% } %>
-          <% } else { %>
-            <option value="0">No hay sectores definidos</option>
-          <% } %>
+          <%- include('./dinamicFormOptions.ejs', {
+            options: locals?.formData && locals?.formData?.sectores,
+            selected: locals?.oldData && locals?.oldData?.sector_id,
+            keyLabel: 'sector',
+            keyValue: 'id',
+            emptyMessage: 'No hay sectores definidos'
+          }) %>
         </select>
       </label>
 
@@ -76,18 +61,13 @@
         <h3>Etapa PAC / Observación</h3>
         <select name="estado_id">
           <option value="">Todos</option>
-          <% if (locals?.formData?.estados?.length > 0) { %>
-            <% for (const estado of locals?.formData?.estados) { %>
-              <option 
-                    value="<%= estado.id %>" 
-                    <%= (locals.oldData?.estado_id === estado.id) && 'selected'  %>
-              > 
-                <%= estado.nombre %>
-              </option>
-            <% } %>
-          <% } else { %>
-            <option value="0">No hay estados definidos</option>
-          <% } %>
+          <%- include('./dinamicFormOptions.ejs', {
+            options: locals?.formData && locals?.formData?.estados,
+            selected: locals?.oldData && locals?.oldData?.estado_id,
+            keyLabel: 'estado',
+            keyValue: 'id',
+            emptyMessage: 'No hay estados definidos'
+          }) %>
         </select>
       </label>
 
@@ -95,18 +75,13 @@
         <h3>Origen</h3>
         <select name="origen_id">
           <option value="">Todos</option>
-          <% if (locals?.formData?.origenes?.length > 0) { %>
-            <% for (const origen of locals?.formData?.origenes) { %>
-              <option 
-                    value="<%= origen.id %>" 
-                    <%= (locals.oldData?.origen_id === origen.id) && 'selected'%>
-              > 
-                <%= origen.origen %> 
-              </option>
-            <% } %>
-          <% } else { %>
-            <option value="0">No hay origenes definidas</option>
-          <% } %>
+          <%- include('./dinamicFormOptions.ejs', {
+            options: locals?.formData && locals?.formData?.origenes,
+            selected: locals?.oldData && locals?.oldData?.origen_id,
+            keyLabel: 'origen',
+            keyValue: 'id',
+            emptyMessage: 'No hay origenes definidos'
+          }) %>
         </select>
       </label>
 
