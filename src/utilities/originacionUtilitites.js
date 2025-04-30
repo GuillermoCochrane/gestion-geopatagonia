@@ -95,20 +95,26 @@ const taskUtilities = {
   originacionFormData: async function(){
     try {
       let origenData = await Origen.findAll();
-      origenData = this.dataFormatter(origenData);
       let enteInspectorData = await EnteInspector.findAll();
-      enteInspectorData = this.dataFormatter(enteInspectorData);
       let sectorData = await Sector.findAll();
-      sectorData = this.dataFormatter(sectorData);
+      let estadosData = await Estado.findAll();
       let observadorData = await Usuario.findAll({where: { rol_id: 4}});
+      origenData = this.dataFormatter(origenData);
+      enteInspectorData = this.dataFormatter(enteInspectorData);
+      sectorData = this.dataFormatter(sectorData);
+      estadosData = this.dataFormatter(estadosData);
       observadorData = this.dataFormatter(observadorData);
       observadorData = utilities.passwordRemover(observadorData);
+      let originacionesData = await this.allOriginacionsData();
+
 
       return {
         origenes: origenData,
         observadores: observadorData,
         enteInspectores: enteInspectorData,
         sectores: sectorData,
+        estados: estadosData,
+        originaciones: originacionesData
       }
     } catch (error) {
       console.error(error); // Registro del error para depuración
