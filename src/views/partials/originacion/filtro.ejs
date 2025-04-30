@@ -1,98 +1,144 @@
 <section>
-  <details >
-    <summary >
+  <details>
+    <summary>
       <h3>Filtrar Originaciones</h3>
     </summary>
-    <form action="/originacion/filtrar" method="POST" id="filtroOriginacion">
+    <form action="/originacion/filtrar" method="POST">
+      
       <label>
         <h3>Fecha de inicio de carga</h3>
-        <input type="date" name="InicioCarga" id="InicioCarga" >
+        <input type="date" name="InicioCarga">
       </label>
+
       <label>
         <h3>Fecha de fin de carga</h3>
-        <input type="date" name="FinCarga" id="FinCarga" >
+        <input type="date" name="FinCarga">
       </label>
+
       <label>
         <h3>Identificador</h3>
-        <input type="text" name="Identificador" id="Identificador" >
+        <select name="id">
+          <option value="">Todos</option>
+          <% if (locals?.formData?.originaciones?.length > 0) { %>
+            <% for (const originacion of locals?.formData?.originaciones) { %>
+              <option 
+                    value="<%= originacion.id %>" 
+                    <%= (locals.oldData?.id === originacion.id) && 'selected'  %>
+              > 
+                <%= originacion.id %>
+              </option>
+            <% } %>
+          <% } else { %>
+            <option value="0">No hay originaciones definidas</option>
+          <% } %>
+        </select>
       </label>
+
       <label>
         <h3>Ente Inspector</h3>
-        <select name="EnteInspector" id="EnteInspector">
-          <option value="0">Todos</option>
-          <option value="1">Geopatagonia</option>
-          <option value="2">YPF</option>
-          <option value="3">Petrobras</option>
-          <option value="4">CGC</option>
+        <select name="ente_inspector_id">
+          <option value="">Todos</option>
+          <% if (locals?.formData?.enteInspectores?.length > 0) { %>
+            <% for (const enteInspector of locals?.formData?.enteInspectores) { %>
+              <option 
+                    value="<%= enteInspector.id %>" 
+                    <%= (locals.oldData?.ente_inspector_id === enteInspector.id) && 'selected'  %>
+              > 
+                <%= enteInspector.ente_inspector %>
+              </option>
+            <% } %>
+          <% } else { %>
+            <option value="0">No hay entes inspectores definidos</option>
+          <% } %>
         </select>
       </label>
+
       <label>
         <h3>Sector</h3>
-        <select name="Sector" id="Sector">
-          <option value="0">Todos</option>
-          <option value="1">Agricultura</option>
-          <option value="2">Industria</option>
-          <option value="3">Comercio</option>
-          <option value="4">Transporte</option>
+        <select name="sector_id">
+          <option value="">Todos</option>
+          <% if (locals?.formData?.sectores?.length > 0) { %>
+            <% for (const sector of locals?.formData?.sectores) { %>
+              <option 
+                  value="<%= sector.id %>" 
+                  <%= (locals.oldData?.sector_id === sector.id) && 'selected'  %>
+              > 
+                <%= sector.sector %> 
+              </option>
+            <% } %>
+          <% } else { %>
+            <option value="0">No hay sectores definidos</option>
+          <% } %>
         </select>
       </label>
+
       <label>
-        <h3>Etapa PAC / Observacion</h3>
-        <select name="Estado" id="Estado">
-          <option value="0">Todos</option>
-          <option value="1">Activo</option>
-          <option value="2">Inactivo</option>
+        <h3>Etapa PAC / Observación</h3>
+        <select name="estado_id">
+          <option value="">Todos</option>
+          <% if (locals?.formData?.estados?.length > 0) { %>
+            <% for (const estado of locals?.formData?.estados) { %>
+              <option 
+                    value="<%= estado.id %>" 
+                    <%= (locals.oldData?.estado_id === estado.id) && 'selected'  %>
+              > 
+                <%= estado.nombre %>
+              </option>
+            <% } %>
+          <% } else { %>
+            <option value="0">No hay estados definidos</option>
+          <% } %>
         </select>
       </label>
+
       <label>
         <h3>Origen</h3>
-        <select name="Origen" id="Origen">
-          <option value="0">Todos</option>
-          <option value="1">Accidente</option>
-          <option value="2">Auditoría</option>
-          <option value="3">Insepección</option>
+        <select name="origen_id">
+          <option value="">Todos</option>
+          <% if (locals?.formData?.origenes?.length > 0) { %>
+            <% for (const origen of locals?.formData?.origenes) { %>
+              <option 
+                    value="<%= origen.id %>" 
+                    <%= (locals.oldData?.origen_id === origen.id) && 'selected'%>
+              > 
+                <%= origen.origen %> 
+              </option>
+            <% } %>
+          <% } else { %>
+            <option value="0">No hay origenes definidas</option>
+          <% } %>
         </select>
       </label>
+
+      <!-- Campos que todavía no están en la DB -->
       <label>
         <h3>Formulario</h3>
-        <select name="Formulario" id="Formulario">
-          <option value="0">Todos</option>
-          <option value="1">Formulario 1</option>
-          <option value="2">Formulario 2</option>
-          <option value="3">Formulario 3</option>
-          <option value="4">Formulario 4</option>
+        <select name="Formulario" disabled>
+          <option value="">(No disponible)</option>
         </select>
       </label>
+
       <label>
         <h3>Inciso</h3>
-        <select name="Inciso" id="Inciso">
-          <option value="0">Todos</option>
-          <option value="1">Inciso 1</option>
-          <option value="2">Inciso 2</option>
-          <option value="3">Inciso 3</option>
-          <option value="4">Inciso 4</option>
+        <select name="Inciso" disabled>
+          <option value="">(No disponible)</option>
         </select>
       </label>
+
       <label>
         <h3>Equipo</h3>
-        <select name="Equipo" id="Equipo">
-          <option value="0">Todos</option>
-          <option value="1">Equipo 1</option>
-          <option value="2">Equipo 2</option>
-          <option value="3">Equipo 3</option>
-          <option value="4">Equipo 4</option>
+        <select name="Equipo" disabled>
+          <option value="">(No disponible)</option>
         </select>
       </label>
+
       <label>
         <h3>Tipo de operación</h3>
-        <select name="TipoOperacion" id="TipoOperacion">
-          <option value="0">Todos</option>
-          <option value="1">Tipo 1</option>
-          <option value="2">Tipo 2</option>
-          <option value="3">Tipo 3</option>
-          <option value="4">Tipo 4</option>
+        <select name="TipoOperacion" disabled>
+          <option value="">(No disponible)</option>
         </select>
       </label>
+
       <aside>
         <button>
           Filtrar
