@@ -24,6 +24,7 @@ const accionValidation = require("../middlewares/validations/originaciones/accio
 
 router.get('/', originacionesController.originaciones);
 router.post('/', upload.single("adjunto"), originacionValidation, originacionesController.nuevaOriginacion);
+router.post('/filtrar', originacionesController.filtrar);
 router.post('/observacionPAC', uploading.single("adjunto"), obsPACValidation, originacionesController.nuevaObservacionPAC);
 router.get('/observacionPAC', originacionesController.observacionesPACs); // Ruta de prueba
 router.get('/observacionPAC/pdf/:id', originacionesController.observacionPacPdf);
