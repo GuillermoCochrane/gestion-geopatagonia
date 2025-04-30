@@ -1,0 +1,22 @@
+<%
+// Espera:
+// - options: array de objetos
+// - selected: valor actualmente seleccionado
+// - keyLabel: propiedad para mostrar como texto (ej: 'origen', 'sector')
+// - keyValue: propiedad para el value (por lo general 'id')
+// - emptyMessage: string si options está vacío
+%>
+
+<% if (options?.length > 0) { %>
+  <% for (const oneOption of options) { %>
+    <option 
+      value="<%= oneOption[keyValue] %>" 
+      <%= (selected === oneOption[keyValue]) ? 'selected' : '' %>
+    >
+      <%= oneOption[keyLabel] %>
+      <% console.log(oneOption);%>
+    </option>
+  <% } %>
+<% } else { %>
+  <option value="0"><%= emptyMessage %></option>
+<% } %>
