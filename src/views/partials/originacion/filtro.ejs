@@ -1,5 +1,5 @@
 <section>
-  <details>
+  <details <%= locals.filterErrors && 'open' %>>
     <summary>
       <h3>Filtrar Originaciones</h3>
     </summary>
@@ -7,12 +7,24 @@
       
       <label>
         <h3>Fecha de inicio de carga</h3>
-        <input type="date" name="InicioCarga">
+        <input 
+          type="date" 
+          name="inicio_carga"
+          id="inicio_carga"
+          value="<%= locals.oldData?.inicio_carga %>"
+        >
+        <span id="error-inicio_carga"><%= locals.filterErrors?.inicio_carga?.msg  %></span>
       </label>
 
       <label>
         <h3>Fecha de fin de carga</h3>
-        <input type="date" name="FinCarga">
+        <input 
+          type="date"  
+          name="fin_carga"
+          id="fin_carga"
+          value="<%= locals.oldData?.fin_carga %>"
+        >
+        <span id="error-fin_carga"><%= locals.filterErrors?.fin_carga?.msg  %></span>
       </label>
 
       <label>
@@ -88,28 +100,28 @@
       <!-- Campos que todavía no están en la DB -->
       <label>
         <h3>Formulario</h3>
-        <select name="Formulario" disabled>
+        <select name="formulario" disabled>
           <option value="">(No disponible)</option>
         </select>
       </label>
 
       <label>
         <h3>Inciso</h3>
-        <select name="Inciso" disabled>
+        <select name="inciso" disabled>
           <option value="">(No disponible)</option>
         </select>
       </label>
 
       <label>
         <h3>Equipo</h3>
-        <select name="Equipo" disabled>
+        <select name="equipo" disabled>
           <option value="">(No disponible)</option>
         </select>
       </label>
 
       <label>
         <h3>Tipo de operación</h3>
-        <select name="TipoOperacion" disabled>
+        <select name="tipo_operacion" disabled>
           <option value="">(No disponible)</option>
         </select>
       </label>
