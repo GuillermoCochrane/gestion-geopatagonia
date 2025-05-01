@@ -306,6 +306,7 @@ const taskUtilities = {
     //Criterios opcionales de filtrado
     const where = id ? { id } : {};
     const originacionWhere = this.originacionFilter(filtros);
+    filtros.estado_id && (where.estado_id = filtros.estado_id);
 
     //Sub Relaciones a incluir en la consulta
     const originacionIncludes = [
@@ -321,6 +322,7 @@ const taskUtilities = {
     // Consulta de las observaciones / PACs
     try {
       const resultados = await ObservacionPAC.findAll({
+        where,
         include: [
           { 
             model: Originacion, 
@@ -334,7 +336,6 @@ const taskUtilities = {
           { model: Accion, as: 'acciones', include: accionIncludes, attributes: this.excludeTimestamps() },
         ],
         attributes: this.excludeTimestamps(),
-        where,
         order: [['id', 'ASC']],
       });
 
