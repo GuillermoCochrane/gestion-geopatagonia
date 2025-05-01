@@ -19,12 +19,14 @@ const obsPACValidation = require("../middlewares/validations/originaciones/obsPA
 const responsableValidation = require("../middlewares/validations/originaciones/responsableValidation");
 // validaciones de formularios de acciones
 const accionValidation = require("../middlewares/validations/originaciones/accionValidation");
+//validaciones de fechas de carga
+const dateValidations = require("../middlewares/validations/originaciones/dateValidations");
 
 //* Rutas
 
 router.get('/', originacionesController.originaciones);
 router.post('/', upload.single("adjunto"), originacionValidation, originacionesController.nuevaOriginacion);
-router.post('/filtrar', originacionesController.filtrar);
+router.post('/filtrar', dateValidations, originacionesController.filtrar);
 router.post('/observacionPAC', uploading.single("adjunto"), obsPACValidation, originacionesController.nuevaObservacionPAC);
 router.get('/observacionPAC', originacionesController.observacionesPACs); // Ruta de prueba
 router.get('/observacionPAC/pdf/:id', originacionesController.observacionPacPdf);
