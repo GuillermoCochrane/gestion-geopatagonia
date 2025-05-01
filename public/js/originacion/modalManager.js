@@ -69,7 +69,6 @@ window.addEventListener("load", () => {
 
   // Cerrar el modal con el botón
   modalCloser.addEventListener("click", async () => {
-    console.log(noObservacionesPACs);
     if (noObservacionesPACs) {
       const userConfirmed = await showConfirmation();
 

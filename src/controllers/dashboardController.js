@@ -89,7 +89,7 @@ const dashboardController = {
                 if(estado.error) return res.render("dashboard/dashboard", estado);
                 return res.redirect("/dashboard/estados");
             } catch (error) {
-                console.log(error);
+                console.error(error);
                 let data = dashboardUtilities.errorHandler(error);
                 return res.render("dashboard/dashboard", data);
             }
@@ -99,7 +99,7 @@ const dashboardController = {
                 if(data.error) return res.render("dashboard/dashboard", data);
                 return res.render("dashboard/dashboard", data);
             } catch (error) {
-                console.log(error);
+                console.error(error);
                 let data = dashboardUtilities.errorHandler(error);
                 return res.render("dashboard/dashboard", data);
             }

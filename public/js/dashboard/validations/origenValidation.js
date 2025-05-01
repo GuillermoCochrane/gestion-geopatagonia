@@ -3,9 +3,6 @@ window.addEventListener("load", () => {
     const $origen = document.querySelector("#origen");
     const $btn = document.querySelector("#new-content button");
 
-    console.log("cargo");
-    
-
     const origenlValidation = () => {
         requiredValidation($origen);
         !errors.origen && minlengthValidation($origen,2);

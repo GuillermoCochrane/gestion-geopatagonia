@@ -1,5 +1,4 @@
 <%
-// Espera:
 // - options: array de objetos
 // - selected: valor actualmente seleccionado
 // - keyLabel: propiedad para mostrar como texto (ej: 'origen', 'sector')
@@ -14,7 +13,6 @@
       <%= (selected === oneOption[keyValue]) ? 'selected' : '' %>
     >
       <%= oneOption[keyLabel] %>
-      <% console.log(oneOption);%>
     </option>
   <% } %>
 <% } else { %>
