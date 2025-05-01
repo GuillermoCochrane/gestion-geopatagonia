@@ -1,19 +1,23 @@
 const { body } = require("express-validator");
-// middleware para validar que las fechas de inicio sea anterior a la de fin
+
 const dateValidations = [
-  body("InicioCarga")
-    .optional({ checkFalsy: true })
-    .isDate().withMessage("La fecha de inicio debe tener un formato válido").bail()
+  body("inicio_carga")
+    .optional({ checkFalsy: true, nullable: true })
+    .isDate({ format: 'YYYY-MM-DD', strictMode: true }).withMessage("La fecha de inicio debe tener un formato válido").bail()
     .custom((value, { req }) => {
-      const { InicioCarga, FinCarga } = req.body;
-      if (InicioCarga && FinCarga && new Date(InicioCarga) > new Date(FinCarga)) {
-        throw new Error("La fecha de inicio no puede ser mayor que la fecha de fin");
+      const { fin_carga } = req.body;
+      const inicio = new Date(value);
+      const fin = new Date(fin_carga);
+
+      if (fin_carga && inicio > fin) {
+        throw new Error("La fecha de inicio no puede ser mayor que la de fin");
       }
+      return true;
     }),
 
-  body("FinCarga")
-    .optional({ checkFalsy: true })
-    .isDate().withMessage("La fecha de fin debe tener un formato válido")
+  body("fin_carga")
+    .optional({ checkFalsy: true, nullable: true })
+    .isDate({ format: 'YYYY-MM-DD', strictMode: true }).withMessage("La fecha de fin debe tener un formato válido")
 ];
 
 module.exports = dateValidations;

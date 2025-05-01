@@ -109,7 +109,6 @@ const originacionesController = {
 
     agregarAccion: async (req, res) => {
         const errors = validationResult(req);
-        console.log(errors);
         try{
             if (errors.isEmpty()) {
                 await utilities.createAccion(req.params.id, req.body);
@@ -153,6 +152,26 @@ const originacionesController = {
         } catch (error) {
             console.error(error);
             throw error;
+        }
+    },
+
+    filtrar: async function(req, res){
+        const errors = validationResult(req);
+        console.log(errors);
+        try{
+            if (errors.isEmpty()) {
+                const data = req.body;
+                return res.send(data);
+            } else {
+                let data = await utilities.originacionData();
+                data.oldData = req.body;
+                data.filterErrors = errors.mapped();
+                return res.render("originacion/originacion", data);
+            }
+        } catch (error) {
+            console.error(error);
+            const data = utilities.errordata(error);
+            return res.render("originacion/originacion", data);
         }
     },
 }
