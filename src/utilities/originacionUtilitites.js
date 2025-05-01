@@ -123,20 +123,22 @@ const taskUtilities = {
     }
   },
 
-  originacionData: async function(){
+  originacionData: async function(filter = {}) {
     let data = this.headerData("Originaciones");
     data.pageScript = [...data.pageScript, ...this.validationScripts, "originacion/validations/originacionValidation"];
     let formData = {};
     let pacTableData = [];
     let originacionData = [];
+
     try {
       formData = await this.originacionFormData();
-      pacTableData = await this.allPACsData();
+      pacTableData = await this.allPACsData(null, filter);
       originacionData = await this.allOriginacionsData();
     } catch (error) {
       console.error(error); // Registro del error para depuración
       throw error;
     }
+
     data.formData = formData;
     data.pacTableData = pacTableData;
     data.subSection = this.mainSubsection;
@@ -300,8 +302,12 @@ const taskUtilities = {
     }
   },
 
-  allPACsData: async function(id = null) {
+  allPACsData: async function(id = null, filtros = {}) {
+    //Criterios opcionales de filtrado
     const where = id ? { id } : {};
+    const originacionWhere = this.originacionFilter(filtros);
+
+    //Sub Relaciones a incluir en la consulta
     const originacionIncludes = [
       { model: Origen, as: 'origen', attributes: this.excludeTimestamps() },
       { model: Usuario, as: 'observador', attributes: this.excludePassword() },
@@ -311,10 +317,18 @@ const taskUtilities = {
     const accionIncludes = [
       { model: Usuario, as: 'ejecutor', attributes: this.excludePassword() },
     ];
+
+    // Consulta de las observaciones / PACs
     try {
       const resultados = await ObservacionPAC.findAll({
         include: [
-          { model: Originacion, as: 'originacion', include: originacionIncludes, attributes: this.excludeTimestamps() },
+          { 
+            model: Originacion, 
+            as: 'originacion', 
+            include: originacionIncludes, 
+            attributes: this.excludeTimestamps(), 
+            where: originacionWhere 
+          },
           { model: Usuario, as: 'responsable', attributes: this.excludePassword() },
           { model: Estado, as: 'estado', attributes: this.excludeTimestamps() },
           { model: Accion, as: 'acciones', include: accionIncludes, attributes: this.excludeTimestamps() },
@@ -323,6 +337,8 @@ const taskUtilities = {
         where,
         order: [['id', 'ASC']],
       });
+
+      // Formateo de las fechas de las observaciones y sus subrelaciones
       let data = utilities.plainData(resultados);
       data = utilities.multipleDateFormat(data, ['fecha_requerida'], [{ parentObject: 'originacion', dateField: 'fecha_de_observacion' }, { parentObject: 'acciones', dateField: 'fecha_realizacion' }]);
       return data; 
