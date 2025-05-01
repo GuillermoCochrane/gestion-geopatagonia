@@ -1,4 +1,5 @@
 const { Estado, EnteInspector, Origen, Sector, Rol, Usuario, AdjuntoOriginacion, AdjuntoObservacionPAC, Originacion, ObservacionPAC, Accion } = require("../database/models");
+const { Op } = require("sequelize");
 const utilities = require("./utilities");
 
 const taskUtilities = {
@@ -406,7 +407,27 @@ const taskUtilities = {
       console.error(error);
       throw error;
     }
-  }
+  },
+  
+  originacionFilter: function(filtros) {
+    const where = {};
+  
+    if (filtros.inicio_carga && filtros.fin_carga) {
+      where.created_at = { [Op.between]: [filtros.inicio_carga, filtros.fin_carga] };
+    } else if (filtros.inicio_carga) {
+      where.created_at = { [Op.gte]: filtros.inicio_carga };
+    } else if (filtros.fin_carga) {
+      where.created_at = { [Op.lte]: filtros.fin_carga };
+    }
+  
+    filtros.id && (where.id = filtros.id);
+    filtros.origen_id && (where.origen_id = filtros.origen_id);
+    filtros.sector_id && (where.sector_id = filtros.sector_id);
+    filtros.ente_inspector_id && (where.ente_inspector_id = filtros.ente_inspector_id);
+  
+    return where;
+  },
+  
 }
 
 module.exports = taskUtilities;
