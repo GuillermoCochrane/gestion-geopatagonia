@@ -15,6 +15,25 @@ const originacionesController = {
         }
     },
 
+    filtrar: async function(req, res){
+        const errors = validationResult(req);
+        try{
+            if (errors.isEmpty()) {
+                const data = await utilities.originacionData(req.body);
+                return res.render("originacion/originacion", data);
+            } else {
+                let data = await utilities.originacionData();
+                data.oldData = req.body;
+                data.filterErrors = errors.mapped();
+                return res.render("originacion/originacion", data);
+            }
+        } catch (error) {
+            console.error(error);
+            const data = utilities.errordata(error);
+            return res.render("originacion/originacion", data);
+        }
+    },
+
     nuevaOriginacion: async (req, res) => {
         const errors = validationResult(req);
         try {
@@ -155,25 +174,6 @@ const originacionesController = {
         }
     },
 
-    filtrar: async function(req, res){
-        const errors = validationResult(req);
-        console.log(errors);
-        try{
-            if (errors.isEmpty()) {
-                const data = req.body;
-                return res.send(data);
-            } else {
-                let data = await utilities.originacionData();
-                data.oldData = req.body;
-                data.filterErrors = errors.mapped();
-                return res.render("originacion/originacion", data);
-            }
-        } catch (error) {
-            console.error(error);
-            const data = utilities.errordata(error);
-            return res.render("originacion/originacion", data);
-        }
-    },
 }
 
 module.exports = originacionesController;
