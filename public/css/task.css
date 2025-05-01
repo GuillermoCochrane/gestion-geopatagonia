@@ -489,8 +489,8 @@ dialog form label textarea{
 main aside,
 details form aside{
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 main aside{
@@ -514,9 +514,21 @@ details form aside button{
   transition: all .5s ease-in-out;
 }
 
+details form aside button.reset{
+  background-color: var(--white);
+  color: var(--logo);
+  border: 2px var(--logo) solid;
+}
+
 main aside button:hover,
 details form aside button:hover{
   background-color: var(--success);
+  color: var(--white);
+  border: 2px transparent solid;
+}
+
+details form aside button.reset:hover{
+  background-color: var(--logo);
   color: var(--white);
   border: 2px transparent solid;
 }
