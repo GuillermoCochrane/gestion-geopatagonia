@@ -2,7 +2,7 @@ const { Estado, EnteInspector, Origen, Sector, Rol, Usuario, AdjuntoOriginacion,
 const { Op } = require("sequelize");
 const utilities = require("./utilities");
 
-const taskUtilities = {
+const originacionUtilitites = {
   styles: ["task"],
 
   pageScript: ["originacion/modalManager", "originacion/selectModalManager"],
@@ -13,8 +13,6 @@ const taskUtilities = {
     mainLabel: "Originación", 
     newLabel: "Nueva Observación / PAC"
   },
-
-  timestamps: ["created_at", "updated_at"],
   
   mainSubsection: "./main.ejs",
 
@@ -55,14 +53,6 @@ const taskUtilities = {
         text: "Cerrar"
       }
     ]
-  },
-
-  excludeTimestamps: function(){
-    return {exclude: this.timestamps}
-  },
-
-  excludePassword: function(){
-    return {exclude:[...this.timestamps, "password"]}
   },
 
   errordata: function(error){
@@ -447,4 +437,4 @@ const taskUtilities = {
   
 }
 
-module.exports = taskUtilities;
+module.exports = originacionUtilitites;

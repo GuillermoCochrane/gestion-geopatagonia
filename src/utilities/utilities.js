@@ -16,6 +16,8 @@ const utilities = {
       message: "La dirección a la que intenta acceder no existe o ha sido modificada.",
     },
 
+    timestamps: ["created_at", "updated_at"],
+
     // Método para convertir fecha a un objeto con día, mes y año
     getDateParts: function(date){
       // Si no se recibe fecha, devolver objeto vacío
