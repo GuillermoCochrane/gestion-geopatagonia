@@ -125,7 +125,7 @@ const taskUtilities = {
 
   originacionData: async function(filter = {}) {
     let data = this.headerData("Originaciones");
-    data.pageScript = [...data.pageScript, ...this.validationScripts, "originacion/validations/originacionValidation"];
+    data.pageScript = [...data.pageScript, ...this.validationScripts, "originacion/validations/originacionValidation", "originacion/validations/filterDateValidation"];
     let formData = {};
     let pacTableData = [];
     let originacionData = [];
