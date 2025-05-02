@@ -18,7 +18,7 @@ const originacionUtilitites = {
 
   confirmPopUp: {
     id: "confirm-pac-delete",
-    title: "No hay observaciones registradas",
+    title: "No hay observaciones o PACs registradas",
     text: "Se eliminará la originación. ¿Estás seguro?",
     buttons: [
       {
@@ -34,7 +34,7 @@ const originacionUtilitites = {
 
   successPopUp: {
     id: "pac-delete-success",
-    title: "La observación se eliminó correctamente",
+    title: "La eliminación se realizó correctamente",
     buttons: [
       {
         id: "pac-delete-close",
