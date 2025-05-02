@@ -201,11 +201,11 @@ const taskUtilities = {
       const data = await Originacion.findAll({
         where: {id: id},
         include: [
-          { model: Origen, as: "origen", attributes: this.excludeTimestamps() },
-          { model: Usuario, as: "observador", attributes: this.excludePassword() },
-          { model: EnteInspector, as: "ente_inspector", attributes: this.excludeTimestamps() },
-          { model: Sector, as: "sector", attributes: this.excludeTimestamps() },
-          { model: AdjuntoOriginacion, as: "adjuntos", attributes: this.excludeTimestamps() },
+          { model: Origen, as: "origen", attributes: utilities.excludeTimestamps() },
+          { model: Usuario, as: "observador", attributes: utilities.excludePassword() },
+          { model: EnteInspector, as: "ente_inspector", attributes: utilities.excludeTimestamps() },
+          { model: Sector, as: "sector", attributes: utilities.excludeTimestamps() },
+          { model: AdjuntoOriginacion, as: "adjuntos", attributes: utilities.excludeTimestamps() },
           { model: ObservacionPAC, as: "observaciones_pacs", attributes: ['id', 'inciso', 'descripcion', 'fecha_requerida', 'referencia', 'fecha_negociable', 'requiere_analisis', 'responsable_id', 'originacion_id', 'estado_id'] },
         ]
       });      
@@ -221,8 +221,8 @@ const taskUtilities = {
       const data = await ObservacionPAC.findAll({
         where: {originacion_id: id},
         include: [
-          { model: Usuario, as: "responsable", attributes: this.excludePassword()},
-          { model: Estado, as: "estado", attributes: this.excludeTimestamps()},
+          { model: Usuario, as: "responsable", attributes: utilities.excludePassword()},
+          { model: Estado, as: "estado", attributes: utilities.excludeTimestamps()},
         ]
       });
       return data;
@@ -310,13 +310,13 @@ const taskUtilities = {
 
     //Sub Relaciones a incluir en la consulta
     const originacionIncludes = [
-      { model: Origen, as: 'origen', attributes: this.excludeTimestamps() },
-      { model: Usuario, as: 'observador', attributes: this.excludePassword() },
-      { model: Sector, as: 'sector', attributes: this.excludeTimestamps() },
-      { model: EnteInspector, as: 'ente_inspector', attributes: this.excludeTimestamps() },
+      { model: Origen, as: 'origen', attributes: utilities.excludeTimestamps() },
+      { model: Usuario, as: 'observador', attributes: utilities.excludePassword() },
+      { model: Sector, as: 'sector', attributes: utilities.excludeTimestamps() },
+      { model: EnteInspector, as: 'ente_inspector', attributes: utilities.excludeTimestamps() },
     ];
     const accionIncludes = [
-      { model: Usuario, as: 'ejecutor', attributes: this.excludePassword() },
+      { model: Usuario, as: 'ejecutor', attributes: utilities.excludePassword() },
     ];
 
     // Consulta de las observaciones / PACs
@@ -328,14 +328,14 @@ const taskUtilities = {
             model: Originacion, 
             as: 'originacion', 
             include: originacionIncludes, 
-            attributes: this.excludeTimestamps(), 
+            attributes: utilities.excludeTimestamps(), 
             where: originacionWhere 
           },
-          { model: Usuario, as: 'responsable', attributes: this.excludePassword() },
-          { model: Estado, as: 'estado', attributes: this.excludeTimestamps() },
-          { model: Accion, as: 'acciones', include: accionIncludes, attributes: this.excludeTimestamps() },
+          { model: Usuario, as: 'responsable', attributes: utilities.excludePassword() },
+          { model: Estado, as: 'estado', attributes: utilities.excludeTimestamps() },
+          { model: Accion, as: 'acciones', include: accionIncludes, attributes: utilities.excludeTimestamps() },
         ],
-        attributes: this.excludeTimestamps(),
+        attributes: utilities.excludeTimestamps(),
         order: [['id', 'ASC']],
       });
 
@@ -351,10 +351,10 @@ const taskUtilities = {
 
   allOriginacionsData: async function(){
     const originacionIncludes = [
-      { model: Origen, as: 'origen', attributes: this.excludeTimestamps() },
-      { model: Usuario, as: 'observador', attributes: this.excludePassword() },
-      { model: Sector, as: 'sector', attributes: this.excludeTimestamps() },
-      { model: EnteInspector, as: 'ente_inspector', attributes: this.excludeTimestamps() },
+      { model: Origen, as: 'origen', attributes: utilities.excludeTimestamps() },
+      { model: Usuario, as: 'observador', attributes: utilities.excludePassword() },
+      { model: Sector, as: 'sector', attributes: utilities.excludeTimestamps() },
+      { model: EnteInspector, as: 'ente_inspector', attributes: utilities.excludeTimestamps() },
     ];
     try {
       const originaciones = await Originacion.findAll({

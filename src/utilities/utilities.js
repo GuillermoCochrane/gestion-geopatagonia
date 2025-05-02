@@ -132,6 +132,7 @@ const utilities = {
         return bcrypt.hashSync(password, 10);
     },
 
+    // Metodo para remover password de un array de usuarios
     passwordRemover: function(users){
       for (const user of users) {
         delete user.password;
@@ -139,6 +140,7 @@ const utilities = {
       return users;
     },
 
+    // Metodo para generar un PDF a partir de un template
     generatePDF: async function(template, data) {
       try {
         //Creamos el archivo html a partir del template
@@ -165,6 +167,7 @@ const utilities = {
       }
     },
 
+    // Metodo para generar un PDF a partir de una URL
     generateURLPDF: async function(url) {
       try {
         // Configuración de Puppeteer con opciones mejoradas
@@ -199,7 +202,17 @@ const utilities = {
         console.error("Error generando PDF:", error);
         throw error;
       }
-    }
+    },
+
+    // Metodo para Excluir timestamps de una consulta de Sequelize
+    excludeTimestamps: function(){
+      return {exclude: this.timestamps}
+    },
+
+    // Metodo para Excluir password de una consulta de Sequelize
+    excludePassword: function(){
+      return {exclude:[...this.timestamps, "password"]}
+    },
 };
 
 module.exports = utilities;
