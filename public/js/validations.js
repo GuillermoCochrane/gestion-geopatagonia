@@ -132,6 +132,20 @@ const notOlderValidation = (input) => {
   handleValidation(input, validation, errorMessage);
 };
 
+// * Validación de Fechas de carga (que inicio sea anterior a fin)
+const notOlderThanEndValidation = (inputStartDate, inputEndDate) => {
+  // Convertimos valores a fechas solo cuando tengan datos con valor
+  const start = inputStartDate.value ? new Date(inputStartDate.value) : null;
+  const end = inputEndDate.value ? new Date(inputEndDate.value) : null;
+  
+  // si estan cargadas ambas fechas, validamos que la primera sea anterior a la segunda
+  const validation = (start && end) ? start <= end : true;
+  const errorMessage = `La fecha de inicio no puede ser posterior a la de fin`;
+
+  handleValidation(inputStartDate, validation, errorMessage);
+};
+
+
 // * Validación de extensiones de archivos permitidas
 const extentionValidation = (input, allowedExtensions) => {
   const fileName = input.value; 
