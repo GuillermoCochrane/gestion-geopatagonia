@@ -76,37 +76,35 @@ const originacionUtilitites = {
     }
   },
 
-  dataFormatter: function(data){
-    let dataFormatted = utilities.plainData(data);
+  dataFormatter: function(data=[], fields=[], nestedFields=[]){
+    // Si el data no es un array, o esta vacio, devolver vacío
+    if (!Array.isArray(data)) return [];
     if (data.length === 0) return [];
-    dataFormatted = utilities.multipleDateFormat(dataFormatted);
+
+    let dataFormatted = utilities.plainData(data);
+    dataFormatted = utilities.multipleDateFormat(dataFormatted, fields, nestedFields);
     return dataFormatted;
   },
 
   originacionFormData: async function(){
     try {
+      // Obtiene los datos de las tablas de la base de datos
       let origenData = await Origen.findAll();
       let enteInspectorData = await EnteInspector.findAll();
       let sectorData = await Sector.findAll();
       let estadosData = await Estado.findAll();
       let observadorData = await Usuario.findAll({where: { rol_id: 4}});
-      origenData = this.dataFormatter(origenData);
-      enteInspectorData = this.dataFormatter(enteInspectorData);
-      sectorData = this.dataFormatter(sectorData);
-      estadosData = this.dataFormatter(estadosData);
-      observadorData = this.dataFormatter(observadorData);
-      observadorData = utilities.passwordRemover(observadorData);
-      let originacionesData = await this.allOriginacionsData();
 
-
+      // Devuelve los datos formateados
       return {
-        origenes: origenData,
-        observadores: observadorData,
-        enteInspectores: enteInspectorData,
-        sectores: sectorData,
-        estados: estadosData,
-        originaciones: originacionesData
+        origenes: this.dataFormatter(origenData),
+        observadores: this.dataFormatter(observadorData),
+        enteInspectores: this.dataFormatter(enteInspectorData),
+        sectores: this.dataFormatter(sectorData),
+        estados: this.dataFormatter(estadosData),
+        originaciones: await this.allOriginacionsData()
       }
+
     } catch (error) {
       console.error(error); // Registro del error para depuración
       throw error;
@@ -156,12 +154,10 @@ const originacionUtilitites = {
 
       // Obtener los datos de la originación
       const newOriginationData = await this.singleOriginacionData(id); 
-      newOriginationData.fecha_de_observacion = utilities.formatDateDisplay(newOriginationData.fecha_de_observacion);
 
       // Obtener las observaciones / PACs de la originación
       let observacionesPACs = await this.observacionesPACs(id);
-      observacionesPACs = utilities.plainData(observacionesPACs);
-      observacionesPACs = utilities.multipleDateFormat(observacionesPACs, ['fecha_requerida']);
+      observacionesPACs = this.dataFormatter(observacionesPACs, ['fecha_requerida']); 
 
       //Datos del tratador para el formulario de PACs
       let tratador = await Usuario.findAll({where: { rol_id: 3}});
@@ -198,8 +194,10 @@ const originacionUtilitites = {
           { model: AdjuntoOriginacion, as: "adjuntos", attributes: utilities.excludeTimestamps() },
           { model: ObservacionPAC, as: "observaciones_pacs", attributes: ['id', 'inciso', 'descripcion', 'fecha_requerida', 'referencia', 'fecha_negociable', 'requiere_analisis', 'responsable_id', 'originacion_id', 'estado_id'] },
         ]
-      });      
-      return utilities.plainData(data)[0];
+      });
+      let plainData = utilities.plainData(data)[0];
+      plainData.fecha_de_observacion = utilities.formatDateDisplay(plainData.fecha_de_observacion);
+      return plainData;
     } catch (error) {
       console.error(error); // Registro del error para depuración
       throw error;
@@ -330,9 +328,13 @@ const originacionUtilitites = {
       });
 
       // Formateo de las fechas de las observaciones y sus subrelaciones
-      let data = utilities.plainData(resultados);
-      data = utilities.multipleDateFormat(data, ['fecha_requerida'], [{ parentObject: 'originacion', dateField: 'fecha_de_observacion' }, { parentObject: 'acciones', dateField: 'fecha_realizacion' }]);
-      return data; 
+      return this.dataFormatter(resultados, 
+        ['fecha_requerida'], 
+        [
+          { parentObject: 'originacion', dateField: 'fecha_de_observacion' }, 
+          { parentObject: 'acciones', dateField: 'fecha_realizacion' }
+        ]
+      );
     } catch (error) {
       console.error(error);
       throw error;
@@ -353,9 +355,7 @@ const originacionUtilitites = {
         order: [['id', 'ASC']],
       });
 
-      let data = utilities.plainData(originaciones);
-      data = utilities.multipleDateFormat(data, ['fecha_de_observacion']);
-      return data;
+      return this.dataFormatter(originaciones, ['fecha_de_observacion']);
     } catch (error) {
       console.error(error);
       throw error;
