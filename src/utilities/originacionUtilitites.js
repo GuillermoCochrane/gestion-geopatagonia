@@ -136,9 +136,9 @@ const originacionUtilitites = {
 
   //pendiente de revision
   originacionPACData: async function(formData, file, id, nuevaObservacionPAC){
-    let data = this.headerData("Originaciones");
-    data.pageScript = [...data.pageScript, ...this.validationScripts, "sectionhandler", "originacion/validations/obsPACValidation"]; 
-    data.dashboardHeader = this.dashboardHeader;
+    // Datos estáticos para la vista
+    const data = this.staticData();
+
     try {
       // Creación de la originación, si no se pasa el id de una originación existente
       if (!id) {
@@ -155,14 +155,11 @@ const originacionUtilitites = {
 
       // Obtener los datos de la originación
       const newOriginationData = await this.singleOriginacionData(id); 
-
       // Obtener las observaciones / PACs de la originación
       let observacionesPACs = await this.observacionesPACs(id);
-
       //Datos del tratador para el formulario de PACs
       let tratador = await Usuario.findAll({where: { rol_id: 3}});
       tratador = this.dataFormatter(tratador);
-
       let originacionData = await this.allOriginacionsData();
 
       //Datos adicionales para el el renderizado de la vista
@@ -170,15 +167,24 @@ const originacionUtilitites = {
       data.originacionData = newOriginationData;
       data.tratadorData = tratador;
       data.observacionesPACs = observacionesPACs;
-      data.confirmPopUp = this.confirmPopUp;
-      data.successPopUp = this.successPopUp;
-      data.errorPopUp = this.errorPopUp;
-      data.subSection = this.mainSubsection;
       data.originacionSelectData = originacionData;
       return data;
     } catch (error) {
       console.error(error); // Registro del error para depuración
       throw error;
+    }
+  },
+
+  staticData: function(){
+    // Devuelve los datos que no varian, necesarios el renderizado de la vista
+    return {
+      ...this.headerData("Originaciones"),
+      pageScript: [...this.pageScript, ...this.validationScripts, "sectionhandler", "originacion/validations/obsPACValidation"],
+      dashboardHeader: this.dashboardHeader,
+      subSection: this.mainSubsection,
+      confirmPopUp: this.confirmPopUp,
+      successPopUp: this.successPopUp,
+      errorPopUp: this.errorPopUp,
     }
   },
 
