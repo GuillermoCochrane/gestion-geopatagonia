@@ -136,9 +136,6 @@ const originacionUtilitites = {
 
   //pendiente de revision
   originacionPACData: async function(formData, file, id, nuevaObservacionPAC){
-    // Datos estáticos para la vista
-    const data = this.staticData();
-
     try {
       // Creación de la originación, si no se pasa el id de una originación existente
       if (!id) {
@@ -153,22 +150,10 @@ const originacionUtilitites = {
         await this.createRegistro(formData, file, true);
       }
 
-      // Obtener los datos de la originación
-      const newOriginationData = await this.singleOriginacionData(id); 
-      // Obtener las observaciones / PACs de la originación
-      let observacionesPACs = await this.observacionesPACs(id);
-      //Datos del tratador para el formulario de PACs
-      let tratador = await Usuario.findAll({where: { rol_id: 3}});
-      tratador = this.dataFormatter(tratador);
-      let originacionData = await this.allOriginacionsData();
+      const staticData = this.staticData();
+      const dynamicData = await this.dinamicData(id);
 
-      //Datos adicionales para el el renderizado de la vista
-      data.oldData = {originacion_id: id};
-      data.originacionData = newOriginationData;
-      data.tratadorData = tratador;
-      data.observacionesPACs = observacionesPACs;
-      data.originacionSelectData = originacionData;
-      return data;
+      return {...staticData, ...dynamicData};
     } catch (error) {
       console.error(error); // Registro del error para depuración
       throw error;
@@ -185,6 +170,40 @@ const originacionUtilitites = {
       confirmPopUp: this.confirmPopUp,
       successPopUp: this.successPopUp,
       errorPopUp: this.errorPopUp,
+    }
+  },
+
+  dinamicData: async function(id){
+    // Devuelve los datos que varían, para el renderizado dinámico de la vista
+    try {
+      let tratador = await Usuario.findAll({where: { rol_id: 3}});
+      tratador = this.dataFormatter(tratador);
+      return {
+        oldData: {originacion_id: id},
+        tratadorData: tratador, // Datos del tratador para el formulario de PACs
+        originacionData: await this.singleOriginacionData(id), // Datos de la originación corrspondientes al id
+        observacionesPACs: await this.observacionesPACs(id), // Observaciones / PACs de la originación
+        originacionSelectData: await this.allOriginacionsData(),
+      }
+    } catch (error) {
+      console.error(error); // Registro del error para depuración
+      throw error;
+    }
+  },
+
+  observacionesPACs: async function(id){
+    try {
+      const data = await ObservacionPAC.findAll({
+        where: {originacion_id: id},
+        include: [
+          { model: Usuario, as: "responsable", attributes: utilities.excludePassword()},
+          { model: Estado, as: "estado", attributes: utilities.excludeTimestamps()},
+        ]
+      });
+      return this.dataFormatter(data, ['fecha_requerida']);
+    } catch (error) {
+      console.error(error); // Registro del error para depuración
+      throw error;
     }
   },
 
@@ -213,22 +232,6 @@ const originacionUtilitites = {
       plainData.fecha_de_observacion = utilities.formatDateDisplay(plainData.fecha_de_observacion);
 
       return plainData;
-    } catch (error) {
-      console.error(error); // Registro del error para depuración
-      throw error;
-    }
-  },
-
-  observacionesPACs: async function(id){
-    try {
-      const data = await ObservacionPAC.findAll({
-        where: {originacion_id: id},
-        include: [
-          { model: Usuario, as: "responsable", attributes: utilities.excludePassword()},
-          { model: Estado, as: "estado", attributes: utilities.excludeTimestamps()},
-        ]
-      });
-      return this.dataFormatter(data, ['fecha_requerida']);
     } catch (error) {
       console.error(error); // Registro del error para depuración
       throw error;
