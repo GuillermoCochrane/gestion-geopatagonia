@@ -151,7 +151,7 @@ const originacionUtilitites = {
       }
 
       const staticData = this.staticData();
-      const dynamicData = await this.dinamicData(id);
+      const dynamicData = await this.dynamicData(id);
 
       return {...staticData, ...dynamicData};
     } catch (error) {
@@ -173,7 +173,7 @@ const originacionUtilitites = {
     }
   },
 
-  dinamicData: async function(id){
+  dynamicData: async function(id){
     // Devuelve los datos que varían, para el renderizado dinámico de la vista
     try {
       let tratador = await Usuario.findAll({where: { rol_id: 3}});
@@ -369,7 +369,7 @@ const originacionUtilitites = {
     try {
       const originaciones = await Originacion.findAll({
         include: originacionIncludes,
-        attributes: this.excludeTimestamps(),
+        attributes: utilities.excludeTimestamps(),
         order: [['id', 'ASC']],
       });
 
