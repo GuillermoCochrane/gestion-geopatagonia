@@ -158,7 +158,6 @@ const originacionUtilitites = {
 
       // Obtener las observaciones / PACs de la originación
       let observacionesPACs = await this.observacionesPACs(id);
-      observacionesPACs = this.dataFormatter(observacionesPACs, ['fecha_requerida']); 
 
       //Datos del tratador para el formulario de PACs
       let tratador = await Usuario.findAll({where: { rol_id: 3}});
@@ -223,7 +222,7 @@ const originacionUtilitites = {
           { model: Estado, as: "estado", attributes: utilities.excludeTimestamps()},
         ]
       });
-      return data;
+      return this.dataFormatter(data, ['fecha_requerida']);
     } catch (error) {
       console.error(error); // Registro del error para depuración
       throw error;
