@@ -144,9 +144,8 @@ const originacionUtilitites = {
       }
       // Creación de la observación / PAC, si esta indicado en la variable nuevaObservacionPAC
       if (nuevaObservacionPAC) {
-        //Cambio de valores de fecha_negociable y requiere_analisis a booleanos
-        formData.fecha_negociable ? formData.fecha_negociable = true : formData.fecha_negociable = false;
-        formData.requiere_analisis ? formData.requiere_analisis = true : formData.requiere_analisis = false
+        formData.fecha_negociable = utilities.toBoolean(formData.fecha_negociable);
+        formData.requiere_analisis = utilities.toBoolean(formData.requiere_analisis);
         await this.createRegistro(formData, file, true);
       }
 

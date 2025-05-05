@@ -215,6 +215,11 @@ const utilities = {
     excludePassword: function(){
       return {exclude:[...this.timestamps, "password"]}
     },
+
+    // Metodo para convertir un valor a booleano (usado para el contenido de un checkbox)
+    toBoolean: function(value) {
+      return Boolean(value); 
+    }
 };
 
 module.exports = utilities;
