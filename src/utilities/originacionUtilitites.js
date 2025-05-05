@@ -106,7 +106,7 @@ const originacionUtilitites = {
       }
 
     } catch (error) {
-      console.error(error); // Registro del error para depuración
+      console.error(error);
       throw error;
     }
   },
@@ -124,7 +124,7 @@ const originacionUtilitites = {
       originacionData = await this.allOriginacionsData();
     } catch (error) {
       console.error(error); // Registro del error para depuración
-      throw error;
+      throw error;          // Lanzar el error para manejarlo en el controlador
     }
 
     data.formData = formData;
@@ -134,14 +134,11 @@ const originacionUtilitites = {
     return data;
   },
 
-  //pendiente de revision
   originacionPACData: async function(formData, file, id, nuevaObservacionPAC){
     try {
       // Creación de la originación, si no se pasa el id de una originación existente
-      if (!id) {
-        const originacion = await this.createRegistro(formData, file); // Creación de la originación que devuelve un objeto con la originación y el adjunto
-        id = originacion.registro.id;
-      }
+      id = id ||await this.createRegistro(formData, file); 
+
       // Creación de la observación / PAC, si esta indicado en la variable nuevaObservacionPAC
       if (nuevaObservacionPAC) {
         formData.fecha_negociable = utilities.toBoolean(formData.fecha_negociable);
@@ -154,7 +151,7 @@ const originacionUtilitites = {
 
       return {...staticData, ...dynamicData};
     } catch (error) {
-      console.error(error); // Registro del error para depuración
+      console.error(error); 
       throw error;
     }
   },
@@ -185,7 +182,7 @@ const originacionUtilitites = {
         originacionSelectData: await this.allOriginacionsData(),
       }
     } catch (error) {
-      console.error(error); // Registro del error para depuración
+      console.error(error); 
       throw error;
     }
   },
@@ -201,12 +198,11 @@ const originacionUtilitites = {
       });
       return this.dataFormatter(data, ['fecha_requerida']);
     } catch (error) {
-      console.error(error); // Registro del error para depuración
+      console.error(error); 
       throw error;
     }
   },
 
-  //ultimo metodo revisado
   singleOriginacionData: async function(id){
     try {
       //chequeamos que se ingrese un id válido
@@ -232,7 +228,7 @@ const originacionUtilitites = {
 
       return plainData;
     } catch (error) {
-      console.error(error); // Registro del error para depuración
+      console.error(error); 
       throw error;
     }
   },
@@ -243,19 +239,20 @@ const originacionUtilitites = {
       const Modelo = observacion 
         ? ObservacionPAC 
         : Originacion;
+
       // Crear la entrada
       observacion && (data.estado_id = data.estado_id || 1); // Estado por defecto (1) para observaciones o PACs
       const registro = await Modelo.create(data);
+
       // Si se subió un archivo, guardarlo en la base de datos
-      let adjunto = {};
       if (file) {
-        adjunto = await this.createAdjunto(file, registro.id, observacion);
+        await this.createAdjunto(file, registro.id, observacion);
       }
-      // Devolver el registro creado
-      return {registro, adjunto};
+
+      return registro.id;
     } catch (error) {
-      console.error(error); // Registro del error para depuración
-      throw error; // Lanzar el error para manejarlo en el controlador
+      console.error(error); 
+      throw error; 
     }
   },
 
@@ -285,8 +282,8 @@ const originacionUtilitites = {
       const adjunto = await Modelo.create(data);
       return adjunto;
     } catch (error) {
-      console.error(error); // Registro del error para depuración
-      throw error; // Lanzar el error para manejarlo en el controlador
+      console.error(error); 
+      throw error; 
     }
   },
 
@@ -302,8 +299,8 @@ const originacionUtilitites = {
       });
       return true;
     } catch (error) {
-      console.error(error); // Registro del error para depuración
-      throw error; // Lanzar el error para manejarlo en el controlador
+      console.error(error); 
+      throw error; 
     }
   },
 
