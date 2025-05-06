@@ -280,7 +280,7 @@ const originacionUtilitites = {
       };
       // Crear el adjunto en la base de datos
       const adjunto = await Modelo.create(data);
-      return adjunto;
+      return adjunto.id;
     } catch (error) {
       console.error(error); 
       throw error; 
@@ -355,6 +355,25 @@ const originacionUtilitites = {
     }
   },
 
+  originacionFilter: function(filtros) {
+    const where = {};
+  
+    if (filtros.inicio_carga && filtros.fin_carga) {
+      where.created_at = { [Op.between]: [filtros.inicio_carga, filtros.fin_carga] };
+    } else if (filtros.inicio_carga) {
+      where.created_at = { [Op.gte]: filtros.inicio_carga };
+    } else if (filtros.fin_carga) {
+      where.created_at = { [Op.lte]: filtros.fin_carga };
+    }
+  
+    filtros.id && (where.id = filtros.id);
+    filtros.origen_id && (where.origen_id = filtros.origen_id);
+    filtros.sector_id && (where.sector_id = filtros.sector_id);
+    filtros.ente_inspector_id && (where.ente_inspector_id = filtros.ente_inspector_id);
+  
+    return where;
+  },
+
   allOriginacionsData: async function(){
     const originacionIncludes = [
       { model: Origen, as: 'origen', attributes: utilities.excludeTimestamps() },
@@ -378,13 +397,23 @@ const originacionUtilitites = {
 
   pacData: async function(id, action){
     try{
+      //chequeamos que se ingrese un id válido
+      if (!id || typeof id !== 'number') throw new Error("ID inválido");
       const allPACDatadata = await this.allPACsData(id);
+      //chequeamos que se encuentra la pac/observación
+      if (pacList.length === 0) throw new Error("No se encontró la PAC/Observación");
+
+      //titulo de la vista, según el valor de requiere_analisis
       const title = allPACDatadata[0].requiere_analisis ? "PAC" : "Observación";
       let data = this.headerData(title);
+
+      //datos específicos de la vista
       data.pageScript = [ ...this.validationScripts, "originacion/sidebarManager", "originacion/actionsModalManager", "originacion/validations/modifyResponsableValidation", "originacion/validations/addActionValidation", "originacion/exportManager"  ];
       data.subSection  = "./actions.ejs";
       data.subSectionStyles = "pac-actions";
       data.action = action;
+
+      //datos variados de la vista
       data.responsables = await Usuario.findAll({where: { rol_id: 3}});
       data.ejecutores = await Usuario.findAll({where: { rol_id: 1}}); 
       data.pacData = allPACDatadata[0];
@@ -429,26 +458,6 @@ const originacionUtilitites = {
       throw error;
     }
   },
-  
-  originacionFilter: function(filtros) {
-    const where = {};
-  
-    if (filtros.inicio_carga && filtros.fin_carga) {
-      where.created_at = { [Op.between]: [filtros.inicio_carga, filtros.fin_carga] };
-    } else if (filtros.inicio_carga) {
-      where.created_at = { [Op.gte]: filtros.inicio_carga };
-    } else if (filtros.fin_carga) {
-      where.created_at = { [Op.lte]: filtros.fin_carga };
-    }
-  
-    filtros.id && (where.id = filtros.id);
-    filtros.origen_id && (where.origen_id = filtros.origen_id);
-    filtros.sector_id && (where.sector_id = filtros.sector_id);
-    filtros.ente_inspector_id && (where.ente_inspector_id = filtros.ente_inspector_id);
-  
-    return where;
-  },
-  
 }
 
 module.exports = originacionUtilitites;
