@@ -55,6 +55,25 @@ const originacionUtilitites = {
     ]
   },
 
+  registerData: {
+    ORIGINACION: { 
+      id: 1, 
+      model: Originacion,
+      requiresAttachment: true 
+    },
+    OBSERVACION_PAC: { 
+      id: 2, 
+      model: ObservacionPAC,
+      defaultStatus: 1, // Estado "Pendiente" 
+      requiresAttachment: false // Cambiar a true cuando se adjunte pruebas
+    },
+    ACCION: { 
+        id: 3, 
+        model: Accion,
+        requiresAttachment: false  
+    }
+  },
+
   errordata: function(error){
     return {
       styles: this.styles,
@@ -256,6 +275,17 @@ const originacionUtilitites = {
     }
   },
 
+  createAccion: async function(id, data){
+    data.observacion_pac_id = id;
+    try{
+      const newAccion = await Accion.create(data);
+      return newAccion;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
+
   createAdjunto: async function (file, id, observacion = false) {
     try {
       //Definimos archivo, key  y modelo dependiendo del valor de observacion
@@ -354,7 +384,7 @@ const originacionUtilitites = {
       throw error;
     }
   },
-
+  
   originacionFilter: function(filtros) {
     const where = {};
   
@@ -417,6 +447,7 @@ const originacionUtilitites = {
       data.responsables = await Usuario.findAll({where: { rol_id: 3}});
       data.ejecutores = await Usuario.findAll({where: { rol_id: 1}}); 
       data.pacData = allPACDatadata[0];
+
       return data;
     } catch (error) {
       console.error(error);
@@ -430,17 +461,6 @@ const originacionUtilitites = {
         where: {id: id},
       });
       return modifiedData;
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  },
-
-  createAccion: async function(id, data){
-    data.observacion_pac_id = id;
-    try{
-      const newAccion = await Accion.create(data);
-      return newAccion;
     } catch (error) {
       console.error(error);
       throw error;
