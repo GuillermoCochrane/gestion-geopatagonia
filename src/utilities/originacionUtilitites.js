@@ -203,7 +203,7 @@ const originacionUtilitites = {
     }
   },
 
-  //Obtiene observaciones/PACs formateadas, asociadas a una originación.
+  // Obtiene observaciones/PACs formateadas, asociadas a una originación.
   observacionesPACsData: async function(id){
     try {
       const data = await ObservacionPAC.findAll({
@@ -220,7 +220,7 @@ const originacionUtilitites = {
     }
   },
 
-  //Obtiene datos dinámicos, luego de la creacion de registros, para vistas de manejo de originaciones y observaciones / PACs 
+  // Obtiene datos dinámicos, luego de la creacion de registros, para vistas de manejo de originaciones y observaciones / PACs 
   dynamicData: async function(id){
     // Devuelve los datos que varían, para el renderizado dinámico de la vista
     try {
@@ -236,6 +236,114 @@ const originacionUtilitites = {
     } catch (error) {
       console.error(error); 
       throw error;
+    }
+  },
+
+  originacionPACData: async function(formData, file, id, nuevaObservacionPAC){
+    try {
+      // Creación de la originación, si no se pasa el id de una originación existente
+      id = id ||await this.createRegistro(formData, file); 
+
+      // Creación de la observación / PAC, si esta indicado en la variable nuevaObservacionPAC
+      if (nuevaObservacionPAC) {
+        formData.fecha_negociable = utilities.toBoolean(formData.fecha_negociable);
+        formData.requiere_analisis = utilities.toBoolean(formData.requiere_analisis);
+        await this.createRegistro(formData, file, true);
+      }
+
+      const staticData = this.staticData();
+      const dynamicData = await this.dynamicData(id);
+
+      return {...staticData, ...dynamicData};
+    } catch (error) {
+      console.error(error); 
+      throw error;
+    }
+  },
+
+  // Crea un registro (originación u observación/PAC) en la base de datos.
+  createRegistro: async function (data, file, observacion = false) {
+    try {
+      // Definimos modelo dependiendo del valor de observacion
+      const Modelo = observacion 
+        ? ObservacionPAC 
+        : Originacion;
+
+      // Crear la entrada
+      observacion && (data.estado_id = data.estado_id || 1); // Estado por defecto (1) para observaciones o PACs
+      const registro = await Modelo.create(data);
+
+      // Si se subió un archivo, guardarlo en la base de datos
+      if (file) {
+        await this.createAdjunto(file, registro.id, observacion);
+      }
+
+      return registro.id;
+    } catch (error) {
+      console.error(error); 
+      throw error; 
+    }
+  },
+
+  // Registra una acción asociada a una observación/PAC
+  createAccion: async function(id, data){
+    data.observacion_pac_id = id;
+    try{
+      const newAccion = await Accion.create(data);
+      return newAccion;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
+
+  // Guarda un archivo adjunto asociado a una originación u observación/PAC.
+  createAdjunto: async function (file, id, observacion = false) {
+    try {
+      //Definimos archivo, key  y modelo dependiendo del valor de observacion
+      const archivo = observacion 
+        ? `/documents/observacion_pac/${file.originalname}`  // ← TRUE: Observación/PAC
+        : `/documents/originacion/${file.originalname}`;     // ← FALSE: Originación
+
+      const key = observacion 
+        ? 'observacion_pac_id' 
+        : 'originacion_id';
+
+      const Modelo = observacion 
+        ? AdjuntoObservacionPAC 
+        : AdjuntoOriginacion;
+
+      // Construir el objeto de datos para el adjunto
+      const data = {
+        nombre: file.originalname,
+        archivo: archivo, 
+        descripcion: '-',
+        [key]: id, //Asociar el adjunto a la entidad usando el ID proporcionado
+      };
+      // Crear el adjunto en la base de datos
+      const adjunto = await Modelo.create(data);
+      return adjunto.id;
+    } catch (error) {
+      console.error(error); 
+      throw error; 
+    }
+  },
+
+  // Elimina un registro (originación u observación/PAC) de la base de datos.
+  deleteRegistro: async function (id, observacion = false) {
+    try {
+      // Definimos modelo dependiendo del valor de observacion
+      const Modelo = observacion 
+        ? ObservacionPAC 
+        : Originacion;
+      // Eliminar la entrada del modelo correspondiente
+      await Modelo.destroy({
+        where: {id: id}
+      });
+      return true;
+    } catch (error) {
+      console.error(error); 
+      throw error; 
     }
   },
 
@@ -286,110 +394,6 @@ const originacionUtilitites = {
     data.subSection = this.mainSubsection;
     data.originacionSelectData = originacionData;
     return data;
-  },
-
-  originacionPACData: async function(formData, file, id, nuevaObservacionPAC){
-    try {
-      // Creación de la originación, si no se pasa el id de una originación existente
-      id = id ||await this.createRegistro(formData, file); 
-
-      // Creación de la observación / PAC, si esta indicado en la variable nuevaObservacionPAC
-      if (nuevaObservacionPAC) {
-        formData.fecha_negociable = utilities.toBoolean(formData.fecha_negociable);
-        formData.requiere_analisis = utilities.toBoolean(formData.requiere_analisis);
-        await this.createRegistro(formData, file, true);
-      }
-
-      const staticData = this.staticData();
-      const dynamicData = await this.dynamicData(id);
-
-      return {...staticData, ...dynamicData};
-    } catch (error) {
-      console.error(error); 
-      throw error;
-    }
-  },
-
-  createRegistro: async function (data, file, observacion = false) {
-    try {
-      // Definimos modelo dependiendo del valor de observacion
-      const Modelo = observacion 
-        ? ObservacionPAC 
-        : Originacion;
-
-      // Crear la entrada
-      observacion && (data.estado_id = data.estado_id || 1); // Estado por defecto (1) para observaciones o PACs
-      const registro = await Modelo.create(data);
-
-      // Si se subió un archivo, guardarlo en la base de datos
-      if (file) {
-        await this.createAdjunto(file, registro.id, observacion);
-      }
-
-      return registro.id;
-    } catch (error) {
-      console.error(error); 
-      throw error; 
-    }
-  },
-
-  createAccion: async function(id, data){
-    data.observacion_pac_id = id;
-    try{
-      const newAccion = await Accion.create(data);
-      return newAccion;
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  },
-
-  createAdjunto: async function (file, id, observacion = false) {
-    try {
-      //Definimos archivo, key  y modelo dependiendo del valor de observacion
-      const archivo = observacion 
-        ? `/documents/observacion_pac/${file.originalname}`  // ← TRUE: Observación/PAC
-        : `/documents/originacion/${file.originalname}`;     // ← FALSE: Originación
-
-      const key = observacion 
-        ? 'observacion_pac_id' 
-        : 'originacion_id';
-
-      const Modelo = observacion 
-        ? AdjuntoObservacionPAC 
-        : AdjuntoOriginacion;
-
-      // Construir el objeto de datos para el adjunto
-      const data = {
-        nombre: file.originalname,
-        archivo: archivo, 
-        descripcion: '-',
-        [key]: id, //Asociar el adjunto a la entidad usando el ID proporcionado
-      };
-      // Crear el adjunto en la base de datos
-      const adjunto = await Modelo.create(data);
-      return adjunto.id;
-    } catch (error) {
-      console.error(error); 
-      throw error; 
-    }
-  },
-
-  deleteRegistro: async function (id, observacion = false) {
-    try {
-      // Definimos modelo dependiendo del valor de observacion
-      const Modelo = observacion 
-        ? ObservacionPAC 
-        : Originacion;
-      // Eliminar la entrada del modelo correspondiente
-      await Modelo.destroy({
-        where: {id: id}
-      });
-      return true;
-    } catch (error) {
-      console.error(error); 
-      throw error; 
-    }
   },
 
   allPACsData: async function(id = null, filtros = {}) {
@@ -460,27 +464,6 @@ const originacionUtilitites = {
     filtros.ente_inspector_id && (where.ente_inspector_id = filtros.ente_inspector_id);
   
     return where;
-  },
-
-  allOriginacionsData: async function(){
-    const originacionIncludes = [
-      { model: Origen, as: 'origen', attributes: utilities.excludeTimestamps() },
-      { model: Usuario, as: 'observador', attributes: utilities.excludePassword() },
-      { model: Sector, as: 'sector', attributes: utilities.excludeTimestamps() },
-      { model: EnteInspector, as: 'ente_inspector', attributes: utilities.excludeTimestamps() },
-    ];
-    try {
-      const originaciones = await Originacion.findAll({
-        include: originacionIncludes,
-        attributes: utilities.excludeTimestamps(),
-        order: [['id', 'ASC']],
-      });
-
-      return utilities.dataFormatter(originaciones, ['fecha_de_observacion']);
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
   },
 
   pacData: async function(id, action){
