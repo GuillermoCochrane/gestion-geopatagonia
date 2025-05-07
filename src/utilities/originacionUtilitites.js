@@ -2,20 +2,41 @@ const { Estado, EnteInspector, Origen, Sector, Rol, Usuario, AdjuntoOriginacion,
 const { Op } = require("sequelize");
 const utilities = require("./utilities");
 
+/**
+* Utilidades para el controlador de originación:
+ * - Consulta y formateo de datos maestros (orígenes, sectores, etc.).
+ * - Creación/eliminación de registros (originaciones, PACs, adjuntos).
+ * - Generación de PDFs y filtros avanzados.
+ * @module originacionUtilitites
+ * @depends {utilities} - Funciones generales (formateo, validación).
+ * @depends {models} - Modelos de Sequelize.
+ */
 const originacionUtilitites = {
-  styles: ["task"],
+  //  --- Estilos y Scripts ---
+  styles: ["task"], // CSS base para las vistas
 
-  pageScript: ["originacion/modalManager", "originacion/selectModalManager"],
+  pageScript: ["originacion/modalManager", "originacion/selectModalManager"], // Scripts para el manejo de modales
 
-  validationScripts: ["validations", "validator.min"],
-  
+  validationScripts: ["validations", "validator.min"], // Scripts para validaciones
+
+  //Encabezados y vistas
   dashboardHeader: {
     mainLabel: "Originación", 
     newLabel: "Nueva Observación / PAC"
   },
   
-  mainSubsection: "./main.ejs",
+  mainSubsection: "./main.ejs", // Ruta de la plantilla EJS base
 
+  /**
+     * Configuración estándar para pop-ups de la UI.
+     * @typedef {Object} PopupConfig
+     * @property {string} id - ID del elemento en el DOM 
+     * @property {string} title - Título del modal 
+     * @property {string} [text] - Mensaje principal 
+     * @property {Array<{id: string, text: string}>} buttons - Botones de acción.
+ */
+
+  /** @type {PopupConfig} - Pop-up de confirmación para eliminar originaciones. */
   confirmPopUp: {
     id: "confirm-pac-delete",
     title: "No hay observaciones o PACs registradas",
@@ -32,6 +53,7 @@ const originacionUtilitites = {
     ]
   },
 
+  /** @type {PopupConfig} - Pop-up para notificar éxito en eliminación. */
   successPopUp: {
     id: "pac-delete-success",
     title: "La eliminación se realizó correctamente",
@@ -43,6 +65,7 @@ const originacionUtilitites = {
     ]
   },
 
+  /** @type {PopupConfig} - Pop-up para notificar error en eliminación. */
   errorPopUp: {
     id: "pac-error",
     title: "Ocurrió un error al eliminar",
@@ -55,22 +78,37 @@ const originacionUtilitites = {
     ]
   },
 
+  /**
+     * Configuración de modelos para creación de registros.
+     * @typedef {Object} RegisterConfig
+     * @property {number} id - ID único del registro.
+     * @property {Sequelize.Model} model - Modelo de Sequelize asociado.
+     * @property {boolean} requiresAttachment - Si requiere archivo adjunto.
+     * @property {number} [defaultStatus] - Estado inicial (opcional).
+ */
+
+  /** @type {Object.<string, RegisterConfig>} - Mapa de configuraciones por tipo. */
   registerData: {
+    /** @type {RegisterConfig} - Registro de originación (requiere adjunto). */
     ORIGINACION: { 
       id: 1, 
       model: Originacion,
-      requiresAttachment: true 
+      requiresAttachment: true, 
     },
+
+    /** @type {RegisterConfig} - Observación/PAC (estado pendiente por defecto). */
     OBSERVACION_PAC: { 
       id: 2, 
       model: ObservacionPAC,
       defaultStatus: 1, // Estado "Pendiente" 
-      requiresAttachment: false // Cambiar a true cuando se adjunte pruebas
+      requiresAttachment: true 
     },
+
+    /** @type {RegisterConfig} - Acción (no requiere adjunto). */
     ACCION: { 
         id: 3, 
         model: Accion,
-        requiresAttachment: false  
+        requiresAttachment: false  // Cambiar a true cuando se adjunte pruebas
     }
   },
 
