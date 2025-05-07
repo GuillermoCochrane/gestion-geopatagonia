@@ -112,6 +112,7 @@ const originacionUtilitites = {
     }
   },
 
+  // Genera el objeto de datos para la vista de error.
   errordata: function(error){
     return {
       styles: this.styles,
@@ -125,6 +126,7 @@ const originacionUtilitites = {
     };
   },
 
+  // Prepara datos básicos para el head de la vista
   headerData: function(title){
     return {
       title: title,
@@ -143,6 +145,7 @@ const originacionUtilitites = {
     return dataFormatted;
   },
 
+  // Carga datos maestros para formulario de originación 
   originacionFormData: async function(){
     try {
       // Obtiene los datos de las tablas de la base de datos
@@ -164,6 +167,37 @@ const originacionUtilitites = {
 
     } catch (error) {
       console.error(error);
+      throw error;
+    }
+  },
+
+  // Devuelve configuración estática para vistas de manejo de originaciones y observaciones / PACs 
+  staticData: function(){
+    return {
+      ...this.headerData("Originaciones"),
+      pageScript: [...this.pageScript, ...this.validationScripts, "sectionhandler", "originacion/validations/obsPACValidation"],
+      dashboardHeader: this.dashboardHeader,
+      subSection: this.mainSubsection,
+      confirmPopUp: this.confirmPopUp,
+      successPopUp: this.successPopUp,
+      errorPopUp: this.errorPopUp,
+    }
+  },
+
+  dynamicData: async function(id){
+    // Devuelve los datos que varían, para el renderizado dinámico de la vista
+    try {
+      let tratador = await Usuario.findAll({where: { rol_id: 3}});
+      tratador = this.dataFormatter(tratador);
+      return {
+        oldData: {originacion_id: id},
+        tratadorData: tratador, // Datos del tratador para el formulario de PACs
+        originacionData: await this.singleOriginacionData(id), // Datos de la originación corrspondientes al id
+        observacionesPACs: await this.observacionesPACs(id), // Observaciones / PACs de la originación
+        originacionSelectData: await this.allOriginacionsData(),
+      }
+    } catch (error) {
+      console.error(error); 
       throw error;
     }
   },
@@ -207,37 +241,6 @@ const originacionUtilitites = {
       const dynamicData = await this.dynamicData(id);
 
       return {...staticData, ...dynamicData};
-    } catch (error) {
-      console.error(error); 
-      throw error;
-    }
-  },
-
-  staticData: function(){
-    // Devuelve los datos que no varian, necesarios el renderizado de la vista
-    return {
-      ...this.headerData("Originaciones"),
-      pageScript: [...this.pageScript, ...this.validationScripts, "sectionhandler", "originacion/validations/obsPACValidation"],
-      dashboardHeader: this.dashboardHeader,
-      subSection: this.mainSubsection,
-      confirmPopUp: this.confirmPopUp,
-      successPopUp: this.successPopUp,
-      errorPopUp: this.errorPopUp,
-    }
-  },
-
-  dynamicData: async function(id){
-    // Devuelve los datos que varían, para el renderizado dinámico de la vista
-    try {
-      let tratador = await Usuario.findAll({where: { rol_id: 3}});
-      tratador = this.dataFormatter(tratador);
-      return {
-        oldData: {originacion_id: id},
-        tratadorData: tratador, // Datos del tratador para el formulario de PACs
-        originacionData: await this.singleOriginacionData(id), // Datos de la originación corrspondientes al id
-        observacionesPACs: await this.observacionesPACs(id), // Observaciones / PACs de la originación
-        originacionSelectData: await this.allOriginacionsData(),
-      }
     } catch (error) {
       console.error(error); 
       throw error;
