@@ -25,7 +25,7 @@ const originacionUtilitites = {
     newLabel: "Nueva Observación / PAC"
   },
   
-  mainSubsection: "./main.ejs", // Ruta de la plantilla EJS base
+  mainSubsection: "./main.ejs", // Ruta de la plantilla EJS base.
 
   /**
      * Configuración estándar para pop-ups de la UI.
@@ -126,12 +126,116 @@ const originacionUtilitites = {
     };
   },
 
-  // Prepara datos básicos para el head de la vista
+  // Prepara datos básicos para el head de la vista.
   headerData: function(title){
     return {
       title: title,
       styles: this.styles,
       pageScript: this.pageScript,
+    }
+  },
+
+  // Devuelve configuración estática para vistas de manejo de originaciones y observaciones / PACs.
+  staticData: function(){
+    return {
+      ...this.headerData("Originaciones"),
+      pageScript: [...this.pageScript, ...this.validationScripts, "sectionhandler", "originacion/validations/obsPACValidation"],
+      dashboardHeader: this.dashboardHeader,
+      subSection: this.mainSubsection,
+      confirmPopUp: this.confirmPopUp,
+      successPopUp: this.successPopUp,
+      errorPopUp: this.errorPopUp,
+    }
+  },
+
+  // Devuelve datos de una originación específica, con sus relaciones completas
+  singleOriginacionData: async function(id){
+    try {
+      //chequeamos que se ingrese un id válido
+      if (!id || typeof id !== 'number') throw new Error("ID inválido o no proporcionado");
+
+      const data = await Originacion.findByPk(id, {
+        include: [
+          { model: Origen, as: "origen", attributes: utilities.excludeTimestamps() },
+          { model: Usuario, as: "observador", attributes: utilities.excludePassword() },
+          { model: EnteInspector, as: "ente_inspector", attributes: utilities.excludeTimestamps() },
+          { model: Sector, as: "sector", attributes: utilities.excludeTimestamps() },
+          { model: AdjuntoOriginacion, as: "adjuntos", attributes: utilities.excludeTimestamps() },
+          { model: ObservacionPAC, as: "observaciones_pacs", attributes: ['id', 'inciso', 'descripcion', 'fecha_requerida', 'referencia', 'fecha_negociable', 'requiere_analisis', 'responsable_id', 'originacion_id', 'estado_id'] },
+        ]
+      });
+
+      //validamos que la consulta tenga información
+      if (!data) throw new Error("Originación no encontrada");
+
+      //formateamos la fecha de observación
+      let plainData = utilities.plainData(data);
+      plainData.fecha_de_observacion = utilities.formatDateDisplay(plainData.fecha_de_observacion);
+
+      return plainData;
+    } catch (error) {
+      console.error(error); 
+      throw error;
+    }
+  },
+
+  // Obtiene todas las originaciones con sus relaciones.
+  allOriginacionsData: async function(){
+    //Modelos asociados a la originación
+    const originacionIncludes = [
+      { model: Origen, as: 'origen', attributes: utilities.excludeTimestamps() },
+      { model: Usuario, as: 'observador', attributes: utilities.excludePassword() },
+      { model: Sector, as: 'sector', attributes: utilities.excludeTimestamps() },
+      { model: EnteInspector, as: 'ente_inspector', attributes: utilities.excludeTimestamps() },
+    ];
+
+    try {
+      const originaciones = await Originacion.findAll({
+        include: originacionIncludes,
+        attributes: utilities.excludeTimestamps(),
+        order: [['id', 'ASC']],
+      });
+
+      return utilities.dataFormatter(originaciones, ['fecha_de_observacion']);
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
+
+  //Obtiene observaciones/PACs formateadas, asociadas a una originación.
+  observacionesPACsData: async function(id){
+    try {
+      const data = await ObservacionPAC.findAll({
+        where: {originacion_id: id},
+        include: [
+          { model: Usuario, as: "responsable", attributes: utilities.excludePassword()},
+          { model: Estado, as: "estado", attributes: utilities.excludeTimestamps()},
+        ]
+      });
+      return utilities.dataFormatter(data, ['fecha_requerida']);
+    } catch (error) {
+      console.error(error); 
+      throw error;
+    }
+  },
+
+  //Obtiene datos dinámicos, luego de la creacion de registros, para vistas de manejo de originaciones y observaciones / PACs 
+  dynamicData: async function(id){
+    // Devuelve los datos que varían, para el renderizado dinámico de la vista
+    try {
+      let tratador = await Usuario.findAll({where: { rol_id: 3}});
+      tratador = utilities.dataFormatter(tratador);
+      return {
+        oldData: {originacion_id: id},
+        tratadorData: tratador, // Datos del tratador para el formulario de PACs
+        originacionData: await this.singleOriginacionData(id), // Datos de la originación corrspondientes al id
+        observacionesPACs: await this.observacionesPACsData(id), // Observaciones / PACs de la originación
+        originacionSelectData: await this.allOriginacionsData(),
+      }
+    } catch (error) {
+      console.error(error); 
+      throw error;
     }
   },
 
@@ -157,37 +261,6 @@ const originacionUtilitites = {
 
     } catch (error) {
       console.error(error);
-      throw error;
-    }
-  },
-
-  // Devuelve configuración estática para vistas de manejo de originaciones y observaciones / PACs 
-  staticData: function(){
-    return {
-      ...this.headerData("Originaciones"),
-      pageScript: [...this.pageScript, ...this.validationScripts, "sectionhandler", "originacion/validations/obsPACValidation"],
-      dashboardHeader: this.dashboardHeader,
-      subSection: this.mainSubsection,
-      confirmPopUp: this.confirmPopUp,
-      successPopUp: this.successPopUp,
-      errorPopUp: this.errorPopUp,
-    }
-  },
-
-  dynamicData: async function(id){
-    // Devuelve los datos que varían, para el renderizado dinámico de la vista
-    try {
-      let tratador = await Usuario.findAll({where: { rol_id: 3}});
-      tratador = utilities.dataFormatter(tratador);
-      return {
-        oldData: {originacion_id: id},
-        tratadorData: tratador, // Datos del tratador para el formulario de PACs
-        originacionData: await this.singleOriginacionData(id), // Datos de la originación corrspondientes al id
-        observacionesPACs: await this.observacionesPACs(id), // Observaciones / PACs de la originación
-        originacionSelectData: await this.allOriginacionsData(),
-      }
-    } catch (error) {
-      console.error(error); 
       throw error;
     }
   },
@@ -231,52 +304,6 @@ const originacionUtilitites = {
       const dynamicData = await this.dynamicData(id);
 
       return {...staticData, ...dynamicData};
-    } catch (error) {
-      console.error(error); 
-      throw error;
-    }
-  },
-
-  observacionesPACs: async function(id){
-    try {
-      const data = await ObservacionPAC.findAll({
-        where: {originacion_id: id},
-        include: [
-          { model: Usuario, as: "responsable", attributes: utilities.excludePassword()},
-          { model: Estado, as: "estado", attributes: utilities.excludeTimestamps()},
-        ]
-      });
-      return utilities.dataFormatter(data, ['fecha_requerida']);
-    } catch (error) {
-      console.error(error); 
-      throw error;
-    }
-  },
-
-  singleOriginacionData: async function(id){
-    try {
-      //chequeamos que se ingrese un id válido
-      if (!id || typeof id !== 'number') throw new Error("ID inválido o no proporcionado");
-
-      const data = await Originacion.findByPk(id, {
-        include: [
-          { model: Origen, as: "origen", attributes: utilities.excludeTimestamps() },
-          { model: Usuario, as: "observador", attributes: utilities.excludePassword() },
-          { model: EnteInspector, as: "ente_inspector", attributes: utilities.excludeTimestamps() },
-          { model: Sector, as: "sector", attributes: utilities.excludeTimestamps() },
-          { model: AdjuntoOriginacion, as: "adjuntos", attributes: utilities.excludeTimestamps() },
-          { model: ObservacionPAC, as: "observaciones_pacs", attributes: ['id', 'inciso', 'descripcion', 'fecha_requerida', 'referencia', 'fecha_negociable', 'requiere_analisis', 'responsable_id', 'originacion_id', 'estado_id'] },
-        ]
-      });
-
-      //validamos que la consulta tenga información
-      if (!data) throw new Error("Originación no encontrada");
-
-      //formateamos la fecha de observación
-      let plainData = utilities.plainData(data);
-      plainData.fecha_de_observacion = utilities.formatDateDisplay(plainData.fecha_de_observacion);
-
-      return plainData;
     } catch (error) {
       console.error(error); 
       throw error;
