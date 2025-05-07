@@ -39,7 +39,7 @@ const originacionesController = {
         try {
             if (errors.isEmpty()) {
                 // Crear la originación y el adjunto (si lo hay)
-                const data = await utilities.originacionPACData(req.body, req.file);
+                const data = await utilities.registerCreationHandler (req.body, req.file);
                 return res.render("originacion/originacion", data);
             } else {
                 let data = await utilities.originacionData();
@@ -56,7 +56,7 @@ const originacionesController = {
 
     originacion: async (req, res) => {
         try{
-            const data = await utilities.originacionPACData({}, null, req.params.id);
+            const data = await utilities.registerCreationHandler ({}, null, req.params.id);
             return res.render("originacion/originacion", data);
         } catch (error) {
             console.error(error);
@@ -70,10 +70,10 @@ const originacionesController = {
         try{
             if (errors.isEmpty()) {
                 // Crear la observación y el adjunto (si lo hay)
-                const data = await utilities.originacionPACData(req.body, req.file, req.body.originacion_id, true);
+                const data = await utilities.registerCreationHandler (req.body, req.file, req.body.originacion_id, true);
                 return res.render("originacion/originacion", data);
             } else {
-                let data = await utilities.originacionPACData({}, null, req.body.originacion_id);
+                let data = await utilities.registerCreationHandler ({}, null, req.body.originacion_id);
                 data.oldData = req.body;
                 data.PACErrors = errors.mapped();
                 return res.render("originacion/originacion", data);

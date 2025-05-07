@@ -239,7 +239,8 @@ const originacionUtilitites = {
     }
   },
 
-  originacionPACData: async function(formData, file, id, nuevaObservacionPAC){
+  //Orquesta la creación/carga de originaciones y observaciones/PACs, y prepara los datos para la vista
+  registerCreationHandler: async function(formData, file, id, nuevaObservacionPAC){
     try {
       // Creación de la originación, si no se pasa el id de una originación existente
       id = id ||await this.createRegistro(formData, file); 
