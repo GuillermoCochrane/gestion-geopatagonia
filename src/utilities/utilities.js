@@ -85,6 +85,22 @@ const utilities = {
       return records;
     },
 
+    // Método para convertir en un objeto plano, la información de una instancia de Sequelize 
+    plainData: function(data){
+      return data.map((register) => register.get({ plain: true }));
+    },
+
+    //Formatea fechas de registros de Sequelize
+    dataFormatter: function(data=[], fields=[], nestedFields=[]){
+      // Si el data no es un array, o esta vacio, devolver vacío
+      if (!Array.isArray(data)) return [];
+      if (data.length === 0) return [];
+
+      let dataFormatted = utilities.plainData(data);
+      dataFormatted = utilities.multipleDateFormat(dataFormatted, fields, nestedFields);
+      return dataFormatted;
+    },
+
     // Método para cambiar una cadena de texto a con "_" a espacios o a "" y poner las primeras letras en mayúsculas
     adjustUnderscores: function (string, method) {
       let palabras = [];
@@ -110,11 +126,6 @@ const utilities = {
       return capitalize
           ? string.charAt(0).toUpperCase() + string.slice(1)
           : string.charAt(0).toLowerCase() + string.slice(1);
-    },
-
-    // Método para convertir en un objeto plano, la información de una instancia de Sequelize 
-    plainData: function(data){
-      return data.map((register) => register.get({ plain: true }));
     },
 
     // Metodo que verifica si una email es se encuentra en uso

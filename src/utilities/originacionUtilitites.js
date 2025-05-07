@@ -135,16 +135,6 @@ const originacionUtilitites = {
     }
   },
 
-  dataFormatter: function(data=[], fields=[], nestedFields=[]){
-    // Si el data no es un array, o esta vacio, devolver vacío
-    if (!Array.isArray(data)) return [];
-    if (data.length === 0) return [];
-
-    let dataFormatted = utilities.plainData(data);
-    dataFormatted = utilities.multipleDateFormat(dataFormatted, fields, nestedFields);
-    return dataFormatted;
-  },
-
   // Carga datos maestros para formulario de originación 
   originacionFormData: async function(){
     try {
@@ -157,11 +147,11 @@ const originacionUtilitites = {
 
       // Devuelve los datos formateados
       return {
-        origenes: this.dataFormatter(origenData),
-        observadores: this.dataFormatter(observadorData),
-        enteInspectores: this.dataFormatter(enteInspectorData),
-        sectores: this.dataFormatter(sectorData),
-        estados: this.dataFormatter(estadosData),
+        origenes: utilities.dataFormatter(origenData),
+        observadores: utilities.dataFormatter(observadorData),
+        enteInspectores: utilities.dataFormatter(enteInspectorData),
+        sectores: utilities.dataFormatter(sectorData),
+        estados: utilities.dataFormatter(estadosData),
         originaciones: await this.allOriginacionsData()
       }
 
@@ -188,7 +178,7 @@ const originacionUtilitites = {
     // Devuelve los datos que varían, para el renderizado dinámico de la vista
     try {
       let tratador = await Usuario.findAll({where: { rol_id: 3}});
-      tratador = this.dataFormatter(tratador);
+      tratador = utilities.dataFormatter(tratador);
       return {
         oldData: {originacion_id: id},
         tratadorData: tratador, // Datos del tratador para el formulario de PACs
@@ -256,7 +246,7 @@ const originacionUtilitites = {
           { model: Estado, as: "estado", attributes: utilities.excludeTimestamps()},
         ]
       });
-      return this.dataFormatter(data, ['fecha_requerida']);
+      return utilities.dataFormatter(data, ['fecha_requerida']);
     } catch (error) {
       console.error(error); 
       throw error;
@@ -413,7 +403,7 @@ const originacionUtilitites = {
       });
 
       // Formateo de las fechas de las observaciones y sus subrelaciones
-      return this.dataFormatter(resultados, 
+      return utilities.dataFormatter(resultados, 
         ['fecha_requerida'], 
         [
           { parentObject: 'originacion', dateField: 'fecha_de_observacion' }, 
@@ -459,7 +449,7 @@ const originacionUtilitites = {
         order: [['id', 'ASC']],
       });
 
-      return this.dataFormatter(originaciones, ['fecha_de_observacion']);
+      return utilities.dataFormatter(originaciones, ['fecha_de_observacion']);
     } catch (error) {
       console.error(error);
       throw error;
