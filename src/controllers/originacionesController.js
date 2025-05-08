@@ -1,7 +1,6 @@
 const { validationResult } = require('express-validator');
 const utilities = require("../utilities/originacionUtilitites");
 
-// refatorizar eliminando los modelos, que se hace en utilities
 const originacionesController = {
 
     originaciones: async (req, res) => {
@@ -99,7 +98,8 @@ const originacionesController = {
 
     observacionPAC: async (req, res) => {
         try{
-            const data = await utilities.pacData(req.params.id, req.params.accion);
+            const id = parseInt(req.params.id, 10); // convertimos el id a un numero entero
+            const data = await utilities.pacData(id, req.params.accion);
             return res.render("originacion/originacion", data);
         } catch (error) {
             console.error(error);

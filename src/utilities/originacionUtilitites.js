@@ -446,10 +446,14 @@ const originacionUtilitites = {
   pacData: async function(id, action){
     try{
       // Validación del ID recibido
-      if (!id || typeof id !== 'number') throw new Error("ID inválido");
+      id = Number(id); // Convierte el string a un numero entero
+      // Validamos que el id sea un entero positivo
+      if (!Number.isInteger(id) || id <= 0) { 
+          throw new Error("ID Inválido");
+      }
       const allPACDatadata = await this.allPACsData(id);
       // Validación de existencia de la observación/PAC
-      if (pacList.length === 0) throw new Error("No se encontró la PAC/Observación");
+      if (allPACDatadata.length === 0) throw new Error("No se encontró la PAC/Observación");
 
       // Título dinámico según el valor de requiere_analisis
       const title = allPACDatadata[0].requiere_analisis ? "PAC" : "Observación";
