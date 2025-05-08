@@ -33,6 +33,7 @@ router.get('/observacionPAC/pdf/:id', originacionesController.observacionPacPdf)
 router.post('/observacionPAC/addAction/:id', accionValidation, originacionesController.agregarAccion);
 router.post('/observacionPAC/export/:id',  originacionesController.exportar);
 router.put('/observacionPAC/modify/:id', responsableValidation, originacionesController.modificarResponsablePAC);
+router.put('/observacionPAC/reopen/:id', responsableValidation, originacionesController.reabrirPac);
 router.get('/observacionPAC/:id/:accion?', originacionesController.observacionPAC);
 router.get('/:id', originacionesController.originacion); //Proximo paso, agregar validaciones
 

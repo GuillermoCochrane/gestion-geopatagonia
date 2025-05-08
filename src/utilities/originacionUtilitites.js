@@ -448,9 +448,8 @@ const originacionUtilitites = {
       // Validación del ID recibido
       id = Number(id); // Convierte el string a un numero entero
       // Validamos que el id sea un entero positivo
-      if (!Number.isInteger(id) || id <= 0) { 
-          throw new Error("ID Inválido");
-      }
+      if (!Number.isInteger(id) || id <= 0) throw new Error("ID Inválido");
+      
       const allPACDatadata = await this.allPACsData(id);
       // Validación de existencia de la observación/PAC
       if (allPACDatadata.length === 0) throw new Error("No se encontró la PAC/Observación");

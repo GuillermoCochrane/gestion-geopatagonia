@@ -174,6 +174,17 @@ const originacionesController = {
         }
     },
 
+    reabrirPac: async (req, res) => {
+        const data = {estado_id: 1};
+        try{
+            await utilities.modifyPAC(req.params.id, data);
+            return res.redirect(`/originacion/observacionPAC/${req.params.id}`);
+        } catch (error) {
+            console.error(error);
+            const data = utilities.errordata(error);
+            return res.render("originacion/originacion", data);
+        }
+    }
 }
 
 module.exports = originacionesController;
