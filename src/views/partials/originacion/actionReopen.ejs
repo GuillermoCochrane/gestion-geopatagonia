@@ -1,0 +1,13 @@
+<dialog id="reopen-modal">
+  <h2>Cambiar Responsable</h2>
+  <form action="/originacion/observacionPAC/reopen/<%= locals?.pacData?.id %>?_method=PUT" method="post" id="reopen-form">
+  </form>
+  <nav>
+    <button id="reopen-save"  type="submit" form="reopen-form">
+      Volver a Abrir
+    </button>
+    <button id="reopen-close" type="button">
+      Cancelar
+    </button>
+  </nav>
+</dialog>
