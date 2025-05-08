@@ -298,38 +298,6 @@ const originacionUtilitites = {
     }
   },
 
-  // Guarda un archivo adjunto asociado a una originación u observación/PAC.
-  createAdjunto: async function (file, id, observacion = false) {
-    try {
-      //Definimos archivo, key  y modelo dependiendo del valor de observacion
-      const archivo = observacion 
-        ? `/documents/observacion_pac/${file.originalname}`  // ← TRUE: Observación/PAC
-        : `/documents/originacion/${file.originalname}`;     // ← FALSE: Originación
-
-      const key = observacion 
-        ? 'observacion_pac_id' 
-        : 'originacion_id';
-
-      const Modelo = observacion 
-        ? AdjuntoObservacionPAC 
-        : AdjuntoOriginacion;
-
-      // Construir el objeto de datos para el adjunto
-      const data = {
-        nombre: file.originalname,
-        archivo: archivo, 
-        descripcion: '-',
-        [key]: id, //Asociar el adjunto a la entidad usando el ID proporcionado
-      };
-      // Crear el adjunto en la base de datos
-      const adjunto = await Modelo.create(data);
-      return adjunto.id;
-    } catch (error) {
-      console.error(error); 
-      throw error; 
-    }
-  },
-
   // Elimina un registro (originación u observación/PAC) de la base de datos.
   deleteRegistro: async function (id, observacion = false) {
     try {
@@ -472,25 +440,28 @@ const originacionUtilitites = {
     return data;
   },
 
+  // --- Acciones de Obseravciones / PACs ---
+
+  // Prepara los datos necesarios para renderizar la vista de detalle de una observación/PAC y sus acciones
   pacData: async function(id, action){
     try{
-      //chequeamos que se ingrese un id válido
+      // Validación del ID recibido
       if (!id || typeof id !== 'number') throw new Error("ID inválido");
       const allPACDatadata = await this.allPACsData(id);
-      //chequeamos que se encuentra la pac/observación
+      // Validación de existencia de la observación/PAC
       if (pacList.length === 0) throw new Error("No se encontró la PAC/Observación");
 
-      //titulo de la vista, según el valor de requiere_analisis
+      // Título dinámico según el valor de requiere_analisis
       const title = allPACDatadata[0].requiere_analisis ? "PAC" : "Observación";
       let data = this.headerData(title);
 
-      //datos específicos de la vista
+      // Scripts y estilos específicos de la vista
       data.pageScript = [ ...this.validationScripts, "originacion/sidebarManager", "originacion/actionsModalManager", "originacion/validations/modifyResponsableValidation", "originacion/validations/addActionValidation", "originacion/exportManager"  ];
       data.subSection  = "./actions.ejs";
       data.subSectionStyles = "pac-actions";
       data.action = action;
 
-      //datos variados de la vista
+      // Carga de ejecutores, responsables y datos de la observación/PAC
       data.responsables = await Usuario.findAll({where: { rol_id: 3}});
       data.ejecutores = await Usuario.findAll({where: { rol_id: 1}}); 
       data.pacData = allPACDatadata[0];
@@ -502,6 +473,39 @@ const originacionUtilitites = {
     }
   },
 
+  // Guarda un archivo adjunto asociado a una originación u observación/PAC.
+  createAdjunto: async function (file, id, observacion = false) {
+    try {
+      //Definimos archivo, key  y modelo dependiendo del valor de observacion
+      const archivo = observacion 
+        ? `/documents/observacion_pac/${file.originalname}`  // ← TRUE: Observación/PAC
+        : `/documents/originacion/${file.originalname}`;     // ← FALSE: Originación
+
+      const key = observacion 
+        ? 'observacion_pac_id' 
+        : 'originacion_id';
+
+      const Modelo = observacion 
+        ? AdjuntoObservacionPAC 
+        : AdjuntoOriginacion;
+
+      // Construir el objeto de datos para el adjunto
+      const data = {
+        nombre: file.originalname,
+        archivo: archivo, 
+        descripcion: '-',
+        [key]: id, //Asociar el adjunto a la entidad usando el ID proporcionado
+      };
+      // Crear el adjunto en la base de datos
+      const adjunto = await Modelo.create(data);
+      return adjunto.id;
+    } catch (error) {
+      console.error(error); 
+      throw error; 
+    }
+  },
+
+  // Actualiza uno o más campos de una observación/PAC
   modifyPACResponsable: async function(id, data){
     try{
       const modifiedData = await ObservacionPAC.update(data, {
@@ -514,6 +518,7 @@ const originacionUtilitites = {
     }
   },
 
+  // Genera un PDF de una observación/PAC a partir de su vista pública
   exportPDF: async function(id, host, protocol){
     try{
       if (!id ||!host || !protocol) throw new Error("Datos insuficientes para generar el PDF");
