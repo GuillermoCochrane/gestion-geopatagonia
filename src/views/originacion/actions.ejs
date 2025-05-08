@@ -9,10 +9,7 @@
     <% if (locals?.pacData?.estado?.id !== 6 && locals?.pacData?.estado?.id !== 8) { %>
       <%- include('../partials/originacion/actionModifyModal.ejs') %>
     <% } else { %>
-      <dialog id="reopen-modal">
-        <h2>Volver a abrir</h2>
-        <button id="reopen-close">Cerrar</button>
-      </dialog>
+      <%- include('../partials/originacion/actionReopenModal.ejs') %>
     <% } %>
   </div>
 </section>

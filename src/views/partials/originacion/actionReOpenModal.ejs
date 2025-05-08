@@ -1,5 +1,9 @@
 <dialog id="reopen-modal">
-  <h2>Cambiar Responsable</h2>
+  <h2>
+    ¿Estás seguro de volver a abrir 
+    <%= title.toUpperCase() === "PAC" ? "este" : "esta"  %> 
+    <%= title %>?
+  </h2>
   <form action="/originacion/observacionPAC/reopen/<%= locals?.pacData?.id %>?_method=PUT" method="post" id="reopen-form">
   </form>
   <nav>
