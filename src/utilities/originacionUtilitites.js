@@ -348,7 +348,7 @@ const originacionUtilitites = {
     }
   },
 
-  // Carga datos maestros para formulario de originación 
+  // Carga datos maestros para formulario de originación, junto con sus relaciones 
   originacionFormData: async function(){
     try {
       // Obtiene los datos de las tablas de la base de datos
@@ -374,29 +374,27 @@ const originacionUtilitites = {
     }
   },
 
-  originacionData: async function(filter = {}) {
-    let data = this.headerData("Originaciones");
-    data.pageScript = [...data.pageScript, ...this.validationScripts, "originacion/validations/originacionValidation", "originacion/validations/filterDateValidation"];
-    let formData = {};
-    let pacTableData = [];
-    let originacionData = [];
-
-    try {
-      formData = await this.originacionFormData();
-      pacTableData = await this.allPACsData(null, filter);
-      originacionData = await this.allOriginacionsData();
-    } catch (error) {
-      console.error(error); // Registro del error para depuración
-      throw error;          // Lanzar el error para manejarlo en el controlador
+  // Procesa los filtros del formulario de originaciones y construye el objeto `where` para Sequelize
+  originacionFilter: function(filtros) {
+    const where = {};
+    
+    if (filtros.inicio_carga && filtros.fin_carga) {
+      where.created_at = { [Op.between]: [filtros.inicio_carga, filtros.fin_carga] };
+    } else if (filtros.inicio_carga) {
+      where.created_at = { [Op.gte]: filtros.inicio_carga };
+    } else if (filtros.fin_carga) {
+      where.created_at = { [Op.lte]: filtros.fin_carga };
     }
-
-    data.formData = formData;
-    data.pacTableData = pacTableData;
-    data.subSection = this.mainSubsection;
-    data.originacionSelectData = originacionData;
-    return data;
+    
+    filtros.id && (where.id = filtros.id);
+    filtros.origen_id && (where.origen_id = filtros.origen_id);
+    filtros.sector_id && (where.sector_id = filtros.sector_id);
+    filtros.ente_inspector_id && (where.ente_inspector_id = filtros.ente_inspector_id);
+  
+    return where;
   },
 
+  // Consulta observaciones/PACs con sus relaciones y aplica filtros si se indican, formateando datos para la vista
   allPACsData: async function(id = null, filtros = {}) {
     //Criterios opcionales de filtrado
     const where = id ? { id } : {};
@@ -447,24 +445,31 @@ const originacionUtilitites = {
       throw error;
     }
   },
-  
-  originacionFilter: function(filtros) {
-    const where = {};
-  
-    if (filtros.inicio_carga && filtros.fin_carga) {
-      where.created_at = { [Op.between]: [filtros.inicio_carga, filtros.fin_carga] };
-    } else if (filtros.inicio_carga) {
-      where.created_at = { [Op.gte]: filtros.inicio_carga };
-    } else if (filtros.fin_carga) {
-      where.created_at = { [Op.lte]: filtros.fin_carga };
+
+  //Prepara los datos necesarios para el renderizado de la vista principal de originaciones.
+  originacionData: async function(filter = {}) {
+    //Datos inmutables para la vista
+    let data = this.headerData("Originaciones");
+    data.pageScript = [...data.pageScript, ...this.validationScripts, "originacion/validations/originacionValidation", "originacion/validations/filterDateValidation"];
+    
+    let formData = {};
+    let pacTableData = [];
+    let originacionData = [];
+
+    try {
+      formData = await this.originacionFormData();          // Datos maestros para el formulario de originaciones
+      pacTableData = await this.allPACsData(null, filter);  // Datos de las observaciones/PACs, con filtrado opcional
+      originacionData = await this.allOriginacionsData();   // Datos para el selector de originaciones, para la edición de las mismas
+    } catch (error) {
+      console.error(error); // Registro del error para depuración
+      throw error;          // Lanzar el error para manejarlo en el controlador
     }
-  
-    filtros.id && (where.id = filtros.id);
-    filtros.origen_id && (where.origen_id = filtros.origen_id);
-    filtros.sector_id && (where.sector_id = filtros.sector_id);
-    filtros.ente_inspector_id && (where.ente_inspector_id = filtros.ente_inspector_id);
-  
-    return where;
+
+    data.formData = formData;
+    data.pacTableData = pacTableData;
+    data.subSection = this.mainSubsection;
+    data.originacionSelectData = originacionData;
+    return data;
   },
 
   pacData: async function(id, action){
