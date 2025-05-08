@@ -973,7 +973,7 @@ article#spinner-modal figcaption {
 
 main dialog#select-originacion-modal,
 main section .data-container dialog{
-  width: 35%;
+  width: 40%;
   height: fit-content;
   padding-inline: 1.5em;
   padding-block:  0.7em;
@@ -986,7 +986,7 @@ main dialog#select-originacion-modal{
 
 main dialog#select-originacion-modal h2,
 main section .data-container dialog h2{
-  margin-inline: 0.5em;
+  margin-top: 0.5em;
   text-align: center;
 }
 
