@@ -112,7 +112,7 @@ const originacionesController = {
         const errors = validationResult(req);
         try{
             if (errors.isEmpty()) {
-            await utilities.modifyPACResponsable(req.params.id, req.body);
+            await utilities.modifyPAC(req.params.id, req.body);
             return res.redirect(`/originacion/observacionPAC/${req.params.id}`);
             } else {
                 let data = await utilities.pacData(req.params.id, "modify");

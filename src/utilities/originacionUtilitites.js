@@ -506,7 +506,7 @@ const originacionUtilitites = {
   },
 
   // Actualiza uno o más campos de una observación/PAC
-  modifyPACResponsable: async function(id, data){
+  modifyPAC: async function(id, data){
     try{
       const modifiedData = await ObservacionPAC.update(data, {
         where: {id: id},
