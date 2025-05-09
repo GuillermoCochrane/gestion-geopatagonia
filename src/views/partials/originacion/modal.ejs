@@ -2,13 +2,30 @@
   <header>
     <aside>
     </aside>
-    <h2>Nueva Originación</h2>
+    <h2>
+      <%= locals.oldData?.originacion_id ? "Editar " : "Nueva " %>
+      Originación
+    </h2>
     <button id="modal-closer">
       <i class="fa-solid fa-xmark"></i>
     </button>
   </header>
   <% if (locals.oldData?.originacion_id) { %>
-    <%- include('./pacSection.ejs') %>
+    <section 
+        id="originacion-section" 
+        class="<%= locals.oldData?.originacionErrors ? "hidden" : " " %>"
+    >
+      <%- include('./pacSection.ejs') %>
+    </section>
+    <form 
+        action="/originacion/edit/<%= locals.oldData?.originacion_id %>"
+        method="POST" 
+        id="nueva-originacion" 
+        enctype="multipart/form-data" 
+        class="<%= locals.oldData?.originacionErrors ? " " : "hidden" %>"
+    >
+      <%- include('./originacionForm.ejs') %>
+    </form>
   <% } else { %>
     <form action="/originacion/" method="POST" id="nueva-originacion" enctype="multipart/form-data">
       <%- include('./originacionForm.ejs') %>

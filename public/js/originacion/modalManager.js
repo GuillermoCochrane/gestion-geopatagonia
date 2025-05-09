@@ -11,6 +11,9 @@ window.addEventListener("load", () => {
   const closeButton = document.querySelector("#pac-delete-close");
   const errorButton = document.querySelector("#pac-error-close");
   const spinner = document.querySelector("#spinner-modal");
+  const originacionSection = document.querySelector("#originacion-section");
+  const originacionForm = document.querySelector("#nueva-originacion");
+  const editButton = document.querySelector("#edit-originacion-opener");
 
   // Estados de la sección
   const STATES = {
@@ -19,6 +22,12 @@ window.addEventListener("load", () => {
     SUCCESS: 3,
     ERROR: 4
   };
+
+  // Mostrar sección de edición de la originación
+  editButton && editButton.addEventListener("click", () => {
+    originacionSection.classList.add("hidden");
+    originacionForm.classList.remove("hidden");
+  });
 
   // Función para cambiar el estado de las secciones
   const sectionHandler = function(state) {

@@ -755,6 +755,8 @@ main dialog section article table td:last-child {
   border: 1px solid var(--font);
 }
 
+main dialog section.hidden,
+main dialog form.hidden,
 main section dialog article.hidden,
 main dialog section form.hidden,
 main dialog section article.hidden{
