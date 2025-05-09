@@ -151,8 +151,11 @@ const originacionUtilitites = {
   // Devuelve datos de una originación específica, con sus relaciones completas
   singleOriginacionData: async function(id){
     try {
-      //chequeamos que se ingrese un id válido
-      if (!id || typeof id !== 'number') throw new Error("ID inválido o no proporcionado");
+      // Validación del ID recibido
+      id = Number(id); // Convierte el string a un numero entero
+      // Validamos que el id sea un entero positivo
+      if (!Number.isInteger(id) || id <= 0) throw new Error("ID Inválido");
+
 
       const data = await Originacion.findByPk(id, {
         include: [
@@ -167,9 +170,9 @@ const originacionUtilitites = {
 
       //validamos que la consulta tenga información
       if (!data) throw new Error("Originación no encontrada");
-
+      
       //formateamos la fecha de observación
-      let plainData = utilities.plainData(data);
+      let plainData = utilities.plainData([data])[0];
       plainData.fecha_de_observacion = utilities.formatDateDisplay(plainData.fecha_de_observacion);
 
       return plainData;
