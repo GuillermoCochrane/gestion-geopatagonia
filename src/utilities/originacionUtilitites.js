@@ -173,7 +173,8 @@ const originacionUtilitites = {
       
       //formateamos la fecha de observación
       let plainData = utilities.plainData([data])[0];
-      plainData.fecha_de_observacion = utilities.formatDateDisplay(plainData.fecha_de_observacion);
+      plainData.display_fecha_de_observacion = utilities.formatDateDisplay(plainData.fecha_de_observacion);
+      plainData.fecha_de_observacion = utilities.formatDateForm(plainData.fecha_de_observacion);
 
       return plainData;
     } catch (error) {
@@ -257,8 +258,9 @@ const originacionUtilitites = {
 
       const staticData = this.staticData();
       const dynamicData = await this.dynamicData(id);
+      const content = await this.originacionContent();
 
-      return {...staticData, ...dynamicData};
+      return {...staticData, ...dynamicData, ...content};
     } catch (error) {
       console.error(error); 
       throw error;
@@ -423,7 +425,7 @@ const originacionUtilitites = {
       return {
         formData: await this.originacionFormData(),         // Datos maestros para el formulario de originaciones
         pacTableData: await this.allPACsData(null, filter), // Datos de las observaciones/PACs, con filtrado opcional
-        originacionData: await this.allOriginacionsData()   // Datos para el selector de originaciones, para la edición de las mismas
+        originacionSelectData: await this.allOriginacionsData()   // Datos para el selector de originaciones, para la edición de las mismas
       };
     } catch (error) {
       console.error(error); // Registro del error para depuración
