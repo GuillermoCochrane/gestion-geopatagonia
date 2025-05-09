@@ -24,7 +24,7 @@
         enctype="multipart/form-data" 
         class="<%= locals.oldData?.originacionErrors ? " " : "hidden" %>"
     >
-      <%- include('./originacionForm.ejs') %>
+      <%- include('./originacionForm.ejs', {oldData: locals.originacionData}) %>
     </form>
   <% } else { %>
     <form action="/originacion/" method="POST" id="nueva-originacion" enctype="multipart/form-data">
