@@ -8,6 +8,7 @@
   >
   <span id="error-fecha_de_observacion"><%= locals.originacionErrors?.fecha_de_observacion?.msg  %></span>
 </label>
+
 <label>
   <h3>Lugar</h3>
   <input 
@@ -18,6 +19,7 @@
   >
   <span id="error-lugar"><%= locals.originacionErrors?.lugar?.msg  %></span>
 </label>
+
 <label>
   <h3>Origen</h3>
   <select name="origen_id" id="origen_id">
@@ -28,21 +30,17 @@
     >
       Seleccione el Origen
     </option>
-    <% if (locals?.formData?.origenes?.length > 0) { %>
-      <% for (const origen of locals?.formData?.origenes) { %>
-        <option 
-              value="<%= origen.id %>" 
-              <%= (locals.oldData?.origen_id === origen.id) && 'selected'%>
-        > 
-          <%= origen.origen %> 
-        </option>
-      <% } %>
-    <% } else { %>
-      <option value="0">No hay origenes definidas</option>
-    <% } %>
+    <%- include('./dinamicFormOptions.ejs', {
+      options: locals?.formData && locals?.formData?.origenes,
+      selected: locals?.oldData && locals?.oldData?.origen_id,
+      keyLabel: 'origen',
+      keyValue: 'id',
+      emptyMessage: 'No hay origenes definidos'
+      }) %>
   </select>
   <span id="error-origen_id"><%= locals.originacionErrors?.origen_id?.msg %></span>
 </label>
+
 <label>
   <h3>Observador</h3>
   <select name="observador_id" id="observador_id">
@@ -53,21 +51,17 @@
     >
       Seleccione el Observador
     </option>
-    <% if (locals?.formData?.observadores?.length > 0) { %>
-      <% for (const observador of locals?.formData?.observadores) { %>
-        <option 
-              value="<%= observador.id %>" 
-              <%= (locals.oldData?.observador_id === observador.id) && 'selected'  %>
-        > 
-          <%= observador.nombre %>
-        </option>
-      <% } %>
-    <% } else { %>
-      <option value="0">No hay observadores definidos</option>
-    <% } %>
+    <%- include('./dinamicFormOptions.ejs', {
+      options: locals?.formData && locals?.formData?.observadores,
+      selected: locals?.oldData && locals?.oldData?.observador_id,
+      keyLabel: 'nombre',
+      keyValue: 'id',
+      emptyMessage: 'No hay observadores definidos'
+    }) %>
   </select>
   <span id="error-observador_id"><%= locals.originacionErrors?.observador_id?.msg %></span>
 </label>
+
 <label>
   <h3>Ente Inspector</h3>
   <select name="ente_inspector_id" id="ente_inspector_id">
@@ -78,23 +72,19 @@
     >
       Seleccione el Ente Inspector
     </option>
-    <% if (locals?.formData?.enteInspectores?.length > 0) { %>
-      <% for (const enteInspector of locals?.formData?.enteInspectores) { %>
-        <option 
-              value="<%= enteInspector.id %>" 
-              <%= (locals.oldData?.ente_inspector_id === enteInspector.id) && 'selected'  %>
-        > 
-          <%= enteInspector.ente_inspector %>
-        </option>
-      <% } %>
-    <% } else { %>
-      <option value="0">No hay entes inspectores definidos</option>
-    <% } %>
+    <%- include('./dinamicFormOptions.ejs', {
+      options: locals?.formData && locals?.formData?.enteInspectores,
+      selected: locals?.oldData && locals?.oldData?.ente_inspector_id,
+      keyLabel: 'ente_inspector',
+      keyValue: 'id',
+      emptyMessage: 'No hay entes inspectores definidos'
+    }) %>
   </select>
   <span id="error-ente_inspector_id">
     <%= locals.originacionErrors?.ente_insperctor_id?.msg %>
   </span>
 </label>
+
 <label>
   <h3>Sector</h3>
   <select name="sector_id" id="sector_id">
@@ -105,26 +95,23 @@
     >
       Seleccione el Sector
     </option>
-    <% if (locals?.formData?.sectores?.length > 0) { %>
-      <% for (const sector of locals?.formData?.sectores) { %>
-        <option 
-            value="<%= sector.id %>" 
-            <%= (locals.oldData?.sector_id === sector.id) && 'selected'  %>
-        > 
-          <%= sector.sector %> 
-        </option>
-      <% } %>
-    <% } else { %>
-      <option value="0">No hay sectores definidos</option>
-    <% } %>
+    <%- include('./dinamicFormOptions.ejs', {
+      options: locals?.formData && locals?.formData?.sectores,
+      selected: locals?.oldData && locals?.oldData?.sector_id,
+      keyLabel: 'sector',
+      keyValue: 'id',
+      emptyMessage: 'No hay sectores definidos'
+    }) %>
   </select>
   <span id="error-sector_id"><%= locals.originacionErrors?.sector_id?.msg %></span>
 </label>
+
 <label>
   <h3>Adjunto</h3>
   <input type="file" name="adjunto" id="adjunto" class="input-file">
   <span id="error-adjunto"><%= locals.originacionErrors?.adjunto?.msg %></span>
 </label>
+
 <aside>
   <button>
     Guardar
