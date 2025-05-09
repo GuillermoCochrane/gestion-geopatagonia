@@ -417,30 +417,37 @@ const originacionUtilitites = {
     }
   },
 
-  //Prepara los datos necesarios para el renderizado de la vista principal de originaciones.
-  originacionData: async function(filter = {}) {
-    //Datos inmutables para la vista
-    let data = this.headerData("Originaciones");
-    data.pageScript = [...data.pageScript, ...this.validationScripts, "originacion/validations/originacionValidation", "originacion/validations/filterDateValidation"];
-    
-    let formData = {};
-    let pacTableData = [];
-    let originacionData = [];
-
+  // Obtiene el contenido variable para la vista de originaciones desde la DB.
+  originacionContent : async function(filter = {}) {
     try {
-      formData = await this.originacionFormData();          // Datos maestros para el formulario de originaciones
-      pacTableData = await this.allPACsData(null, filter);  // Datos de las observaciones/PACs, con filtrado opcional
-      originacionData = await this.allOriginacionsData();   // Datos para el selector de originaciones, para la edición de las mismas
+      return {
+        formData: await this.originacionFormData(),         // Datos maestros para el formulario de originaciones
+        pacTableData: await this.allPACsData(null, filter), // Datos de las observaciones/PACs, con filtrado opcional
+        originacionData: await this.allOriginacionsData()   // Datos para el selector de originaciones, para la edición de las mismas
+      };
     } catch (error) {
       console.error(error); // Registro del error para depuración
       throw error;          // Lanzar el error para manejarlo en el controlador
     }
+  },
 
-    data.formData = formData;
-    data.pacTableData = pacTableData;
-    data.subSection = this.mainSubsection;
-    data.originacionSelectData = originacionData;
-    return data;
+  //Prepara los datos necesarios para el renderizado de la vista principal de originaciones.
+  originacionData: async function(filter = {}) {
+    //Datos inmutables para la vista
+    const data = this.headerData("Originaciones");
+    data.pageScript = [...data.pageScript, ...this.validationScripts, "originacion/validations/originacionValidation", "originacion/validations/filterDateValidation"];
+
+    try {
+      const content = await this.originacionContent(filter);
+      return {
+        ...data,                           //  Configuración (títulos, CSS, scripts)
+        ...content,                        //  Datos de DB (form, PACs, originaciones)
+        subSection: this.mainSubsection,   //  Ruta de la plantilla EJS base.
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   },
 
   // --- Acciones de Obseravciones / PACs ---
