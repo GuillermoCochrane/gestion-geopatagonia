@@ -1,16 +1,16 @@
-<dialog id="modal" data-has-errors="<%= (locals?.originacionErrors || locals.oldData?.originacion_id) ? true : false %>">
+<dialog id="modal" data-has-errors="<%= (locals?.originacionErrors || locals.originacionData?.id) ? true : false %>">
   <header>
     <aside>
     </aside>
     <h2>
-      <%= locals.oldData?.originacion_id ? "Editar " : "Nueva " %>
+      <%= locals.originacionData?.id ? "Editar " : "Nueva " %>
       Originación
     </h2>
     <button id="modal-closer">
       <i class="fa-solid fa-xmark"></i>
     </button>
   </header>
-  <% if (locals.oldData?.originacion_id) { %>
+  <% if (locals.originacionData?.id) { %>
     <section 
         id="originacion-section" 
         class="<%= locals.oldData?.originacionErrors ? "hidden" : " " %>"
@@ -18,7 +18,7 @@
       <%- include('./pacSection.ejs') %>
     </section>
     <form 
-        action="/originacion/edit/<%= locals.oldData?.originacion_id %>"
+        action="/originacion/edit/<%= locals.originacionData?.id %>"
         method="POST" 
         id="nueva-originacion" 
         enctype="multipart/form-data" 
