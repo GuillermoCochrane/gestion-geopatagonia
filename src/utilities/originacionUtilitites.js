@@ -231,7 +231,6 @@ const originacionUtilitites = {
       let tratador = await Usuario.findAll({where: { rol_id: 3}});
       tratador = utilities.dataFormatter(tratador);
       return {
-        oldData: {originacion_id: id},
         tratadorData: tratador, // Datos del tratador para el formulario de PACs
         originacionData: await this.singleOriginacionData(id), // Datos de la originación corrspondientes al id
         observacionesPACs: await this.observacionesPACsData(id), // Observaciones / PACs de la originación
