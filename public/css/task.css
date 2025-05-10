@@ -831,7 +831,7 @@ main dialog form label input.input-error {
 main dialog form label textarea.input-ok,
 main dialog form label select.input-ok,
 main dialog form label input.input-ok {
-  color: var(--success);
+  color: var(--font);
   border-color: var(--success);
 }
 
