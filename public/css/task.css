@@ -682,6 +682,20 @@ main dialog section article aside{
   border-radius: 10px;
 }
 
+main dialog section article aside.edit{
+  border-color: transparent;
+}
+
+main dialog section article aside.edit button{
+  border-color: var(--info);
+  color: var(--info);
+}
+
+main dialog section article aside.edit button:hover{
+  background-color: var(--info);
+  color: var(--white);
+}
+
 main section article aside{
   border: 2px solid var(--logo-secondary);
 }
