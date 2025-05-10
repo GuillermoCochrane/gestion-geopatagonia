@@ -39,7 +39,7 @@ const originacionesController = {
             if (errors.isEmpty()) {
                 // Crear la originación y el adjunto (si lo hay)
                 const data = await utilities.registerCreationHandler(req.body, req.file);
-                return res.redirect(`/originacion/${data.oldData.originacion_id}`);
+                return res.redirect(`/originacion/${data.originacionData.id}`);
             } else {
                 let data = await utilities.originacionData();
                 data.oldData = req.body;
