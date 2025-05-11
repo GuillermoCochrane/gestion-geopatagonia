@@ -64,6 +64,11 @@ const originacionesController = {
         }
     },
 
+    editarOriginacion: async (req, res) => {
+        const id = await utilities.editRegistro(req.body,req.file, req.params.id);
+        return res.redirect(`/originacion/${id}`);
+    },
+
     nuevaObservacionPAC: async (req, res) => {
         const errors = validationResult(req);
         try{

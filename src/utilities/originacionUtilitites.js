@@ -302,6 +302,24 @@ const originacionUtilitites = {
     }
   },
 
+  // Edita un registro (originación u observación/PAC) en la base de datos.
+  editRegistro: async function (data, file, id, observacion = false, ) {
+    try {
+      // Definimos modelo dependiendo del valor de observacion
+      const Modelo = observacion 
+        ? ObservacionPAC 
+        : Originacion;
+
+      // Editar la entrada del modelo correspondiente
+      await Modelo.update(data, {where: {id: id}});
+
+      return id;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
+
   // Elimina un registro (originación u observación/PAC) de la base de datos.
   deleteRegistro: async function (id, observacion = false) {
     try {
