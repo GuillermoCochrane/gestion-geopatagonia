@@ -26,18 +26,19 @@
     >
       <%- include('./originacionForm.ejs', {oldData: locals.originacionData}) %>
     </form>
+    <%- include('./pacPopUp.ejs', {popUp: locals?.confirmPopUp}) %>
+    <%- include('./pacPopUp.ejs', {popUp: locals?.successPopUp}) %>
+    <%- include('./pacPopUp.ejs', {popUp: locals?.errorPopUp}) %>
+    <article id="spinner-modal" class="hidden">
+      <figure class="spinner-figure">
+        <div class="spinner"></div>
+        <figcaption>Cargando...</figcaption>
+      </figure>
+    </article>
   <% } else { %>
     <form action="/originacion/" method="POST" id="nueva-originacion" enctype="multipart/form-data">
       <%- include('./originacionForm.ejs') %>
     </form>
   <% } %>
-  <%- include('./pacPopUp.ejs', {popUp: locals?.confirmPopUp}) %>
-  <%- include('./pacPopUp.ejs', {popUp: locals?.successPopUp}) %>
-  <%- include('./pacPopUp.ejs', {popUp: locals?.errorPopUp}) %>
-  <article id="spinner-modal" class="hidden">
-    <figure class="spinner-figure">
-      <div class="spinner"></div>
-      <figcaption>Cargando...</figcaption>
-    </figure>
-  </article>
+  
 </dialog>
