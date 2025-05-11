@@ -5,6 +5,7 @@
     <h2>
       <%= locals.originacionData?.id ? "Editar " : "Nueva " %>
       Originación
+      <%= locals.originacionData?.id ?  `: ${locals.originacionData?.id}`: "" %>
     </h2>
     <button id="modal-closer">
       <i class="fa-solid fa-xmark"></i>
