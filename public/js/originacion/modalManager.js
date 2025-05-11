@@ -14,6 +14,7 @@ window.addEventListener("load", () => {
   const originacionSection = document.querySelector("#originacion-section");
   const originacionForm = document.querySelector("#nueva-originacion");
   const editButton = document.querySelector("#edit-originacion-opener");
+  const detailsButton = document.querySelector("#details-originacion-opener");
 
   // Estados de la sección
   const STATES = {
@@ -27,6 +28,11 @@ window.addEventListener("load", () => {
   editButton && editButton.addEventListener("click", () => {
     originacionSection.classList.add("hidden");
     originacionForm.classList.remove("hidden");
+  });
+
+  detailsButton && detailsButton.addEventListener("click", () => {
+    originacionSection.classList.remove("hidden");
+    originacionForm.classList.add("hidden");
   });
 
   // Función para cambiar el estado de las secciones

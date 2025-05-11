@@ -687,11 +687,13 @@ main dialog section article aside.edit{
   border-color: transparent;
 }
 
+main dialog form aside button#details-originacion-opener,
 main dialog section article aside.edit button{
   border-color: var(--info);
   color: var(--info);
 }
 
+main dialog form aside button#details-originacion-opener:hover,
 main dialog section article aside.edit button:hover{
   background-color: var(--info);
   color: var(--white);
