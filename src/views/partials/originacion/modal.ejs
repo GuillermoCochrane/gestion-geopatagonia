@@ -19,7 +19,7 @@
       <%- include('./pacSection.ejs') %>
     </section>
     <form 
-        action="/originacion/edit/<%= locals.originacionData?.id %>"
+        action="/originacion/edit/<%= locals.originacionData?.id %>?_method=PUT"
         method="POST" 
         id="nueva-originacion" 
         enctype="multipart/form-data" 
