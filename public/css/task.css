@@ -633,6 +633,7 @@ main dialog section header nav{
   padding-block: 20px;
 }
 
+main dialog article nav button,
 main dialog#select-originacion-modal nav button,
 main section .data-container dialog nav button,
 main dialog section article nav button,
