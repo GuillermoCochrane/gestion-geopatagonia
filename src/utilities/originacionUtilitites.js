@@ -267,7 +267,7 @@ const originacionUtilitites = {
   },
 
   // Prepara los datos necesarios para el procesamiento de adjuntos
-  adjuntoConfig(file, id, observacion  =false) {
+  adjuntoConfig(file, id, observacion  = false) {
 
     //Definimos archivo, key y modelo dependiendo del valor de observacion
     const entity = observacion ? 'observacion_pac' : 'originacion';
@@ -314,26 +314,7 @@ const originacionUtilitites = {
   // Guarda un archivo adjunto asociado a una originación u observación/PAC.
   createAdjunto: async function (file, id, observacion = false) {
     try {
-      //Definimos archivo, key  y modelo dependiendo del valor de observacion
-      const archivo = observacion 
-        ? `/documents/observacion_pac/${file.originalname}`  // ← TRUE: Observación/PAC
-        : `/documents/originacion/${file.originalname}`;     // ← FALSE: Originación
-
-      const key = observacion 
-        ? 'observacion_pac_id' 
-        : 'originacion_id';
-
-      const Modelo = observacion 
-        ? AdjuntoObservacionPAC 
-        : AdjuntoOriginacion;
-
-      // Construir el objeto de datos para el adjunto
-      const data = {
-        nombre: file.originalname,
-        archivo: archivo, 
-        descripcion: '-',
-        [key]: id, //Asociar el adjunto a la entidad usando el ID proporcionado
-      };
+      const {Modelo, data} = this.adjuntoConfig(file, id, observacion);
       // Crear el adjunto en la base de datos
       const adjunto = await Modelo.create(data);
       return adjunto.id;
@@ -368,27 +349,7 @@ const originacionUtilitites = {
   // Edita  los datos de un archivo adjunto asociado a una originación u observación/PAC.
   editAdjunto: async function (file, id, observacion = false) {
     try {
-      //Definimos archivo, key  y modelo dependiendo del valor de observacion
-      
-      const Modelo = observacion 
-        ? AdjuntoObservacionPAC 
-        : AdjuntoOriginacion;
-
-      const archivo = observacion 
-        ? `/documents/observacion_pac/${file.originalname}`  // ← TRUE: Observación/PAC
-        : `/documents/originacion/${file.originalname}`;     // ← FALSE: Originación
-
-      const key = observacion 
-        ? 'observacion_pac_id' 
-        : 'originacion_id';
-
-      // Construir el objeto de datos para el adjunto
-      const data = {
-        nombre: file.originalname,
-        archivo: archivo, 
-        descripcion: '-',
-        [key]: id, //Asociar el adjunto a la entidad usando el ID proporcionado
-      };
+      const {Modelo, data, key} = this.adjuntoConfig(file, id, observacion);
 
       let adjuntoID = 0;
 
@@ -406,7 +367,9 @@ const originacionUtilitites = {
             id: oldData.id,
           }
         });
+
         adjuntoID = oldData.id
+
       } else {
         // Sino crearmos el adjunto en la base de datos
         const newAdjunto = await this.createAdjunto(file, id, observacion);
