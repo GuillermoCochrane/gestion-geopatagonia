@@ -369,14 +369,14 @@ const originacionUtilitites = {
         [key]: id, //Asociar el adjunto a la entidad usando el ID proporcionado
       };
 
-      const adjuntoID = 0;
+      let adjuntoID = 0;
 
       // Verificamos si el adjunto ya existe
-      const oldData = await Modelo.findAll({
+      const oldData = (await Modelo.findAll({
         where: {
           [key]: id,
         }
-      })[0];
+      }))[0];
 
       if (oldData) {
         // Si existe el adjunto, actualizamos los datos
