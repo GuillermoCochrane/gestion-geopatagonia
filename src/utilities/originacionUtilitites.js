@@ -266,6 +266,27 @@ const originacionUtilitites = {
     }
   },
 
+  // Prepara los datos necesarios para el procesamiento de adjuntos
+  adjuntoConfig(file, id, observacion  =false) {
+
+    //Definimos archivo, key y modelo dependiendo del valor de observacion
+    const entity = observacion ? 'observacion_pac' : 'originacion';
+    const key = `${entity}_id`;
+    const fileName = file.filename;
+    const filePath = `/documents/${entity}/${fileName}`;
+
+    return {
+      Modelo: observacion ? AdjuntoObservacionPAC : AdjuntoOriginacion,
+      data: {
+        nombre: fileName,
+        archivo: filePath,
+        descripcion: '-',
+        [key]: id
+      },
+      key: key, 
+    };
+  },
+
   // Crea un registro (originación u observación/PAC) en la base de datos.
   createRegistro: async function (data, file, observacion = false) {
     try {
