@@ -65,8 +65,22 @@ const originacionesController = {
     },
 
     editarOriginacion: async (req, res) => {
-        const id = await utilities.editRegistro(req.body,req.file, req.params.id);
-        return res.redirect(`/originacion/${id}`);
+        const errors = validationResult(req);
+        try{
+            if (errors.isEmpty()) {
+                const id = await utilities.editRegistro(req.body,req.file, req.params.id);
+                return res.redirect(`/originacion/${id}`);
+            } else {
+                let data = await utilities.registerCreationHandler ({}, null, req.params.id);
+                data.oldData = req.body;
+                data.originacionErrors = errors.mapped();
+                return res.render("originacion/originacion", data);
+            }
+        } catch (error) {
+            console.error(error);
+            const data = utilities.errordata(error);
+            return res.render("originacion/originacion", data);
+        }
     },
 
     nuevaObservacionPAC: async (req, res) => {
