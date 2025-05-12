@@ -14,7 +14,7 @@
   <% if (locals.originacionData?.id) { %>
     <section 
         id="originacion-section" 
-        class="<%= locals.oldData?.originacionErrors ? "hidden" : " " %>"
+        class="<%= locals?.originacionErrors ? "hidden" : " " %>"
     >
       <%- include('./pacSection.ejs') %>
     </section>
@@ -23,9 +23,9 @@
         method="POST" 
         id="nueva-originacion" 
         enctype="multipart/form-data" 
-        class="<%= locals.oldData?.originacionErrors ? " " : "hidden" %>"
+        class="<%= locals?.originacionErrors ? " " : "hidden" %>"
     >
-      <%- include('./originacionForm.ejs', {oldData: locals.originacionData}) %>
+      <%- include('./originacionForm.ejs', {oldData: locals.oldData ? locals.oldData : locals.originacionData}) %>
     </form>
     <%- include('./pacPopUp.ejs', {popUp: locals?.confirmPopUp}) %>
     <%- include('./pacPopUp.ejs', {popUp: locals?.successPopUp}) %>
