@@ -139,7 +139,7 @@ const originacionUtilitites = {
   staticData: function(){
     return {
       ...this.headerData("Originaciones"),
-      pageScript: [...this.pageScript, ...this.validationScripts, "sectionhandler", "originacion/validations/obsPACValidation"],
+      pageScript: [...this.pageScript, ...this.validationScripts, "sectionhandler", "originacion/validations/obsPACValidation", "originacion/validations/originacionValidation"],
       dashboardHeader: this.dashboardHeader,
       subSection: this.mainSubsection,
       confirmPopUp: this.confirmPopUp,
