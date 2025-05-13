@@ -485,15 +485,23 @@ const originacionUtilitites = {
         attributes: utilities.excludeTimestamps(),
         order: [['id', 'ASC']],
       });
-
+      
       // Formateo de las fechas de las observaciones y sus subrelaciones
-      return utilities.dataFormatter(resultados, 
+      let data = utilities.dataFormatter(resultados, 
         ['fecha_requerida'], 
         [
           { parentObject: 'originacion', dateField: 'fecha_de_observacion' }, 
           { parentObject: 'acciones', dateField: 'fecha_realizacion' }
         ]
       );
+
+      // Si se solicita una observación especifica, devolvemos la fecha requerida para visualizar y para el formulario de edición
+      if (id){
+        data[0].display_fecha_requerida = data[0].fecha_requerida;
+        data[0].fecha_requerida = resultados[0].fecha_requerida;
+      }
+
+      return data;
     } catch (error) {
       console.error(error);
       throw error;
