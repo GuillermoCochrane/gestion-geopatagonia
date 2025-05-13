@@ -6,7 +6,7 @@ window.addEventListener("load", () => {
 	const $observador = document.querySelector("#observador_id");
     const $insperctor = document.querySelector("#ente_inspector_id");
     const $sector = document.querySelector("#sector_id");
-    const $adjunto = document.querySelector("#adjunto");
+    const $adjunto = document.querySelector("#adjunto_originacion");
     const $btn = document.querySelector("#nueva-originacion button");
 
     const fechaValidation = () => {
