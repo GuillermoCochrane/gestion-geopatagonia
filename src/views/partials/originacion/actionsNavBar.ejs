@@ -4,6 +4,10 @@
     <span>Menú</span>
   </button>
   <nav class="sidebar-nav">
+    <a id="edit-pac-action" title="Editar <%= title %>">
+      <i class="fa-solid fa-pen-to-square fa-lg"></i>
+      <span>Editar <%= title %></span>
+    </a>
     <a id="export-action" title="Exportar">
       <i class="fa-solid fa-file-arrow-down fa-lg"></i>
       <span>Exportar</span>
@@ -23,9 +27,9 @@
         <span>Reabrir</span>
       </a>
     <% } %>
-    <a id="edit-pac-action" title="Editar <%= title %>">
-      <i class="fa-solid fa-pen-to-square fa-lg"></i>
-      <span>Editar <%= title %></span>
+    <a href="/originacion/"  title="Volver a originaciones">
+      <i class="fa-solid fa-arrow-left fa-lg"></i>
+      <span>Volver a Originaciones</span>
     </a>
   </nav>
 </aside>
