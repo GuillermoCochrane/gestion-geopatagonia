@@ -218,7 +218,7 @@ body.pac-actions main section aside.sidebar nav.sidebar-nav a i {
   align-items: center;
   border-radius: 50%;
   color: var(--font);
-  border: 2px solid var(--ice);
+  border: 2px solid var(--logo-secondary);
   background-color: var(--white);
 }
 
@@ -229,7 +229,6 @@ body.pac-actions main section aside.sidebar nav.sidebar-nav a i:hover{
 }
 
 body.pac-actions main section aside.sidebar nav.sidebar-nav a:hover i.fa-pen-to-square,
-body.pac-actions main section aside.sidebar nav.sidebar-nav a:hover i.fa-magnifying-glass,
 body.pac-actions main section aside.sidebar nav.sidebar-nav a:hover i.fa-user-pen,
 body.pac-actions main section aside.sidebar nav.sidebar-nav a:hover i.fa-arrow-rotate-left{
   background-color: var(--info);
@@ -350,18 +349,24 @@ main section table td .actions-container a:has(i.fa-file-arrow-down):hover{
   box-shadow: 0 0 10px var(--logo)
 }
 
-body.pac-actions main section aside.sidebar nav.sidebar-nav a i.fa-magnifying-glass,
 body.pac-actions main section aside.sidebar nav.sidebar-nav a i.fa-plus,
-main section table td .actions-container a:has(i.fa-magnifying-glass),
 main section table td .actions-container a:has(i.fa-plus){
   color: var(--success);
   border-color: var(--success);
   transition: all 0.5s ease-in-out;
 }
 
-main section table td .actions-container a:has(i.fa-magnifying-glass):hover,
+/* main section table td .actions-container a:has(i.fa-magnifying-glass):hover, */
 main section table td .actions-container a:has(i.fa-plus):hover{
   box-shadow: 0 0 10px var(--success)
+}
+
+main section table td .actions-container a:has(i.fa-magnifying-glass){
+  color: var(--font);
+}
+
+main section table td .actions-container a:has(i.fa-magnifying-glass):hover{
+  box-shadow: 0 0 10px var(--font)
 }
 
 body.pac-actions main section aside.sidebar nav.sidebar-nav a i.fa-user-pen::before,
@@ -442,6 +447,7 @@ details summary h3 {
   width: 100%;
 }
 
+main section .data-container dialog#edit-pac-modal form,
 dialog form,
 details form{
   display: flex;
@@ -455,6 +461,7 @@ details form{
   border-radius: 5px;
 }
 
+main section .data-container dialog#edit-pac-modal form label,
 dialog form aside,
 dialog form label,
 details form aside,
@@ -464,6 +471,7 @@ details form label{
   margin-top: .5em;
 }
 
+main section .data-container dialog#edit-pac-modal form label h3,
 dialog form label h3,
 details form label h3{
   width: 100%;
@@ -471,6 +479,9 @@ details form label h3{
   margin-bottom: .5em;
 }
 
+main section .data-container dialog#edit-pac-modal form label textarea,
+main section .data-container dialog#edit-pac-modal form label input,
+main section .data-container dialog#edit-pac-modal form label select,
 dialog form label textarea,
 dialog form label input,
 dialog form label select,
@@ -484,6 +495,7 @@ details form label select{
   border-radius: 3px;
 }
 
+
 dialog form label textarea:focus,
 dialog form label input:focus,
 dialog form label select:focus,
@@ -493,6 +505,7 @@ details form label select:focus{
   outline-offset: 1px;
 }
 
+main section .data-container dialog#edit-pac-modal form label textarea,
 dialog form label textarea{
   resize: none;
   field-sizing: content;
@@ -803,6 +816,7 @@ main dialog section form label.checkbox{
 	min-width: 70px;
 }
 
+main section .data-container dialog#edit-pac-modal form label.checkbox input,
 main dialog section form label.checkbox input{
 	all: unset;
 	appearance: none;
@@ -818,6 +832,7 @@ main dialog section form label.checkbox input{
 	transition: 0.25s linear background;
 }
 
+main section .data-container dialog#edit-pac-modal form label.checkbox input::before,
 main dialog section form label.checkbox input::before{
 	content: "";
 	display: block;
@@ -833,13 +848,17 @@ main dialog section form label.checkbox input::before{
 	transform: translateX(0rem);
 }
 
+main section .data-container dialog#edit-pac-modal form label.checkbox input:checked,
 main dialog section form label.checkbox input:checked {
   background: var(--logo);
 }
+
+main section .data-container dialog#edit-pac-modal form label.checkbox input:checked::before,
 main dialog section form label.checkbox input:checked::before {
   transform: translateX(1rem);
 }
 
+main section .data-container dialog#edit-pac-modal form label.checkbox input:focus,
 main dialog section form label.checkbox input:focus {
   outline: transparent;
 }
@@ -1013,7 +1032,12 @@ main section .data-container dialog{
 
 main dialog#select-originacion-modal{
   width: 40%;
-} 
+}
+
+main section .data-container dialog#edit-pac-modal{
+  width: 80%;
+  height: 60vh;
+}
 
 main dialog#select-originacion-modal h2,
 main section .data-container dialog h2{
