@@ -4,18 +4,21 @@ window.addEventListener("load", () => {
   const $addButton = document.querySelector("#add-action");
   const $modifyButton = document.querySelector("#modify-action");
   const $reopenButton = document.querySelector("#reopen-action");
+  const $editPACButton = document.querySelector("#edit-pac-action");
 
   //Botones de cierre de modales
   const $exportClose = document.querySelector("#export-close");
   const $addClose = document.querySelector("#add-close");
   const $modifyClose = document.querySelector("#modify-close");
   const $reopenClose = document.querySelector("#reopen-close");
+  const $editPACClose = document.querySelector("#edit-pac-close");
 
   // Modales
   const $export = document.querySelector("#export-modal");
   const $add = document.querySelector("#add-modal");
   const $modify = document.querySelector("#modify-modal");
   const $reopen = document.querySelector("#reopen-modal");
+  const $editPAC = document.querySelector("#edit-pac-modal");
 
   // dataset
   const $dataContainer = document.querySelector("#data-container");
@@ -31,11 +34,13 @@ window.addEventListener("load", () => {
 
   $exportButton.addEventListener("click", () => openModal($export));
   $addButton.addEventListener("click", () => openModal($add));
+  $editPACButton.addEventListener("click", () => openModal($editPAC));
   $modifyButton && $modifyButton.addEventListener("click", () => openModal($modify));
   $reopenButton && $reopenButton.addEventListener("click", () => openModal($reopen));
 
   $exportClose.addEventListener("click", () => closeModal($export));
   $addClose.addEventListener("click", () => closeModal($add));
+  $editPACClose.addEventListener("click", () => closeModal($editPAC));
   $modifyClose && $modifyClose.addEventListener("click", () => closeModal($modify));
   $reopenClose && $reopenClose.addEventListener("click", () => closeModal($reopen));
 

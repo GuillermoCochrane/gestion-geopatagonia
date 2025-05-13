@@ -1,6 +1,6 @@
 <dialog id="edit-pac-modal">
   <h2>Editar <%= title %>: <%= locals.pacData?.id %></h2>
-  <form id="new-content" action="/originacion/observacionPAC/edit/<%= locals.pacData?.id %>?method=put" method="POST" enctype="multipart/form-data">
+  <form id="new-content" action="/originacion/observacionPAC/edit/<%= locals.pacData?.id %>?_method=PUT" method="POST" enctype="multipart/form-data">
     <%- include('./pacForm.ejs', {oldData: locals.oldData ? locals.oldData : locals.pacData}); %>
   </form>
 </dialog>

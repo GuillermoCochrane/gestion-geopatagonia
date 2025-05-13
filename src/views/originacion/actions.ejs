@@ -6,6 +6,7 @@
     <%- include('../partials/originacion/actionsTable.ejs') %>
     <%- include('../partials/originacion/actionExportModal.ejs') %>
     <%- include('../partials/originacion/actionAddModal.ejs') %>
+    <%- include('../partials/originacion/actionEditPACModal.ejs') %>
     <% if (locals?.pacData?.estado?.id !== 6 && locals?.pacData?.estado?.id !== 8) { %>
       <%- include('../partials/originacion/actionModifyModal.ejs') %>
     <% } else { %>
