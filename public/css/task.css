@@ -218,25 +218,35 @@ body.pac-actions main section aside.sidebar nav.sidebar-nav a i {
   align-items: center;
   border-radius: 50%;
   color: var(--font);
-  border: 2px solid transparent;
+  border: 2px solid var(--ice);
   background-color: var(--white);
 }
 
+body.pac-actions main section aside.sidebar nav.sidebar-nav a i:hover{
+  background-color: var(--font);
+  box-shadow: 0 0 10px var(--ice);
+  color: var(--ice);
+}
+
+body.pac-actions main section aside.sidebar nav.sidebar-nav a:hover i.fa-pen-to-square,
 body.pac-actions main section aside.sidebar nav.sidebar-nav a:hover i.fa-magnifying-glass,
 body.pac-actions main section aside.sidebar nav.sidebar-nav a:hover i.fa-user-pen,
 body.pac-actions main section aside.sidebar nav.sidebar-nav a:hover i.fa-arrow-rotate-left{
-  background-color: var(--success);
+  background-color: var(--info);
+  box-shadow: 0 0 10px var(--info);
   color: var(--white);
 }
-
 
 body.pac-actions main section aside.sidebar nav.sidebar-nav a:hover i.fa-file-arrow-down {
   background-color: var(--logo);
+  box-shadow: 0 0 10px var(--logo);
   color: var(--white);
 }
 
+
 body.pac-actions main section aside.sidebar nav.sidebar-nav a:hover i.fa-plus{
-  background-color: var(--info);
+  background-color: var(--success);
+  box-shadow: 0 0 10px var(--success);
   color: var(--white);
 }
 
@@ -313,21 +323,20 @@ main section table td .actions-container a{
   border-radius: 50%;
   border: 2px solid var(--font);
 }
-body.pac-actions main section aside.sidebar nav.sidebar-nav a i.fa-magnifying-glass,
+
+body.pac-actions main section aside.sidebar nav.sidebar-nav a i.fa-pen-to-square,
 body.pac-actions main section aside.sidebar nav.sidebar-nav a i.fa-user-pen,
 body.pac-actions main section aside.sidebar nav.sidebar-nav a i.fa-arrow-rotate-left,
-main section table td .actions-container a:has(i.fa-magnifying-glass),
 main section table td .actions-container a:has(i.fa-user-pen),
 main section table td .actions-container a:has(i.fa-arrow-rotate-left){
-  border-color: var(--success);
-  color: var(--success);
+  border-color: var(--info);
+  color: var(--info);
   transition: all 0.5s ease-in-out;
 }
 
-main section table td .actions-container a:has(i.fa-magnifying-glass):hover,
 main section table td .actions-container a:has(i.fa-user-pen):hover,
 main section table td .actions-container a:has(i.fa-arrow-rotate-left):hover{
-  box-shadow: 0 0 10px var(--success)
+  box-shadow: 0 0 10px var(--info)
 }
 
 body.pac-actions main section aside.sidebar nav.sidebar-nav a i.fa-file-arrow-down,
@@ -341,15 +350,18 @@ main section table td .actions-container a:has(i.fa-file-arrow-down):hover{
   box-shadow: 0 0 10px var(--logo)
 }
 
+body.pac-actions main section aside.sidebar nav.sidebar-nav a i.fa-magnifying-glass,
 body.pac-actions main section aside.sidebar nav.sidebar-nav a i.fa-plus,
+main section table td .actions-container a:has(i.fa-magnifying-glass),
 main section table td .actions-container a:has(i.fa-plus){
-  color: var(--info);
-  border-color: var(--info);
+  color: var(--success);
+  border-color: var(--success);
   transition: all 0.5s ease-in-out;
 }
 
+main section table td .actions-container a:has(i.fa-magnifying-glass):hover,
 main section table td .actions-container a:has(i.fa-plus):hover{
-  box-shadow: 0 0 10px var(--info)
+  box-shadow: 0 0 10px var(--success)
 }
 
 body.pac-actions main section aside.sidebar nav.sidebar-nav a i.fa-user-pen::before,
