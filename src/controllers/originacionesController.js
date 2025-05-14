@@ -206,10 +206,23 @@ const originacionesController = {
     },
 
     editarPAC: async (req, res) => {
-        req.body.fecha_negociable =Boolean(req.body.fecha_negociable);
-        req.body.requiere_analisis = Boolean(req.body.requiere_analisis);
-        const id = await utilities.editRegistro(req.body, req.file, req.params.id, true);
-        return res.redirect(`/originacion/observacionPAC/${id}`);
+        const errors = validationResult(req);
+        try{
+            if (errors.isEmpty()) {
+                req.body.fecha_negociable =Boolean(req.body.fecha_negociable);
+                req.body.requiere_analisis = Boolean(req.body.requiere_analisis);
+                const id = await utilities.editRegistro(req.body, req.file, req.params.id, true);
+                return res.redirect(`/originacion/observacionPAC/${id}`);
+            } else {
+                let data = await utilities.pacData(req.params.id, "edit");
+                data.PACErrors = errors.mapped();
+                return res.render("originacion/originacion", data);
+            }
+        } catch (error) {
+            console.error(error);
+            const data = utilities.errordata(error);
+            return res.render("originacion/originacion", data);
+        }
     },
 }
 

@@ -30,13 +30,13 @@ router.put('/edit/:id', uploading.single("adjunto"), originacionValidation, orig
 router.post('/filtrar', dateValidations, originacionesController.filtrar);
 router.get('/observacionPAC', originacionesController.observacionesPACs); // Ruta de prueba
 router.post('/observacionPAC', uploading.single("adjunto"), obsPACValidation, originacionesController.nuevaObservacionPAC);
-router.put('/observacionPAC/edit/:id', uploading.single("adjunto"), originacionesController.editarPAC);
+router.put('/observacionPAC/edit/:id', uploading.single("adjunto"), obsPACValidation, originacionesController.editarPAC);
 router.get('/observacionPAC/pdf/:id', originacionesController.observacionPacPdf);
 router.post('/observacionPAC/addAction/:id', accionValidation, originacionesController.agregarAccion);
 router.post('/observacionPAC/export/:id',  originacionesController.exportar);
 router.put('/observacionPAC/modify/:id', responsableValidation, originacionesController.modificarResponsablePAC);
 router.put('/observacionPAC/reopen/:id', responsableValidation, originacionesController.reabrirPac);
 router.get('/observacionPAC/:id/:accion?', originacionesController.observacionPAC);
-router.get('/:id', originacionesController.originacion); //Proximo paso, agregar validaciones
+router.get('/:id', originacionesController.originacion);
 
 module.exports = router;
