@@ -203,7 +203,14 @@ const originacionesController = {
             const data = utilities.errordata(error);
             return res.render("originacion/originacion", data);
         }
-    }
+    },
+
+    editarPAC: async (req, res) => {
+        req.body.fecha_negociable =Boolean(req.body.fecha_negociable);
+        req.body.requiere_analisis = Boolean(req.body.requiere_analisis);
+        const id = await utilities.editRegistro(req.body, req.file, req.params.id, true);
+        return res.redirect(`/originacion/observacionPAC/${id}`);
+    },
 }
 
 module.exports = originacionesController;
