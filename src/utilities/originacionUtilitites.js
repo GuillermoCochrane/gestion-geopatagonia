@@ -560,7 +560,7 @@ const originacionUtilitites = {
       let data = this.headerData(title);
 
       // Scripts y estilos específicos de la vista
-      data.pageScript = [ ...this.validationScripts, "originacion/sidebarManager", "originacion/actionsModalManager", "originacion/validations/modifyResponsableValidation", "originacion/validations/addActionValidation", "originacion/exportManager"  ];
+      data.pageScript = [ ...this.validationScripts, "originacion/sidebarManager", "originacion/actionsModalManager", "originacion/validations/modifyResponsableValidation", "originacion/validations/addActionValidation", "originacion/exportManager", "originacion/validations/obsPACValidation" ];
       data.subSection  = "./actions.ejs";
       data.subSectionStyles = "pac-actions";
       data.action = action;
