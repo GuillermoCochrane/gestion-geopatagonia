@@ -214,7 +214,8 @@ const originacionesController = {
                 const id = await utilities.editRegistro(req.body, req.file, req.params.id, true);
                 return res.redirect(`/originacion/observacionPAC/${id}`);
             } else {
-                let data = await utilities.pacData(req.params.id, "edit");
+                let data = await utilities.pacData(req.params.id, "edit-pac");
+                data.oldData = req.body;
                 data.PACErrors = errors.mapped();
                 return res.render("originacion/originacion", data);
             }
