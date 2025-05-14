@@ -3,5 +3,18 @@
 # dependencies
 /node_modules
 /cosas_referencia
+
+# Archivos de entorno
+.env
+*.env
+
+# archivos temporales
 test.js
 notas.md
+
+# Editor/IDE
+.vscode/
+.idea/
+
+# Logs
+*.log

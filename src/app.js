@@ -1,3 +1,8 @@
+// Carga de variables de entorno, si no nos encontramos en producción
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+} 
+
 // Dependencias y modulos
 const express = require("express");
 const path = require("path");
