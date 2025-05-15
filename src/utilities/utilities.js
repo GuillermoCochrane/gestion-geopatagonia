@@ -22,7 +22,12 @@ const utilities = {
     getDateParts: function(date){
       // Si no se recibe fecha, devolver objeto vacío
       if (!date) return { day: null, month: null, year: null };
-      const formattedDate = new Date(date);
+
+      // Forzar interpretación local si es string tipo "yyyy-mm-dd"
+      const formattedDate = typeof date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(date)
+        ? new Date(date + 'T00:00:00')
+        : new Date(date);
+
       // Si no se pudo convertir la fecha, devolver objeto vacío
       if (isNaN(formattedDate)) return { day: null, month: null, year: null };
 
