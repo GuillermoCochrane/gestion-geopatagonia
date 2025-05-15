@@ -13,6 +13,7 @@ const {
 
 const mailUtilities = {
 
+  //Devuelve la configuración para el envío de mails
   smtpConfig: function(){
     if (!SMTP_USER) throw new Error("Falta el valor de la variable de entorno SMTP_USER");
     if (!SMTP_PASS) throw new Error("Falta el valor de la variable de entorno SMTP_PASS");
@@ -28,6 +29,16 @@ const mailUtilities = {
     return config
   },
 
+  // Devuelve un objeto con los datos para el envío de mails
+  mailData: function(to, subject, text, html = null) {
+    return {
+      from: `"${SMTP_FROM_NAME}" <${SMTP_FROM_EMAIL}>`,
+      to,
+      subject,
+      text,
+      html: html || text                  // Usa HTML si está definido, sino texto plano
+    };
+  },
 }
 
 module.exports = mailUtilities
