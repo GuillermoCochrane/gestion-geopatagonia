@@ -39,6 +39,19 @@ const mailUtilities = {
       html: html || text                  // Usa HTML si está definido, sino texto plano
     };
   },
+
+  // Envía un mail con configuración por defecto con los datos ingresado
+  sendMail: async function(to, subject, text, html = null) {
+    const mail = this.mailData(to, subject, text, html);
+    const transporter = nodemailer.createTransport(this.smtpConfig());
+    try {
+      const info = await transporter.sendMail(mail);
+      return { success: true, messageId: info.messageId }
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
 }
 
 module.exports = mailUtilities
