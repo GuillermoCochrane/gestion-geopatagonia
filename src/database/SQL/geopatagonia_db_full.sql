@@ -131,6 +131,25 @@ INSERT INTO `estados` VALUES (1,'Abierta',NULL,'2025-01-09 22:55:31','2025-01-09
 UNLOCK TABLES;
 
 --
+-- Table structure for table `formularios`
+--
+
+DROP TABLE IF EXISTS `formularios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `formularios` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `codigo` varchar(20) NOT NULL,
+  `descripcion` varchar(100) DEFAULT '-',
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  UNIQUE KEY `codigo_UNIQUE` (`codigo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `observaciones_pacs`
 --
 
