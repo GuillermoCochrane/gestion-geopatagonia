@@ -156,6 +156,26 @@ CREATE TABLE `formularios` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `incisos`
+--
+
+DROP TABLE IF EXISTS `incisos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `incisos` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `inciso` varchar(20) NOT NULL,
+  `descripcion` varchar(100) DEFAULT '-',
+  `formulario_id` int(10) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_inciso_formulario` (`formulario_id`,`inciso`),
+  CONSTRAINT `fk_incisos_formulario` FOREIGN KEY (`formulario_id`) REFERENCES `formularios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `observaciones_pacs`
 --
 
