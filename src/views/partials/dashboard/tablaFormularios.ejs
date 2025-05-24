@@ -1,0 +1,40 @@
+<thead>
+  <tr>
+    <th> # </th>
+    <th>Código</th>
+    <th>Descripción</th>
+    <th>Creado</th>
+    <th>Modificado</th>
+    <th>Acciones</th>
+  </tr>
+</thead>
+<tbody>
+  <% if (locals?.formularios?.length !== 0) { %>
+    <% for (const formulario of locals?.formularios) { %>
+      <tr>
+        <td><%= formulario.id %></td>
+        <td><%= formulario.formulario %></td>
+        <td><%= formulario.descripcion  ? formulario.descripcion : " - " %></td>
+        <td><%= formulario.created_at %></td>
+        <td><%= formulario.updated_at %></td>
+        <td>
+          <a href="/dashboard/formularios/editar/<%= formulario.id %>">
+            <button>
+              Editar
+            </button>
+          </a>
+          <a href="/dashboard/formularios/eliminar/<%= formulario.id %>">
+            <button class="delete">
+              Eliminar
+            </button>
+          </a>
+        </td>
+      </tr>
+      <% } %>
+  <% } else { %>
+    <tr>
+      <td colspan="6" style="text-align: center; display: table-cell; border-color:var(--font);">
+        No hay formularios definidos
+      </td>
+  <% } %>
+</tbody>
