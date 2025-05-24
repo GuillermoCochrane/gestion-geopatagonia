@@ -55,6 +55,12 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
     },
+
+    formulario_id: {
+      // ID del formulario al que pertenece la observación, opcional
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: true, 
+    }
   };
 
   let config = {
@@ -99,6 +105,13 @@ module.exports = function(sequelize, DataTypes) {
       foreignKey: 'sector_id',
       onDelete: 'RESTRICT',
       onUpdate: 'NO ACTION'
+    });
+
+    Originacion.belongsTo(models.Formulario, {
+      as: 'formulario',
+      foreignKey: 'formulario_id',
+      onDelete: 'SET NULL',
+      onUpdate: 'CASCADE'
     });
 
     Originacion.hasMany(models.ObservacionPAC, {
