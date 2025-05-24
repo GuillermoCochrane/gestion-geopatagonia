@@ -10,21 +10,6 @@ module.exports = function(sequelize, DataTypes) {
       autoIncrement: true,
     },
 
-    inciso: {
-      // Código del formulario, máximo 20 caracteres
-      type: DataTypes.STRING(20),
-      allowNull: false,
-      validate: {
-        len: {
-          args: [1, 20],
-          msg: 'El nombre del inciso debe tener entre 1 y 20 caracteres.',
-        },
-        notEmpty: {
-          msg: 'El nombre del inciso no puede estar vacío.',
-        },
-      },
-    },
-
   descripcion: {
     // Descripción del formulario, máximo 100 caracteres
     type: DataTypes.STRING(100),
