@@ -71,7 +71,7 @@ const dashboardUtilities = {
       ...config,
       dashboardHeader: headerData,
       pageScript: scripts,
-      title: id ? singleTitle : config.mainLabel,
+      title: id ? singleTitle : headerData.mainLabel,
       styles: this.styles,
       subSection: id ? "./edition.ejs" : "./subSections.ejs",
       ...(id ? { id, [entidad]: registros[0] } : { [coleccion]: registros })
