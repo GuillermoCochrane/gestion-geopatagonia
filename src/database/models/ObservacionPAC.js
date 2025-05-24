@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
     inciso: {
       // Inciso al que pertenece la observación, obligatorio
       type: DataTypes.STRING(5),
-      allowNull: false,
+      allowNull: true,
     },
 
     descripcion: {
@@ -65,22 +65,28 @@ module.exports = function(sequelize, DataTypes) {
     },
 
     responsable_id: {
-      // ID del responsable de la observación, opcional
+      // ID del responsable de la observación
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
     },
 
     originacion_id: {
-      // ID de la originación al que pertenece la observación, opcional
+      // ID de la originación al que pertenece la observación
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
     },
 
     estado_id: {
-      // ID del estado al que pertenece la observación, opcional
+      // ID del estado al que pertenece la observación
       type: DataTypes.INTEGER.UNSIGNED,
       allowNull: false,
     },
+
+    inciso_id: {
+      // ID del inciso al que pertenece la observación, opcional
+      type: DataTypes.INTEGER.UNSIGNED,
+      allowNull: true, 
+    }
   };
 
   let config = {
@@ -117,6 +123,14 @@ module.exports = function(sequelize, DataTypes) {
       foreignKey: 'originacion_id',
       onDelete: 'RESTRICT',
       onUpdate: 'NO ACTION'
+    });
+
+    ObservacionPAC.belongsTo(models.Inciso, {
+      // Una observación puede tener a un solo inciso de formulario
+      as: 'inciso_formulario',
+      foreignKey: 'inciso_id',
+      onDelete: 'SET NULL',
+      onUpdate: 'CASCADE'
     });
 
     ObservacionPAC.hasMany(models.AdjuntoObservacionPAC, {
