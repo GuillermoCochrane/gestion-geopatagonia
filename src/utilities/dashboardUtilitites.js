@@ -66,12 +66,12 @@ const dashboardUtilities = {
     let scripts = this.pageScript;
     scripts = [...scripts, "validator.min", "validations", `dashboard/validations/${entidad}Validation`];
     !id && scripts.push("sectionhandler");
-    const singleTitle = `Editando ${headerData.entity} : ${nombre ? nombre : registros[0][entidad]}`;
+    const singleTitle = id ?`Editando ${headerData.entity} : ${nombre ? nombre : registros[0][entidad]}`: headerData.mainLabel;
     return {
       ...config,
       dashboardHeader: headerData,
       pageScript: scripts,
-      title: id ? singleTitle : headerData.mainLabel,
+      title: singleTitle,
       styles: this.styles,
       subSection: id ? "./edition.ejs" : "./subSections.ejs",
       ...(id ? { id, [entidad]: registros[0] } : { [coleccion]: registros })
@@ -107,9 +107,9 @@ const dashboardUtilities = {
       let registros = await Modelo.findAll({ where });
 
       // Si no se encuentran registros, devolvemos un mensaje de error
-      if (registros.length === 0) {
+/*       if (registros.length === 0) {
         return this.errorInfo(coleccion);
-      }
+      } */
 
       // Convertimos las instancias de Sequelize a objetos planos
       let registrosPlanos = utilities.plainData(registros);
