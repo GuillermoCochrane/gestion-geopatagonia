@@ -1,0 +1,11 @@
+<label>
+  <h4>Código</h4>
+  <input type="text" name="codigo" id="codigo" value="<%= locals.formulario?.codigo %>">
+  <span id="error-codigo"><%= locals?.errors?.codigo?.msg  %></span>
+</label>
+<label>
+  <h4>Descripción</h4>
+  <textarea name="descripcion" id="descripcion" ><%= locals.formulario?.descripcion%></textarea>
+  <span id="error-descripcion"><%= locals.errors?.descripcion?.msg %></span>
+</label>
+<%- include(`./submitButton.ejs`) %>
