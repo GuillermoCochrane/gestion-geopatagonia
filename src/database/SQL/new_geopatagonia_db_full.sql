@@ -213,16 +213,19 @@ CREATE TABLE `observaciones_pacs` (
   `responsable_id` int(10) unsigned NOT NULL,
   `originacion_id` int(10) unsigned NOT NULL,
   `estado_id` int(10) unsigned NOT NULL,
+  `inciso_id` int(10) unsigned DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `fk_op_responsable_id_idx` (`responsable_id`),
   KEY `fk_op_originacion_id_idx` (`originacion_id`),
   KEY `fk_op_estado_id_idx` (`estado_id`),
+  KEY `fk_observaciones_inciso_idx` (`inciso_id`),
+  CONSTRAINT `fk_observaciones_inciso` FOREIGN KEY (`inciso_id`) REFERENCES `incisos` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `fk_op_estado_id` FOREIGN KEY (`estado_id`) REFERENCES `estados` (`id`) ON UPDATE NO ACTION,
   CONSTRAINT `fk_op_originacion_id` FOREIGN KEY (`originacion_id`) REFERENCES `originaciones` (`id`) ON UPDATE NO ACTION,
   CONSTRAINT `fk_op_responsable_id` FOREIGN KEY (`responsable_id`) REFERENCES `usuarios` (`id`) ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
