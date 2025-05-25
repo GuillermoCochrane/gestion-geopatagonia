@@ -13,7 +13,7 @@
     <% for (const formulario of locals?.formularios) { %>
       <tr>
         <td><%= formulario.id %></td>
-        <td><%= formulario.formulario %></td>
+        <td style="text-align: center;"><%= formulario.codigo %></td>
         <td><%= formulario.descripcion  ? formulario.descripcion : " - " %></td>
         <td><%= formulario.created_at %></td>
         <td><%= formulario.updated_at %></td>
