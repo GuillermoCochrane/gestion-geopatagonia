@@ -60,6 +60,8 @@ router.get("/formularios", dashboardController.formularios);
 router.post("/formularios/nuevo", formularioValidation, dashboardController.nuevoFormulario);
 router.get("/formularios/editar/:id", dashboardController.formulario);
 router.put("/formularios/editar/:id", formularioValidation, dashboardController.editarFormulario);
+router.get("/formularios/eliminar/:id", dashboardController.eliminarFormulario);
+
 
 //Usuarios
 router.get("/usuarios", dashboardController.usuarios);
