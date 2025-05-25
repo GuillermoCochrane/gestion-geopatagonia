@@ -423,6 +423,18 @@ const dashboardController = {
         }
     },
 
+    formulario: async(req, res) => {
+        try{
+            let data = await dashboardUtilities.dataHandler(Formulario, "formulario", "formularios", req.params.id);
+            if(data.error) return res.render("dashboard/dashboard", data);
+            return res.render("dashboard/dashboard", data);
+        } catch (error) {
+            console.error(error);
+            let data = dashboardUtilities.errorHandler(error); 
+            return res.render("dashboard/dashboard", data);
+        }
+    },
+
     editarEnteInspector: async(req, res) => {
         const errors = validationResult(req)
         if (errors.isEmpty()){
