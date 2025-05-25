@@ -461,9 +461,22 @@ const dashboardController = {
     },
 
     editarFormulario: async(req, res) => {
-        let fomrulario = await dashboardUtilities.updateEntity(Formulario, req.body, req.params.id);
-        if(fomrulario.error) return res.render("dashboard/dashboard", fomrulario);
-        return res.redirect("/dashboard/formularios");
+        const errors = validationResult(req)
+        try{
+            if (errors.isEmpty()){
+                let fomrulario = await dashboardUtilities.updateEntity(Formulario, req.body, req.params.id);
+                if(fomrulario.error) return res.render("dashboard/dashboard", fomrulario);
+                return res.redirect("/dashboard/formularios");
+            } else {
+                let data = await dashboardUtilities.formErrorsHandler(Formulario, "formulario", "formularios", req.body, errors.mapped(), req.params.id);
+                if(data.error) return res.render("dashboard/dashboard", data);
+                return res.render("dashboard/dashboard", data);
+            }
+        } catch (error) {
+            console.error(error);
+            let data = dashboardUtilities.errorHandler(error); 
+            return res.render("dashboard/dashboard", data);
+        }
     },
 
     usuario: async(req, res) => {
