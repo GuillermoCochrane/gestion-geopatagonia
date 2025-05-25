@@ -59,6 +59,7 @@ router.delete("/entes_inspectores/eliminar/:id", dashboardController.enteInspect
 router.get("/formularios", dashboardController.formularios);
 router.post("/formularios/nuevo", formularioValidation, dashboardController.nuevoFormulario);
 router.get("/formularios/editar/:id", dashboardController.formulario);
+router.put("/formularios/editar/:id", formularioValidation, dashboardController.editarFormulario);
 
 //Usuarios
 router.get("/usuarios", dashboardController.usuarios);
