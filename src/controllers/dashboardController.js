@@ -218,6 +218,12 @@ const dashboardController = {
         }
     },
 
+    nuevoFormulario: async(req, res) => {
+        let fomrulario = await dashboardUtilities.createEntity(Formulario, req.body);
+        if(fomrulario.error) return res.render("dashboard/dashboard", fomrulario);
+        return res.redirect("/dashboard/formularios");
+    },
+
     nuevoUsuario: async(req, res) => {
         let errors = validationResult(req);
         if (errors.isEmpty()){
