@@ -290,6 +290,7 @@ main section.managemnet table#main-content tr:hover{
   background-color: var(--white);
 }
 
+main section.managemnet form#dashboard-form,
 main section.managemnet form#new-content{
   padding-block: 1em;
   margin-inline: auto;
@@ -382,6 +383,7 @@ main section.managemnet form#new-content span{
   margin-inline: auto;
 }
 
+main section.managemnet form#dashboard-form aside,
 main section.managemnet form#new-content aside{
   margin-block: 10px;
   display: flex;
@@ -389,6 +391,7 @@ main section.managemnet form#new-content aside{
   justify-content: space-around;
 }
 
+main section.managemnet form#dashboard-form button,
 main section.managemnet form#new-content button{
   width: 40%;
   padding-block: 10px;
@@ -401,6 +404,7 @@ main section.managemnet form#new-content button{
   margin-inline: auto;
 }
 
+main section.managemnet form#dashboard-form button.delete,
 main section.managemnet form#new-content button.delete,
 main section.managemnet table#main-content td button.delete{
   background-color: var(--ice);
@@ -409,6 +413,7 @@ main section.managemnet table#main-content td button.delete{
   transition: all 0.7s ease-out;
 }
 
+main section.managemnet form#dashboard-form button.delete:hover,
 main section.managemnet form#new-content button.delete:hover,
 main section.managemnet table#main-content td button.delete:hover{
   background-color: var(--logo);
@@ -416,6 +421,7 @@ main section.managemnet table#main-content td button.delete:hover{
   border-color: transparent;
 }
 
+main section.managemnet form#dashboard-form.confirm-delete,
 main section.managemnet form#new-content.confirm-delete{
   background-color: transparent;
 }
