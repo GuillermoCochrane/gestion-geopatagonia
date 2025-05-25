@@ -8,6 +8,7 @@ const rolValidation = require("../middlewares/validations/dashboard/rolValidatio
 const origenValidation = require("../middlewares/validations/dashboard/origenValidationMDW");
 const sectorValidation = require("../middlewares/validations/dashboard/sectorValidationMDW");
 const enteValidation = require("../middlewares/validations/dashboard/enteInspectorValidationMDW");
+const formularioValidation = require("../middlewares/validations/dashboard/formularioValidationMDW");
 const usuarioValidation = require("../middlewares/validations/dashboard/usuarioValidationMDW");
 const passwordValidation = require("../middlewares/validations/dashboard/passwordValidationMDW");
 
@@ -56,7 +57,7 @@ router.delete("/entes_inspectores/eliminar/:id", dashboardController.enteInspect
 
 //Formularios
 router.get("/formularios", dashboardController.formularios);
-router.post("/formularios/nuevo", dashboardController.nuevoFormulario);
+router.post("/formularios/nuevo", formularioValidation, dashboardController.nuevoFormulario);
 
 //Usuarios
 router.get("/usuarios", dashboardController.usuarios);
