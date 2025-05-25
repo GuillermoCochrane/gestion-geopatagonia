@@ -39,7 +39,7 @@ const dashboardUtilities = {
     return {
       tabla: `tabla${newName}`,
       path: coleccion,
-      formulario: `form${newName}`,
+      componenteFormulario: `form${newName}`,
     }
   },
 
@@ -107,9 +107,9 @@ const dashboardUtilities = {
       let registros = await Modelo.findAll({ where });
 
       // Si no se encuentran registros, devolvemos un mensaje de error
-/*       if (registros.length === 0) {
+      if (registros.length === 0) {
         return this.errorInfo(coleccion);
-      } */
+      }
 
       // Convertimos las instancias de Sequelize a objetos planos
       let registrosPlanos = utilities.plainData(registros);
