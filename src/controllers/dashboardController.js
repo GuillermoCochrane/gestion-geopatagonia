@@ -219,9 +219,22 @@ const dashboardController = {
     },
 
     nuevoFormulario: async(req, res) => {
-        let fomrulario = await dashboardUtilities.createEntity(Formulario, req.body);
-        if(fomrulario.error) return res.render("dashboard/dashboard", fomrulario);
-        return res.redirect("/dashboard/formularios");
+        let errors = validationResult(req);
+        try{
+            if (errors.isEmpty()){
+                let fomrulario = await dashboardUtilities.createEntity(Formulario, req.body);
+                if(fomrulario.error) return res.render("dashboard/dashboard", fomrulario);
+                return res.redirect("/dashboard/formularios");
+            } else {
+                let data = await dashboardUtilities.formErrorsHandler(Formulario, "formulario", "formularios", req.body, errors.mapped());
+                if(data.error) return res.render("dashboard/dashboard", data);
+                return res.render("dashboard/dashboard", data);
+            }
+        } catch (error) {
+            console.error(error);
+            let data = dashboardUtilities.errorHandler(error); 
+            return res.render("dashboard/dashboard", data);
+        }
     },
 
     nuevoUsuario: async(req, res) => {
