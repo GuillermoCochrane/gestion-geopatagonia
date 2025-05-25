@@ -80,12 +80,12 @@ const dashboardUtilities = {
     }
   },
 
-  deleteData: async function(Modelo, entidad, coleccion, id, isUser = false){
+  deleteData: async function(Modelo, entidad, coleccion, id, exception = false){
     try {
       let entity = await Modelo.findByPk(id);
       if(!entity) return this.errorInfo(coleccion);
       //Muestra diferentes títulos si se especifica si es un usuario o no
-      let title = isUser ? `Eliminar ${entidad}: ${entity.nombre}` : `Eliminar ${entidad}: ${entity[entidad]}`;
+      let title = exception ? `Eliminar ${entidad}: ${(entity.nombre || entity.codigo)}` : `Eliminar ${entidad}: ${entity[entidad]}`;
       return {
         title,
         path: coleccion,
