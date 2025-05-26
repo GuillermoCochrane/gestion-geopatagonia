@@ -3,7 +3,7 @@
   <select name="formulario_id" id="formulario_id">
     <option value="" <%= (!locals.inciso?.formulario_id) && 'selected' %> disabled>Seleccione el Formulario</option>
     <% for (const formulario of formularios) { %>
-      <option value="<%= formulario.id %>" <%= (locals.inciso?.formulario_id === formulario.id) && 'selected'  %> > <%= formulario.codigo %> </option>
+      <option value="<%= formulario.id %>" <%= (locals.inciso?.formulario_id == formulario.id) && 'selected'  %> > <%= formulario.codigo %> </option>
     <% } %>
   </select>
   <span id="error-formulario_id"><%= locals.errors?.formulario_id?.msg  %></span>
