@@ -1,6 +1,6 @@
 const db = require("../database/models");
 const dashboardUtilities = require("../utilities/dashboardUtilitites");
-const { Estado, EnteInspector, Origen, Sector, Rol, Usuario, Formulario } = db;
+const { Estado, EnteInspector, Origen, Sector, Rol, Usuario, Formulario, Inciso } = db;
 const { validationResult } = require('express-validator');
 
 const dashboardController = {
@@ -73,6 +73,18 @@ const dashboardController = {
     formularios: async(req, res) => {
         try{
             let data = await dashboardUtilities.dataHandler(Formulario, "formulario", "formularios");
+            if(data.error) return res.render("dashboard/dashboard", data);
+            return res.render("dashboard/dashboard", data);
+        } catch (error) {
+            console.error(error);
+            let data = dashboardUtilities.errorHandler(error); 
+            return res.render("dashboard/dashboard", data);
+        }
+    },
+
+    incisos: async(req, res) => {
+        try{
+            let data = await dashboardUtilities.itemData(Inciso, Formulario);
             if(data.error) return res.render("dashboard/dashboard", data);
             return res.render("dashboard/dashboard", data);
         } catch (error) {
