@@ -170,6 +170,43 @@ const dashboardUtilities = {
     }
   },
 
+  // Formulario de creacion de incisos
+  itemData: async function(ModeloInciso, ModeloFormulario, id = null) {
+    // Construir el objeto "where" de manera condicional
+    const where = id ? { id } : {};
+
+    // Obtenemos inciso / incisos
+    const incisos = await ModeloInciso.findAll({
+      include: [{
+        model: ModeloFormulario,
+        attributes: ["codigo"],
+        as: "formulario"
+      }],
+      where
+    });
+
+    // Obtenemos los formularios
+    let formularios = await ModeloFormulario.findAll();
+    (formularios.length === 0) 
+          ? formularios = [{codigo: "No hay formularios definidos"}] 
+          : formularios = utilities.plainData(formularios);
+    
+          // Convertimos las instancias de Sequelize a objetos planos
+    let incisosPlanos = utilities.plainData(incisos);
+    //Damos formato las fechas 
+    incisosPlanos = utilities.multipleDateFormat(incisosPlanos);
+
+    // Obtenemos el nombre del inciso si es necesario
+    let nombre = null;
+    if (id) { 
+      nombre = incisosPlanos[0].inciso;
+    }
+
+    // Procesamos los datos
+    let finalData = { ...this.finalData("inciso", "incisos", incisosPlanos, id, nombre ), formularios };
+    return  finalData;
+  },
+
   formErrorsHandler: async function(modelo, entidad, coleccion, oldData, errors, id = null) {
     try {
         // Obtiene datos para la vista
