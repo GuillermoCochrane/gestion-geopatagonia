@@ -6,6 +6,7 @@
     <th>Formulario</th>
     <th>Creado</th>
     <th>Modificado</th>
+    <th>Acciones</th>
   </tr>
 </thead>
 <tbody>
@@ -19,8 +20,8 @@
     <% for (const inciso of incisos) { %>
       <tr>
         <td><%= inciso.id %></td>
-        <td><%= inciso.inciso %></td>
-        <td><%= inciso.descripcion %></td>
+        <td style="text-align: center;"><%= inciso.inciso %></td>
+        <td><%= (inciso.descripcion ? inciso.descripcion : " - ") %></td>
         <td><%= inciso.formulario.codigo %></td>
         <td><%= inciso.created_at %></td>
         <td><%= inciso.updated_at %></td>
