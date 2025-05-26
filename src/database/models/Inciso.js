@@ -10,30 +10,45 @@ module.exports = function(sequelize, DataTypes) {
       autoIncrement: true,
     },
 
-  descripcion: {
-    // Descripción del formulario, máximo 100 caracteres
-    type: DataTypes.STRING(100),
-    allowNull: true,
-    validate: {
-      len: {
-        args: [1, 100],
-        msg: 'La descripción del inciso debe tener entre 1 y 100 caracteres.',
-      },
-    },
-    defaultValue: "-",
-  },
-
-    formulario_id: {
-      // ID del formulario al que pertenece el inciso, obligatorio
-      type: DataTypes.INTEGER.UNSIGNED,
+    inciso: {
+      // nombre del inciso, obligatorio
+      type: DataTypes.STRING(20),
       allowNull: false,
       validate: {
         notEmpty: {
-          msg: 'El inciso debe pertenecer a un formulario.',
+          msg: 'El inciso no puede estar vacio.',
+        },
+        len: {
+          args: [1, 20],
+          msg: 'El inciso debe tener entre 1 y 20 caracteres.',
+        },
+      }
+    },
+
+    descripcion: {
+      // Descripción del formulario, máximo 100 caracteres
+      type: DataTypes.STRING(100),
+      allowNull: true,
+      validate: {
+        len: {
+          args: [1, 100],
+          msg: 'La descripción del inciso debe tener entre 1 y 100 caracteres.',
         },
       },
+      defaultValue: "-",
     },
-};
+
+      formulario_id: {
+        // ID del formulario al que pertenece el inciso, obligatorio
+        type: DataTypes.INTEGER.UNSIGNED,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            msg: 'El inciso debe pertenecer a un formulario.',
+          },
+        },
+      },
+    };
 
   let config = {
     timestamps: true,
