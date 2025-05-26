@@ -31,8 +31,8 @@ module.exports = function(sequelize, DataTypes) {
     allowNull: true,
     validate: {
       len: {
-        args: [1, 100],
-        msg: 'La descripción del formulario debe tener entre 1 y 100 caracteres.',
+        args: [0, 100],
+        msg: 'La descripción del formulario debe tener máximo 100 caracteres.',
       },
     },
     defaultValue: "-",
