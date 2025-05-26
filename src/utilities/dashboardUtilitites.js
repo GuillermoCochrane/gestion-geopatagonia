@@ -248,6 +248,26 @@ const dashboardUtilities = {
         }
   },
 
+  itemErrorHandler: async function(ModeloInciso, ModeloFormulario, oldData, errors, id = null) {
+    try {
+        // Obtiene datos para la vista
+        let data = await this.itemData(ModeloInciso, ModeloFormulario, id); 
+        data.inciso = {};
+        // Itera sobre todas las claves de oldData
+        for (const fieldName in oldData) {
+            // Agrega cada campo ingresado por el usuario al objeto de datos
+            data.inciso[fieldName] = oldData[fieldName];
+        }
+        // Agrega los errores de validación
+        data.errors = errors;
+        // Devuelve el objeto con los datos necesarios para la vista
+        return data; 
+        } catch (error) {
+          console.error(error);
+          return this.errorHandler(error); // Maneja errores internos si ocurre un problema
+        }
+  },
+
   createEntity: async function (Modelo, data, isUser = false) {
     try {
       // Si es un usuario, encriptamos la contraseña
