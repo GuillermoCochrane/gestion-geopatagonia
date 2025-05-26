@@ -250,9 +250,22 @@ const dashboardController = {
     },
 
     nuevoInciso: async(req, res) => {
-        const inciso = await dashboardUtilities.createEntity(Inciso, req.body);
-        if(inciso.error) return res.render("dashboard/dashboard", inciso);
-        return res.redirect("/dashboard/incisos");
+        let errors = validationResult(req);
+        try{
+            if (errors.isEmpty()){
+                const inciso = await dashboardUtilities.createEntity(Inciso, req.body);
+                if(inciso.error) return res.render("dashboard/dashboard", inciso);
+                return res.redirect("/dashboard/incisos");
+            } else {
+                let data = await dashboardUtilities.itemErrorHandler(Inciso, Formulario, req.body, errors.mapped());
+                if(data.error) return res.render("dashboard/dashboard", data);
+                return res.render("dashboard/dashboard", data);
+            }
+        } catch (error) {
+            console.error(error);
+            let data = dashboardUtilities.errorHandler(error); 
+            return res.render("dashboard/dashboard", data);
+        }
     },
 
     nuevoUsuario: async(req, res) => {

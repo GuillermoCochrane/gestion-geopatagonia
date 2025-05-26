@@ -11,6 +11,7 @@ const enteValidation = require("../middlewares/validations/dashboard/enteInspect
 const formularioValidation = require("../middlewares/validations/dashboard/formularioValidationMDW");
 const usuarioValidation = require("../middlewares/validations/dashboard/usuarioValidationMDW");
 const passwordValidation = require("../middlewares/validations/dashboard/passwordValidationMDW");
+const incisoValidation = require("../middlewares/validations/dashboard/incisoValidationMDW");
 
 //Rutas
 router.get("/", dashboardController.index);
@@ -65,7 +66,7 @@ router.delete("/formularios/eliminar/:id", dashboardController.formularioElimina
 
 //Incisos
 router.get("/incisos", dashboardController.incisos);
-router.post("/incisos/nuevo", dashboardController.nuevoInciso);
+router.post("/incisos/nuevo", incisoValidation, dashboardController.nuevoInciso);
 
 //Usuarios
 router.get("/usuarios", dashboardController.usuarios);
