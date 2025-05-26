@@ -67,7 +67,8 @@ const dashboardUtilities = {
     scripts = [...scripts, "validator.min", "validations", `dashboard/validations/${entidad}Validation`];
     !id && scripts.push("sectionhandler");
     const entity = (entidad === "formulario") ? "codigo" : entidad;
-    const name = nombre ? nombre : registros[0][entity];
+    let name = null;
+    if (registros.length > 0) name = nombre ? nombre : registros[0][entity];
     const singleTitle = id ?`Editando ${headerData.entity} : ${name}`: headerData.mainLabel;
     return {
       ...config,
