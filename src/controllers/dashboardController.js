@@ -249,6 +249,12 @@ const dashboardController = {
         }
     },
 
+    nuevoInciso: async(req, res) => {
+        const inciso = await dashboardUtilities.createEntity(Inciso, req.body);
+        if(inciso.error) return res.render("dashboard/dashboard", inciso);
+        return res.redirect("/dashboard/incisos");
+    },
+
     nuevoUsuario: async(req, res) => {
         let errors = validationResult(req);
         if (errors.isEmpty()){
