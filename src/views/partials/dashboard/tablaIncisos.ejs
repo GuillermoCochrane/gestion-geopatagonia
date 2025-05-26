@@ -1,0 +1,42 @@
+<thead>
+  <tr>
+    <th> # </th>
+    <th>Inciso </th>
+    <th>Descripción</th>
+    <th>Formulario</th>
+    <th>Creado</th>
+    <th>Modificado</th>
+  </tr>
+</thead>
+<tbody>
+  <% if (incisos.length === 0) { %>
+    <tr>
+      <td colspan="6" style="text-align: center; display: table-cell; border-color:var(--font);">
+        No hay incisos disponibles
+      </td>
+    </tr>
+  <% } else { %>
+    <% for (const inciso of incisos) { %>
+      <tr>
+        <td><%= inciso.id %></td>
+        <td><%= inciso.inciso %></td>
+        <td><%= inciso.descripcion %></td>
+        <td><%= inciso.formulario.codigo %></td>
+        <td><%= inciso.created_at %></td>
+        <td><%= inciso.updated_at %></td>
+        <td>
+          <a href="/dashboard/incisos/editar/<%= inciso.id %>">
+            <button>
+              Editar
+            </button>
+          </a>
+          <a href="/dashboard/incisos/eliminar/<%= inciso.id %>">
+            <button class="delete">
+              Eliminar
+            </button>
+          </a>
+        </td>
+      </tr>
+      <% } %>
+  <% } %>
+</tbody>
