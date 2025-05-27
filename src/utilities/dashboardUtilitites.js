@@ -85,8 +85,8 @@ const dashboardUtilities = {
     try {
       let entity = await Modelo.findByPk(id);
       if(!entity) return this.errorInfo(coleccion);
-      //Muestra diferentes títulos si se especifica si es un usuario o no
-      let title = exception ? `Eliminar ${entidad}: ${(entity.nombre || entity.codigo)}` : `Eliminar ${entidad}: ${entity[entidad]}`;
+      //Muestra diferentes títulos si se especifica si es un excepción o no
+      let title = exception ? `Eliminar ${entidad}: ${(entity.nombre || entity.codigo || entity.inciso)}` : `Eliminar ${entidad}: ${entity[entidad]}`;
       return {
         title,
         path: coleccion,
