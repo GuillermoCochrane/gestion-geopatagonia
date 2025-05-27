@@ -70,6 +70,7 @@ router.post("/incisos/nuevo", incisoValidation, dashboardController.nuevoInciso)
 router.get("/incisos/editar/:id", dashboardController.inciso);
 router.put("/incisos/editar/:id", incisoValidation, dashboardController.editarInciso);
 router.get("/incisos/eliminar/:id", dashboardController.eliminarInciso);
+router.delete("/incisos/eliminar/:id", dashboardController.incisoEliminado);
 
 //Usuarios
 router.get("/usuarios", dashboardController.usuarios);
