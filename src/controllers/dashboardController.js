@@ -510,6 +510,18 @@ const dashboardController = {
         }
     },
 
+    inciso: async(req, res) => {
+        try{
+            let data = await dashboardUtilities.itemData(Inciso, Formulario, req.params.id);
+            if(data.error) return res.render("dashboard/dashboard", data);
+            return res.render("dashboard/dashboard", data);
+        } catch (error) {
+            console.error(error);
+            let data = dashboardUtilities.errorHandler(error); 
+            return res.render("dashboard/dashboard", data);
+        }
+    },
+
     usuario: async(req, res) => {
         try{
             let data = await dashboardUtilities.userData(Usuario, Rol, req.params.id);
