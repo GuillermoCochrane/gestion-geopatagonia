@@ -534,6 +534,12 @@ const dashboardController = {
         }
     },
 
+    editarInciso: async(req, res) => {
+        const inciso = await dashboardUtilities.updateEntity(Inciso, req.body, req.params.id);
+        if(inciso.error) return res.render("dashboard/dashboard", inciso);
+        return res.redirect("/dashboard/incisos");
+    },
+
     editarUsuario: async(req, res) => {
         const errors = validationResult(req)
         if (errors.isEmpty()){

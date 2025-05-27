@@ -68,6 +68,7 @@ router.delete("/formularios/eliminar/:id", dashboardController.formularioElimina
 router.get("/incisos", dashboardController.incisos);
 router.post("/incisos/nuevo", incisoValidation, dashboardController.nuevoInciso);
 router.get("/incisos/editar/:id", dashboardController.inciso);
+router.put("/incisos/editar/:id", incisoValidation, dashboardController.editarInciso);
 
 //Usuarios
 router.get("/usuarios", dashboardController.usuarios);
