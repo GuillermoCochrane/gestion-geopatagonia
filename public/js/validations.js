@@ -110,7 +110,7 @@ const strongValidation = (input) => {
 
 // * Validación de confirmación de contraseña
 const checkPasswordValidation = (input, password) => {
-  const validation = input.value !== password.value;
+  const validation = input.value == password.value;
   const errorMessage = `Las contraseñas no coinciden`;
   handleValidation(input, validation, errorMessage);
 }
