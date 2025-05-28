@@ -3,9 +3,11 @@ window.addEventListener("load", () => {
   const $nombre = document.querySelector("#nombre");
   const $email = document.querySelector("#email");
   const $password = document.querySelector("#password");
+  const $checkPassword = document.querySelector("#check-password");
   const $id = document.querySelector("#id");
   const $btn = document.querySelector("#new-content button");
 	const $toggleIcon = document.querySelector("#toggle-icon");
+  const $toggleIconCheck = document.querySelector("#toggle-icon-check");
 
 	let togglePassword = (input, icon) => {
 		if (input.type == "password"){
@@ -18,6 +20,10 @@ window.addEventListener("load", () => {
 				icon.classList.add("fa-eye");
 		}
 	}
+
+  $toggleIconCheck.addEventListener("click", () => {
+    togglePassword($checkPassword, $toggleIconCheck);
+  });
 
 	$toggleIcon.addEventListener("click", () => {
 		togglePassword($password, $toggleIcon);
