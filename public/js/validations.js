@@ -108,6 +108,13 @@ const strongValidation = (input) => {
   handleValidation(input, validation, errorMessage);
 };
 
+// * Validación de confirmación de contraseña
+const checkPasswordValidation = (input, password) => {
+  const validation = input.value !== password.value;
+  const errorMessage = `Las contraseñas no coinciden`;
+  handleValidation(input, validation, errorMessage);
+}
+
 // * Validación de fechas con formato valido (YYYY-MM-DD)
 const isDateValidation = (input) => {
   const datePattern = /^\d{4}-\d{2}-\d{2}$/; // Expresión regular para YYYY-MM-DD
@@ -157,7 +164,6 @@ const notOlderThanEndValidation = (inputStartDate, inputEndDate) => {
 
   handleValidation(inputStartDate, validation, errorMessage);
 };
-
 
 // * Validación de extensiones de archivos permitidas
 const extentionValidation = (input, allowedExtensions) => {
