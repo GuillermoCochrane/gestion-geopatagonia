@@ -27,8 +27,16 @@
   <label>
     <h4>Contraseña</h4>
     <div class="password-container">
-      <input type="password" name="password" id="password" value="<%= locals.usuario?.password  %>">
+      <input type="password" name="password" id="password">
       <i id="toggle-icon" class="fa-regular fa-eye"></i>
+    </div>
+    <span id="error-password"><%= locals.errors?.password?.msg %></span>
+  </label>
+  <label>
+    <h4>Repetir contraseña</h4>
+    <div class="password-container">
+      <input type="password" name="check-password" id="check-password">
+      <i id="toggle-icon-check" class="fa-regular fa-eye"></i>
     </div>
     <span id="error-password"><%= locals.errors?.password?.msg %></span>
   </label>
