@@ -3,14 +3,14 @@ window.addEventListener("load", () => {
   const $nombre = document.querySelector("#nombre");
   const $email = document.querySelector("#email");
   const $password = document.querySelector("#password");
-  const $checkPassword = document.querySelector("#check-password");
+  const $check = document.querySelector("#check");
   const $id = document.querySelector("#id");
   const $btn = document.querySelector("#new-content button");
 	const $toggleIcon = document.querySelector("#toggle-icon");
   const $toggleIconCheck = document.querySelector("#toggle-icon-check");
 
   $toggleIconCheck && $toggleIconCheck.addEventListener("click", () => {
-    togglePassword($checkPassword, $toggleIconCheck);
+    togglePassword($check, $toggleIconCheck);
   });
 
 	$toggleIcon && $toggleIcon.addEventListener("click", () => {
@@ -37,18 +37,28 @@ window.addEventListener("load", () => {
       !errors.password && strongValidation($password);
   };
 
+  const confirmPasswordValidation = () => {
+      requiredValidation($check);
+      !errors.check && minlengthValidation($check,8);
+      !errors.check && strongValidation($check);
+      !errors.check && checkPasswordValidation($check, $password);
+  };
+
   $nombre.addEventListener("input",() => nombreValidation());
   $nombre.addEventListener("blur", () => nombreValidation());
   $email.addEventListener("input",() => emailValidation());
   $email.addEventListener("blur", () => emailValidation());
 	$password &&	$password.addEventListener("input",() => passwordValidation());
-	$password &&	$password.addEventListener("blur", () => passwordValidation());	
+	$password &&	$password.addEventListener("blur", () => passwordValidation());
+  $check &&	$check.addEventListener("input",() => confirmPasswordValidation());
+  $check &&	$check.addEventListener("blur", () => confirmPasswordValidation());
 
   $btn.addEventListener("click", (e)=>{
       e.preventDefault();
       nombreValidation();
       emailValidation();
       $password && passwordValidation();
+      $check && confirmPasswordValidation();
       if (Object.keys(errors).length == 0) {
           $form.submit();
       }
