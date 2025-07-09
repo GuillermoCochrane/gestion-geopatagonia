@@ -11,12 +11,6 @@ module.exports = function(sequelize, DataTypes) {
       autoIncrement: true,
     },
 
-    inciso: {
-      // Inciso al que pertenece la observación, obligatorio
-      type: DataTypes.STRING(5),
-      allowNull: true,
-    },
-
     descripcion: {
       // Descripción de la observación, máximo 300 caracteres, obligatorio
       type: DataTypes.STRING(300),
@@ -53,14 +47,14 @@ module.exports = function(sequelize, DataTypes) {
     fecha_negociable: {
       // Fecha de negociable, opcional
       type: DataTypes.BOOLEAN,
-      allowNull: true,
+      allowNull: false,
       defaultValue: false,
     },
 
     requiere_analisis: {
       // Indica si la observación requiere de un análisis, opcional
       type: DataTypes.BOOLEAN,
-      allowNull: true,
+      allowNull: false,
       defaultValue: false,
     },
 
@@ -118,7 +112,7 @@ module.exports = function(sequelize, DataTypes) {
     });
 
     ObservacionPAC.belongsTo(models.Originacion, {
-      // Una observación puede tener a un solo origen
+      // Una observación o PAC pertenece a una única originación
       as: 'originacion',
       foreignKey: 'originacion_id',
       onDelete: 'RESTRICT',
