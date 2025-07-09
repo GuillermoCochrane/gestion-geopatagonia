@@ -1,6 +1,7 @@
 const { Estado, EnteInspector, Origen, Sector, Rol, Usuario, AdjuntoOriginacion, AdjuntoObservacionPAC, Originacion, ObservacionPAC, Accion } = require("../database/models");
 const { Op, where } = require("sequelize");
 const utilities = require("./utilities");
+const mailutilities = require("./mailUtilities");
 
 /**
 * Utilidades para el controlador de originación:
@@ -613,6 +614,11 @@ const originacionUtilitites = {
       console.error(error);
       throw error;
     }
+  },
+
+  // Envia un correo electrónico a un usuario con notificacion de la originacion
+  sendNotification: async function(id, host, protocol){
+    
   },
 }
 
