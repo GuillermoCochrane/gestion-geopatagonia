@@ -52,6 +52,24 @@ const mailUtilities = {
       throw error;
     }
   },
+
+  // Genera el mensaje de notificación de la originación asignada
+  orginacionNotification: function(userName, date, description, originacionId) {
+    const subject = `[Originación Asignada] ${date} - ${description.substring(0, 30)}${description.length > 30 ? '...' : ''}`;
+    
+    const text = `Estimado ${userName},\n\n` +
+      `En el día ${date} se le ha asignado la obervación del siguiente originación:\n\n` +
+      `${originacionId ? `ID del originación: ${originacionId}\n` : ''}` +
+      `"${description}"\n\n` +
+      `Fecha: ${date}\n\n` +
+      `Por favor verifique la misma en la aplicación para más detalles.\n\n` +
+      `Este es un mensaje automático, por favor no responda directamente.`;
+    
+    return {
+      subject,
+      text
+    };
+  },
 }
 
 module.exports = mailUtilities
