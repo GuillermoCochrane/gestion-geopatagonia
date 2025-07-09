@@ -30,19 +30,20 @@ const mailUtilities = {
   },
 
   // Devuelve un objeto con los datos para el envío de mails
-  mailData: function(to, subject, text, html = null) {
+  mailData: function(to, subject, text, html = null, bcc = null) {
     return {
       from: `"${SMTP_FROM_NAME}" <${SMTP_FROM_EMAIL}>`,
       to,
       subject,
       text,
-      html: html || text                  // Usa HTML si está definido, sino texto plano
+      ...(html && { html }),
+      bcc: bcc || SMTP_FROM_EMAIL,
     };
   },
 
   // Envía un mail con configuración por defecto con los datos ingresado
-  sendMail: async function(to, subject, text, html = null) {
-    const mail = this.mailData(to, subject, text, html);
+  sendMail: async function(to, subject, text, html = null, bcc = null) {
+    const mail = this.mailData(to, subject, text, html, bcc);
     const transporter = nodemailer.createTransport(this.smtpConfig());
     try {
       const info = await transporter.sendMail(mail);
