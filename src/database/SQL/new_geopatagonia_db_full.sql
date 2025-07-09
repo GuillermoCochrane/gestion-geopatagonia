@@ -37,8 +37,18 @@ CREATE TABLE `acciones` (
   KEY `fk_op_observacion_pac_id_idx` (`observacion_pac_id`),
   CONSTRAINT `fk_op_ejecutor_id` FOREIGN KEY (`ejecutor_id`) REFERENCES `usuarios` (`id`),
   CONSTRAINT `fk_op_observacion_pac_id` FOREIGN KEY (`observacion_pac_id`) REFERENCES `observaciones_pacs` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `acciones`
+--
+
+LOCK TABLES `acciones` WRITE;
+/*!40000 ALTER TABLE `acciones` DISABLE KEYS */;
+INSERT INTO `acciones` VALUES (1,'Realizar reparación lo mas pronto posible','2025-04-27',9,3,'2025-04-21 21:05:17','2025-04-21 21:05:17');
+/*!40000 ALTER TABLE `acciones` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `adjuntos_acciones`
@@ -62,6 +72,15 @@ CREATE TABLE `adjuntos_acciones` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `adjuntos_acciones`
+--
+
+LOCK TABLES `adjuntos_acciones` WRITE;
+/*!40000 ALTER TABLE `adjuntos_acciones` DISABLE KEYS */;
+/*!40000 ALTER TABLE `adjuntos_acciones` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `adjuntos_observacion_pac`
 --
 
@@ -83,6 +102,15 @@ CREATE TABLE `adjuntos_observacion_pac` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `adjuntos_observacion_pac`
+--
+
+LOCK TABLES `adjuntos_observacion_pac` WRITE;
+/*!40000 ALTER TABLE `adjuntos_observacion_pac` DISABLE KEYS */;
+/*!40000 ALTER TABLE `adjuntos_observacion_pac` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `adjuntos_originaciones`
 --
 
@@ -100,8 +128,18 @@ CREATE TABLE `adjuntos_originaciones` (
   PRIMARY KEY (`id`),
   KEY `fk_adjuntos_originacion_id_idx` (`originacion_id`),
   CONSTRAINT `fk_adjuntos_originacion_id` FOREIGN KEY (`originacion_id`) REFERENCES `originaciones` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `adjuntos_originaciones`
+--
+
+LOCK TABLES `adjuntos_originaciones` WRITE;
+/*!40000 ALTER TABLE `adjuntos_originaciones` DISABLE KEYS */;
+INSERT INTO `adjuntos_originaciones` VALUES (7,'Adjunto_ObsPAC1747049965527.pdf','/documents/originacion/Adjunto_ObsPAC1747049965527.pdf','-','2025-05-12 11:08:25','2025-05-12 11:39:25',1);
+/*!40000 ALTER TABLE `adjuntos_originaciones` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `entes_inspectores`
@@ -143,7 +181,7 @@ CREATE TABLE `estados` (
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -152,7 +190,7 @@ CREATE TABLE `estados` (
 
 LOCK TABLES `estados` WRITE;
 /*!40000 ALTER TABLE `estados` DISABLE KEYS */;
-INSERT INTO `estados` VALUES (1,'Abierta',NULL,'2025-01-10 01:55:31','2025-01-10 01:55:31'),(2,'No tratado',NULL,'2025-01-10 01:55:54','2025-01-10 01:55:54'),(3,'En Curso',NULL,'2025-01-10 01:56:07','2025-01-10 01:56:07'),(4,'Con Acciones Vencidas',NULL,'2025-01-10 01:56:24','2025-01-10 01:56:24'),(5,'Vencidas',NULL,'2025-01-10 01:56:34','2025-01-10 01:56:34'),(6,'Cerrado',NULL,'2025-01-10 01:56:49','2025-01-10 01:56:49'),(7,'No Verificadas',NULL,'2025-01-10 01:57:07','2025-01-10 01:57:07'),(8,'Verificado No Efectivo',NULL,'2025-01-10 01:57:33','2025-01-10 01:57:33'),(9,'Verificado Efectivo',NULL,'2025-01-10 01:57:44','2025-01-10 01:57:44');
+INSERT INTO `estados` VALUES (1,'Abierta',NULL,'2025-01-10 01:55:31','2025-01-10 01:55:31'),(2,'No tratado',NULL,'2025-01-10 01:55:54','2025-01-10 01:55:54'),(3,'En Curso',NULL,'2025-01-10 01:56:07','2025-01-10 01:56:07'),(4,'Con Acciones Vencidas',NULL,'2025-01-10 01:56:24','2025-01-10 01:56:24'),(5,'Vencidas',NULL,'2025-01-10 01:56:34','2025-01-10 01:56:34'),(6,'Cerrado',NULL,'2025-01-10 01:56:49','2025-01-10 01:56:49'),(7,'No Verificadas',NULL,'2025-01-10 01:57:07','2025-01-10 01:57:07'),(8,'Verificado No Efectivo',NULL,'2025-01-10 01:57:33','2025-01-10 01:57:33'),(9,'Verificado Efectivo',NULL,'2025-01-10 01:57:44','2025-01-10 01:57:44'),(10,'estado de prueba','','2025-05-26 21:24:41','2025-05-26 21:24:41');
 /*!40000 ALTER TABLE `estados` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,8 +210,18 @@ CREATE TABLE `formularios` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   UNIQUE KEY `codigo_UNIQUE` (`codigo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `formularios`
+--
+
+LOCK TABLES `formularios` WRITE;
+/*!40000 ALTER TABLE `formularios` DISABLE KEYS */;
+INSERT INTO `formularios` VALUES (1,'34WG5T','Formulario de control de equipos','2025-05-25 21:37:36','2025-05-25 21:37:36'),(2,'22XDR6','Formulario de inspección de actividades laborales','2025-05-25 22:21:47','2025-05-25 22:27:57');
+/*!40000 ALTER TABLE `formularios` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `incisos`
@@ -192,8 +240,18 @@ CREATE TABLE `incisos` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `uq_inciso_formulario` (`formulario_id`,`inciso`),
   CONSTRAINT `fk_incisos_formulario` FOREIGN KEY (`formulario_id`) REFERENCES `formularios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `incisos`
+--
+
+LOCK TABLES `incisos` WRITE;
+/*!40000 ALTER TABLE `incisos` DISABLE KEYS */;
+INSERT INTO `incisos` VALUES (1,'1','',1,'2025-05-26 21:15:15','2025-05-26 21:15:15'),(2,'2','',1,'2025-05-26 21:54:25','2025-05-26 21:54:25'),(3,'3','',1,'2025-05-26 21:54:34','2025-05-26 21:54:34'),(4,'A','Chequeo de elementos de protección personal',2,'2025-05-26 22:28:59','2025-05-26 22:28:59'),(5,'B','Verificación del estado de las herramientas',2,'2025-05-26 22:29:34','2025-05-26 22:29:34'),(6,'C','Comprobación de metodologías de trabajo',2,'2025-05-26 22:30:30','2025-05-27 20:12:26');
+/*!40000 ALTER TABLE `incisos` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `observaciones_pacs`
@@ -204,7 +262,6 @@ DROP TABLE IF EXISTS `observaciones_pacs`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `observaciones_pacs` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `inciso` varchar(5) DEFAULT NULL,
   `descripcion` varchar(300) NOT NULL,
   `fecha_requerida` date NOT NULL,
   `referencia` varchar(100) DEFAULT NULL,
@@ -225,7 +282,7 @@ CREATE TABLE `observaciones_pacs` (
   CONSTRAINT `fk_op_estado_id` FOREIGN KEY (`estado_id`) REFERENCES `estados` (`id`) ON UPDATE NO ACTION,
   CONSTRAINT `fk_op_originacion_id` FOREIGN KEY (`originacion_id`) REFERENCES `originaciones` (`id`) ON UPDATE NO ACTION,
   CONSTRAINT `fk_op_responsable_id` FOREIGN KEY (`responsable_id`) REFERENCES `usuarios` (`id`) ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -234,7 +291,7 @@ CREATE TABLE `observaciones_pacs` (
 
 LOCK TABLES `observaciones_pacs` WRITE;
 /*!40000 ALTER TABLE `observaciones_pacs` DISABLE KEYS */;
-INSERT INTO `observaciones_pacs` VALUES (1,'R','la descripcion es obligatoria','2025-04-03','Referencia del incidente',1,1,6,1,1,'2025-04-01 01:18:20','2025-04-19 00:03:34'),(2,'R','Plan de accion correctiva del incidente','2025-04-04','Referencia del incidente',1,1,5,1,1,'2025-04-01 01:20:18','2025-04-01 01:20:18'),(3,'B','Chequeo del PAC','2025-05-10','',1,0,7,1,6,'2025-04-01 01:21:42','2025-04-01 01:21:42');
+INSERT INTO `observaciones_pacs` VALUES (1,'la descripcion es obligatoria','2025-05-15','Referencia del incidente',1,1,6,1,1,NULL,'2025-04-01 01:18:20','2025-05-14 19:19:09'),(2,'Plan de accion correctiva del incidente','2025-04-04','Referencia del incidente',1,1,5,1,1,NULL,'2025-04-01 01:20:18','2025-04-01 01:20:18'),(3,'Chequeo del PAC','2025-05-10','',1,0,7,1,6,NULL,'2025-04-01 01:21:42','2025-05-08 21:53:33'),(4,'Se paralizo el trabajo por problemas climaticos','2025-05-16','',1,0,5,2,1,NULL,'2025-05-01 23:19:49','2025-05-01 23:19:49');
 /*!40000 ALTER TABLE `observaciones_pacs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -280,6 +337,7 @@ CREATE TABLE `originaciones` (
   `observador_id` int(100) unsigned NOT NULL,
   `sector_id` int(100) unsigned NOT NULL,
   `formulario_id` int(100) unsigned DEFAULT NULL,
+  `notificada` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
@@ -293,7 +351,7 @@ CREATE TABLE `originaciones` (
   CONSTRAINT `fk_originacion_origen_id` FOREIGN KEY (`origen_id`) REFERENCES `origenes` (`id`) ON UPDATE NO ACTION,
   CONSTRAINT `fk_originacion_sector_id` FOREIGN KEY (`sector_id`) REFERENCES `sectores` (`id`) ON UPDATE NO ACTION,
   CONSTRAINT `fk_originaciones_formulario` FOREIGN KEY (`formulario_id`) REFERENCES `formularios` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -302,7 +360,7 @@ CREATE TABLE `originaciones` (
 
 LOCK TABLES `originaciones` WRITE;
 /*!40000 ALTER TABLE `originaciones` DISABLE KEYS */;
-INSERT INTO `originaciones` VALUES (1,'2025-03-22','Cordoba',1,1,4,2,'2025-03-21 23:29:56','2025-03-21 23:29:56'),(2,'2025-03-24','Catamarca',2,1,3,5,'2025-04-01 01:54:48','2025-04-01 01:54:48'),(3,'2025-04-20','Catamarca',2,1,3,5,'2025-04-21 20:32:16','2025-04-21 20:32:16');
+INSERT INTO `originaciones` VALUES (1,'2025-03-06','Cordoba',2,1,4,2,NULL,0,'2025-03-21 23:29:56','2025-05-12 11:39:25'),(2,'2025-03-24','Catamarca',2,4,3,5,NULL,0,'2025-04-01 01:54:48','2025-04-01 01:54:48'),(4,'2025-05-07','Jujuy',3,2,3,3,NULL,0,'2025-05-09 05:13:42','2025-05-09 05:13:42'),(5,'2025-05-08','Jujuy',5,2,3,4,NULL,0,'2025-05-09 05:23:14','2025-05-09 05:23:14'),(7,'2025-05-07','Jujuy',3,2,3,3,NULL,0,'2025-05-09 05:25:44','2025-05-09 05:25:44'),(8,'2025-05-08','Salta',4,1,4,1,NULL,0,'2025-05-10 23:04:47','2025-05-10 23:04:47');
 /*!40000 ALTER TABLE `originaciones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -399,4 +457,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-28 17:11:27
+-- Dump completed on 2025-07-09 15:59:46
