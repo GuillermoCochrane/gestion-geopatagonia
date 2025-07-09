@@ -38,6 +38,12 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
     },
 
+    notificada: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
+
     origen_id: {
       // ID del origen al que pertenece la observación, obligatorio
       type: DataTypes.INTEGER.UNSIGNED,
@@ -115,7 +121,7 @@ module.exports = function(sequelize, DataTypes) {
     });
 
     Originacion.hasMany(models.ObservacionPAC, {
-      // Una observación puede tener muchas observaciones
+      // Una originación puede tener muchas observaciones o PACs
       as: 'observaciones_pacs',
       foreignKey: 'originacion_id',
       onDelete: 'RESTRICT',
