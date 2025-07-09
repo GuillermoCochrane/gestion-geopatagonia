@@ -247,13 +247,22 @@ const originacionUtilitites = {
   registerCreationHandler: async function(formData, file, id, nuevaObservacionPAC){
     try {
       // Creación de la originación, si no se pasa el id de una originación existente
-      id = id ||await this.createRegistro(formData, file); 
+      let originationData = null;
+
+      if (!id) {
+        originationData = await this.createRegistro(formData, file);
+        id = originationData.id;
+      } else {
+        originationData = await Originacion.findByPk(id);
+      }
 
       // Creación de la observación / PAC, si esta indicado en la variable nuevaObservacionPAC
       if (nuevaObservacionPAC) {
         formData.fecha_negociable = utilities.toBoolean(formData.fecha_negociable);
         formData.requiere_analisis = utilities.toBoolean(formData.requiere_analisis);
         await this.createRegistro(formData, file, true);
+        // Enviamos un correo electrónico de notificación al observador, si no lo había hecho
+        if (!originationData.notificada) await this.originacionNotification(id);
       }
 
       const staticData = this.staticData();
@@ -305,7 +314,7 @@ const originacionUtilitites = {
         await this.createAdjunto(file, registro.id, observacion);
       }
 
-      return registro.id;
+      return registro;
     } catch (error) {
       console.error(error); 
       throw error; 
