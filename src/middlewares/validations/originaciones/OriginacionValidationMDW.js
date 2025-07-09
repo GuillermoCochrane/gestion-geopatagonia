@@ -25,6 +25,10 @@ const originacionValidationMDW = [
       .notEmpty().withMessage("Debe seleccionar el sector").bail()
       .toInt()
       .isInt({ min: 1 }).withMessage("Debe seleccionar un sector válido"),
+    body("formulario_id")
+      .notEmpty().withMessage("Debe seleccionar el formulario").bail()
+      .toInt()
+      .isInt({ min: 1 }).withMessage("Debe seleccionar un formulario válido"),
     body("adjunto")
       .custom((value, { req }) => {
         if (req.file) {
