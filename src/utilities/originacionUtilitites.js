@@ -444,6 +444,7 @@ const originacionUtilitites = {
       let sectorData = await Sector.findAll();
       let estadosData = await Estado.findAll();
       let observadorData = await Usuario.findAll({where: { rol_id: 4}});
+      let formulariosData = await Formulario.findAll();
 
       // Devuelve los datos formateados
       return {
@@ -452,7 +453,8 @@ const originacionUtilitites = {
         enteInspectores: utilities.dataFormatter(enteInspectorData),
         sectores: utilities.dataFormatter(sectorData),
         estados: utilities.dataFormatter(estadosData),
-        originaciones: await this.allOriginacionsData()
+        originaciones: await this.allOriginacionsData(),
+        formularios: utilities.dataFormatter(formulariosData),
       }
 
     } catch (error) {
