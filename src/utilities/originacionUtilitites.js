@@ -1,4 +1,4 @@
-const { Estado, EnteInspector, Origen, Sector, Rol, Usuario, AdjuntoOriginacion, AdjuntoObservacionPAC, Originacion, ObservacionPAC, Accion } = require("../database/models");
+const { Estado, EnteInspector, Origen, Sector, Rol, Usuario, AdjuntoOriginacion, AdjuntoObservacionPAC, Originacion, ObservacionPAC, Accion, Inciso, Formulario } = require("../database/models");
 const { Op, where } = require("sequelize");
 const utilities = require("./utilities");
 const mailutilities = require("./mailUtilities");
@@ -165,7 +165,29 @@ const originacionUtilitites = {
           { model: EnteInspector, as: "ente_inspector", attributes: utilities.excludeTimestamps() },
           { model: Sector, as: "sector", attributes: utilities.excludeTimestamps() },
           { model: AdjuntoOriginacion, as: "adjuntos", attributes: utilities.excludeTimestamps() },
-          { model: ObservacionPAC, as: "observaciones_pacs", attributes: ['id', 'inciso', 'descripcion', 'fecha_requerida', 'referencia', 'fecha_negociable', 'requiere_analisis', 'responsable_id', 'originacion_id', 'estado_id'] },
+          {
+            model: ObservacionPAC,
+            as: "observaciones_pacs",
+            attributes: [
+              'id',
+              'descripcion',
+              'fecha_requerida',
+              'referencia',
+              'fecha_negociable',
+              'requiere_analisis',
+              'inciso_id',
+              'responsable_id',
+              'originacion_id',
+              'estado_id'
+            ],
+            include: [
+              {
+                model: Inciso,
+                as: 'inciso_formulario',
+                attributes: ['inciso', 'descripcion'] // o lo que necesites mostrar
+              }
+            ]
+          }
         ]
       });
 
@@ -275,6 +297,7 @@ const originacionUtilitites = {
       throw error;
     }
   },
+
 
   // Prepara los datos necesarios para el procesamiento de adjuntos
   adjuntoConfig(file, id, observacion  = false) {
@@ -634,6 +657,7 @@ const originacionUtilitites = {
       const description = origination.lugar;
       const data = mailutilities.orginacionNotification(user.nombre, date, description, origination.id);
       await mailutilities.sendMail(user.email, data.subject, data.text); // podemos agrerarle el HTML y el mail de respaldo
+      await this.editRegistro({notificada: true}, null, id); //cambiamos a true el valor de notificada, para que no se reenvie el mail
       return true;
     } catch (error) {
       console.error(error);
