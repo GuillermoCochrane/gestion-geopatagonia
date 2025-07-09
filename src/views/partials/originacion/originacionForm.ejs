@@ -107,6 +107,27 @@
 </label>
 
 <label>
+  <h3>Formulario</h3>
+  <select name="formulario_id" id="formulario_id">
+    <option 
+        value="" 
+        <%= (!locals.oldData?.formulario_id) && 'selected' %>
+        disabled
+    >
+      Seleccione el Sector
+    </option>
+    <%- include('./dinamicFormOptions.ejs', {
+      options: locals?.formData && locals?.formData?.formularios,
+      selected: locals?.oldData && locals?.oldData?.formulario_id,
+      keyLabel: 'codigo',
+      keyValue: 'id',
+      emptyMessage: 'No hay formularios definidos'
+    }) %>
+  </select>
+  <span id="error-formulario_id"><%= locals.originacionErrors?.formulario_id?.msg %></span>
+</label>
+<% console.log(locals.formData) %>
+<label>
   <h3>Adjunto</h3>
   <input type="file" name="adjunto" id="adjunto_originacion" class="input-file">
   <span id="error-adjunto_originacion"><%= locals.originacionErrors?.adjunto?.msg %></span>
