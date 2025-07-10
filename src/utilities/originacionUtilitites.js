@@ -239,6 +239,7 @@ const originacionUtilitites = {
         include: [
           { model: Usuario, as: "responsable", attributes: utilities.excludePassword()},
           { model: Estado, as: "estado", attributes: utilities.excludeTimestamps()},
+          { model: Inciso, as: "inciso_formulario", attributes: utilities.excludeTimestamps()},
         ]
       });
       return utilities.dataFormatter(data, ['fecha_requerida']);
