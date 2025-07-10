@@ -294,9 +294,11 @@ const originacionUtilitites = {
       if (nuevaObservacionPAC) {
         formData.fecha_negociable = utilities.toBoolean(formData.fecha_negociable);
         formData.requiere_analisis = utilities.toBoolean(formData.requiere_analisis);
-        await this.createRegistro(formData, file, true);
+        const pacData = await this.createRegistro(formData, file, true);
         // Enviamos un correo electrónico de notificación al observador, si no lo había hecho
         if (!originationData.notificada) await this.originacionNotification(id);
+        // Enviamos un correo electrónico de notificación a la persona que asigno la observación/PAC
+        await this.pacNotification(pacData.id);
       }
 
       const staticData = this.staticData();
