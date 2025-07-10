@@ -4,9 +4,10 @@ window.addEventListener("load", () => {
     const $lugar = document.querySelector("#lugar");
     const $origen = document.querySelector("#origen_id");
 	const $observador = document.querySelector("#observador_id");
-    const $insperctor = document.querySelector("#ente_inspector_id");
+    const $inspector = document.querySelector("#ente_inspector_id");
     const $sector = document.querySelector("#sector_id");
     const $adjunto = document.querySelector("#adjunto_originacion");
+    const $formulario = document.querySelector("#formulario_id");
     const $btn = document.querySelector("#nueva-originacion button");
 
     const fechaValidation = () => {
@@ -28,8 +29,12 @@ window.addEventListener("load", () => {
 		requiredValidation($observador);
 	};
 
-    const insperctorValidation = () => {
-        requiredValidation($insperctor);
+    const inspectorValidation = () => {
+        requiredValidation($inspector);
+    };
+
+    const formularioValidation = () => {
+        requiredValidation($formulario);
     };
 
     const sectorValidation = () => {
@@ -49,10 +54,12 @@ window.addEventListener("load", () => {
     $origen.addEventListener("blur", origenValidation);
 	$observador.addEventListener("input", observadorValidation);
 	$observador.addEventListener("blur", observadorValidation);
-    $insperctor.addEventListener("input", insperctorValidation);
-    $insperctor.addEventListener("blur", insperctorValidation);
+    $inspector.addEventListener("input", inspectorValidation);
+    $inspector.addEventListener("blur", inspectorValidation);
     $sector.addEventListener("input", sectorValidation);
     $sector.addEventListener("blur", sectorValidation);
+    $formulario.addEventListener("input", formularioValidation);
+    $formulario.addEventListener("blur", formularioValidation);
     $adjunto.addEventListener("input", adjuntoValidation);
     $adjunto.addEventListener("blur", adjuntoValidation);
 
@@ -63,8 +70,9 @@ window.addEventListener("load", () => {
         lugarValidation();
         origenValidation();
 		observadorValidation();
-        insperctorValidation();
+        inspectorValidation();
         sectorValidation();
+        formularioValidation();
         adjuntoValidation();
 
         if (Object.keys(errors).length == 0) {
