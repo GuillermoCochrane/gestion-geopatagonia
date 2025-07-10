@@ -200,8 +200,6 @@ const originacionUtilitites = {
       plainData.display_fecha_de_observacion = utilities.formatDateDisplay(plainData.fecha_de_observacion);
       plainData.fecha_de_observacion = utilities.formatDateForm(plainData.fecha_de_observacion);
 
-      console.log(plainData);
-
       return plainData;
     } catch (error) {
       console.error(error); 
@@ -256,9 +254,20 @@ const originacionUtilitites = {
     try {
       let tratador = await Usuario.findAll({where: { rol_id: 3}});
       tratador = utilities.dataFormatter(tratador);
+      const originacion = await this.singleOriginacionData(id);
+      let incisos = await Inciso.findAll(
+        {
+          where: {
+            formulario_id: originacion.formulario_id
+          }
+        }
+      );
+      incisos = utilities.dataFormatter(incisos);
+
       return {
         tratadorData: tratador, // Datos del tratador para el formulario de PACs
-        originacionData: await this.singleOriginacionData(id), // Datos de la originación corrspondientes al id
+        incisosData: incisos, // Incisos de formulario de la originación
+        originacionData: originacion, // Datos de la originación corrspondientes al id
         observacionesPACs: await this.observacionesPACsData(id), // Observaciones / PACs de la originación
         originacionSelectData: await this.allOriginacionsData(),
       }
