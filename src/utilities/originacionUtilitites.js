@@ -165,6 +165,7 @@ const originacionUtilitites = {
           { model: EnteInspector, as: "ente_inspector", attributes: utilities.excludeTimestamps() },
           { model: Sector, as: "sector", attributes: utilities.excludeTimestamps() },
           { model: AdjuntoOriginacion, as: "adjuntos", attributes: utilities.excludeTimestamps() },
+          { model: Formulario, as: "formulario", attributes: utilities.excludeTimestamps()},
           {
             model: ObservacionPAC,
             as: "observaciones_pacs",
@@ -198,6 +199,8 @@ const originacionUtilitites = {
       let plainData = utilities.plainData([data])[0];
       plainData.display_fecha_de_observacion = utilities.formatDateDisplay(plainData.fecha_de_observacion);
       plainData.fecha_de_observacion = utilities.formatDateForm(plainData.fecha_de_observacion);
+
+      console.log(plainData);
 
       return plainData;
     } catch (error) {
@@ -297,7 +300,6 @@ const originacionUtilitites = {
       throw error;
     }
   },
-
 
   // Prepara los datos necesarios para el procesamiento de adjuntos
   adjuntoConfig(file, id, observacion  = false) {
