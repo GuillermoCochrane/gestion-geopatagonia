@@ -677,6 +677,22 @@ const originacionUtilitites = {
       throw error;
     }
   },
+
+  // Envia un correo electrónico a un usuario con notificación de la observación/PAC asignada
+  pacNotification: async function(id){
+    try{
+      const pac = await ObservacionPAC.findByPk(id);
+      const user = await Usuario.findByPk(pac.responsable_id);
+      const date = utilities.formatDateDisplay(pac.fecha_requerida);
+      const description = pac.descripcion;
+      const data = mailutilities.pacNotification(user.nombre, date, description, pac.referencia, pac.id, pac.requiere_analisis);
+      await mailutilities.sendMail(user.email, data.subject, data.text); // podemos agrerarle el HTML y el mail de respaldo
+      return true;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
 }
 
 module.exports = originacionUtilitites;
