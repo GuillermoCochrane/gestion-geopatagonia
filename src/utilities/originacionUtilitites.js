@@ -697,6 +697,25 @@ const originacionUtilitites = {
     }
   },
 
+  pacNotificationData: async function(id, originacionId){
+    try{
+      const pac = await ObservacionPAC.findByPk(id);
+      const user = await Usuario.findByPk(pac.responsable_id);
+      const date = utilities.formatDateDisplay(pac.fecha_requerida);
+      const description = pac.descripcion;
+      const data = mailutilities.pacNotification(user.nombre, date, description, pac.referencia, pac.id, pac.requiere_analisis);
+      if (originacionId) {
+        const origination = await this.orginacionNotificationData(originacionId);
+        let newtext = `${data.text}\n ------------------------------- \n --- Datos de la originacion --- \n ------------------------------- \n ${origination.text}`;
+        data.text = newtext;
+      }
+      return data;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
+
     orginacionNotificationData: async function(id){
       try{
         const origination = await Originacion.findByPk(id);
