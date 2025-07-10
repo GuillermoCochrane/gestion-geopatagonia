@@ -61,7 +61,7 @@ const mailUtilities = {
     const text = `Estimado ${userName},\n\n` +
       `En el día ${date} se le ha asignado la obervación del siguiente originación:\n\n` +
       `${originacionId ? `ID del originación: ${originacionId}\n` : ''}` +
-      `"${description}"\n\n` +
+      `Localización: "${description}"\n\n` +
       `Fecha: ${date}\n\n` +
       `Por favor verifique la misma en la aplicación para más detalles.\n\n` +
       `Este es un mensaje automático, por favor no responda directamente.`;
@@ -70,6 +70,28 @@ const mailUtilities = {
       subject,
       text
     };
+  },
+
+  // Genera el mensaje de notificación de la observación/PAC asignada
+  pacNotification: function(userName, date, description, reference, pacId, isPac = false) {
+
+    const type = isPac ? "Plan de acción correctiva" : "Observación";
+    const subject = `[${type} Asignada] ${date} - ${description.substring(0, 30)}${description.length > 30 ? '...' : ''}`;
+    
+    const text = `Estimado ${userName},\n\n` +
+      `En el día ${date} se le ha asignado ${isPac ? "el": "la" } siguiente ${type} :\n\n` +
+      `${pacId ? `ID ${isPac ? "del": "de la" }: ${pacId}\n` : ''}` +
+      `Descripcion: "${description}"\n\n` +
+      `Referencia: ${reference}\n\n` +
+      `Fecha Requierda: ${date}\n\n` +
+      `Por favor verifique la misma en la aplicación para más detalles.\n\n` +
+      `Este es un mensaje automático, por favor no responda directamente.`;
+
+      return {
+        subject,
+        text
+      };
+
   },
 }
 
