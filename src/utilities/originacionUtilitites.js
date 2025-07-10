@@ -696,6 +696,22 @@ const originacionUtilitites = {
       throw error;
     }
   },
+
+    orginacionNotificationData: async function(id){
+      try{
+        const origination = await Originacion.findByPk(id);
+        const user = await Usuario.findByPk(origination.observador_id);
+        const date = utilities.formatDateDisplay(origination.fecha_de_observacion);
+        const description = origination.lugar;
+        const data = mailutilities.orginacionNotification(user.nombre, date, description, origination.id);
+        return data;
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
+    },  
+
 }
+
 
 module.exports = originacionUtilitites;
