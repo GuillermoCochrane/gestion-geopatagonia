@@ -5,8 +5,8 @@
   <article>
     <ul>
       <li>
-        <h4>Item: </h4>
-        <p><%= locals?.pacData?.inciso %></p>
+        <h4>Inciso del formulario: </h4>
+        <p><%= locals?.pacData?.inciso_formulario?.inciso %></p>
       </li>
       <li>
         <h4>Fecha requerida: </h4>
@@ -38,7 +38,17 @@
       </li>
       <li>
         <h4>Adjuntos: </h4>
-        <p> - </p>
+        <p>
+          <% if (locals.pacData?.adjuntos.length > 0) { %>
+            <% for (const adjunto of locals.pacData.adjuntos) { %>
+              <a href="<%= adjunto.archivo %>">
+                <%= adjunto.nombre %> 
+              </a>
+            <% } %>
+          <% } else { %>
+            No
+          <% } %>
+        </p>
       </li>
     </ul>
   </article>
