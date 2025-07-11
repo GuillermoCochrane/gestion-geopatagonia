@@ -3,9 +3,10 @@ const { body } = require("express-validator");
 const path = require("path");
 
 const obsPACValidationMDW = [
-  body("inciso")
-    .optional() //hace que la campon no sea obligatorio
-    .isLength({ max: 5 }).withMessage("El inciso no puede tener más de 5 caracteres"),
+  body("inciso_id")
+    .notEmpty().withMessage("Debe seleccionar el inciso").bail()
+    .toInt()
+    .isInt({ min: 1 }).withMessage("Debe seleccionar un inciso válido"),
   body("fecha_requerida")
     .notEmpty().withMessage("Debe completar la fecha").bail()
     .isDate().withMessage("La fecha debe ser válida").bail()
@@ -27,7 +28,7 @@ const obsPACValidationMDW = [
       }
       return true;
     }),
-    body("responsable_id")
+  body("responsable_id")
     .notEmpty().withMessage("Debe seleccionar el responsable").bail()
     .toInt()
     .isInt({ min: 1 }).withMessage("Debe seleccionar un responsable válido"),
