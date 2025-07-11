@@ -278,7 +278,7 @@ const originacionUtilitites = {
     }
   },
 
-  //Orquesta la creación/carga de originaciones y observaciones/PACs, y prepara los datos para la vista
+  //Orquesta la creación/carga de originaciones y observaciones/PACs, notifica, y prepara los datos para la vista
   registerCreationHandler: async function(formData, file, id, nuevaObservacionPAC){
     try {
       // Creación de la originación, si no se pasa el id de una originación existente
@@ -297,9 +297,13 @@ const originacionUtilitites = {
         formData.requiere_analisis = utilities.toBoolean(formData.requiere_analisis);
         const pacData = await this.createRegistro(formData, file, true);
         // Enviamos un correo electrónico de notificación al observador, si no lo había hecho
-        if (!originationData.notificada) await this.originacionNotification(id);
+        if (!originationData.notificada) {
+          const notificationData = await this.originacionNotificationData(id);
+          await mailutilities.sendMail(notificationData.to, notificationData.subject, notificationData.text);
+        }
         // Enviamos un correo electrónico de notificación a la persona que asigno la observación/PAC
-        await this.pacNotification(pacData.id);
+        const pacNotificationData = await this.pacNotificationData(pacData.id, id);
+        await mailutilities.sendMail(pacNotificationData.to, pacNotificationData.subject, pacNotificationData.text);
       }
 
       const staticData = this.staticData();
