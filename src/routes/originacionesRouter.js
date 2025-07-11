@@ -26,7 +26,7 @@ const dateValidations = require("../middlewares/validations/originaciones/dateVa
 
 router.get('/', originacionesController.originaciones);
 router.post('/', upload.single("adjunto"), originacionValidation, originacionesController.nuevaOriginacion);
-router.put('/edit/:id', uploading.single("adjunto"), originacionValidation, originacionesController.editarOriginacion);
+router.put('/edit/:id', upload.single("adjunto"), originacionValidation, originacionesController.editarOriginacion);
 router.post('/filtrar', dateValidations, originacionesController.filtrar);
 router.get('/observacionPAC', originacionesController.observacionesPACs); // Ruta de prueba
 router.post('/observacionPAC', uploading.single("adjunto"), obsPACValidation, originacionesController.nuevaObservacionPAC);
