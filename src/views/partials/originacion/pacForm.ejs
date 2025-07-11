@@ -18,6 +18,28 @@
   </select>
   <span id="error-inciso_id"><%= locals.PACErrors?.inciso_id?.msg %></span>
 </label>
+
+<label>
+  <h3>Responsable</h3>
+  <select name="responsable_id" id="responsable_id1">
+    <option 
+          value="" 
+          <%= (!locals.oldData?.responsable_id) && 'selected' %> 
+          disabled
+    >
+      Seleccione el Responsable
+    </option>
+    <%- include('./dinamicFormOptions.ejs', {
+      options: locals?.tratadorData,
+      selected: locals?.oldData && locals?.oldData?.responsable_id,
+      keyLabel: 'nombre',
+      keyValue: 'id',
+      emptyMessage: 'No hay tratadores definidos'
+    }) %>
+  </select>
+  <span id="error-responsable_id"><%= locals.PACErrors?.responsable_id?.msg %></span>
+</label>
+
 <label>
   <h3>Fecha Requerida</h3>
   <input 
@@ -28,6 +50,7 @@
   >
   <span id="error-fecha_requerida"><%= locals.PACErrors?.fecha_requerida?.msg %></span>
 </label>
+
 <label class="checkbox">
   <h3>¿Fecha Negociable?</h3>
   <input 
@@ -38,31 +61,16 @@
   >
   <span id="error-fecha_negociable"><%= locals.PACErrors?.fecha_negociable?.msg %></span>
 </label>
+
 <label>
-  <h3>Responsable</h3>
-  <select name="responsable_id" id="responsable_id">
-    <option 
-          value="" 
-          <%= (!locals.oldData?.responsable_id) && 'selected' %> 
-          disabled
-    >
-      Seleccione el Responsable
-    </option>
-    <% if (locals?.tratadorData?.length > 0) { %>
-      <% for (const responsable of locals?.tratadorData) { %>
-        <option 
-              value="<%= responsable.id %>" 
-              <%= (locals.oldData?.responsable_id === responsable.id) && 'selected'  %>
-        > 
-          <%= responsable.nombre %>
-        </option>
-      <% } %>
-    <% } else { %>
-      <option value="0">No hay responsables definidos</option>
-    <% } %>
-  </select>
-  <span id="error-responsable_id"><%= locals.PACErrors?.responsable_id?.msg %></span>
+  <h3>Descripción</h3>
+  <textarea 
+    name="descripcion" 
+    id="descripcion"
+  ><%= locals.oldData?.descripcion %></textarea>
+  <span id="error-descripcion"><%= locals.PACErrors?.descripcion?.msg %></span>
 </label>
+
 <label class="checkbox">
   <h3>¿Requiere Análisis?</h3>
   <input 
@@ -73,6 +81,7 @@
   >
   <span id="error-requiere_analisis"><%= locals.PACErrors?.requiere_analisis?.msg %></span>
 </label>
+
 <label>
   <h3>Referencia</h3>
   <input 
@@ -83,14 +92,7 @@
   >
   <span id="error-referencia"><%= locals.PACErrors?.referencia?.msg %></span>
 </label>
-<label>
-  <h3>Descripción</h3>
-  <textarea 
-    name="descripcion" 
-    id="descripcion"
-  ><%= locals.oldData?.descripcion %></textarea>
-  <span id="error-descripcion"><%= locals.PACErrors?.descripcion?.msg %></span>
-</label>
+
 <label>
   <h3>Adjuntos</h3>
   <input 
@@ -101,7 +103,9 @@
   >
   <span id="error-adjunto"><%= locals.PACErrors?.adjunto?.msg %></span>
 </label>
+
 <input type="hidden" name="originacion_id" id="originacion_id" value="<%= locals.originacionData?.id || locals.oldData?.originacion_id %>">
+
 <aside>
   <button>
     Guardar
