@@ -69,6 +69,10 @@ const mailUtilities = {
     return `En el día ${date} se le ha asignado `;
   },
 
+  // Prepara los datos para parte del texto del mensaje de notificación
+  textEnd: function() {
+  return `Por favor verifique la misma en la aplicación para más detalles.\n\n Este es un mensaje automático, por favor no responda directamente.`;
+  },
 
   // Genera el mensaje de notificación de la originación asignada
   orginacionNotification: function(userName, date, description, originacionId) {
