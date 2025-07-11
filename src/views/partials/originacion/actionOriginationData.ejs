@@ -29,8 +29,22 @@
         <p><%= locals?.pacData?.originacion?.sector?.sector %></p>
       </li>
       <li>
-        <h4>Adjuntos: </h4>
-        <p> - </p>
+        <h4>Formulario: </h4>
+        <p><%= locals?.pacData?.originacion?.formulario?.codigo %></p>
+      </li>
+      <li>
+        <h4>Adjuntos:</h4>
+        <p>
+          <% if (locals.pacData?.originacion?.adjuntos.length > 0) { %>
+            <% for (const adjunto of locals.pacData.originacion.adjuntos) { %>
+              <a href="<%= adjunto.archivo %>">
+                <%= adjunto.nombre %> 
+              </a>
+            <% } %>
+          <% } else { %>
+            No
+          <% } %>
+        </p>
       </li>
     </ul>
   </article>
