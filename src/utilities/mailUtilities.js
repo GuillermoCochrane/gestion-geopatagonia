@@ -56,17 +56,17 @@ const mailUtilities = {
 
   // Prepara los datos para el sujeto del mensaje de notificación
   subjectData: function(date, description) {
-    return `Asignada - ${date} - ${description.substring(0, 30)}${description.length > 30 ? '...' : ''}`;
+    return `asignada - ${date} - ${description.substring(0, 30)}${description.length > 30 ? '...' : ''}`;
   },
   
   // Prepara los datos para parte del texto del mensaje de notificación
   textGreeting: function(userName) {
-    return `Estimado ${userName},\n\n`;
+    return `Estimado ${userName},`;
   },
 
   // Prepara los datos para parte del texto del mensaje de notificación
   textIntro: function(date) {
-    return `En el día ${date} se le ha asignado`;
+    return ` en el día ${date} se le ha asignado`;
   },
 
   // Prepara los datos para parte del texto del mensaje de notificación
@@ -79,7 +79,7 @@ const mailUtilities = {
     const subject = `Originación ${this.subjectData(date, description)}`;
     
     const text = `${this.textGreeting(userName)}` +
-      `${this.textIntro(date)} la obervación del siguiente originación:\n\n` +
+      `${this.textIntro(date)} la observación del siguiente originación:\n\n` +
       `${originacionId ? `ID del originación: ${originacionId}\n` : ''}` +
       `\nLocalización: "${description}"\n\n` +
       `Fecha: ${date}\n\n` +
@@ -94,16 +94,15 @@ const mailUtilities = {
   pacNotification: function(userName, date, description, reference, pacId, isPac = false) {
 
     const type = isPac ? "Plan de acción correctiva" : "Observación";
-    const subject = `${type} Asignada - ${date} - ${description.substring(0, 30)}${description.length > 30 ? '...' : ''}`;
+    const subject = `${type} ${this.subjectData(date, description)}`;
     
-    const text = `Estimado ${userName},\n\n` +
-      `En el día ${date} se le ha asignado ${isPac ? "el": "la" } siguiente ${type} :\n\n` +
-      `${pacId ? `ID ${isPac ? "del": "de la" }: ${pacId}\n` : ''}` +
+    const text = `${this.textGreeting(userName)}` +
+      `${this.textIntro(date)} ${isPac ? "el": "la" } siguiente ${type} :\n\n` +
+      `${pacId ? `ID ${isPac ? "del": "de la" } ${type}: ${pacId}\n\n` : '\n'}` +
       `Descripcion: "${description}"\n\n` +
       `Referencia: ${reference}\n\n` +
       `Fecha Requierda: ${date}\n\n` +
-      `Por favor verifique la misma en la aplicación para más detalles.\n\n` +
-      `Este es un mensaje automático, por favor no responda directamente.`;
+      `${this.textEnd()}`;
 
       return {
         subject,
