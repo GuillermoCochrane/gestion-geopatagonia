@@ -7,7 +7,7 @@
     </tr>
     <tr>
       <th>Identificador</th>
-      <th>Item</th>
+      <th>Inciso del Formulario</th>
       <th>Descripción</th>
       <th>Fecha Requerida</th>
       <th>Requiere Analisis</th>
@@ -26,7 +26,8 @@
       <% for (const data of locals?.observacionesPACs) { %>
         <tr>
           <td><%= data.id %></td>
-          <td><%= data.inciso %></td>
+          <% console.log(data.inciso_formulario); %>
+          <td><%= data?.inciso_formulario?.inciso ? data.inciso_formulario.inciso : " - "   %></td>
           <td><%= data.descripcion %></td>
           <td><%= data.fecha_requerida %></td>
           <td><%= data.requiere_analisis ? "Si" : "No" %></td>
