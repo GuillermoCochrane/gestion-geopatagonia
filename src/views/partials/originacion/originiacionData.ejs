@@ -24,5 +24,23 @@
       <h4>Sector:</h4>
       <p><%= locals?.originacionData?.sector?.sector %></p>
     </li>
+    <li>
+      <h4>Formulario:</h4>
+      <p><%= locals?.originacionData?.formulario?.codigo %></p>
+    </li>
+    <li>
+      <h4>Adjuntos:</h4>
+      <p>
+        <% if (locals.originacionData?.adjuntos?.length > 0) { %>
+          <% for (const adjunto of locals.originacionData.adjuntos) { %>
+            <a href="/documents/originacion/<%= adjunto.nombre %>">
+              <%= adjunto.nombre %> 
+            </a>
+          <% } %>
+        <% } else { %>
+          No
+        <% } %>
+      </p>
+    </li>
   </ul>
 </aside>
