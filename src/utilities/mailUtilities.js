@@ -56,7 +56,7 @@ const mailUtilities = {
 
   // Prepara los datos para el sujeto del mensaje de notificación
   subjectData: function(date, description) {
-    return ` Asignada- ${date} - ${description.substring(0, 30)}${description.length > 30 ? '...' : ''}`;
+    return `Asignada - ${date} - ${description.substring(0, 30)}${description.length > 30 ? '...' : ''}`;
   },
   
   // Prepara los datos para parte del texto del mensaje de notificación
@@ -66,25 +66,24 @@ const mailUtilities = {
 
   // Prepara los datos para parte del texto del mensaje de notificación
   textIntro: function(date) {
-    return `En el día ${date} se le ha asignado `;
+    return `En el día ${date} se le ha asignado`;
   },
 
   // Prepara los datos para parte del texto del mensaje de notificación
   textEnd: function() {
-  return `Por favor verifique la misma en la aplicación para más detalles.\n\n Este es un mensaje automático, por favor no responda directamente.`;
+  return `Por favor verifique la misma en la aplicación para más detalles.\nEste es un mensaje automático, por favor no responda directamente.`;
   },
 
   // Genera el mensaje de notificación de la originación asignada
   orginacionNotification: function(userName, date, description, originacionId) {
-    const subject = `Originación Asignada - ${date} - ${description.substring(0, 30)}${description.length > 30 ? '...' : ''}`;
+    const subject = `Originación ${this.subjectData(date, description)}`;
     
-    const text = `Estimado ${userName},\n\n` +
-      `En el día ${date} se le ha asignado la obervación del siguiente originación:\n\n` +
+    const text = `${this.textGreeting(userName)}` +
+      `${this.textIntro(date)} la obervación del siguiente originación:\n\n` +
       `${originacionId ? `ID del originación: ${originacionId}\n` : ''}` +
-      `Localización: "${description}"\n\n` +
+      `\nLocalización: "${description}"\n\n` +
       `Fecha: ${date}\n\n` +
-      `Por favor verifique la misma en la aplicación para más detalles.\n\n` +
-      `Este es un mensaje automático, por favor no responda directamente.`;
+      `${this.textEnd()}`;
     return {
       subject,
       text
