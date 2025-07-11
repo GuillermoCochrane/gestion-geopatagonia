@@ -697,6 +697,7 @@ const originacionUtilitites = {
     }
   },
 
+  // Genera el mensaje de notificación y el mail de la observación/PAC asignada
   pacNotificationData: async function(id, originacionId){
     try{
       const pac = await ObservacionPAC.findByPk(id);
@@ -706,29 +707,32 @@ const originacionUtilitites = {
       const data = mailutilities.pacNotification(user.nombre, date, description, pac.referencia, pac.id, pac.requiere_analisis);
       if (originacionId) {
         const origination = await this.orginacionNotificationData(originacionId);
-        let newtext = `${data.text}\n ------------------------------- \n --- Datos de la originacion --- \n ------------------------------- \n ${origination.text}`;
+        const separator ="-------------------------------";
+        const innerText = `\n${separator}\n --- Datos de la originación --- \n${separator}\n`;
+        let newtext = `${data.text} ${innerText} ${origination.text}`;
         data.text = newtext;
       }
-      return data;
+      return {...data, to: user.email};
     } catch (error) {
       console.error(error);
       throw error;
     }
   },
 
-    orginacionNotificationData: async function(id){
-      try{
-        const origination = await Originacion.findByPk(id);
-        const user = await Usuario.findByPk(origination.observador_id);
-        const date = utilities.formatDateDisplay(origination.fecha_de_observacion);
-        const description = origination.lugar;
-        const data = mailutilities.orginacionNotification(user.nombre, date, description, origination.id);
-        return data;
-      } catch (error) {
-        console.error(error);
-        throw error;
-      }
-    },  
+  // Genera el mensaje de notificación y el mail de la originación asignada
+  orginacionNotificationData: async function(id){
+    try{
+      const origination = await Originacion.findByPk(id);
+      const user = await Usuario.findByPk(origination.observador_id);
+      const date = utilities.formatDateDisplay(origination.fecha_de_observacion);
+      const description = origination.lugar;
+      const data = mailutilities.orginacionNotification(user.nombre, date, description, origination.id);
+      return {...data, to: user.email};
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },  
 
 }
 
