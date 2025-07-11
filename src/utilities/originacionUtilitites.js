@@ -298,7 +298,7 @@ const originacionUtilitites = {
         const pacData = await this.createRegistro(formData, file, true);
         // Enviamos un correo electrónico de notificación al observador, si no lo había hecho
         if (!originationData.notificada) {
-          const notificationData = await this.originacionNotificationData(id);
+          const notificationData = await this.orginacionNotificationData(id);
           await mailutilities.sendMail(notificationData.to, notificationData.subject, notificationData.text);
         }
         // Enviamos un correo electrónico de notificación a la persona que asigno la observación/PAC
@@ -678,7 +678,7 @@ const originacionUtilitites = {
       const data = mailutilities.pacNotification(user.nombre, date, description, pac.referencia, pac.id, pac.requiere_analisis);
       if (originacionId) {
         const origination = await this.orginacionNotificationData(originacionId);
-        const separator ="-------------------------------";
+        const separator ="-------------------------------------------";
         const innerText = `\n${separator}\n --- Datos de la originación --- \n${separator}\n`;
         let newtext = `${data.text} ${innerText} ${origination.text}`;
         data.text = newtext;
