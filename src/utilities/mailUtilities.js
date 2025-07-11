@@ -54,13 +54,21 @@ const mailUtilities = {
     }
   },
 
+  // Prepara los datos para el sujeto del mensaje de notificación
   subjectData: function(date, description) {
     return ` Asignada- ${date} - ${description.substring(0, 30)}${description.length > 30 ? '...' : ''}`;
   },
   
+  // Prepara los datos para parte del texto del mensaje de notificación
   textGreeting: function(userName) {
     return `Estimado ${userName},\n\n`;
   },
+
+  // Prepara los datos para parte del texto del mensaje de notificación
+  textIntro: function(date) {
+    return `En el día ${date} se le ha asignado `;
+  },
+
 
   // Genera el mensaje de notificación de la originación asignada
   orginacionNotification: function(userName, date, description, originacionId) {
