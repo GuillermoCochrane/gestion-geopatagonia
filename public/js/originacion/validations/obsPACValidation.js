@@ -1,6 +1,6 @@
 window.addEventListener("load", () => {
   const $form = document.querySelector("#new-content");
-  const $inciso = document.querySelector("#inciso");
+  const $inciso = document.querySelector("#inciso_id");
   const $fecha = document.querySelector("#fecha_requerida");
   const $responsable = document.querySelector("#responsable_id");
   const $requiere = document.querySelector("#requiere_analisis");
@@ -10,7 +10,7 @@ window.addEventListener("load", () => {
   const $btn = document.querySelector("#new-content button");
   
   const incisoValidation = () => {
-    maxlengthValidation($inciso, 5);
+    requiredValidation($inciso);
   };
 
   const fechaValidation = () => {
