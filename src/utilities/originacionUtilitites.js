@@ -514,6 +514,8 @@ const originacionUtilitites = {
       { model: Usuario, as: 'observador', attributes: utilities.excludePassword() },
       { model: Sector, as: 'sector', attributes: utilities.excludeTimestamps() },
       { model: EnteInspector, as: 'ente_inspector', attributes: utilities.excludeTimestamps() },
+      { model: Formulario, as: 'formulario', attributes: utilities.excludeTimestamps() },
+      { model: AdjuntoOriginacion, as: 'adjuntos', attributes: utilities.excludeTimestamps() },
     ];
     const accionIncludes = [
       { model: Usuario, as: 'ejecutor', attributes: utilities.excludePassword() },
@@ -534,6 +536,8 @@ const originacionUtilitites = {
           { model: Usuario, as: 'responsable', attributes: utilities.excludePassword() },
           { model: Estado, as: 'estado', attributes: utilities.excludeTimestamps() },
           { model: Accion, as: 'acciones', include: accionIncludes, attributes: utilities.excludeTimestamps() },
+          { model: Inciso, as: 'inciso_formulario', attributes: utilities.excludeTimestamps() },
+          { model: AdjuntoObservacionPAC, as: 'adjuntos', attributes: utilities.excludeTimestamps() },
         ],
         attributes: utilities.excludeTimestamps(),
         order: [['id', 'ASC']],
