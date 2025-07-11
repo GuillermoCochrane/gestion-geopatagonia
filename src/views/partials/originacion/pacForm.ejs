@@ -1,12 +1,22 @@
 <label>
   <h3>Inciso</h3>
-  <input 
-    type="text" 
-    name="inciso" 
-    id="inciso"
-    value="<%= locals.oldData?.inciso %>"
-  >
-  <span id="error-inciso"><%= locals.PACErrors?.inciso?.msg %></span>
+  <select name="inciso_id" id="inciso_id">
+    <option 
+        value="" 
+        <%= (!locals.oldData?.inciso_id) && 'selected' %>
+        disabled
+    >
+      Seleccione el Inciso
+    </option>
+    <%- include('./dinamicFormOptions.ejs', {
+      options: locals?.incisosData,
+      selected: locals?.oldData && locals?.oldData?.inciso_id,
+      keyLabel: 'inciso',
+      keyValue: 'id',
+      emptyMessage: 'No hay incisos definidos'
+    }) %>
+  </select>
+  <span id="error-inciso_id"><%= locals.PACErrors?.inciso_id?.msg %></span>
 </label>
 <label>
   <h3>Fecha Requerida</h3>
