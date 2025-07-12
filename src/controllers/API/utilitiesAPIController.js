@@ -47,7 +47,36 @@ const utilitiesAPIController = {
                     message: "Originación eliminada correctamente",
                 }
             }
-            res.json(info);
+            return res.json(info);
+        } catch (error) {
+            let info = {
+                meta: {
+                    status : 400,
+                    url: endpoint,
+                },
+                errors: "error interno del servidor",
+            }
+            return res.json(info);
+        }
+    },
+
+    incisos: async(req, res) => {
+        const {id} = req.params;
+        const endpoint =  "/api/utilities/incisos/:id";
+        try {
+            let incisos = await utilities.incisos(id);
+            let info = {
+                meta: {
+                    status : 200,
+                    url: endpoint,
+                },
+                data: {
+                    formulario_id: id,
+                    incisos_encotrados: incisos.length > 0 ? true : false,
+                    incisos: incisos,
+                }
+            }
+            return res.json(info);
         } catch (error) {
             let info = {
                 meta: {

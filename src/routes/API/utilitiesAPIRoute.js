@@ -11,4 +11,7 @@ router.get("/inUseEmail/:email/:id?", utilitiesAPIController.checkEmail);
 //? Endpoint para eliminar organizaciones sin observaciones / PACs
 router.delete("/deleteOrigination/:id", utilitiesAPIController.deleteOrigination);
 
+//? Endpoint para consultar incisos de formularios
+router.get("/incisos/:id", utilitiesAPIController.incisos);
+
 module.exports = router;
