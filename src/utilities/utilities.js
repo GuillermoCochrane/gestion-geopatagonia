@@ -1,4 +1,4 @@
-const { Usuario} = require("../database/models");
+const { Usuario, Inciso, Formulario } = require("../database/models");
 const bcrypt = require("bcryptjs");
 const puppeteer = require("puppeteer");
 const ejs = require("ejs");
@@ -143,6 +143,16 @@ const utilities = {
         let response = user.length > 0;
         if (id && response && user[0].id == id) response = false;
         return response
+    },
+
+    // Método para obtener los incisos de un formulario
+    incisos: async function(id){
+        let incisos = await Inciso.findAll({
+            where: {
+                formulario_id: id
+            }
+        });
+        return incisos;
     },
 
     // Método para encriptar una contraseña
