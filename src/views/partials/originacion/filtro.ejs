@@ -102,11 +102,27 @@
         <span id="error-origen_id"><%= locals.filterErrors?.origen_id?.msg  %></span>
       </label>
 
-      <!-- Campos que todavía no están en la DB -->
+      <!-- Campo que todavía no está en la DB -->
+      <label>
+        <h3>Equipo</h3>
+        <select name="equipo" disabled>
+          <option value="">(No disponible)</option>
+        </select>
+        <span id="error-equipo"><%= locals.filterErrors?.equipo?.msg  %></span>
+      </label>
+
       <label>
         <h3>Formulario</h3>
-        <select name="formulario" disabled>
-          <option value="">(No disponible)</option>
+        <select name="formulario">
+          <option value="">Todos</option>
+          <% console.log(locals.formData.formularios);%>
+          <%- include('./dinamicFormOptions.ejs', {
+            options: locals?.formData && locals?.formData?.formularios,
+            selected: locals?.oldData && locals?.oldData?.formulario_id,
+            keyLabel: 'codigo',
+            keyValue: 'id',
+            emptyMessage: 'No hay formularios definidos'
+          }) %>
         </select>
         <span id="error-formulario"><%= locals.filterErrors?.formulario?.msg  %></span>
       </label>
@@ -119,14 +135,7 @@
         <span id="error-inciso"><%= locals.filterErrors?.inciso?.msg  %></span>
       </label>
 
-      <label>
-        <h3>Equipo</h3>
-        <select name="equipo" disabled>
-          <option value="">(No disponible)</option>
-        </select>
-        <span id="error-equipo"><%= locals.filterErrors?.equipo?.msg  %></span>
-      </label>
-
+      <!-- Campo que todavía no está en la DB -->
       <label>
         <h3>Tipo de operación</h3>
         <select name="tipo_operacion" disabled>
