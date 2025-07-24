@@ -113,9 +113,8 @@
 
       <label>
         <h3>Formulario</h3>
-        <select name="formulario">
+        <select name="formulario" id="formulario">
           <option value="">Todos</option>
-          <% console.log(locals.formData.formularios);%>
           <%- include('./dinamicFormOptions.ejs', {
             options: locals?.formData && locals?.formData?.formularios,
             selected: locals?.oldData && locals?.oldData?.formulario_id,
@@ -129,13 +128,12 @@
 
       <label>
         <h3>Inciso</h3>
-        <select name="inciso" disabled>
-          <option value="">(No disponible)</option>
+        <select name="inciso" id="inciso">
         </select>
         <span id="error-inciso"><%= locals.filterErrors?.inciso?.msg  %></span>
       </label>
 
-      <!-- Campo que todavía no está en la DB -->
+      <!-- Campos que todavía no está en la DB -->
       <label>
         <h3>Tipo de operación</h3>
         <select name="tipo_operacion" disabled>
