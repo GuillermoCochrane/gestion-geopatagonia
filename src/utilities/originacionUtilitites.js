@@ -497,7 +497,8 @@ const originacionUtilitites = {
     filtros.origen_id && (where.origen_id = filtros.origen_id);
     filtros.sector_id && (where.sector_id = filtros.sector_id);
     filtros.ente_inspector_id && (where.ente_inspector_id = filtros.ente_inspector_id);
-  
+    filtros.formulario && (where.formulario_id = filtros.formulario);
+
     return where;
   },
 
