@@ -583,7 +583,7 @@ const originacionUtilitites = {
   originacionData: async function(filter = {}) {
     //Datos inmutables para la vista
     const data = this.headerData("Originaciones");
-    data.pageScript = [...data.pageScript, ...this.validationScripts, "originacion/validations/originacionValidation", "originacion/validations/filterDateValidation"];
+    data.pageScript = [...data.pageScript, ...this.validationScripts, "originacion/validations/originacionValidation", "originacion/validations/filterDateValidation", "originacion/incisosOptinosLoader"];
 
     try {
       const content = await this.originacionContent(filter);
