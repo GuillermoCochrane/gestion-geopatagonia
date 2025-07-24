@@ -507,6 +507,7 @@ const originacionUtilitites = {
     //Criterios opcionales de filtrado
     const where = id ? { id } : {};
     const originacionWhere = this.originacionFilter(filtros);
+    filtros.formulario && filtros.inciso && (where.inciso_id = filtros.inciso);
     filtros.estado_id && (where.estado_id = filtros.estado_id);
 
     //Sub Relaciones a incluir en la consulta
