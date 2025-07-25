@@ -41,7 +41,7 @@
     }
 
     /* Secciones */
-    seccion {
+    section {
       margin-bottom: 25px;
       page-break-inside: avoid;
     }
@@ -108,6 +108,12 @@
         <th>Sector:</th>
         <td><%= originacion.sector.sector %></td>
       </tr>
+      <tr>
+        <th>Formulario:</th>
+        <td><%= originacion.formulario.codigo %></td>
+        <th>Archivos adjuntos:</th>
+        <td><%= originacion.adjuntos.length %></td>
+      </tr>
     </table>
   </section>
 
@@ -116,22 +122,28 @@
     <h2>Datos de <%= requiere_analisis ? 'PAC' : 'Observación' %></h2>
     <table>
       <tr>
-        <th>Item:</th>
-        <td><%= inciso %></td>
         <th>Responsable:</th>
         <td><%= responsable.nombre %></td>
+        <th>Estado:</th>
+        <td><%= estado.estado %></td>
       </tr>
       <tr>
         <th>Fecha requerida:</th>
-        <td><%= fecha_requerida %></td>
-        <th>Requiere análisis:</th>
-        <td><%= requiere_analisis ? 'Sí' : 'No' %></td>
-      </tr>
-      <tr>
+        <td><%= display_fecha_requerida %></td>
         <th>Fecha negociable:</th>
         <td><%= fecha_negociable ? 'Sí' : 'No' %></td>
-        <th>Estado:</th>
-        <td><%= estado.estado %></td>
+      </tr>
+      <tr>
+        <th>Requiere análisis:</th>
+        <td><%= requiere_analisis ? 'Sí' : 'No' %></td>
+        <th>Referencia:</th>
+        <td><%= referencia %></td>
+      </tr>
+      <tr>
+        <th>Inciso del formulario:</th>
+        <td><%= inciso_formulario.inciso %></td>
+        <th>Adjuntos:</th>
+        <td><%= adjuntos.length %></td>
       </tr>
       <tr>
         <th>Descripción:</th>
@@ -169,7 +181,6 @@
             </tr>
         <% } %>
       </tbody>
-      <tbody></tbody>
     </table>
 
   </section>
