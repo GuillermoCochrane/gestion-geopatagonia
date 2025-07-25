@@ -8,6 +8,7 @@ const express = require("express");
 const path = require("path");
 const methodOverride =  require('method-override'); // Necesario para usar métodos PUT y DELETE
 const utilities = require("./utilities/utilities");
+const session = require("express-session");
 // Routers
 const mainRoutes = require("./routes/mainRouter");
 const dashboardRoutes = require("./routes/dashboardRouter");
@@ -21,6 +22,7 @@ app.use(express.static('public'));// Setea carpeta de recuros estáticos
 app.use(express.json()); // Necesario para procesar información POST
 app.use(express.urlencoded({ extended: false })); // Necesario para procesar información POST
 app.use(methodOverride('_method')); // Para sobreescribir el método="POST" en formularios, con PUT y DELETE
+app.use(session({secret: "You know nothing", resave: false, saveUninitialized: false})); // Necesario para crear sesiones
 
 // Seteo de motor de plantillas
 app.set('view engine', 'ejs');
