@@ -15,12 +15,19 @@ const mailutilities = require("./mailUtilities");
  */
 const usuariosUtilities = {
   //  --- Estilos y Scripts ---
-  styles: ["task"], // CSS base para las vistas
+  styles: ["usuario/usuario"], // CSS base para las vistas
 
   pageScript: ["usuario/passwordViewer"], // Scripts para el manejo de modales
 
   validationScripts: ["validations", "validator.min"], // Scripts para validaciones
 
+  loginData: function(){
+    return {
+      title: "Iniciar sesión",
+      styles: ["usuario/login"],
+      pageScript: this.pageScript,
+    }
+  },
 }
 
 module.exports = usuariosUtilities;
