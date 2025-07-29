@@ -1,38 +1,88 @@
 h1{
   margin: auto;
   text-align: center;
-  margin-block: 2em;
+  margin-block: 1em;
 }
 
 form{
   width: 400px;
-  margin: auto;
+  margin-inline: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-block: 1em;
+  background-color: var(--logo-secondary);
+  padding-inline: 30px;
+  padding-block: 10px;
+  border-radius: 10px;
+  font-size: 15px;
 }
 
-label{
+form label{
   display: flex;
   flex-direction: column;
   width: 100%;
   margin-bottom: 15px;
 }
 
-label input{
+form label h4{
+  font-size: 18px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+form label div.password-container{
+  display: flex;
+  align-items: center;
+}
+
+
+form label div.password-container i{
+  width: 0;
+  transform: translateX(-27px);
+  color: var(--font);
+  font-size: 1.1em;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+form label input{
   width: 100%;
   padding-block: 3px;
   padding-inline: 5px;
   border-radius: 6px;
   font-size: 15px;
   border: 2px solid transparent;
-  margin-inline: 10px;
-  margin-block: auto;
-  ;
+  font-size: 15px;
+  margin-bottom: 10px;
 }
 
+form label input.input-error{
+  color: var(--logo);
+  border-color: var(--logo);
+}
 
-label.checkbox{
+form label input.input-ok{
+  color: var(--success);
+  border-color: var(--success);
+}
+
+form label input:focus{
+  outline: 2px solid var(--font);
+  outline-offset: 1px;
+}
+
+form label span{
+  font-size: 14px;
+  display: inline-block;
+  padding-inline: 3px;
+  color: var(--logo);
+  width: 90%;
+  min-height: 1em;
+  margin-inline: auto;
+}
+
+form label.checkbox{
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -40,11 +90,11 @@ label.checkbox{
   gap: 8px
 }
 
-label.checkbox h4{
+form label.checkbox h4{
   margin-block: 0;
 }
 
-label.checkbox input{
+form label.checkbox input{
   width: auto;
   padding: 0;
   margin: 0
