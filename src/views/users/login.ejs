@@ -1,0 +1,37 @@
+<%- include("../partials/head.ejs") %>
+<body>
+  <main>
+
+    <h2 >Ingresar</h2>
+
+    <form action="/usuario/login" method="post" id="login-form">
+
+      <label>
+          <h4>Email</h4>
+          <input type="text" name="email" id="email" value="<%= locals.usuario?.email %>">
+          <span id="error-email"><%= locals.errors?.email?.msg  %></span>
+      </label>
+      
+      <label>
+          <h4>Contraseña</h4>
+          <div class="password-container">
+              <input type="password" name="password" id="password">
+              <i id="toggle-icon" class="fa-regular fa-eye"></i>
+          </div>
+          <span id="error-password"><%= locals.errors?.password?.msg %></span>
+      </label>
+
+      <label>
+        <input type="checkbox" name="rememberMe" id="rememberMe">
+        <h4>Recordarme</h4>
+      </label>
+
+      <div class="login-options">
+          <div><a href="/users/recovery">¿Olvidó su contraseña?</a></div>
+      </div>
+
+      <button id="login-btn">Ingresar</button>
+    </form>
+  </main>
+</body>
+</html>
