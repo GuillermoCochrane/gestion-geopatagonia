@@ -7,7 +7,8 @@ const usuarioController = {
     },
 
     login: (req, res) => {
-        res.redirect("/dashboard");
+        const data = utilities.loginData();
+        return res.render("usuario/login", data)
     },
 
     logout: (req, res) => {
