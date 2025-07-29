@@ -17,7 +17,7 @@ const usuariosUtilities = {
   //  --- Estilos y Scripts ---
   styles: ["usuario/usuario"], // CSS base para las vistas
 
-  pageScript: ["usuario/passwordViewer"], // Scripts para el manejo de modales
+  viewScript: ["usuario/passwordViewer"], // Scripts para el manejo del toggle de contraseña
 
   validationScripts: ["validations", "validator.min"], // Scripts para validaciones
 
@@ -25,7 +25,7 @@ const usuariosUtilities = {
     return {
       title: "Iniciar sesión",
       styles: ["usuario/login"],
-      pageScript: this.pageScript,
+      pageScript: [...this.validationScripts, ...this.viewScript],
     }
   },
 }
