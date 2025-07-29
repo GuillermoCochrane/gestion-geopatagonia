@@ -16,11 +16,12 @@ const mainRoutes = require("./routes/mainRouter");
 const dashboardRoutes = require("./routes/dashboardRouter");
 const originacionRoutes = require("./routes/originacionesRouter");
 const utilitiesAPIRoutes = require("./routes/API/utilitiesAPIRoute");
+const usuariosRoutes = require("./routes/usuariosRouter");
 
 // Configuración
 const app = express();
 const port = process.env.PORT || 3003;
-app.use(express.static('public'));// Setea carpeta de recuros estáticos
+app.use(express.static('public'));// Setea carpeta de recursos estáticos
 app.use(express.json()); // Necesario para procesar información POST
 app.use(express.urlencoded({ extended: false })); // Necesario para procesar información POST
 app.use(methodOverride('_method')); // Para sobreescribir el método="POST" en formularios, con PUT y DELETE
@@ -35,6 +36,7 @@ app.set('views', path.join(__dirname, './views'));
 app.use('/', mainRoutes);
 app.use('/dashboard', dashboardRoutes);
 app.use('/originacion', originacionRoutes);
+app.use('/usuario', usuariosRoutes);
 app.use('/api/utilities', utilitiesAPIRoutes);
 
 //Error 404
