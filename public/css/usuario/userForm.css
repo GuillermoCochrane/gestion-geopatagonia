@@ -1,0 +1,51 @@
+h1{
+  margin: auto;
+  text-align: center;
+  margin-block: 2em;
+}
+
+form{
+  width: 400px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+label input{
+  width: 100%;
+  padding-block: 3px;
+  padding-inline: 5px;
+  border-radius: 6px;
+  font-size: 15px;
+  border: 2px solid transparent;
+  margin-inline: 10px;
+  margin-block: auto;
+  ;
+}
+
+
+label.checkbox{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 8px
+}
+
+label.checkbox h4{
+  margin-block: 0;
+}
+
+label.checkbox input{
+  width: auto;
+  padding: 0;
+  margin: 0
+}

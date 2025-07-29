@@ -2,7 +2,7 @@
 <body>
   <main>
 
-    <h2 >Ingresar</h2>
+    <h1><%= title %></h1>
 
     <form action="/usuario/login" method="post" id="login-form">
 
@@ -21,7 +21,7 @@
           <span id="error-password"><%= locals.errors?.password?.msg %></span>
       </label>
 
-      <label>
+      <label class="checkbox">
         <input type="checkbox" name="rememberMe" id="rememberMe">
         <h4>Recordarme</h4>
       </label>
