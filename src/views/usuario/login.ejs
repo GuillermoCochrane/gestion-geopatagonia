@@ -8,7 +8,7 @@
 
       <label>
           <h4>Email</h4>
-          <input type="text" name="email" id="email" value="<%= locals.usuario?.email %>">
+          <input type="text" name="email" id="email" value="<%= locals.old?.email %>">
           <span id="error-email"><%= locals.errors?.email?.msg  %></span>
       </label>
       
@@ -22,7 +22,7 @@
       </label>
 
       <label class="checkbox">
-        <input type="checkbox" name="rememberMe" id="rememberMe">
+        <input type="checkbox" name="rememberMe" id="rememberMe" <%= locals.old?.rememberMe && "checked" %>>
         <h4>Recordarme</h4>
       </label>
 
