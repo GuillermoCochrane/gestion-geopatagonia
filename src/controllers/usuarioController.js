@@ -15,9 +15,9 @@ const usuarioController = {
     processLogin: async function (req, res) {
         let errors = validationResult(req);
         if (errors.isEmpty()){
-            const user = await utilities.processLogin(req.body);
+            const user = req.userFromDB;
             if (user) {
-                req.session.user = user;
+                req.session.user = user.id; //buscar forma de encriptar el ID en un token
                 return res.redirect("/usuario/logged");
             } else {
                 return res.redirect("/usuario/login");
@@ -34,7 +34,7 @@ const usuarioController = {
     logged: function(req, res){
         const user = req.session.user;
         if (user) {
-            return res.send(user);
+            return res.send("logueado user: " + user);
         } else {
             return res.redirect("/usuario/login");
         }
