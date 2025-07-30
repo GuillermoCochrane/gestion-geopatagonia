@@ -21,6 +21,15 @@ const usuarioController = {
         }
     },
 
+    logged: function(req, res){
+        const user = req.session.user;
+        if (user) {
+            return res.send(user);
+        } else {
+            return res.redirect("/usuario/login");
+        }
+    },
+
     logout: (req, res) => {
         res.redirect("/dashboard");
     }

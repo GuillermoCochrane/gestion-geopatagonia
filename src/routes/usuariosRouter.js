@@ -9,5 +9,5 @@ const usuariosController = require('../controllers/usuarioController');
 router.get('/', usuariosController.index);
 router.get('/login', usuariosController.login);
 router.post('/login', usuariosController.processLogin);
-
+router.get('/logged', usuariosController.logged);
 module.exports = router;
