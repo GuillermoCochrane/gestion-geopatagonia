@@ -36,12 +36,13 @@ const usuarioController = {
         if (user) {
             return res.send("logueado user: " + user);
         } else {
-            return res.redirect("/usuario/login");
+            return res.send("No hay usuario logueado");
         }
     },
 
     logout: (req, res) => {
-        res.redirect("/dashboard");
+        req.session.destroy();
+        res.redirect("/usuario/login");
     }
 };
 

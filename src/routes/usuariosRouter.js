@@ -13,4 +13,5 @@ router.get('/', usuariosController.index);
 router.get('/login', usuariosController.login);
 router.post('/login', loginValidations, usuariosController.processLogin);
 router.get('/logged', usuariosController.logged);
+router.post('/logout', usuariosController.logout);
 module.exports = router;
