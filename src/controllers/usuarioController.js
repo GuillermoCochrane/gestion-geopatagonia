@@ -11,6 +11,16 @@ const usuarioController = {
         return res.render("usuario/login", data)
     },
 
+    processLogin: async function (req, res) {
+        const user = await utilities.processLogin(req.body);
+        if (user) {
+            req.session.user = user;
+            return res.redirect("/usuario/logged");
+        } else {
+            return res.redirect("/usuario/login");
+        }
+    },
+
     logout: (req, res) => {
         res.redirect("/dashboard");
     }
