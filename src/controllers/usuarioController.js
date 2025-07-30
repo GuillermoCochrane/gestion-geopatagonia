@@ -1,4 +1,5 @@
 const utilities = require("../utilities/usuarioUtilities");
+const { validationResult } = require('express-validator');
 
 const usuarioController = {
 
@@ -12,12 +13,21 @@ const usuarioController = {
     },
 
     processLogin: async function (req, res) {
-        const user = await utilities.processLogin(req.body);
-        if (user) {
-            req.session.user = user;
-            return res.redirect("/usuario/logged");
+        let errors = validationResult(req);
+        if (errors.isEmpty()){
+            const user = await utilities.processLogin(req.body);
+            if (user) {
+                req.session.user = user;
+                return res.redirect("/usuario/logged");
+            } else {
+                return res.redirect("/usuario/login");
+            }
         } else {
-            return res.redirect("/usuario/login");
+            let data = utilities.loginData();
+            data.errors = errors.mapped();
+            req.body.rememberMe = Boolean(req.body.rememberMe);
+            data.old = req.body;
+            return res.render("usuario/login", data);
         }
     },
 

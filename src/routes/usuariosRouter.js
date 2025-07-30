@@ -4,10 +4,13 @@ const usuariosController = require('../controllers/usuarioController');
 
 //* Middlewares
 
-//* Rutas
+//? Validaciones
+const loginValidations = require("../middlewares/validations/usuario/loginValidationsMDW");
 
+
+//* Rutas
 router.get('/', usuariosController.index);
 router.get('/login', usuariosController.login);
-router.post('/login', usuariosController.processLogin);
+router.post('/login', loginValidations, usuariosController.processLogin);
 router.get('/logged', usuariosController.logged);
 module.exports = router;
