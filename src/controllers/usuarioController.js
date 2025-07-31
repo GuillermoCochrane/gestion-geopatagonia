@@ -1,4 +1,5 @@
-const utilities = require("../utilities/usuarioUtilities");
+const userUtilities = require("../utilities/usuarioUtilities");
+const utilities = require("../utilities/utilities");
 const { validationResult } = require('express-validator');
 
 const usuarioController = {
@@ -8,7 +9,7 @@ const usuarioController = {
     },
 
     login: (req, res) => {
-        const data = utilities.loginData();
+        const data = userUtilities.loginData();
         return res.render("usuario/login", data)
     },
 
@@ -17,13 +18,13 @@ const usuarioController = {
         if (errors.isEmpty()){
             const user = req.userFromDB;
             if (user) {
-                req.session.user = user.id; //buscar forma de encriptar el ID en un token
+                req.session.user = utilities.encrypt(user.id); 
                 return res.redirect("/usuario/logged");
             } else {
                 return res.redirect("/usuario/login");
             }
         } else {
-            let data = utilities.loginData();
+            let data = userUtilities.loginData();
             data.errors = errors.mapped();
             req.body.rememberMe = Boolean(req.body.rememberMe);
             data.old = req.body;
