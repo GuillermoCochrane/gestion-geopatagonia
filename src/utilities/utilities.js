@@ -217,10 +217,19 @@ const utilities = {
 
     // Metodo para decifrar un texto
     decrypt: function (encryptedText) {
-      const { key, iv } = this.cryptoValidations();
-      const decipher = crypto.createDecipheriv('aes-256-cbc', key, iv); // Creamos un decifrado
-      let decrypted = decipher.update(String(encryptedText), 'hex', 'utf8'); //Deciframos el parte del texto
-      decrypted += decipher.final('utf8'); // Terminamos el proceso de decifrado
+      const { key,} = this.cryptoValidations();
+
+      // Extraemos el IV y el mensaje cifrado
+      const ivHex = encryptedText.slice(0, 32);
+      const iv = Buffer.from(ivHex, 'hex');
+      const encryptedMessage = encryptedText.slice(32);
+
+      // Creamos el decifrador AES-256-CBC con la clave y el IV
+      const decipher = crypto.createDecipheriv('aes-256-cbc', key, iv);
+
+      // Deciframos el texto
+      let decrypted = decipher.update(String(encryptedMessage), 'hex', 'utf8');
+      decrypted += decipher.final('utf8');
       return decrypted;
     },
 
