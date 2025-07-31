@@ -196,12 +196,23 @@ const utilities = {
     },
 
     // Metodo para encriptar un texto
-    encrypt: function (text) {
-      const { key, iv } = this.cryptoValidations();
-      const cipher = crypto.createCipheriv('aes-256-cbc', key, iv ); // Creamos un cifrado
-      let encrypted = cipher.update(String(text), 'utf8', 'hex');  //Ciframos el parte del texto
-      encrypted += cipher.final('hex'); // Terminamos el proceso de cifrado
-      return encrypted;
+    encrypt: function (text, randomIV = false) {
+      let { key, iv } = this.cryptoValidations();
+
+      // Si se solicita IV aleatorio, lo genera en el momento
+      if (randomIV) iv = crypto.randomBytes(16);
+
+      // Creamos el cifrador AES-256-CBC con la clave y el IV
+      const cipher = crypto.createCipheriv('aes-256-cbc', key, iv );
+
+      // Ciframos el texto
+      let encrypted = cipher.update(String(text), 'utf8', 'hex');
+      encrypted += cipher.final('hex');
+
+      // Convertimos el IV a hex y lo concatenamos al principio del mensaje cifrado
+      const ivHex = iv.toString('hex');
+      const encryptedMessage = ivHex + encrypted;
+      return encryptedMessage;
     },
 
     // Metodo para decifrar un texto
