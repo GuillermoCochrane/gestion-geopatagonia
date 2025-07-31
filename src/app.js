@@ -10,6 +10,7 @@ const methodOverride =  require('method-override'); // Necesario para usar méto
 const utilities = require("./utilities/utilities");
 const session = require("express-session");
 const cookieParser = require("cookie-parser");
+const persistUserMDW = require("./middlewares/persistUserMDW");
 
 // Routers
 const mainRoutes = require("./routes/mainRouter");
@@ -27,6 +28,7 @@ app.use(express.urlencoded({ extended: false })); // Necesario para procesar inf
 app.use(methodOverride('_method')); // Para sobreescribir el método="POST" en formularios, con PUT y DELETE
 app.use(session({secret: "You know nothing", resave: false, saveUninitialized: false})); // Necesario para crear sesiones
 app.use(cookieParser()); // Necesario para crear cookies
+app.use(persistUserMDW); // Middleware global que persiste la sesion del usuario, si hay cookie y no sesión
 
 // Seteo de motor de plantillas
 app.set('view engine', 'ejs');
