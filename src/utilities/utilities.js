@@ -3,6 +3,8 @@ const bcrypt = require("bcryptjs");
 const puppeteer = require("puppeteer");
 const ejs = require("ejs");
 const path = require("path");
+const crypto = require('crypto');
+const { ENCRYPTION_KEY, ENCRYPTION_IV } = process.env;
 
 const utilities = {
 
@@ -166,6 +168,14 @@ const utilities = {
         delete user.password;
       }
       return users;
+    },
+
+    // Metodo para encriptar un texto
+    encrypt: function (text) {
+      const cipher = crypto.createCipheriv('aes-256-cbc', ENCRYPTION_KEY, ENCRYPTION_IV); // Creamos un cifrado
+      let encrypted = cipher.update(text, 'utf8', 'hex');  //Ciframos el parte del texto
+      encrypted += cipher.final('hex'); // Terminamos el proceso de cifrado
+      return encrypted;
     },
 
     // Metodo para generar un PDF a partir de un template
