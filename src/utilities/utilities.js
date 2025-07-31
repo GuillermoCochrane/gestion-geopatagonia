@@ -170,9 +170,35 @@ const utilities = {
       return users;
     },
 
+    cryptoValidations: function () {
+      const key = ENCRYPTION_KEY;
+      const iv = ENCRYPTION_IV;
+
+      // Validamos que se haya definido la clave y el iv en las variables de entorno
+      if (!key || !iv) {
+        throw new Error('Faltan ENCRYPTION_KEY o ENCRYPTION_IV en el archivo .env');
+      }
+
+      // Conviertimos las claves y iv a Buffer con datos binarios
+      const keyBuffer = Buffer.from(key, 'hex');
+      const ivBuffer = Buffer.from(iv, 'hex');
+
+      // Validamos que la clave y el iv sean de 32 y 16 bytes respectivamente
+      if (keyBuffer.length !== 32) {
+        throw new Error('ENCRYPTION_KEY debe tener 32 bytes (64 caracteres hex)');
+      }
+
+      if (ivBuffer.length !== 16) {
+        throw new Error('ENCRYPTION_IV debe tener 16 bytes (32 caracteres hex)');
+      }
+
+      return { key: keyBuffer, iv: ivBuffer };
+    },
+
     // Metodo para encriptar un texto
     encrypt: function (text) {
-      const cipher = crypto.createCipheriv('aes-256-cbc', ENCRYPTION_KEY, ENCRYPTION_IV); // Creamos un cifrado
+      const { key, iv } = this.cryptoValidations();
+      const cipher = crypto.createCipheriv('aes-256-cbc', key, iv ); // Creamos un cifrado
       let encrypted = cipher.update(text, 'utf8', 'hex');  //Ciframos el parte del texto
       encrypted += cipher.final('hex'); // Terminamos el proceso de cifrado
       return encrypted;
