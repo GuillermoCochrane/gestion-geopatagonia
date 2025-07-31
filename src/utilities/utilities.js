@@ -199,9 +199,18 @@ const utilities = {
     encrypt: function (text) {
       const { key, iv } = this.cryptoValidations();
       const cipher = crypto.createCipheriv('aes-256-cbc', key, iv ); // Creamos un cifrado
-      let encrypted = cipher.update(text, 'utf8', 'hex');  //Ciframos el parte del texto
+      let encrypted = cipher.update(String(text), 'utf8', 'hex');  //Ciframos el parte del texto
       encrypted += cipher.final('hex'); // Terminamos el proceso de cifrado
       return encrypted;
+    },
+
+    // Metodo para decifrar un texto
+    decrypt: function (encryptedText) {
+      const { key, iv } = this.cryptoValidations();
+      const decipher = crypto.createDecipheriv('aes-256-cbc', key, iv); // Creamos un decifrado
+      let decrypted = decipher.update(String(encryptedText), 'hex', 'utf8'); //Deciframos el parte del texto
+      decrypted += decipher.final('utf8'); // Terminamos el proceso de decifrado
+      return decrypted;
     },
 
     // Metodo para generar un PDF a partir de un template
