@@ -5,7 +5,7 @@ const { validationResult } = require('express-validator');
 const usuarioController = {
 
     index: (req, res) => {
-        return res.redirect("/usuario/login")
+        return res.redirect("/usuario/logged")
     },
 
     login: (req, res) => {
@@ -18,7 +18,9 @@ const usuarioController = {
         if (errors.isEmpty()){
             const user = req.userFromDB;
             if (user) {
-                req.session.user = utilities.encrypt(user.id); 
+                req.session.user = utilities.encrypt(user.id);
+                // Si se marca el checkbox de recordarme, se crea un cookie con el id del usuario que dura 1 hora
+                if(req.body.rememberMe) res.cookie("user", req.session.user, {maxAge: (1000*60)*60} ) //(1000*60 = 1000ms * 60s = 1 min) * 60min = 1h
                 return res.redirect("/usuario/logged");
             } else {
                 return res.redirect("/usuario/login");
