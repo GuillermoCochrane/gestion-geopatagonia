@@ -1,42 +1,31 @@
-<%- include("../partials/head.ejs") %>
-<body>
-  <header>
-    <img src="/img/logo.png" alt="Logo de Geopatagonia" id="logo">
-  </header>
-  <main>
-    <h1><%= title %></h1>
+<form action="/usuario/recovery" method="post" id="login-form">
 
-    <form action="/usuario/recovery" method="post" id="login-form">
+  <label>
+      <h4>Email</h4>
+      <input type="text" name="email" id="email" value="<%= locals.old?.email %>">
+      <span id="error-email"><%= locals.errors?.email?.msg  %></span>
+  </label>
 
-      <label>
-          <h4>Email</h4>
-          <input type="text" name="email" id="email" value="<%= locals.old?.email %>">
-          <span id="error-email"><%= locals.errors?.email?.msg  %></span>
-      </label>
+  <label>
+    <h3>Rol</h3>
+    <select name="rol_id" id="rol">
+      <option 
+            value="" 
+            <%= (!locals.oldData?.rol) && 'selected' %> 
+            disabled
+      >
+        Seleccione su Rol
+      </option>
+      <%- include('../partials/originacion/dinamicFormOptions.ejs', {
+        options: locals?.roles,
+        selected: locals?.oldData && locals?.oldData?.rol_id,
+        keyLabel: 'rol',
+        keyValue: 'id',
+        emptyMessage: 'No hay roles definidos'
+      }) %>
+    </select>
+    <span id="error-responsable_id"><%= locals.PACErrors?.responsable_id?.msg %></span>
+  </label>
 
-      <label>
-        <h3>Rol</h3>
-        <select name="rol_id" id="rol">
-          <option 
-                value="" 
-                <%= (!locals.oldData?.rol) && 'selected' %> 
-                disabled
-          >
-            Seleccione su Rol
-          </option>
-          <%- include('../partials/originacion/dinamicFormOptions.ejs', {
-            options: locals?.roles,
-            selected: locals?.oldData && locals?.oldData?.rol_id,
-            keyLabel: 'rol',
-            keyValue: 'id',
-            emptyMessage: 'No hay roles definidos'
-          }) %>
-        </select>
-        <span id="error-responsable_id"><%= locals.PACErrors?.responsable_id?.msg %></span>
-      </label>
-
-      <button id="login-btn">Recuperar Contraseña</button>
-    </form>
-  </main>
-</body>
-</html>
+  <button id="login-btn">Recuperar Contraseña</button>
+</form>
