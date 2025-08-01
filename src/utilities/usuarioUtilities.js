@@ -29,12 +29,19 @@ const usuariosUtilities = {
     }
   },
 
-  // Método que devuelve los datos enciptados para la session
+  // Método que devuelve los datos encriptados para la session
   encryptedSessionData: function(userData){
     return {
       id: utilities.encrypt(userData.id),
       rol: utilities.encrypt(userData.rol_id),
     }
+  },
+
+  // Método que devuelve el nombre y el rol encriptado de un usuario
+  encryptedRol: async function(userID){
+    const id = utilities.decrypt(userID);
+    const usuario = await Usuario.findByPk(id);
+    return {rol:utilities.encrypt(usuario.rol_id), nombre: usuario.nombre};
   },
 }
 
