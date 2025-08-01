@@ -14,4 +14,5 @@ router.get('/login', usuariosController.login);
 router.post('/login', loginValidations, usuariosController.processLogin);
 router.get('/logged', usuariosController.logged);
 router.post('/logout', usuariosController.logout);
+router.get('/recovery', usuariosController.recovery);
 module.exports = router;
