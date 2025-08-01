@@ -1,0 +1,57 @@
+main {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section.error-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+  padding-block: 30px;
+}
+
+section.error-wrapper h2 {
+  font-size: 5rem;
+  color: var(--logo);
+  margin-bottom: 1rem;
+}
+
+section.error-wrapper h3 {
+  font-size: 2rem;
+  color: var(--font);
+  margin-bottom: 0.5rem;
+}
+
+section.error-wrapper p {
+  font-size: 1.1rem;
+  color: var(--font);
+  max-width: 500px;
+  margin-bottom: 2rem;
+}
+
+section.error-wrapper button {
+  all: unset;
+  padding-inline: 20px;
+  padding-block: 10px;
+  border: 2px solid var(--logo);
+  color: var(--logo);
+  font-size: 16px;
+  line-height: initial;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: var(--white);
+  transition: all 0.3s ease;
+}
+
+section.error-wrapper button:hover {
+  background-color: var(--logo);
+  color: var(--white);
+}
