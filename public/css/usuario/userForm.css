@@ -47,7 +47,8 @@ form label div.password-container i{
   margin-bottom: 10px;
 }
 
-form label input{
+form label input, 
+form label select{
   width: 100%;
   padding-block: 3px;
   padding-inline: 5px;
