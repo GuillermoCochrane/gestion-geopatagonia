@@ -29,6 +29,18 @@ const usuariosUtilities = {
     }
   },
 
+  recoveryData: async function(){
+    try {
+      const data = this.loginData();
+      data.title = "Recuperar contraseña";
+      data.roles = await Rol.findAll();
+      return data;
+    } catch (error) {
+      console.error(error);
+      throw error
+    }
+  },
+
   // Método que devuelve los datos encriptados para la session
   encryptedSessionData: function(userData){
     return {
