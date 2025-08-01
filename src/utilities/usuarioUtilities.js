@@ -28,6 +28,14 @@ const usuariosUtilities = {
       pageScript: [...this.validationScripts, ...this.viewScript],
     }
   },
+
+  // Método que devuelve los datos enciptados para la session
+  encryptedSessionData: function(userData){
+    return {
+      id: utilities.encrypt(userData.id),
+      rol: utilities.encrypt(userData.rol_id),
+    }
+  },
 }
 
 module.exports = usuariosUtilities;
