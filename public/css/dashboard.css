@@ -73,7 +73,7 @@ header aside figure img {
   width: 100%;
 }
 
-header aside a {
+header aside form button {
   color: var(--logo);
   text-decoration: none;
   padding-inline: 10px;
@@ -86,7 +86,7 @@ header aside a {
   transition: all 0.5s ease-in-out;
 }
 
-header aside a:hover {
+header aside form button:hover {
   background-color: var(--logo);
   color: var(--white);
   border: 2px solid transparent;
