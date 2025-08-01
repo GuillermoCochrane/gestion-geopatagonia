@@ -21,6 +21,17 @@ const usuariosUtilities = {
 
   validationScripts: ["validations", "validator.min"], // Scripts para validaciones
 
+  errorData: function(error){
+    return {
+      styles: ["usuario/error"],
+      pageScript: ["errorButton"],
+      title: "Error 500",
+      mainTitle: "Error 500",
+      secondaryTitle: "Error interno del servidor",
+      message: error.message,
+    };
+  },
+
   loginData: function(){
     return {
       title: "Iniciar sesión",
