@@ -37,6 +37,7 @@ const usuariosUtilities = {
       title: "Iniciar sesión",
       styles: ["usuario/login"],
       pageScript: [...this.validationScripts, ...this.viewScript],
+      subSection: "./login.ejs"
     }
   },
 
@@ -45,6 +46,7 @@ const usuariosUtilities = {
       const data = this.loginData();
       data.title = "Recuperar contraseña";
       data.roles = await Rol.findAll();
+      data.subSection = "./recovery.ejs";
       return data;
     } catch (error) {
       console.error(error);
