@@ -32,8 +32,8 @@ const usuariosUtilities = {
   // Método que devuelve los datos encriptados para la session
   encryptedSessionData: function(userData){
     return {
-      id: utilities.encrypt(userData.id),
-      rol: utilities.encrypt(userData.rol_id),
+      id: utilities.encrypt(userData.id,true),
+      rol: utilities.encrypt(userData.rol_id, true),
     }
   },
 
@@ -41,7 +41,7 @@ const usuariosUtilities = {
   encryptedRol: async function(userID){
     const id = utilities.decrypt(userID);
     const usuario = await Usuario.findByPk(id);
-    return {rol:utilities.encrypt(usuario.rol_id), nombre: usuario.nombre};
+    return {rol:utilities.encrypt(usuario.rol_id, true), nombre: usuario.nombre};
   },
 }
 
