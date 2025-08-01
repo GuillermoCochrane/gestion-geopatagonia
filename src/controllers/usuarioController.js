@@ -35,15 +35,19 @@ const usuarioController = {
     },
 
     logged: function(req, res){
-        const user = req.session.user;
-        if (user) {
-            return res.send("logueado user: " + user);
+        if (req.session.user) {
+            return res.send({
+                Usuario: req.session.nombre, 
+                ID: req.session.user,
+                Rol: req.session.rol
+            });
         } else {
             return res.send("No hay usuario logueado");
         }
     },
 
     logout: (req, res) => {
+        res.clearCookie("user");
         req.session.destroy();
         res.redirect("/usuario/login");
     }
