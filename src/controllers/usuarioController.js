@@ -10,7 +10,7 @@ const usuarioController = {
 
     login: (req, res) => {
         const data = userUtilities.loginData();
-        return res.render("usuario/login", data)
+        return res.render("usuario/usuario", data)
     },
 
     processLogin: async function (req, res) {
@@ -28,11 +28,11 @@ const usuarioController = {
                 return res.redirect("/usuario/login");
             }
         } else {
-            let data = userUtilities.loginData();
+            const errorData = userUtilities.loginData();
             data.errors = errors.mapped();
             req.body.rememberMe = Boolean(req.body.rememberMe);
             data.old = req.body;
-            return res.render("usuario/login", data);
+            return res.render("usuario/usuario", errorData);
         }
     },
 
@@ -57,7 +57,7 @@ const usuarioController = {
     recovery: async (req, res) => {
         try {
             const data = await userUtilities.recoveryData();
-            return res.render("usuario/recovery", data)
+            return res.render("usuario/usuario", data)
         } catch (error) {
             console.log(error);
             const errorData = userUtilities.errorData(error);
