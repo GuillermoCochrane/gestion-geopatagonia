@@ -1,4 +1,5 @@
 const userUtilities = require("../utilities/usuarioUtilities");
+const originacionUtilitites = require("../utilities/originacionUtilitites");
 const utilities = require("../utilities/utilities");
 const { validationResult } = require('express-validator');
 
@@ -52,7 +53,19 @@ const usuarioController = {
         res.clearCookie("user");
         req.session.destroy();
         res.redirect("/usuario/login");
-    }
+    },
+
+    recovery: async (req, res) => {
+        try {
+            const data = await userUtilities.recoveryData();
+            return res.render("usuario/recovery", data)
+        } catch (error) {
+            console.log(error);
+            //temporal, crear nuevo metodo para generar datos para renderizar error
+            const errorData = originacionUtilitites.errordata(error);
+            return res.render("error", errorData);
+        }
+    },
 };
 
 module.exports = usuarioController;
