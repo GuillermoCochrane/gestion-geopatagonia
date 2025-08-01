@@ -29,7 +29,21 @@ body {
   overflow-y: hidden;
 }
 
+header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header img {
+  width: 300px;
+  margin: auto;
+  margin-block: 1.5em;
+}
+
 main {
   width: 100%;
-  margin: auto;
+  margin-inline: auto;
+  margin-top: 2.5em;
 }
