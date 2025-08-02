@@ -1,0 +1,13 @@
+<dialog id="<%= popUp?.id %>">
+  <article>
+    <h2><%= popUp?.title %> <span id="notification-mail"></span> </h2>
+    <% if (popUp?.text) { %>
+      <h3><%= popUp?.text %></h3>
+    <% } %>
+    <nav>
+      <% for (const button of popUp?.buttons) { %>
+        <button id="<%= button.id %>"><%= button.text %></button>
+      <%  } %>
+    </nav>
+  </article>
+</dialog>
