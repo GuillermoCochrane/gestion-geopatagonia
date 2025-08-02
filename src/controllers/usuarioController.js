@@ -64,6 +64,10 @@ const usuarioController = {
             return res.render("error", errorData);
         }
     },
+
+    processRecovery: async (req, res) => {
+        return res.send("Email de Recuperación de contraseña enviado");
+    }
 };
 
 module.exports = usuarioController;
