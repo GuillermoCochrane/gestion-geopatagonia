@@ -21,6 +21,18 @@ const usuariosUtilities = {
 
   validationScripts: ["validations", "validator.min"], // Scripts para validaciones
 
+  notificationPopUp:  {
+      id: "notification-modal",
+      title: `Se enviara un email con un código de recuperación a `,
+      text: "El código de recuperación expirará en 15 minutos. \nSi no recibes el email, revisa tu carpeta de spam.",
+      buttons: [
+        {
+          id: "notification-close",
+          text: "Cerrar"
+        },
+      ]
+  },
+
   errorData: function(error){
     return {
       styles: ["usuario/error"],
@@ -47,6 +59,7 @@ const usuariosUtilities = {
       data.title = "Recuperar contraseña";
       data.roles = await Rol.findAll();
       data.subSection = "./recovery.ejs";
+      data.popUp = this.notificationPopUp;
       return data;
     } catch (error) {
       console.error(error);
