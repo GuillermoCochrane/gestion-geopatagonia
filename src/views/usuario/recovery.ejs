@@ -18,13 +18,13 @@
       </option>
       <%- include('../partials/originacion/dinamicFormOptions.ejs', {
         options: locals?.roles,
-        selected: locals?.oldData && locals?.oldData?.rol_id,
+        selected: locals?.old && locals?.old?.rol_id,
         keyLabel: 'rol',
         keyValue: 'id',
         emptyMessage: 'No hay roles definidos'
       }) %>
     </select>
-    <span id="error-responsable_id"><%= locals.PACErrors?.responsable_id?.msg %></span>
+    <span id="error-rol_id"><%= locals.errors?.rol_id?.msg  %></span>
   </label>
 
   <button id="login-btn">Recuperar Contraseña</button>
