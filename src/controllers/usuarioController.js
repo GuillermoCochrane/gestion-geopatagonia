@@ -1,3 +1,4 @@
+const e = require("express");
 const userUtilities = require("../utilities/usuarioUtilities");
 const utilities = require("../utilities/utilities");
 const { validationResult } = require('express-validator');
@@ -29,9 +30,9 @@ const usuarioController = {
             }
         } else {
             const errorData = userUtilities.loginData();
-            data.errors = errors.mapped();
-            req.body.rememberMe = Boolean(req.body.rememberMe);
-            data.old = req.body;
+            errorData.errors = errors.mapped();
+            errorData.body.rememberMe = Boolean(req.body.rememberMe);
+            errorData.old = req.body;
             return res.render("usuario/usuario", errorData);
         }
     },
@@ -66,7 +67,21 @@ const usuarioController = {
     },
 
     processRecovery: async (req, res) => {
-        return res.send("Email de Recuperación de contraseña enviado");
+        const errors = validationResult(req);
+        try {
+            if (errors.isEmpty()){
+                return res.send("Email de Recuperación de contraseña enviado");
+            } else {
+                const errorData = await userUtilities.recoveryData();
+                errorData.errors = errors.mapped();
+                errorData.old = req.body;
+                return res.render("usuario/usuario", errorData);
+            }
+        } catch (error) {
+            console.log(error);
+            const errorData = userUtilities.errorData(error);
+            return res.render("error", errorData);
+        }
     }
 };
 
