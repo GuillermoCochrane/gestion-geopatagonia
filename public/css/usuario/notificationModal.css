@@ -63,17 +63,12 @@ main form dialog article nav button{
   all: unset;
   padding-block: 8px;
   padding-inline: 12px;
-  border: 2px var(--success) solid;
-  background-color: var(--white);
-  color: var(--success);
+  border: 2px var(--font) solid;
+  background-color: var(--font);
+  color: var(--white);
   font-size: 15px;
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
   margin-inline: auto;
-}
-
-main form dialog article nav button:hover{
-  background-color: var(--success);
-  color: var(--white);
 }
