@@ -58,11 +58,13 @@ form label select{
   margin-bottom: 10px;
 }
 
+form label select.input-error,
 form label input.input-error{
   color: var(--logo);
   border-color: var(--logo);
 }
 
+form label select.input-ok,
 form label input.input-ok{
   color: var(--success);
   border-color: var(--success);
