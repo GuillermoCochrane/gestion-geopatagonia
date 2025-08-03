@@ -55,11 +55,14 @@ const usuariosUtilities = {
 
   recoveryData: async function(){
     try {
-      const data = this.loginData();
-      data.title = "Recuperar contraseña";
-      data.roles = await Rol.findAll();
-      data.subSection = "./recovery.ejs";
-      data.popUp = this.notificationPopUp;
+      const data = {
+        title: "Recuperar contraseña",
+        styles: ["usuario/recovery"],
+        pageScript: [...this.validationScripts, ...this.viewScript, "usuario/validations/recoveryValidations"],
+        subSection: "./recovery.ejs",
+        roles: await Rol.findAll(),
+        popUp: this.notificationPopUp
+      };
       return data;
     } catch (error) {
       console.error(error);
