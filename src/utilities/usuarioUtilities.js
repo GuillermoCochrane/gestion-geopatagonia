@@ -82,8 +82,17 @@ const usuariosUtilities = {
   encryptedRol: async function(userID){
     const id = utilities.decrypt(userID);
     const usuario = await Usuario.findByPk(id);
-    return {rol:utilities.encrypt(usuario.rol_id, true), nombre: usuario.nombre};
+    return {rol: utilities.encrypt(usuario.rol_id, true), nombre: usuario.nombre};
   },
+
+  // Método que devuelve token para la recuepración de contraseña
+  genrateToken: function(mail){
+    // Generamos el un string de 15 caracteres para encriptar con el email, para luego poder recuperarlo
+    const fixedTime = Date.now().toString().padStart(15, '0');
+    const token = utilities.encrypt((fixedTime + mail), true);
+    return token;
+  },
+
 }
 
 module.exports = usuariosUtilities;
