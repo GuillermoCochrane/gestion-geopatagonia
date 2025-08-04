@@ -102,7 +102,7 @@ const usuariosUtilities = {
 
   processRecovery: async function(email, baseUrl){
     const token = this.genrateToken(email);
-    const recoveryData = mailUtilities.recoveryNotification(token, baseUrl);
+    const recoveryData = mailutilities.recoveryNotification(token, baseUrl, email);
     await mailutilities.sendMail(email, recoveryData.subject, recoveryData.text);
     return token;
   }
