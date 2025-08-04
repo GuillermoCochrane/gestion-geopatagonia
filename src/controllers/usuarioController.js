@@ -68,9 +68,14 @@ const usuarioController = {
 
     processRecovery: async (req, res) => {
         const errors = validationResult(req);
+        const host = req.get("host");
+        const protocol = req.protocol;
+        const baseUrl = `${protocol}://${host}`;
         try {
             if (errors.isEmpty()){
-                return res.send("Email de Recuperación de contraseña enviado");
+                const token = await userUtilities.processRecovery(req.body.email, baseUrl);
+                res.cookie("token", token, {maxAge: (1000*60)*15} ) //(1000*60 = 1000ms * 60 = 1 min) * 15 = 15 min
+                return res.redirect("/usuario/NewPassword");
             } else {
                 const errorData = await userUtilities.recoveryData();
                 errorData.errors = errors.mapped();
