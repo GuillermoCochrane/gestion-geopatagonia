@@ -110,6 +110,18 @@ const mailUtilities = {
       };
 
   },
+
+  // Genera el mensaje de notificación para el email de recuperación de contraseña
+  recoveryNotification: function(token, baseUrl) {
+    const subject = `Recuperación de contraseña de Geopatagonia`;
+    const text = `Se ha solicitado la recuperación de la contraseña \n\n` +
+      `Por favor, haga clic en el siguiente enlace para restablecer la contraseña:\n\n` +
+      `${baseUrl}/usuario/recovery/${token}\n\n` +
+      `o ingrese el siguiente token en el formulario: ${token} \n\n` +
+      `${this.textEnd()}`;
+    return { subject, text };
+  },
+
 }
 
 module.exports = mailUtilities
