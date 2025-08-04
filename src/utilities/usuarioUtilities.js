@@ -98,7 +98,13 @@ const usuariosUtilities = {
     const decryptedData = utilities.decrypt(token);
     const email = decryptedData.slice(15); 
     return email;
+  },
+
+  processRecovery: async function(email, baseUrl){
+    const token = this.genrateToken(email);
+    const recoveryData = mailUtilities.recoveryNotification(token, baseUrl);
+    await mailutilities.sendMail(email, recoveryData.subject, recoveryData.text);
+    return token;
   }
 }
-
 module.exports = usuariosUtilities;
