@@ -75,7 +75,7 @@ const usuarioController = {
             if (errors.isEmpty()){
                 const token = await userUtilities.processRecovery(req.body.email, baseUrl);
                 res.cookie("token", token, {maxAge: (1000*60)*15} ) //(1000*60 = 1000ms * 60 = 1 min) * 15 = 15 min
-                return res.redirect("/usuario/NewPassword");
+                return res.redirect("/usuario/validate");
             } else {
                 const errorData = await userUtilities.recoveryData();
                 errorData.errors = errors.mapped();
@@ -87,7 +87,12 @@ const usuarioController = {
             const errorData = userUtilities.errorData(error);
             return res.render("error", errorData);
         }
-    }
+    },
+
+    validateToken: async (req, res) => {
+        const data = userUtilities.tokenData();
+        return res.render("usuario/usuario", data);
+    },
 };
 
 module.exports = usuarioController;
