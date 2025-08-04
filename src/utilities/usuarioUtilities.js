@@ -85,7 +85,7 @@ const usuariosUtilities = {
     return {rol: utilities.encrypt(usuario.rol_id, true), nombre: usuario.nombre};
   },
 
-  // Método que devuelve token para la recuepración de contraseña
+  // Método que devuelve token para la recueperación de contraseña
   genrateToken: function(mail){
     // Generamos el un string de 15 caracteres para encriptar con el email, para luego poder recuperarlo
     const fixedTime = Date.now().toString().padStart(15, '0');
@@ -93,6 +93,12 @@ const usuariosUtilities = {
     return token;
   },
 
+  // Método que devuelve el email encriptado para la recuepración de contraseña
+  recoverEmail: async function(token){
+    const decryptedData = utilities.decrypt(token);
+    const email = decryptedData.slice(15); 
+    return email;
+  }
 }
 
 module.exports = usuariosUtilities;
