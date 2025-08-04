@@ -60,7 +60,7 @@ const usuarioController = {
             const data = await userUtilities.recoveryData();
             return res.render("usuario/usuario", data)
         } catch (error) {
-            console.log(error);
+            console.error(error);
             const errorData = userUtilities.errorData(error);
             return res.render("error", errorData);
         }
@@ -83,7 +83,7 @@ const usuarioController = {
                 return res.render("usuario/usuario", errorData);
             }
         } catch (error) {
-            console.log(error);
+            console.error(error);
             const errorData = userUtilities.errorData(error);
             return res.render("error", errorData);
         }
@@ -92,6 +92,24 @@ const usuarioController = {
     validateToken: async (req, res) => {
         const data = userUtilities.tokenData();
         return res.render("usuario/usuario", data);
+    },
+
+    tokenValidtion: async (req, res) => {
+        const errors = validationResult(req);
+        try {
+            if (errors.isEmpty()){
+                return res.send("ya puede cambiar la contraseña")
+            } else {
+                const errorData = userUtilities.tokenData();
+                errorData.errors = errors.mapped();
+                errorData.old = req.body;
+                return res.render("usuario/usuario", errorData);
+            }
+        } catch (error) {
+            console.error(error);
+            const errorData = userUtilities.errorData(error);
+            return res.render("error", errorData);
+        }
     },
 };
 

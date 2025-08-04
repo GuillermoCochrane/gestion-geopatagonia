@@ -7,6 +7,7 @@ const usuariosController = require('../controllers/usuarioController');
 //? Validaciones
 const loginValidations = require("../middlewares/validations/usuario/loginValidationsMDW");
 const recoveryValidations = require("../middlewares/validations/usuario/recoveryValidationsMDW");
+const tokenValidations = require("../middlewares/validations/usuario/tokenValidations");
 
 
 //* Rutas
@@ -18,4 +19,5 @@ router.post('/logout', usuariosController.logout);
 router.get('/recovery', usuariosController.recovery);
 router.post('/recovery', recoveryValidations, usuariosController.processRecovery);
 router.get('/validate', usuariosController.validateToken);
+router.post('/validate', tokenValidations, usuariosController.tokenValidtion);
 module.exports = router;
