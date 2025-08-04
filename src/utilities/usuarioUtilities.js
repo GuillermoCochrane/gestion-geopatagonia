@@ -70,6 +70,15 @@ const usuariosUtilities = {
     }
   },
 
+  tokenData: function(){
+    return {
+      title: "Recuperar contraseña",
+      styles: ["usuario/login"],
+      pageScript: [...this.validationScripts],
+      subSection: "./validate.ejs",
+    };
+  },
+
   // Método que devuelve los datos encriptados para la session
   encryptedSessionData: function(userData){
     return {
