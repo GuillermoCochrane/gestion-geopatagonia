@@ -84,7 +84,7 @@ const usuariosUtilities = {
     return {
       title: "Cambiar contraseña",
       styles: ["usuario/login"],
-      pageScript: [...this.validationScripts, ...this.viewScript],
+      pageScript: [...this.validationScripts, ...this.viewScript, "usuario/validations/newPasswordValidation"],
       subSection: "./newPassword.ejs",
     };
   },
