@@ -118,6 +118,23 @@ const usuarioController = {
     newPassword: async (req, res) => {
         const data = userUtilities.newPasswordData();
         return res.render("usuario/usuario", data)
+    },
+
+    setNewPassword: async (req, res) => {
+        const errors = validationResult(req);
+        try {
+            if (errors.isEmpty()){
+                return res.send(req.body)
+            } else {
+                const errorData = userUtilities.newPasswordData();
+                errorData.errors = errors.mapped();
+                return res.render("usuario/usuario", errorData);
+            }
+        } catch (error) {
+            console.error(error);
+            const errorData = userUtilities.errorData(error);
+            return res.render("error", errorData);
+        }
     }
 };
 

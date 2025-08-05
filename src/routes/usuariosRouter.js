@@ -8,6 +8,7 @@ const usuariosController = require('../controllers/usuarioController');
 const loginValidations = require("../middlewares/validations/usuario/loginValidationsMDW");
 const recoveryValidations = require("../middlewares/validations/usuario/recoveryValidationsMDW");
 const tokenValidations = require("../middlewares/validations/usuario/tokenValidations");
+const passwordValidationMDW = require("../middlewares/validations/dashboard/passwordValidationMDW");
 
 
 //* Rutas
@@ -22,4 +23,5 @@ router.get('/recovery/:token', usuariosController.tokenValidtion);
 router.get('/validate', usuariosController.validateToken);
 router.post('/validate', tokenValidations, usuariosController.tokenValidtion);
 router.get('/newPassword', usuariosController.newPassword);
+router.post('/newPassword',passwordValidationMDW, usuariosController.setNewPassword);
 module.exports = router;
