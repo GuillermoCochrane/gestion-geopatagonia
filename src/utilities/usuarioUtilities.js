@@ -80,6 +80,18 @@ const usuariosUtilities = {
     };
   },
 
+  tokenValidator: function(errors, token , cookie){
+    if (token && cookie && token != cookie) {
+      errors.errors.push({ 
+          type: 'field',
+          msg: 'Token de recuperación inválido',
+          path: 'token',
+          location: 'body'
+      });
+    }
+    return errors;
+  },
+
   // Método que devuelve los datos encriptados para la session
   encryptedSessionData: function(userData){
     return {
@@ -115,6 +127,6 @@ const usuariosUtilities = {
     const recoveryData = mailutilities.recoveryNotification(token, baseUrl, email);
     await mailutilities.sendMail(email, recoveryData.subject, recoveryData.text);
     return token;
-  }
+  },
 }
 module.exports = usuariosUtilities;
