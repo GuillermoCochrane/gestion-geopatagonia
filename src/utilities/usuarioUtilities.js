@@ -80,6 +80,15 @@ const usuariosUtilities = {
     };
   },
 
+  newPasswordData: function(){
+    return {
+      title: "Cambiar contraseña",
+      styles: ["usuario/login"],
+      pageScript: [...this.validationScripts, ...this.viewScript],
+      subSection: "./newPassword.ejs",
+    };
+  },
+
   tokenValidator: function(errors, token , cookie){
     if (token && cookie && token != cookie) {
       errors.errors.push({ 
