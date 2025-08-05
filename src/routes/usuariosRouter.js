@@ -18,6 +18,7 @@ router.get('/logged', usuariosController.logged);
 router.post('/logout', usuariosController.logout);
 router.get('/recovery', usuariosController.recovery);
 router.post('/recovery', recoveryValidations, usuariosController.processRecovery);
+router.get('/recovery/:token', usuariosController.tokenValidtion);
 router.get('/validate', usuariosController.validateToken);
 router.post('/validate', tokenValidations, usuariosController.tokenValidtion);
 module.exports = router;

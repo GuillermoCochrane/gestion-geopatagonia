@@ -95,7 +95,19 @@ const usuarioController = {
     },
 
     tokenValidtion: async (req, res) => {
-        const errors = validationResult(req);
+        let errors = validationResult(req);
+        const mailToken = req.params.token;
+        const cookieToken = req.cookies.token;
+
+        if (mailToken && cookieToken && mailToken != cookieToken) {
+            errors.errors.push({ 
+                type: 'field',
+                msg: 'Token de recuperación inválido',
+                path: 'token',
+                location: 'body'
+            });
+        }
+        
         try {
             if (errors.isEmpty()){
                 return res.send("ya puede cambiar la contraseña")
