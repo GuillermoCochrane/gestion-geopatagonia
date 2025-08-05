@@ -100,7 +100,8 @@ const usuarioController = {
 
         try {
             if (errors.isEmpty()){
-                return res.send("ya puede cambiar la contraseña")
+                res.session.validToken = true;
+                return res.redirect("/usuario/newPassword");
             } else {
                 const errorData = userUtilities.tokenData();
                 errorData.errors = errors.mapped();
