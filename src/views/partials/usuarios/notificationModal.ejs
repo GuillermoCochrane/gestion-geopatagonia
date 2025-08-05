@@ -2,7 +2,8 @@
   <article>
     <h2 id="<%= popUp?.id %>-title"><%= popUp?.title %></h2>
     <% if (popUp?.text) { %>
-      <h3><%= popUp?.text %></h3>
+      <h3><%= popUp?.secondaryTitle %></h3>
+      <p><%= popUp?.text %></p>
     <% } %>
     <nav>
       <% for (const button of popUp?.buttons) { %>
