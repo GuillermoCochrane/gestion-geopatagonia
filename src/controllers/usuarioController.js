@@ -124,7 +124,9 @@ const usuarioController = {
         const errors = validationResult(req);
         try {
             if (errors.isEmpty()){
-                return res.send(req.body)
+                const results = await userUtilities.setNewPassword(req.cookies.token, req.body);
+                if (results.success) res.clearCookie("token")
+                return res.redirect("/usuario/login");
             } else {
                 const errorData = userUtilities.newPasswordData();
                 errorData.errors = errors.mapped();
