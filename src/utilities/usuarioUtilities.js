@@ -24,7 +24,8 @@ const usuariosUtilities = {
   notificationPopUp:  {
       id: "notification-modal",
       title: `Se enviara un email con un código de recuperación a `,
-      text: "El código de recuperación expirará en 15 minutos. \nSi no recibes el email, revisa tu carpeta de spam.",
+      secondaryTitle: "El código de recuperación expirará en 15 minutos.",
+      text: "Si no recibes el email, revisa tu carpeta de spam.",
       buttons: [
         {
           id: "notification-close",
