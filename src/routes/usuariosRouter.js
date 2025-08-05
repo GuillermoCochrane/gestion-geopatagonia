@@ -21,4 +21,5 @@ router.post('/recovery', recoveryValidations, usuariosController.processRecovery
 router.get('/recovery/:token', usuariosController.tokenValidtion);
 router.get('/validate', usuariosController.validateToken);
 router.post('/validate', tokenValidations, usuariosController.tokenValidtion);
+router.get('/newPassword', usuariosController.newPassword);
 module.exports = router;

@@ -100,7 +100,7 @@ const usuarioController = {
 
         try {
             if (errors.isEmpty()){
-                res.session.validToken = true;
+                req.session.validToken = true;
                 return res.redirect("/usuario/newPassword");
             } else {
                 const errorData = userUtilities.tokenData();
@@ -114,6 +114,11 @@ const usuarioController = {
             return res.render("error", errorData);
         }
     },
+
+    newPassword: async (req, res) => {
+        const data = userUtilities.newPasswordData();
+        return res.render("usuario/usuario", data)
+    }
 };
 
 module.exports = usuarioController;
