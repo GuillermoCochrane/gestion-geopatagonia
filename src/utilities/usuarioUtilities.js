@@ -2,6 +2,7 @@ const {  Rol, Usuario } = require("../database/models");
 const { Op } = require("sequelize");
 const utilities = require("./utilities");
 const mailutilities = require("./mailUtilities");
+const validator = require("../../public/js/validator.min");
 
 /**
 * Utilidades para el controlador de usuarios:
@@ -87,6 +88,36 @@ const usuariosUtilities = {
       pageScript: [...this.validationScripts, ...this.viewScript, "usuario/validations/newPasswordValidation"],
       subSection: "./newPassword.ejs",
     };
+  },
+
+  setNewPassword: async function(token, body){
+    try {
+      if (!body.password) {
+        throw new Error("La nueva contraseña es requerida");
+      }
+      
+      const email = await this.recoverEmail(token);
+
+      if (!email || !validator.isEmail(email)) {
+          throw new Error("Token inválido o corrupto");
+      }
+
+      body.password = utilities.hashPassword(body.password);
+
+      const result = await Usuario.update(
+        { password: body.password }, 
+        { where: { email: email } }
+      );
+
+      if (result[0] === 0) {
+        throw new Error("Usuario no encontrado");
+      }
+
+      return { success: true, message: "Contraseña actualizada correctamente" };
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   },
 
   tokenValidator: function(errors, token , cookie){
