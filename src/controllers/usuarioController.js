@@ -94,7 +94,7 @@ const usuarioController = {
         return res.render("usuario/usuario", data);
     },
 
-    tokenValidtion: async (req, res) => {
+    tokenValidation: async (req, res) => {
         let errors = validationResult(req);
         errors = userUtilities.tokenValidator(errors, req.params.token, req.cookies.token);
 
@@ -125,7 +125,10 @@ const usuarioController = {
         try {
             if (errors.isEmpty()){
                 const results = await userUtilities.setNewPassword(req.cookies.token, req.body);
-                if (results.success) res.clearCookie("token")
+                if (results.success) {
+                    res.clearCookie("token")
+                    delete req.session.validToken;
+                }
                 return res.redirect("/usuario/login");
             } else {
                 const errorData = userUtilities.newPasswordData();
