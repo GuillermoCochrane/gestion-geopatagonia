@@ -26,6 +26,6 @@ router.post('/recovery', recoveryValidations, usuariosController.processRecovery
 router.get('/recovery/:token', tokenAccessMDW, usuariosController.tokenValidation);
 router.get('/validate', tokenAccessMDW, usuariosController.validateToken);
 router.post('/validate', tokenAccessMDW, tokenValidations, usuariosController.tokenValidation);
-router.get('/newPassword', tokenAccessMDW, usuariosController.newPassword);
-router.post('/newPassword', tokenAccessMDW, passwordValidationMDW, usuariosController.setNewPassword);
+router.get('/newPassword', tokenAccessMDW, validTokenAccessMDW, usuariosController.newPassword);
+router.post('/newPassword', tokenAccessMDW, validTokenAccessMDW, passwordValidationMDW, usuariosController.setNewPassword);
 module.exports = router;
