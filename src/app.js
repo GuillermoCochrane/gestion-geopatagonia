@@ -17,6 +17,7 @@ const loggedMDW = require("./middlewares/access/loggedMDW");
 const adminAccessMDW = require("./middlewares/access/usuario/adminAccessMDW");
 const ejecutorAccessMDW = require("./middlewares/access/usuario/ejecutorAccessMDW");
 const observadorAccessMDW = require("./middlewares/access/usuario/observadorAccessMDW");
+const tratadorAccessMDW = require("./middlewares/access/usuario/tratadorAccessMDW");
 
 // Routers
 const mainRoutes = require("./routes/mainRouter");
@@ -48,7 +49,7 @@ app.use('/', mainRoutes);
 app.use('/api/utilities', utilitiesAPIRoutes);
 app.use('/dashboard', loggedMDW, adminAccessMDW, dashboardRoutes);
 app.use('/originacion', loggedMDW, originacionRoutes);
-app.use('/tratamiento', loggedMDW, tratamientosRoutes);
+app.use('/tratamiento', loggedMDW, tratadorAccessMDW, tratamientosRoutes);
 app.use('/observacion', loggedMDW, observadorAccessMDW, observacionesRoutes);
 app.use('/ejecucion', loggedMDW, ejecutorAccessMDW, ejecucionesRoutes);
 app.use('/usuario', usuariosRoutes);
