@@ -1,10 +1,13 @@
+const utilities = require("../utilities/utilities");
+const { forbiddenData } = require("../utilities/utilities");
+
 const mainController = {
     index: (req, res) => {
         res.redirect("/dashboard");
     },
 
-    logout: (req, res) => {
-        res.redirect("/dashboard");
+    forbidden: (req, res) => {
+        res.render("error", utilities.forbiddenData);
     }
 };
 

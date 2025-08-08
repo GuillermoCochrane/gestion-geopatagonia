@@ -18,6 +18,15 @@ const utilities = {
       message: "La dirección a la que intenta acceder no existe o ha sido modificada.",
     },
 
+    forbiddenData: {
+      title:	"Error 403",
+      styles: ["error"],
+      pageScript: ["errorButton"],
+      mainTitle: "Error 403",
+      secondaryTitle: "Acceso denegado: Rol no autorizado",
+      message: "No tiene los permisos necesarios para acceder a esta sección.",
+    },
+
     timestamps: ["created_at", "updated_at"],
 
     // Método para convertir fecha a un objeto con día, mes y año
