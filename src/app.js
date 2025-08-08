@@ -15,6 +15,7 @@ const persistUserMDW = require("./middlewares/persistUserMDW");
 // Middlewares de acceso
 const loggedMDW = require("./middlewares/access/loggedMDW");
 const adminAccessMDW = require("./middlewares/access/usuario/adminAccessMDW");
+const ejecutorAccessMDW = require("./middlewares/access/usuario/ejecutorAccessMDW");
 
 // Routers
 const mainRoutes = require("./routes/mainRouter");
@@ -48,7 +49,7 @@ app.use('/dashboard', loggedMDW, adminAccessMDW, dashboardRoutes);
 app.use('/originacion', loggedMDW, originacionRoutes);
 app.use('/tratamiento', loggedMDW, tratamientosRoutes);
 app.use('/observacion', loggedMDW, observacionesRoutes);
-app.use('/ejecucion', loggedMDW, ejecucionesRoutes);
+app.use('/ejecucion', loggedMDW, ejecutorAccessMDW, ejecucionesRoutes);
 app.use('/usuario', usuariosRoutes);
 
 //Error 404
