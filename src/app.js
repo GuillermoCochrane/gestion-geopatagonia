@@ -12,6 +12,10 @@ const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const persistUserMDW = require("./middlewares/persistUserMDW");
 
+// Middlewares de acceso
+const loggedMDW = require("./middlewares/access/loggedMDW");
+const adminAccessMDW = require("./middlewares/access/usuario/adminAccessMDW");
+
 // Routers
 const mainRoutes = require("./routes/mainRouter");
 const utilitiesAPIRoutes = require("./routes/API/utilitiesAPIRoute");
@@ -40,11 +44,11 @@ app.set('views', path.join(__dirname, './views'));
 // Seteo de rutas
 app.use('/', mainRoutes);
 app.use('/api/utilities', utilitiesAPIRoutes);
-app.use('/dashboard', dashboardRoutes);
-app.use('/originacion', originacionRoutes);
-app.use('/tratamiento', tratamientosRoutes);
-app.use('/observacion', observacionesRoutes);
-app.use('/ejecucion', ejecucionesRoutes);
+app.use('/dashboard', loggedMDW, adminAccessMDW, dashboardRoutes);
+app.use('/originacion', loggedMDW, originacionRoutes);
+app.use('/tratamiento', loggedMDW, tratamientosRoutes);
+app.use('/observacion', loggedMDW, observacionesRoutes);
+app.use('/ejecucion', loggedMDW, ejecucionesRoutes);
 app.use('/usuario', usuariosRoutes);
 
 //Error 404
