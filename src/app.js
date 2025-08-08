@@ -14,9 +14,12 @@ const persistUserMDW = require("./middlewares/persistUserMDW");
 
 // Routers
 const mainRoutes = require("./routes/mainRouter");
+const utilitiesAPIRoutes = require("./routes/API/utilitiesAPIRoute");
 const dashboardRoutes = require("./routes/dashboardRouter");
 const originacionRoutes = require("./routes/originacionesRouter");
-const utilitiesAPIRoutes = require("./routes/API/utilitiesAPIRoute");
+const tratamientosRoutes = require("./routes/tratamientosRouter");
+const observacionesRoutes = require("./routes/observacionesRouter");
+const ejecucionesRoutes = require("./routes/ejecucionesRouter");
 const usuariosRoutes = require("./routes/usuariosRouter");
 
 // Configuración
@@ -36,10 +39,13 @@ app.set('views', path.join(__dirname, './views'));
 
 // Seteo de rutas
 app.use('/', mainRoutes);
+app.use('/api/utilities', utilitiesAPIRoutes);
 app.use('/dashboard', dashboardRoutes);
 app.use('/originacion', originacionRoutes);
+app.use('/tratamiento', tratamientosRoutes);
+app.use('/observacion', observacionesRoutes);
+app.use('/ejecucion', ejecucionesRoutes);
 app.use('/usuario', usuariosRoutes);
-app.use('/api/utilities', utilitiesAPIRoutes);
 
 //Error 404
 app.use((req,res,next) =>{
