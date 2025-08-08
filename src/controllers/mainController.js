@@ -3,7 +3,7 @@ const { forbiddenData } = require("../utilities/utilities");
 
 const mainController = {
     index: (req, res) => {
-        res.redirect("/dashboard");
+        res.redirect("/usuario/login");
     },
 
     forbidden: (req, res) => {
