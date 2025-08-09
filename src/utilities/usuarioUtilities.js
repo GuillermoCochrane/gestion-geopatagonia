@@ -55,6 +55,14 @@ const usuariosUtilities = {
     }
   },
 
+  homeData: function(){
+    return {
+      title: "Inicio",
+      styles: ["usuario/userHome"],
+      pageScript: [],
+    }
+  },
+
   recoveryData: async function(){
     try {
       const data = {
