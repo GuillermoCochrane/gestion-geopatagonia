@@ -35,6 +35,14 @@ const usuariosUtilities = {
       ]
   },
 
+  rolesRoutes: {
+    rol1: "ejecucion",
+    rol2: "originacion",
+    rol3: "tratamiento",
+    rol4: "observacion",
+    rol5: "dashboard",
+  },
+
   errorData: function(error){
     return {
       styles: ["usuario/error"],
