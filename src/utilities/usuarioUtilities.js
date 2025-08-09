@@ -3,6 +3,7 @@ const { Op } = require("sequelize");
 const utilities = require("./utilities");
 const mailutilities = require("./mailUtilities");
 const validator = require("../../public/js/validator.min");
+const { parse } = require("dotenv");
 
 /**
 * Utilidades para el controlador de usuarios:
@@ -104,6 +105,23 @@ const usuariosUtilities = {
       pageScript: [...this.validationScripts, ...this.viewScript, "usuario/validations/newPasswordValidation"],
       subSection: "./newPassword.ejs",
     };
+  },
+
+  userRolRoute: function(encryptedRol){
+    try {
+      if (!encryptedRol) throw new Error("No se proporcionó rol");
+
+      const rol = parseInt(utilities.decrypt(encryptedRol));
+
+      if (isNaN(rol) !== "number" || rol < 1 || rol > 5) {
+        throw new Error("Error al recuperar el Rol");
+      }
+
+      return this.rolesRoutes[`rol${rol}`];
+    } catch (error) {
+      console.error("Error al determinar ruta por rol:", error);
+      throw error;
+    }
   },
 
   setNewPassword: async function(token, body){
