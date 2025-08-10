@@ -6,7 +6,14 @@ const { validationResult } = require('express-validator');
 const usuarioController = {
 
     index: (req, res) => {
-        return res.redirect("/usuario/logged")
+        try {
+            const data = userUtilities.homeData(req.session.rol);
+            return res.render("usuario/homeUsuario", data)
+        } catch (error) {
+            console.error(error);
+            const errorData = userUtilities.errorData(error);
+            return res.render("error", errorData);
+        }
     },
 
     login: (req, res) => {
