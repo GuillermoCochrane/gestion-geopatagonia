@@ -64,13 +64,16 @@ const usuariosUtilities = {
     }
   },
 
-  homeData: function(){
-    return {
-      title: "Inicio",
-      styles: ["usuario/userHome"],
-      pageScript: [],
-    }
-  },
+homeData: function(encryptedRol) {
+  if (!encryptedRol) throw new Error("No se proporcionó rol"); 
+
+  return {
+    title: "Inicio",
+    styles: ["usuario/userHome"],
+    pageScript: [],
+    userRoute: this.userRolRoute(encryptedRol)
+  };
+},
 
   recoveryData: async function(){
     try {
@@ -113,7 +116,7 @@ const usuariosUtilities = {
 
       const rol = parseInt(utilities.decrypt(encryptedRol));
 
-      if (isNaN(rol) !== "number" || rol < 1 || rol > 5) {
+      if (isNaN(rol) || rol < 1 || rol > 5) {
         throw new Error("Error al recuperar el Rol");
       }
 
