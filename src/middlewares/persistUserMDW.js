@@ -2,17 +2,19 @@
 const usuarioUtilities = require("../utilities/usuarioUtilities");
 
 async function persistUserMDW(req, res, next) {
-    // Toma el valor falsy o trusty de la sesión
-    res.locals.isLogged = Boolean(req.session.user);
-
-    // Si hay cookie y no sesión, se guarda el valor de la cookie en la sesión y se establece como logged
+    // 1. Reconstruye sesión desde cookie si no existe
     if (req.cookies.user && !req.session.user) { 
         const data = await usuarioUtilities.encryptedRol(req.cookies.user);
         req.session.user = req.cookies.user;
         req.session.rol = data.rol;
         req.session.nombre = data.nombre;
-        res.locals.isLogged = true;
     }
+
+    // 2. Guarda nombre de usuario en locals
+    if (req.session.user) {
+        res.locals.username = req.session.nombre;
+    }
+    
     next();
 }
 
