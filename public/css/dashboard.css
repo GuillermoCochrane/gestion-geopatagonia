@@ -474,3 +474,127 @@ section.error-wrapper button:hover {
   background-color: var(--logo);
   color: var(--white);
 }
+
+/* Dropdown styles */
+
+header aside details.dropdown {
+  position: relative;
+  padding: 0;
+  border: none;
+  margin: auto;
+  margin-inline: 10px;
+  background: var(--ice);
+  width: 100%
+}
+
+header aside details.dropdown summary {
+  list-style: none;
+  list-style-type: none;
+  color: var(--font)!important;
+  padding-inline: 5px;
+  transition: all 0.2s ease-in;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  color: var(--white);
+  cursor: pointer;
+}
+
+header aside details.dropdown[open] summary {
+  font-size: 1.05em;
+  color: var(--logo)!important;
+}
+
+header aside details.dropdown summary h3 {
+  width: 100%;
+}
+
+header aside details.dropdown summary::after{
+  content: '';
+  width: 16px;
+  height: 8px;
+  background: url('/img/arrow.svg') no-repeat;  
+  background-size: cover;
+  transition: 0.2s;
+  display: block;
+}
+
+details[open] > summary::after {
+  transform: rotate(180deg);
+}
+
+header aside details.dropdown ul {
+  position: absolute;
+  margin: 1em 0 0 0;
+  padding: 5px 0;
+  width: var(--dropdown-width);
+  margin-right: calc((var(--dropdown-width) / 2)  * -1);
+  box-sizing: border-box;
+  z-index: 2;
+  background: var(--font);
+  color: var(--ice);
+  border-radius: 10px;
+  list-style: none;
+  font-size: 14px;
+  font-weight: bolder;
+}
+
+header aside details.dropdown ul li {
+  padding: 0;
+  margin: 0;
+}
+
+.link-separator{
+  border: var(--logo) 1px solid;
+  margin: .2em;
+}
+
+header aside details.dropdown ul li a:link, 
+header aside details.dropdown ul li a:visited {
+  display: inline-block;
+  padding: 10px 0.8rem;
+  width: 100%;
+  box-sizing: border-box;
+  color: var(--ice);
+  text-decoration: none;
+  transition: all 0.5s ease-in-out;
+}
+
+header aside details.dropdown ul li a:hover {
+  background-color: var(--logo-secondary);
+  color: var(--logo);
+}
+
+/* para cerrar el dropdown con click fuera */
+header aside details.dropdown > summary::before {
+  display: none;
+}
+
+header aside details.dropdown[open] > summary::before {
+    content: ' ';
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+header aside details.dropdown[open] .fa-bars {
+  display: none;
+}
+
+header aside details.dropdown[open] .fa-xmark {
+  display: block; 
+}
+
+header aside details.dropdown:not([open]) .fa-xmark {
+  display: none;
+}
+
+header aside details.dropdown:not([open]) .fa-bars {
+  display: block;
+}

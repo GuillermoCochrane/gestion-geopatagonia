@@ -182,6 +182,7 @@ header aside details.dropdown ul li a:visited {
   box-sizing: border-box;
   color: var(--ice);
   text-decoration: none;
+  transition: all 0.5s ease-in-out;
 }
 
 header aside details.dropdown ul li a:hover {
