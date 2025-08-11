@@ -1,0 +1,14 @@
+<details class="dropdown">
+  <summary role="button">
+    <h3>
+      Bienvenido <%= locals?.username ? locals?.username : "usuario" %>
+    </h3>
+  </summary>
+
+  <ul>
+      <li><hr class="link-separator"></li>
+      <li><a href="/usuario/password">Cambiar Contraseña</a></li>
+      <li><a href="/usuario/email">Cambiar E-Mail</a></li>
+      <li><hr class="link-separator"></li>
+  </ul>
+</details>
