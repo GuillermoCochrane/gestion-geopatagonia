@@ -422,6 +422,8 @@ summary {
   cursor: pointer;
 }
 
+
+
 summary::after {
   content: '';
   width: 18px;
@@ -1195,6 +1197,7 @@ header aside details.dropdown summary {
 
 header aside details.dropdown[open] summary {
   font-size: 1.05em;
+  color: var(--logo)!important;
 }
 
 header aside details.dropdown summary::after{
