@@ -9,12 +9,7 @@
     </a>
   </h1>
   <aside>
-    <figure>
-      <img src="/img/default.png" alt="Imagen de perfil de <%= usuario %>" id="perfil">
-    </figure>
-    <h3>
-      <%= usuario  %>
-    </h3>
+    <%- include('../dropdown') %>
     <form action="/usuario/logout" method="post">
       <button type="submit">
         <i class="fa-solid fa-power-off"></i>
