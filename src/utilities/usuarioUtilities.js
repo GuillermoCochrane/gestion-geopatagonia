@@ -91,6 +91,7 @@ const usuariosUtilities = {
       styles: ["usuario/set"],
       pageScript: [...this.validationScripts, ...this.viewScript],
       subSection: "./newPassword.ejs",
+      setPassword: true
     };
   },
 
