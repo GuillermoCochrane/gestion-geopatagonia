@@ -71,7 +71,8 @@ homeData: function(encryptedRol) {
     title: "Inicio",
     styles: ["usuario/userHome"],
     pageScript: [],
-    userRoute: this.userRolRoute(encryptedRol)
+    userRoute: this.userRolRoute(encryptedRol),
+    subSection: "./homeContent.ejs"
   };
 },
 
