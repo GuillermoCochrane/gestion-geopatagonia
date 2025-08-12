@@ -30,6 +30,7 @@ router.get('/validate', guestMDW, tokenAccessMDW, usuariosController.validateTok
 router.post('/validate', guestMDW, tokenAccessMDW, tokenValidations, usuariosController.tokenValidation);
 router.get('/newPassword', guestMDW, tokenAccessMDW, validTokenAccessMDW, usuariosController.newPassword);
 router.post('/newPassword', guestMDW, tokenAccessMDW, validTokenAccessMDW, passwordValidationMDW, usuariosController.setNewPassword);
-router.get('/email', loggedMDW, usuariosController.email);
 router.get('/password', loggedMDW, usuariosController.password);
+router.post('/setPassword', loggedMDW, passwordValidationMDW, usuariosController.setPassword);
+router.get('/email', loggedMDW, usuariosController.email);
 module.exports = router;
