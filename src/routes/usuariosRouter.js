@@ -33,4 +33,5 @@ router.post('/newPassword', guestMDW, tokenAccessMDW, validTokenAccessMDW, passw
 router.get('/password', loggedMDW, usuariosController.password);
 router.post('/setPassword', loggedMDW, passwordValidationMDW, usuariosController.setPassword);
 router.get('/email', loggedMDW, usuariosController.email);
+router.post('/setEmail', loggedMDW, usuariosController.processEmail);
 module.exports = router;
