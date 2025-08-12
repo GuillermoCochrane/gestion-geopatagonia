@@ -64,17 +64,26 @@ const usuariosUtilities = {
     }
   },
 
-homeData: function(encryptedRol) {
-  if (!encryptedRol) throw new Error("No se proporcionó rol"); 
+  homeData: function(encryptedRol) {
+    if (!encryptedRol) throw new Error("No se proporcionó rol"); 
 
-  return {
-    title: "Inicio",
-    styles: ["usuario/userHome"],
-    pageScript: [],
-    userRoute: this.userRolRoute(encryptedRol),
-    subSection: "./homeContent.ejs"
-  };
-},
+    return {
+      title: "Inicio",
+      styles: ["usuario/userHome"],
+      pageScript: [],
+      userRoute: this.userRolRoute(encryptedRol),
+      subSection: "./homeContent.ejs"
+    };
+  },
+
+  setEmailData: function(){
+    return {
+      title: "Cambiar email",
+      styles: ["usuario/set"],
+      pageScript: [],
+      subSection: "./setEmail.ejs",
+    };
+  },
 
   recoveryData: async function(){
     try {
