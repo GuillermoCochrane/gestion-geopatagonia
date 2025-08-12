@@ -8,6 +8,7 @@
   --shadow: rgba(169, 171, 174, 0.4);
   --success: #39b54a;
   --error: orangered;
+  --dropdown-width: 170px;
 }
 
 * {
