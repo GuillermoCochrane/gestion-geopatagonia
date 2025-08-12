@@ -62,14 +62,35 @@ const usuarioController = {
         res.redirect("/usuario/login");
     },
 
+    password: (req, res) => {
+        const data = userUtilities.setPasswordData();
+        return res.render("usuario/homeUsuario", data)
+    },
+
+    setPassword: async (req, res) => {
+        const errors = validationResult(req);
+        try {
+            if (errors.isEmpty()){
+                return res.send(req.body);
+            } else {
+                const errorData = userUtilities.setPasswordData();
+                errorData.errors = errors.mapped();
+                return res.render("usuario/homeUsuario", errorData);
+            }
+        } catch (error) {
+            console.error(error);
+            const errorData = userUtilities.errorData(error);
+            return res.render("error", errorData);
+        }
+    },
+
     email: (req, res) => {
         const data = userUtilities.setEmailData();
         return res.render("usuario/homeUsuario", data)
     },
 
-    password: (req, res) => {
-        const data = userUtilities.setPasswordData();
-        return res.render("usuario/homeUsuario", data)
+    processEmail: async (req, res) => {
+        return res.send(req.body);
     },
 
     recovery: async (req, res) => {
