@@ -62,6 +62,11 @@ const usuarioController = {
         res.redirect("/usuario/login");
     },
 
+    email: (req, res) => {
+        const data = userUtilities.setEmailData();
+        return res.render("usuario/homeUsuario", data)
+    },
+
     recovery: async (req, res) => {
         try {
             const data = await userUtilities.recoveryData();
