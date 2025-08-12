@@ -85,6 +85,15 @@ const usuariosUtilities = {
     };
   },
 
+  setPasswordData: function(){
+    return {
+      title: "Cambiar contraseña",
+      styles: ["usuario/set"],
+      pageScript: [...this.validationScripts, ...this.viewScript],
+      subSection: "./newPassword.ejs",
+    };
+  },
+
   recoveryData: async function(){
     try {
       const data = {
