@@ -1,0 +1,17 @@
+<form action="/usuario/setEmail" method="post" id="login-form">
+
+  <label>
+      <h4>Nuevo Email</h4>
+      <input type="text" name="email" id="email" value="<%= locals.old?.email %>">
+      <span id="error-email"><%= locals.errors?.email?.msg  %></span>
+  </label>
+
+  <label>
+    <h4>Repetir Email</h4>
+    <input type="text" name="check" id="check" value="<%= locals.old?.check %>">
+    <span id="error-check"><%= locals.errors?.check?.msg  %></span>
+  </label>
+
+  <button id="set-email-btn" type="button">Cambiar Email</button>
+
+</form>
