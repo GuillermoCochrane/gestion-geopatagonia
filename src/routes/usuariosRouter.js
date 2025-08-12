@@ -31,4 +31,5 @@ router.post('/validate', guestMDW, tokenAccessMDW, tokenValidations, usuariosCon
 router.get('/newPassword', guestMDW, tokenAccessMDW, validTokenAccessMDW, usuariosController.newPassword);
 router.post('/newPassword', guestMDW, tokenAccessMDW, validTokenAccessMDW, passwordValidationMDW, usuariosController.setNewPassword);
 router.get('/email', loggedMDW, usuariosController.email);
+router.get('/password', loggedMDW, usuariosController.password);
 module.exports = router;

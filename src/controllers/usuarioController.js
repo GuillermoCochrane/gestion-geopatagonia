@@ -67,6 +67,11 @@ const usuarioController = {
         return res.render("usuario/homeUsuario", data)
     },
 
+    password: (req, res) => {
+        const data = userUtilities.setPasswordData();
+        return res.render("usuario/homeUsuario", data)
+    },
+
     recovery: async (req, res) => {
         try {
             const data = await userUtilities.recoveryData();
