@@ -39,8 +39,13 @@ header aside figure img {
   width: 100%;
 }
 
+header aside form{
+  background-color: var(--ice);
+}
+
 header aside form button {
   color: var(--logo);
+  background-color: var(--ice);
   padding-inline: 10px;
   padding-block: 8px;
   border-radius: 10px;
@@ -105,7 +110,8 @@ header aside details.dropdown {
   margin: auto;
   margin-inline: 10px;
   background: var(--ice);
-  width: 100%
+  width: 100%;
+  min-width: 106px;
 }
 
 header aside details.dropdown summary {
