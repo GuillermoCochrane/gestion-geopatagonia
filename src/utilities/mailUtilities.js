@@ -122,6 +122,32 @@ const mailUtilities = {
     return { subject, text };
   },
 
+  mailChangeNotification: function(email, token, baseUrl, isFirstStep = true) {
+      const subject = isFirstStep 
+          ? "⚠️ Confirmación requerida: Cambio de email en Geopatagonia" 
+          : "✅ Verificación final: Nuevo email registrado";
+
+      const text = isFirstStep
+          ? `Estimado usuario,\n\n` +
+            `Se ha solicitado el cambio del email asociado a su cuenta de Geopatagonia.\n` +
+            `Nuevo email: ${email}\n\n` +
+            `Para autorizar este cambio, ingrese al siguiente enlace:\n` +
+            `${baseUrl}/usuario/oldEmail/${token}\n\n` +
+            `o ingrese el siguiente token en el formulario: ${token} \n\n` +
+            `⚠️ Si no reconoces esta acción, por favor contacta a soporte.\n` +
+            this.textEnd()
+          : `Estimado usuario,\n\n` +
+            `Estás a un paso de completar el cambio de email en Geopatagonia.\n` +
+            `Email original: ${email}\n\n` +
+            `Para confirmar definitivamente, ingresa a:\n` +
+            `${baseUrl}/usuario/newEmail/${token}\n\n` +
+            `o ingrese el siguiente token en el formulario: ${token} \n\n` +
+            `⚠️ Al confirmar, cerrarás tu sesión y deberás ingresar con el nuevo email.\n` +
+            this.textEnd();
+
+      return { subject, text };
+  },
+
 }
 
 module.exports = mailUtilities
