@@ -123,6 +123,10 @@ const usuarioController = {
 
     },
 
+    validateEmail: async (req, res) => {
+      return res.send("validacion de email");
+    },
+
     recovery: async (req, res) => {
         try {
             const data = await userUtilities.recoveryData();
