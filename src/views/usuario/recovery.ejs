@@ -1,9 +1,9 @@
 <form action="/usuario/recovery" method="post" id="login-form">
 
   <label>
-      <h4>Email</h4>
-      <input type="text" name="email" id="email" value="<%= locals.old?.email %>">
-      <span id="error-email"><%= locals.errors?.email?.msg  %></span>
+    <h4>Email</h4>
+    <input type="email" name="email" id="email" value="<%= locals.old?.email %>">
+    <span id="error-email"><%= locals.errors?.email?.msg  %></span>
   </label>
 
   <label>
