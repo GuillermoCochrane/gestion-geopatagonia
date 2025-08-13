@@ -225,6 +225,14 @@ const usuariosUtilities = {
     return errors;
   },
 
+  // Método que devuelve los emails encriptados
+  encryptedMails: function(oldMail, newMail){
+    return {
+      old: utilities.encrypt(oldMail, true),
+      new: utilities.encrypt(newMail, true),
+    }
+  },
+
   // Método que devuelve los datos encriptados para la session
   encryptedSessionData: function(userData){
     return {
