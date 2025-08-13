@@ -91,7 +91,22 @@ const usuarioController = {
     },
 
     processEmail: async (req, res) => {
-        return res.send(req.body);
+              const errors = validationResult(req);
+        try {
+            if (errors.isEmpty()){
+                return res.send(req.body);
+            } else {
+              const errorData = userUtilities.setEmailData();
+              errorData.errors = errors.mapped();
+              errorData.old = req.body;
+              return res.render("usuario/homeUsuario", errorData);
+            }
+        } catch (error) {
+          console.error(error);
+          const errorData = userUtilities.errorData(error);
+          return res.render("error", errorData);
+        }
+
     },
 
     recovery: async (req, res) => {

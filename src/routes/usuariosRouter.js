@@ -9,6 +9,7 @@ const loginValidations = require("../middlewares/validations/usuario/loginValida
 const recoveryValidations = require("../middlewares/validations/usuario/recoveryValidationsMDW");
 const tokenValidations = require("../middlewares/validations/usuario/tokenValidations");
 const passwordValidationMDW = require("../middlewares/validations/dashboard/passwordValidationMDW");
+const emailValidationMDW = require("../middlewares/validations/usuario/emailValidationMDW");
 
 //? Acceso
 const tokenAccessMDW = require("../middlewares/access/usuario/tokenAccessMDW");
@@ -33,5 +34,5 @@ router.post('/newPassword', guestMDW, tokenAccessMDW, validTokenAccessMDW, passw
 router.get('/password', loggedMDW, usuariosController.password);
 router.post('/setPassword', loggedMDW, passwordValidationMDW, usuariosController.setPassword);
 router.get('/email', loggedMDW, usuariosController.email);
-router.post('/setEmail', loggedMDW, usuariosController.processEmail);
+router.post('/setEmail', loggedMDW, emailValidationMDW, usuariosController.processEmail);
 module.exports = router;
