@@ -89,7 +89,7 @@ const usuariosUtilities = {
     return {
       title: "Cambiar contraseña",
       styles: ["usuario/set"],
-      pageScript: [...this.validationScripts, ...this.viewScript],
+      pageScript: [...this.validationScripts, ...this.viewScript, "usuario/validations/newPasswordValidation"],
       subSection: "./newPassword.ejs",
       setPassword: true
     };
@@ -147,30 +147,34 @@ const usuariosUtilities = {
     }
   },
 
-  setNewPassword: async function(token, body){
+  processPassword: async function(email, newPassword) {
     try {
-      if (!body.password) {
-        throw new Error("La nueva contraseña es requerida");
+      if (!newPassword) throw new Error("Contraseña requerida");
+      
+      const hashedPassword = utilities.hashPassword(newPassword);
+      const result = await Usuario.update(
+        { password: hashedPassword },
+        { where: { email } }
+      );
+      
+      if (result[0] === 0) throw new Error("Usuario no encontrado");
+
+      return true;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
+
+  setNewPassword: async function(token, body) {
+    try {
+      const email = await this.recoverEmail(token);
+      if (!email || !validator.isEmail(email)) {
+        throw new Error("Token inválido");
       }
       
-      const email = await this.recoverEmail(token);
-
-      if (!email || !validator.isEmail(email)) {
-          throw new Error("Token inválido o corrupto");
-      }
-
-      body.password = utilities.hashPassword(body.password);
-
-      const result = await Usuario.update(
-        { password: body.password }, 
-        { where: { email: email } }
-      );
-
-      if (result[0] === 0) {
-        throw new Error("Usuario no encontrado");
-      }
-
-      return { success: true, message: "Contraseña actualizada correctamente" };
+      await this.processPassword(email, body.password);
+      return { success: true, message: "Contraseña actualizada" };
     } catch (error) {
       console.error(error);
       throw error;
