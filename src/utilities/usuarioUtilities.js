@@ -228,8 +228,8 @@ const usuariosUtilities = {
   // Método que devuelve los emails encriptados
   encryptedMails: function(oldMail, newMail){
     return {
-      old: utilities.encrypt(oldMail, true),
-      new: utilities.encrypt(newMail, true),
+      oldEncrypted: utilities.encrypt(oldMail, true),
+      newEncrypted: utilities.encrypt(newMail, true),
     }
   },
 
@@ -263,11 +263,21 @@ const usuariosUtilities = {
     return email;
   },
 
+  // Método que genera el token de recuperación de contraseña y lo envia por mail
   processRecovery: async function(email, baseUrl){
     const token = this.genrateToken(email);
     const recoveryData = mailutilities.recoveryNotification(token, baseUrl, email);
     await mailutilities.sendMail(email, recoveryData.subject, recoveryData.text);
     return token;
   },
+
+  // Método que envia el mail de notifcación de cambio de email
+  sendChangeMailNotification: async function(newEmail, oldEmail, token, baseUrl, isFirstStep = true) {
+    const changeData = mailutilities.mailChangeNotification(newEmail, token, baseUrl, isFirstStep);
+    await mailutilities.sendMail(oldEmail, changeData.subject, changeData.text);
+
+    return { success: true, message: "Email cambiado" };
+  },
+
 }
 module.exports = usuariosUtilities;
