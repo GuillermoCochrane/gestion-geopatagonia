@@ -71,16 +71,17 @@ const usuarioController = {
         const errors = validationResult(req);
         try {
             if (errors.isEmpty()){
-                return res.send(req.body);
+              await userUtilities.setPassword(req.session.user, req.body);
+              return res.redirect("/usuario");
             } else {
-                const errorData = userUtilities.setPasswordData();
-                errorData.errors = errors.mapped();
-                return res.render("usuario/homeUsuario", errorData);
+              const errorData = userUtilities.setPasswordData();
+              errorData.errors = errors.mapped();
+              return res.render("usuario/homeUsuario", errorData);
             }
         } catch (error) {
-            console.error(error);
-            const errorData = userUtilities.errorData(error);
-            return res.render("error", errorData);
+          console.error(error);
+          const errorData = userUtilities.errorData(error);
+          return res.render("error", errorData);
         }
     },
 
