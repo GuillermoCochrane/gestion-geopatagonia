@@ -7,9 +7,6 @@ window.addEventListener("load", () => {
   const $modalButton = document.querySelector("#notification-close");
   const $modalTitle = document.querySelector("#notification-modal-title");
 
-  console.log($modalTitle);
-  
-
   const emailValidation = () => {
       requiredValidation($email);
       !errors.email && minlengthValidation($email,7);
