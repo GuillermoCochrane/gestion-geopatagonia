@@ -147,6 +147,23 @@ const usuariosUtilities = {
     }
   },
 
+  getUserFromEncryptedID: async function(encryptedID){
+    try {
+      // recuepramos el id
+      const id = utilities.decrypt(encryptedID);
+      if (!id) throw new Error("ID inválido");
+
+      // recuperamos el email a partir del id
+      const user = await Usuario.findByPk(id);
+      if (!user) throw new Error("Usuario no encontrado");
+
+      return user;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
+
   processPassword: async function(email, newPassword) {
     try {
       if (!newPassword) throw new Error("Contraseña requerida");
@@ -181,19 +198,14 @@ const usuariosUtilities = {
     }
   },
 
-    setPassword: async function(encryptedID, body) {
+  setPassword: async function(encryptedID, body) {
     try {
-      // recuepramos el id
-      const id = utilities.decrypt(encryptedID);
-      if (!id) throw new Error("ID inválido");
-
       // recuperamos el email a partir del id
-      const user = await Usuario.findByPk(id);
-      if (!user) throw new Error("Usuario no encontrado");
-      const email = user.email;
+      const user = await this.getUserFromEncryptedID(encryptedID);
 
+      if (!body.password) throw new Error("Contraseña no proporcionada");
       // actualizamos la contraseña
-      await this.processPassword(email, body.password);
+      await this.processPassword(user.email, body.password);
       return { success: true, message: "Contraseña actualizada" };
     } catch (error) {
       console.error(error);
