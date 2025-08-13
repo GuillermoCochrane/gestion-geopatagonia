@@ -9,15 +9,17 @@ const emailValidationMDW = [
       .isLength({min: 6}).withMessage("El email no puede tener menos de 6 caracteres").bail()
       .isLength({max: 100}).withMessage("El email no puede tener más de 100 caracteres").bail()
       .custom(async(value, { req }) => {
-        const idFromSession = req.session.id;
+        const idFromSession = req.session.user;
         if (!idFromSession) throw new Error("No se encuentra sesión");
+
         const user = await userUtilties.getUserFromEncryptedID(idFromSession);
         if (!user) throw new Error("No se encuentra usuario");
-        if (value !== user.email) {
+
+        if (user.email.toLowerCase() !== (value.toLowerCase())) {
           throw new Error("El email actual no coincide con el usuario logueado");
         }
         return true;
-      }), //valida que el email se el del logueado
+      }),
   body("email")
     .trim()
     .notEmpty().withMessage("El nuevo email es obligatorio").bail()
