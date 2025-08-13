@@ -181,6 +181,26 @@ const usuariosUtilities = {
     }
   },
 
+    setPassword: async function(encryptedID, body) {
+    try {
+      // recuepramos el id
+      const id = utilities.decrypt(encryptedID);
+      if (!id) throw new Error("ID inválido");
+
+      // recuperamos el email a partir del id
+      const user = await Usuario.findByPk(id);
+      if (!user) throw new Error("Usuario no encontrado");
+      const email = user.email;
+
+      // actualizamos la contraseña
+      await this.processPassword(email, body.password);
+      return { success: true, message: "Contraseña actualizada" };
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
+
   tokenValidator: function(errors, token , cookie){
     if (token && cookie && token != cookie) {
       errors.errors.push({ 
