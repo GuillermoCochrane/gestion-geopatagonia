@@ -91,10 +91,24 @@ const usuarioController = {
     },
 
     processEmail: async (req, res) => {
-              const errors = validationResult(req);
+        const errors = validationResult(req);
+        const host = req.get("host");
+        const protocol = req.protocol;
+        const baseUrl = `${protocol}://${host}`;
         try {
             if (errors.isEmpty()){
-                return res.send(req.body);
+                // encriptamos los mails con los datos del formulario
+                const { oldEncrypted, newEncrypted } = userUtilities.encryptedMails(req.body.oldEmail, req.body.email);
+                // lo guadamos en cookies
+                res.cookie("oldEncrypted", oldEncrypted, {maxAge: (1000*60)*30} ) //(1000*60 = 1000ms * 60 = 1 min) * 30 = 30 min
+                res.cookie("newEncrypted", newEncrypted, {maxAge: (1000*60)*30} ) //(1000*60 = 1000ms * 60 = 1 min) * 30 = 30 min
+                // enviamos el mail al mail original, con el token
+                const sended = await userUtilities.sendChangeMailNotification(req.body.email, req.body.oldEmail, req.body.token, baseUrl);
+                if (!sended.success) {
+                    throw new Error("Error al enviar el mail de confirmacion");
+                }
+                // redirgitamos a la pagina de confirmacion
+                return res.redirect("/usuario/validateEmail");
             } else {
               const errorData = userUtilities.setEmailData();
               errorData.errors = errors.mapped();
