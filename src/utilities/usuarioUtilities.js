@@ -3,7 +3,6 @@ const { Op } = require("sequelize");
 const utilities = require("./utilities");
 const mailutilities = require("./mailUtilities");
 const validator = require("../../public/js/validator.min");
-const { parse } = require("dotenv");
 
 /**
 * Utilidades para el controlador de usuarios:
@@ -226,10 +225,18 @@ const usuariosUtilities = {
   },
 
   // Método que devuelve los emails encriptados
-  encryptedMails: function(oldMail, newMail){
-    return {
-      oldEncrypted: utilities.encrypt(oldMail, true),
-      newEncrypted: utilities.encrypt(newMail, true),
+  encryptedMails: async function(oldMail, newMail){
+    try {
+      if (!oldMail || !newMail)  throw new Error("Ambos emails son requeridos");
+      if (oldMail === newMail) throw new Error("El nuevo email debe ser diferente al actual");
+      if ( await utilities.checkEmail(newMail)) throw new Error("El nuevo email se encuentra en uso");
+      return {
+        oldEncrypted: utilities.encrypt(oldMail, true),
+        newEncrypted: utilities.encrypt(newMail, true),
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
     }
   },
 
