@@ -10,6 +10,7 @@ const recoveryValidations = require("../middlewares/validations/usuario/recovery
 const tokenValidations = require("../middlewares/validations/usuario/tokenValidations");
 const passwordValidationMDW = require("../middlewares/validations/dashboard/passwordValidationMDW");
 const emailValidationMDW = require("../middlewares/validations/usuario/emailValidationMDW");
+const confirmEmailValidationsMDW = require("../middlewares/validations/usuario/confirmEmailValidationsMDW");
 
 //? Acceso
 const tokenAccessMDW = require("../middlewares/access/usuario/tokenAccessMDW");
@@ -37,5 +38,5 @@ router.get('/email', loggedMDW, usuariosController.email);
 router.post('/setEmail', loggedMDW, emailValidationMDW, usuariosController.processEmail);
 router.get('/email/:token', loggedMDW, usuariosController.confirmEmail);
 router.get('/emailConfirmation', loggedMDW, usuariosController.emailConfirmation);
-router.post('/emailConfirmation', loggedMDW, emailValidationMDW, usuariosController.confirmEmail);
+router.post('/emailConfirmation', loggedMDW, confirmEmailValidationsMDW, usuariosController.confirmEmail);
 module.exports = router;

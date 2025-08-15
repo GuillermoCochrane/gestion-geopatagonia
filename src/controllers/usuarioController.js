@@ -138,7 +138,22 @@ const usuarioController = {
     },
 
     confirmEmail: async (req, res) => {
-      return res.send("validacion de email");
+      const errors = validationResult(req);
+      try {
+        if (errors.isEmpty()){
+          return res.send("validacion de email");
+        } else {
+          const errorData = userUtilities.oldEmailData();
+          errorData.errors = errors.mapped();
+          console.log(errorData.errors);
+          errorData.old = req.body;
+          return res.render("usuario/usuario", errorData);
+        }
+      } catch (error) {
+        console.error(error);
+        const errorData = userUtilities.errorData(error);
+        return res.render("error", errorData);
+      }
     },
 
     recovery: async (req, res) => {
