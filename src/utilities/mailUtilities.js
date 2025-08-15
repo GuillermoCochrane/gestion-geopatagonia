@@ -71,7 +71,7 @@ const mailUtilities = {
 
   // Prepara los datos para parte del texto del mensaje de notificación
   textEnd: function() {
-  return `Por favor verifique la misma en la aplicación para más detalles.\nEste es un mensaje automático, por favor no responda directamente.`;
+  return `Por favor verifique en la aplicación para más detalles.\nEste es un mensaje automático, por favor no responda directamente.`;
   },
 
   // Genera el mensaje de notificación de la originación asignada
@@ -133,7 +133,7 @@ const mailUtilities = {
             `Nuevo email: ${email}\n\n` +
             `Para autorizar este cambio, ingrese al siguiente enlace:\n` +
             `${baseUrl}/usuario/email/${token}\n\n` +
-            `o ingrese el siguiente token en el formulario: ${token} \n\n` +
+            `o ingrese el siguiente token en el formulario: \n\n${token} \n\n` +
             `⚠️ Si no reconoces esta acción, por favor contacta a soporte.\n` +
             this.textEnd()
           : `Estimado usuario,\n\n` +
@@ -141,7 +141,7 @@ const mailUtilities = {
             `Email original: ${email}\n\n` +
             `Para confirmar definitivamente, ingresa a:\n` +
             `${baseUrl}/usuario/validateEmail/${token}\n\n` +
-            `o ingrese el siguiente token en el formulario: ${token} \n\n` +
+            `o ingrese el siguiente token en el formulario: \n\n${token} \n\n` +
             `⚠️ Al confirmar, cerrarás tu sesión y deberás ingresar con el nuevo email.\n` +
             this.textEnd();
 
