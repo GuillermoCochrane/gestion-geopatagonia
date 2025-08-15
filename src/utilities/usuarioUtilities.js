@@ -249,6 +249,18 @@ const usuariosUtilities = {
     }
   },
 
+  decryptedMails: function(encryptedOldMail, encryptedNewMail){
+    try {
+      return {
+        oldMail: utilities.decrypt(encryptedOldMail),
+        newMail: utilities.decrypt(encryptedNewMail),
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
+
   // Método que devuelve los datos encriptados para la session
   encryptedSessionData: function(userData){
     return {
