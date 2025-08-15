@@ -101,7 +101,7 @@ const usuarioController = {
         try {
             if (errors.isEmpty()){
                 // encriptamos los mails con los datos del formulario
-                const { oldEncrypted, newEncrypted } = userUtilities.encryptedMails(req.body.oldEmail, req.body.email);
+                const { oldEncrypted, newEncrypted } = await userUtilities.encryptedMails(req.body.oldEmail, req.body.email);
                 // lo guadamos en cookies
                 res.cookie("oldEncrypted", oldEncrypted, {maxAge: (1000*60)*30} ) //(1000*60 = 1000ms * 60 = 1 min) * 30 = 30 min
                 res.cookie("newEncrypted", newEncrypted, {maxAge: (1000*60)*30} ) //(1000*60 = 1000ms * 60 = 1 min) * 30 = 30 min
