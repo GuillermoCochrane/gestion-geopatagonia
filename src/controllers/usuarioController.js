@@ -111,7 +111,7 @@ const usuarioController = {
                     throw new Error("Error al enviar el mail de confirmacion");
                 }
                 // redirgitamos a la pagina de confirmacion
-                return res.redirect("/usuario/emailValidation");
+                return res.redirect("/usuario/emailConfirmation");
             } else {
               const errorData = userUtilities.setEmailData();
               errorData.errors = errors.mapped();
@@ -126,7 +126,18 @@ const usuarioController = {
 
     },
 
-    validateEmail: async (req, res) => {
+    emailConfirmation: async (req, res) => {
+      try {
+        const data = userUtilities.oldEmailData();
+        return res.render("usuario/usuario", data)
+      } catch (error) {
+        console.error(error);
+        const errorData = userUtilities.errorData(error);
+        return res.render("error", errorData);
+      }
+    },
+
+    confirmEmail: async (req, res) => {
       return res.send("validacion de email");
     },
 
