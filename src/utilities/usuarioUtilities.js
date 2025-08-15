@@ -129,6 +129,15 @@ const usuariosUtilities = {
     };
   },
 
+  oldEmailData: function(){
+    return {
+      title: "Cambiar email",
+      styles: ["usuario/login"],
+      pageScript: [...this.validationScripts, ...this.viewScript,],
+      subSection: "./oldEmailValidate.ejs",
+    };
+  },
+
   userRolRoute: function(encryptedRol){
     try {
       if (!encryptedRol) throw new Error("No se proporcionó rol");
