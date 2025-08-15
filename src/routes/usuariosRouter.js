@@ -35,4 +35,6 @@ router.get('/password', loggedMDW, usuariosController.password);
 router.post('/setPassword', loggedMDW, passwordValidationMDW, usuariosController.setPassword);
 router.get('/email', loggedMDW, usuariosController.email);
 router.post('/setEmail', loggedMDW, emailValidationMDW, usuariosController.processEmail);
+router.get('/email/:token', loggedMDW, usuariosController.validateEmail);
+router.get('/emailValidation', loggedMDW, usuariosController.validateEmail);
 module.exports = router;
