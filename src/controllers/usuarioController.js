@@ -46,11 +46,14 @@ const usuarioController = {
 
     logged: function(req, res){
         if (req.session.user) {
-            return res.send({
-                Usuario: req.session.nombre, 
-                ID: req.session.user,
-                Rol: req.session.rol
-            });
+          const response = {
+            Usuario: req.session.nombre,
+            ID: req.session.user,
+            Rol: req.session.rol
+          };
+          if (req.cookies.oldEncrypted) response.oldEncrypted = req.cookies.oldEncrypted;
+          if (req.cookies.newEncrypted) response.newEncrypted = req.cookies.newEncrypted;
+          return res.send(response);  
         } else {
             return res.send("No hay usuario logueado");
         }
@@ -103,12 +106,12 @@ const usuarioController = {
                 res.cookie("oldEncrypted", oldEncrypted, {maxAge: (1000*60)*30} ) //(1000*60 = 1000ms * 60 = 1 min) * 30 = 30 min
                 res.cookie("newEncrypted", newEncrypted, {maxAge: (1000*60)*30} ) //(1000*60 = 1000ms * 60 = 1 min) * 30 = 30 min
                 // enviamos el mail al mail original, con el token
-                const sended = await userUtilities.sendChangeMailNotification(req.body.email, req.body.oldEmail, req.body.token, baseUrl);
+                const sended = await userUtilities.sendChangeMailNotification(req.body.email, req.body.oldEmail, oldEncrypted, baseUrl);
                 if (!sended.success) {
                     throw new Error("Error al enviar el mail de confirmacion");
                 }
                 // redirgitamos a la pagina de confirmacion
-                return res.redirect("/usuario/validateEmail");
+                return res.redirect("/usuario/emailValidation");
             } else {
               const errorData = userUtilities.setEmailData();
               errorData.errors = errors.mapped();
