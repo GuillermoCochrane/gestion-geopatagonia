@@ -138,14 +138,14 @@ const usuarioController = {
     },
 
     confirmEmail: async (req, res) => {
-      const errors = validationResult(req);
+      let errors = validationResult(req);
+      errors = userUtilities.tokenValidator(errors, req.params.token, req.cookies.oldEncrypted);
       try {
         if (errors.isEmpty()){
           return res.send("validacion de email");
         } else {
           const errorData = userUtilities.oldEmailData();
           errorData.errors = errors.mapped();
-          console.log(errorData.errors);
           errorData.old = req.body;
           return res.render("usuario/usuario", errorData);
         }
