@@ -140,9 +140,19 @@ const usuarioController = {
     confirmEmail: async (req, res) => {
       let errors = validationResult(req);
       errors = userUtilities.tokenValidator(errors, req.params.token, req.cookies.oldEncrypted);
+      const host = req.get("host");
+      const protocol = req.protocol;
+      const baseUrl = `${protocol}://${host}`
       try {
         if (errors.isEmpty()){
-          return res.send("validacion de email");
+          req.session.confirmedEmail = true;
+          const { oldMail, newMail } =  userUtilities.decryptedMails(req.cookies.oldEncrypted, req.cookies.newEncrypted);
+          const sended = await userUtilities.sendChangeMailNotification(newMail, oldMail, req.cookies.newEncrypted, baseUrl, isFistStep = false);
+          if (!sended.success) {
+              throw new Error("Error al enviar el mail de validación");
+          }
+          // redirgitamos a la pagina de confirmacion
+          return res.redirect("/usuario/emailConfirmation");
         } else {
           const errorData = userUtilities.oldEmailData();
           errorData.errors = errors.mapped();
