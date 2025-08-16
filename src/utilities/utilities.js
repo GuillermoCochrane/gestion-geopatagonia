@@ -179,6 +179,13 @@ const utilities = {
       return users;
     },
 
+    // Metodo para obtener la URL base de una petición
+    getBaseURL : function(request){
+      const host = request.get("host");
+      const protocol = request.protocol;
+      return `${protocol}://${host}`
+    },
+
     cryptoValidations: function () {
       const key = ENCRYPTION_KEY;
       const iv = ENCRYPTION_IV;
