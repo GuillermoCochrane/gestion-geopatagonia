@@ -95,9 +95,7 @@ const usuarioController = {
 
     processEmail: async (req, res) => {
         const errors = validationResult(req);
-        const host = req.get("host");
-        const protocol = req.protocol;
-        const baseUrl = `${protocol}://${host}`;
+        const baseUrl = utilities.getBaseURL(req);
         try {
             if (errors.isEmpty()){
                 // encriptamos los mails con los datos del formulario
@@ -140,9 +138,7 @@ const usuarioController = {
     confirmEmail: async (req, res) => {
       let errors = validationResult(req);
       errors = userUtilities.tokenValidator(errors, req.params.token, req.cookies.oldEncrypted);
-      const host = req.get("host");
-      const protocol = req.protocol;
-      const baseUrl = `${protocol}://${host}`
+      const baseUrl = utilities.getBaseURL(req);
       try {
         if (errors.isEmpty()){
           req.session.confirmedEmail = true;
@@ -166,6 +162,10 @@ const usuarioController = {
       }
     },
 
+    validateEmail: async (req, res) => {
+      return res.send("validacion de email");
+    },
+
     recovery: async (req, res) => {
         try {
             const data = await userUtilities.recoveryData();
@@ -179,9 +179,7 @@ const usuarioController = {
 
     processRecovery: async (req, res) => {
         const errors = validationResult(req);
-        const host = req.get("host");
-        const protocol = req.protocol;
-        const baseUrl = `${protocol}://${host}`;
+        const baseUrl = utilities.getBaseURL(req);
         try {
             if (errors.isEmpty()){
                 const token = await userUtilities.processRecovery(req.body.email, baseUrl);
