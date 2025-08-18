@@ -129,12 +129,13 @@ const usuariosUtilities = {
     };
   },
 
-  oldEmailData: function(){
+  emailData: function(validation = false){
     return {
       title: "Cambiar email",
       styles: ["usuario/login"],
-      pageScript: [...this.validationScripts],
+      pageScript: [],
       subSection: "./emailValidate.ejs",
+      emailValidation: validation,
     };
   },
 

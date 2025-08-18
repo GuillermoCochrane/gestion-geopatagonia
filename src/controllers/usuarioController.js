@@ -125,7 +125,7 @@ const usuarioController = {
 
     emailConfirmation: async (req, res) => {
       try {
-        const data = userUtilities.oldEmailData();
+        const data = userUtilities.emailData();
         return res.render("usuario/usuario", data)
       } catch (error) {
         console.error(error);
@@ -149,7 +149,7 @@ const usuarioController = {
           // redirgitamos a la pagina de confirmacion
           return res.redirect("/usuario/validateEmail");
         } else {
-          const errorData = userUtilities.oldEmailData();
+          const errorData = userUtilities.emailData();
           errorData.errors = errors.mapped();
           errorData.old = req.body;
           return res.render("usuario/usuario", errorData);
@@ -163,8 +163,7 @@ const usuarioController = {
 
 		emailValidation: async (req, res) => {
       try {
-        const data = userUtilities.oldEmailData();
-				data.emailValidation = true;
+        const data = userUtilities.emailData(true);
         return res.render("usuario/usuario", data)
       } catch (error) {
         console.error(error);
@@ -174,7 +173,7 @@ const usuarioController = {
 		},
 
     validateEmail: async (req, res) => {
-      return res.send("validacion de email");
+			return res.send("validacion de email");
     },
 
     recovery: async (req, res) => {
