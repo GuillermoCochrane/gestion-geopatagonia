@@ -172,6 +172,25 @@ const usuariosUtilities = {
       throw error;
     }
   },
+  
+  processEmail: async function(oldMail, newMail){
+    try {
+      if (!oldMail || !newMail)  throw new Error("Ambos emails son requeridos");
+      if (oldMail === newMail) throw new Error("El nuevo email debe ser diferente al actual");
+      if ( await utilities.checkEmail(newMail)) throw new Error("El nuevo email se encuentra en uso");
+      const result = await Usuario.update(
+        { email: newMail },
+        { where: { email: oldMail } }
+      );
+      
+      if (result[0] === 0) throw new Error("Usuario no encontrado");
+
+      return true;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
 
   processPassword: async function(email, newPassword) {
     try {
