@@ -132,7 +132,7 @@ const mailUtilities = {
             `Se ha solicitado el cambio del email asociado a su cuenta de Geopatagonia.\n` +
             `Nuevo email: ${email}\n\n` +
             `Para autorizar este cambio, ingrese al siguiente enlace:\n` +
-            `${baseUrl}/usuario/email/${token}\n\n` +
+            `${baseUrl}/usuario/emailConfirmation/${token}\n\n` +
             `o ingrese el siguiente token en el formulario: \n\n${token} \n\n` +
             `⚠️ Si no reconoces esta acción, por favor contacta a soporte.\n` +
             this.textEnd()
