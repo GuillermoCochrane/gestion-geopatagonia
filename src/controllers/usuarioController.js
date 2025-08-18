@@ -177,7 +177,14 @@ const usuarioController = {
       errors = userUtilities.tokenValidator(errors, req.params.token, req.cookies.newEncrypted);
 			try {
 				if (errors.isEmpty()){
-					return res.send("validacion de email");
+					const result = await userUtilities.setNewEmail(req.cookies.oldEncrypted, req.cookies.newEncrypted);
+					if (result.success) {
+						res.clearCookie("oldEncrypted");
+						res.clearCookie("newEncrypted");
+						res.clearCookie("user");
+						req.session.destroy();
+					} 
+					return res.redirect("/usuario/login");
 				} else {
 					const errorData = userUtilities.emailData();
 					errorData.errors = errors.mapped();
