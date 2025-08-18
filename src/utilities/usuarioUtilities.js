@@ -192,9 +192,25 @@ const usuariosUtilities = {
     }
   },
 
+  setNewEmail: async function(encryptedOldMail, encryptedNewMail){
+    try {
+      let oldMail = utilities.decrypt(encryptedOldMail);
+      let newMail = utilities.decrypt(encryptedNewMail);
+
+      if (!oldMail || !newMail || !validator.isEmail(oldMail) || !validator.isEmail(newMail) ) {
+        throw new Error("Token inválido");
+      }
+      await this.processEmail(oldMail, newMail);
+      return { success: true, message: "Email Actualizado" };
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  },
+
   setNewPassword: async function(token, body) {
     try {
-      const email = await this.recoverEmail(token);
+      const email =  this.recoverEmail(token);
       if (!email || !validator.isEmail(email)) {
         throw new Error("Token inválido");
       }
@@ -241,7 +257,7 @@ const usuariosUtilities = {
       if (oldMail === newMail) throw new Error("El nuevo email debe ser diferente al actual");
       if ( await utilities.checkEmail(newMail)) throw new Error("El nuevo email se encuentra en uso");
       return {
-        oldEncrypted: utilities.encrypt(oldMail, true),
+        oldEncrypted: utilities.encrypt(oldMail, true), //ver de encriptar ambos con this.generateToken
         newEncrypted: utilities.encrypt(newMail, true),
       }
     } catch (error) {
@@ -286,7 +302,7 @@ const usuariosUtilities = {
   },
 
   // Método que devuelve el email encriptado para la recuepración de contraseña
-  recoverEmail: async function(token){
+  recoverEmail: function(token){
     const decryptedData = utilities.decrypt(token);
     const email = decryptedData.slice(15); 
     return email;
