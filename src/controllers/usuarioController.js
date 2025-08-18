@@ -173,7 +173,22 @@ const usuarioController = {
 		},
 
     validateEmail: async (req, res) => {
-			return res.send("validacion de email");
+			let errors = validationResult(req);
+      errors = userUtilities.tokenValidator(errors, req.params.token, req.cookies.newEncrypted);
+			try {
+				if (errors.isEmpty()){
+					return res.send("validacion de email");
+				} else {
+					const errorData = userUtilities.emailData();
+					errorData.errors = errors.mapped();
+					errorData.old = req.body;
+					return res.render("usuario/usuario", errorData);
+				}
+			} catch (error) {
+				console.error(error);
+				const errorData = userUtilities.errorData(error);
+				return res.render("error", errorData);
+			}
     },
 
     recovery: async (req, res) => {
