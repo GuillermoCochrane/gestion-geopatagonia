@@ -47,6 +47,7 @@ router.post('/setEmail', loggedMDW, emailValidationMDW, usuariosController.proce
 router.get('/emailConfirmation', loggedMDW, usuariosController.emailConfirmation);
 router.get('/emailConfirmation/:token', loggedMDW, usuariosController.confirmEmail); // recibe x query token y confirma
 router.post('/emailConfirmation', loggedMDW, confirmEmailValidationsMDW, usuariosController.confirmEmail); // procesa el token de confirmación desde el formulario
+router.get('/validateEmail', loggedMDW, usuariosController.emailValidation); 
 router.get('/validateEmail/:token', loggedMDW, usuariosController.validateEmail); // recibe x query token y valida, cambia el email y cierra sesión
 router.post('/validateEmail', loggedMDW,usuariosController.validateEmail); // procesa el token de validación desde el formulario, cambia el email y cierra sesión
 
