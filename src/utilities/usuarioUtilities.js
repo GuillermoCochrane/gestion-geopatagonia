@@ -134,7 +134,7 @@ const usuariosUtilities = {
       title: "Cambiar email",
       styles: ["usuario/login"],
       pageScript: [...this.validationScripts],
-      subSection: "./oldEmailValidate.ejs",
+      subSection: "./emailValidate.ejs",
     };
   },
 
