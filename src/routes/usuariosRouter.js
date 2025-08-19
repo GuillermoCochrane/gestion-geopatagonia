@@ -44,7 +44,7 @@ router.post('/setPassword', loggedMDW, passwordValidationMDW, usuariosController
 
 //Sistema de cambio de email
 router.get('/email', loggedMDW, usuariosController.email);
-router.post('/setEmail', loggedMDW, emailValidationMDW, usuariosController.processEmail); // Procesa cambio de email, genera tokens y envía mail con token de validacion al original
+router.post('/email', loggedMDW, emailValidationMDW, usuariosController.processEmail); // Procesa cambio de email, genera tokens y envía mail con token de validacion al original
 router.get('/emailConfirmation', loggedMDW, usuariosController.emailConfirmation);
 router.get('/emailConfirmation/:token', loggedMDW, usuariosController.confirmEmail); // recibe x query token y confirma
 router.post('/emailConfirmation', loggedMDW, confirmEmailValidationsMDW, usuariosController.confirmEmail); // procesa el token de confirmación desde el formulario
