@@ -21,7 +21,7 @@ const usuarioController = {
 			return res.render("usuario/usuario", data)
     },
 
-    processLogin: async function (req, res) {
+    processLogin: function (req, res) {
 			let errors = validationResult(req);
 			if (errors.isEmpty()){
 				const { id, rol } = userUtilities.encryptedSessionData(req.userFromDB);
@@ -123,7 +123,7 @@ const usuarioController = {
 			}
     },
 
-    emailConfirmation: async (req, res) => {
+    emailConfirmation: (req, res) => {
       try {
         const data = userUtilities.emailData();
         return res.render("usuario/usuario", data)
@@ -161,7 +161,7 @@ const usuarioController = {
       }
     },
 
-		emailValidation: async (req, res) => {
+		emailValidation: (req, res) => {
       try {
         const data = userUtilities.emailData(true);
         return res.render("usuario/usuario", data)
@@ -230,12 +230,12 @@ const usuarioController = {
 			}
     },
 
-    validateToken: async (req, res) => {
+    validateToken: (req, res) => {
 			const data = userUtilities.tokenData();
 			return res.render("usuario/usuario", data);
     },
 
-    tokenValidation: async (req, res) => {
+    tokenValidation: (req, res) => {
 			let errors = validationResult(req);
 			errors = userUtilities.tokenValidator(errors, req.params.token, req.cookies.token);
 
@@ -256,7 +256,7 @@ const usuarioController = {
 			}
     },
 
-    newPassword: async (req, res) => {
+    newPassword: (req, res) => {
 			const data = userUtilities.newPasswordData();
 			return res.render("usuario/usuario", data)
     },
