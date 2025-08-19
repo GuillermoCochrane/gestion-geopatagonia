@@ -18,6 +18,7 @@ const tokenAccessMDW = require("../middlewares/access/usuario/tokenAccessMDW");
 const validTokenAccessMDW = require("../middlewares/access/usuario/validTokenAccessMDW");
 const loggedMDW = require("../middlewares/access/loggedMDW");
 const guestMDW = require("../middlewares/access/guestMDW");
+const changeMailAccessMDW = require("../middlewares/access/usuario/changeMailAccessMDW");
 
 
 //* Rutas
@@ -45,11 +46,11 @@ router.post('/setPassword', loggedMDW, passwordValidationMDW, usuariosController
 //Sistema de cambio de email
 router.get('/email', loggedMDW, usuariosController.email);
 router.post('/email', loggedMDW, emailValidationMDW, usuariosController.processEmail); // Procesa cambio de email, genera tokens y envía mail con token de validacion al original
-router.get('/emailConfirmation', loggedMDW, usuariosController.emailConfirmation);
-router.get('/emailConfirmation/:token', loggedMDW, usuariosController.confirmEmail); // recibe x query token y confirma
-router.post('/emailConfirmation', loggedMDW, confirmEmailValidationsMDW, usuariosController.confirmEmail); // procesa el token de confirmación desde el formulario
-router.get('/validateEmail', loggedMDW, usuariosController.emailValidation); 
-router.get('/validateEmail/:token', loggedMDW, usuariosController.validateEmail); // recibe x query token y valida, cambia el email y cierra sesión
-router.post('/validateEmail', loggedMDW, newEmailValidationsMDW, usuariosController.validateEmail); // procesa el token de validación desde el formulario, cambia el email y cierra sesión
+router.get('/emailConfirmation', loggedMDW, changeMailAccessMDW, usuariosController.emailConfirmation);
+router.get('/emailConfirmation/:token', loggedMDW, changeMailAccessMDW, usuariosController.confirmEmail); // recibe x query token y confirma
+router.post('/emailConfirmation', loggedMDW, changeMailAccessMDW, confirmEmailValidationsMDW, usuariosController.confirmEmail); // procesa el token de confirmación desde el formulario
+router.get('/validateEmail', loggedMDW, changeMailAccessMDW, usuariosController.emailValidation);
+router.get('/validateEmail/:token', changeMailAccessMDW, loggedMDW, usuariosController.validateEmail); // recibe x query token y valida, cambia el email y cierra sesión
+router.post('/validateEmail', loggedMDW, changeMailAccessMDW, newEmailValidationsMDW, usuariosController.validateEmail); // procesa el token de validación desde el formulario, cambia el email y cierra sesión
 
 module.exports = router;
