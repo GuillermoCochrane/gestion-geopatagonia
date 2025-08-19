@@ -337,11 +337,12 @@ const usuariosUtilities = {
 
   // Método que envia el mail de notifcación de cambio de email
   sendChangeMailNotification: async function(newEmail, oldEmail, token, baseUrl, isFirstStep = true) {
-    const mail = isFirstStep ? newEmail : oldEmail;
-    const changeData = mailutilities.mailChangeNotification(mail, token, baseUrl, isFirstStep);
-    await mailutilities.sendMail(oldEmail, changeData.subject, changeData.text)
+    const mailToNotify = isFirstStep ? newEmail : oldEmail;
+    const mailDestination = isFirstStep ? oldEmail : newEmail;
+    const changeData = mailutilities.mailChangeNotification(mailToNotify, token, baseUrl, isFirstStep);
+    await mailutilities.sendMail(mailDestination, changeData.subject, changeData.text)
 
-    return { success: true, message: "Email cambiado" };
+    return { success: true, message: `Email enviado a ${mailDestination}` };
   },
 
 }
