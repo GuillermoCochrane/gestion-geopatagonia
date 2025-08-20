@@ -46,16 +46,30 @@ const usuarioController = {
 
     logged: function(req, res){
 			if (req.session.user) {
-				const response = {
+				
+				const loginData = {
 					Usuario: req.session.nombre,
 					ID: req.session.user,
 					Rol: req.session.rol
 				};
-				if (req.cookies.oldEncrypted) response.oldEncrypted = req.cookies.oldEncrypted;
-				if (req.cookies.newEncrypted) response.newEncrypted = req.cookies.newEncrypted;
+
+				const changeMailData = {
+					oldEncrypted: req.cookies.oldEncrypted ? req.cookies.oldEncrypted : null,
+					newEncrypted: req.cookies.newEncrypted ? req.cookies.newEncrypted : null,
+					confirmedEmail: req.session.confirmedEmail ? req.session.confirmedEmail : null
+				};
+
+				const response = {
+					loginData : loginData,
+					changeMailData:  changeMailData,
+				};
 				return res.send(response);  
 			} else {
-					return res.send("No hay usuario logueado");
+				const notLogged = {
+					userData: "No hay usuario logueado",
+					validToken: req.session.validToken ? req.session.validToken : null,
+				}
+				return res.send(notLogged);
 			}
     },
 
