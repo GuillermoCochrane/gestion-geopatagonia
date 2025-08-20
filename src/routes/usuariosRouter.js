@@ -19,6 +19,7 @@ const validTokenAccessMDW = require("../middlewares/access/usuario/validTokenAcc
 const loggedMDW = require("../middlewares/access/loggedMDW");
 const guestMDW = require("../middlewares/access/guestMDW");
 const changeMailAccessMDW = require("../middlewares/access/usuario/changeMailAccessMDW");
+const confirmMailAccessMDW = require("../middlewares/access/usuario/confirmMailAccessMDW");
 
 
 //* Rutas
@@ -49,8 +50,8 @@ router.post('/email', loggedMDW, emailValidationMDW, usuariosController.processE
 router.get('/emailConfirmation', loggedMDW, changeMailAccessMDW, usuariosController.emailConfirmation);
 router.get('/emailConfirmation/:token', loggedMDW, changeMailAccessMDW, usuariosController.confirmEmail); // recibe x query token y confirma
 router.post('/emailConfirmation', loggedMDW, changeMailAccessMDW, confirmEmailValidationsMDW, usuariosController.confirmEmail); // procesa el token de confirmación desde el formulario
-router.get('/validateEmail', loggedMDW, changeMailAccessMDW, usuariosController.emailValidation);
-router.get('/validateEmail/:token', changeMailAccessMDW, loggedMDW, usuariosController.validateEmail); // recibe x query token y valida, cambia el email y cierra sesión
+router.get('/validateEmail', loggedMDW, changeMailAccessMDW, confirmMailAccessMDW, usuariosController.emailValidation);
+router.get('/validateEmail/:token', loggedMDW, changeMailAccessMDW, confirmMailAccessMDW, usuariosController.validateEmail); // recibe x query token y valida, cambia el email y cierra sesión
 router.post('/validateEmail', loggedMDW, changeMailAccessMDW, newEmailValidationsMDW, usuariosController.validateEmail); // procesa el token de validación desde el formulario, cambia el email y cierra sesión
 
 module.exports = router;
