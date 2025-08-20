@@ -1,6 +1,5 @@
 const{body} = require("express-validator");
 const userUtilties = require("../../../utilities/usuarioUtilities");
-const { trim } = require("../../../../public/js/validator.min");
 const emailValidationMDW = [
     body("oldEmail")
       .trim()
