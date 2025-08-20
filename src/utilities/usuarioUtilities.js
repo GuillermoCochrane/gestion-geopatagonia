@@ -79,7 +79,7 @@ const usuariosUtilities = {
     return {
       title: "Cambiar email",
       styles: ["usuario/set"],
-      pageScript: [],
+      pageScript: [...this.validationScripts, "usuario/validations/changeMailValidation"],
       subSection: "./setEmail.ejs",
     };
   },
