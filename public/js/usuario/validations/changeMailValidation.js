@@ -14,6 +14,8 @@ window.addEventListener("load", () => {
 
   const oldEmailValidation = () => {
       emailsValidation($oldEmail);
+      console.log($oldEmail.value);
+      !errors[$oldEmail.id] && currentEmailValidation($oldEmail);
   };
 
   const emailValidation = () => {
