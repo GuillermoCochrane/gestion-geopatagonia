@@ -345,5 +345,21 @@ const usuariosUtilities = {
     return { success: true, message: `Email enviado a ${mailDestination}` };
   },
 
+  // Método para validar si el email actual es el mismo que el que se envió en el formulario
+  isCurrentUser: async  function(request, email){
+    try {
+      // Recueroamos el email enviado en el formulario y el id encriptado de la sesión
+      const userId = request.session.user;
+      if (!email || !userId) throw new Error("Faltan datos para completar la validación ");
+      // desencriptamos el id y recuperamos el usuario
+      const user = await this.getUserFromEncryptedID(userId);
+      const isValid = user && user.email.toLowerCase() === email.toLowerCase();
+      return isValid;
+    } catch (error) {
+      console.error("Error en isCurrentUser:", error);
+      throw error;
+    }
+  },
+
 }
 module.exports = usuariosUtilities;
