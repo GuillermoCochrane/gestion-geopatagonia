@@ -101,6 +101,16 @@ const uniqueValidation = async (input, id = null) => {
   handleValidation(input, validation, errorMessage);
 };
 
+// * Validación de email del usuario actual
+const currentEmailValidation = async (input) => {
+  const endpoint = `${baseUrl}/api/utilities/currentEmail/${input.value}`;
+  const response = await fetch(endpoint);
+  const json = await response.json();
+  const validation = json.data.isValid === true;
+  const errorMessage = "El email actual no coincide con el usuario logueado";
+  handleValidation(input, validation, errorMessage);
+};
+
 // * Validación de contraseña segura
 const strongValidation = (input) => {
   const validation = validator.isStrongPassword(input.value);
