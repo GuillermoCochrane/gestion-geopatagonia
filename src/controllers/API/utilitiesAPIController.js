@@ -1,10 +1,11 @@
 const utilities = require("../../utilities/utilities");
 const originacionUtilities = require("../../utilities/originacionUtilitites");
+const usersUtilities = require("../../utilities/usuarioUtilities");
 
 const utilitiesAPIController = {
     checkEmail: async(req, res) => {
         const {email, id} = req.params;
-        const endpoint =  "/api/utilities/unique/:email";
+        const endpoint =  "/api/utilities/inUseEmail/:email/:id?";
         try {
             let inUse = await utilities.checkEmail(email, id);
             let info = {
@@ -25,6 +26,33 @@ const utilitiesAPIController = {
                     url: endpoint,
                 },
                 errors: "error interno del servidor",
+            }
+            return res.json(info);
+        }
+    },
+
+    currentEmail: async(req, res) => {
+        const endpoint =  "/api/utilities/currentEmail/:email";
+        try {
+            const isValid = await usersUtilities.isCurrentUser(req, req.params.email);
+            let info = {
+                meta: {
+                    status : 200,
+                    url: endpoint,
+                },
+                data: {
+                    isValid: isValid,
+                    email: req.params.email
+                }
+            }
+            return res.json(info);
+        } catch (error) {
+            let info = {
+                meta: {
+                    status : 400,
+                    url: endpoint,
+                },
+                errors: error.message || "error interno del servidor",
             }
             return res.json(info);
         }

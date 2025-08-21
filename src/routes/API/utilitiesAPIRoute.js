@@ -14,4 +14,7 @@ router.delete("/deleteOrigination/:id", utilitiesAPIController.deleteOrigination
 //? Endpoint para consultar incisos de formularios
 router.get("/incisos/:id", utilitiesAPIController.incisos);
 
+//? Endpoint para comprobar si el email del usuario actual es el mismo que el que se envió en el formulario
+router.get("/currentEmail/:email", utilitiesAPIController.currentEmail);
+
 module.exports = router;
