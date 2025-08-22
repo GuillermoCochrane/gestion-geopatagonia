@@ -20,10 +20,12 @@ window.addEventListener("load", () => {
 
   const emailValidation = () => {
       emailsValidation($email);
+      !errors[$email.id] && uniqueValidation($email);
   };
 
   const checkValidation = () => {
-      emailsValidation($check);
+    emailsValidation($check);
+    !errors[$check.id] && sameEmailValidation($check, $email);
   };
 
   $oldEmail && $oldEmail.addEventListener("input",() => oldEmailValidation());
