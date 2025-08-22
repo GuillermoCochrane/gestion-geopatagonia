@@ -1,7 +1,7 @@
 <form action="/usuario/validate" method="post" id="validate-token-form">
   <label>
     <h4>Ingrese su token de recuperación</h4>
-    <input type="text" name="token" id="token" value="<%= locals.old?.token %>">
+    <input type="text" name="token" id="token" value="<%= locals.old?.token %>" autofocus>
     <span id="error-token"><%= locals.errors?.token?.msg  %></span>
   </label>
   <button id="token-btn">Enviar</button>
