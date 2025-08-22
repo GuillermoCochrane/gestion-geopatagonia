@@ -2,7 +2,7 @@
   <h2>Seleccionar Originación</h2>
   <form  id="originacion-select-form">
     <label>
-      <select name="originacion_id" id="originacion_id">
+      <select name="originacion_id" id="originacion_id" autofocus>
         <% if (locals?.originacionSelectData && locals?.originacionSelectData?.length !== 0) { %>
           <option value="" disabled selected>Selecione una originación</option>
           <% for (const originacion of locals?.originacionSelectData) { %>

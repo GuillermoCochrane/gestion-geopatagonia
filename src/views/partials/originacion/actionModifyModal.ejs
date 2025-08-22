@@ -2,7 +2,7 @@
   <h2>Cambiar Responsable</h2>
   <form action="/originacion/observacionPAC/modify/<%= locals?.pacData?.id %>?_method=PUT" method="post" id="modify-form">
     <label>
-      <select name="responsable_id" id="responsable_id">
+      <select name="responsable_id" id="responsable_id" autofocus>
         <% if (locals) { %>
           <% for (const responsable of locals?.responsables) { %>
             <option value="<%= responsable.id %>" <%= responsable.id === locals?.pacData?.responsable_id ? 'selected' : '' %>>

@@ -25,7 +25,7 @@
     </label>
     <label>
       <h3>Acción Inmediata</h3>
-      <textarea name="accion" id="accion" ><%= locals?.oldData?.accion_inmediata %></textarea>
+      <textarea name="accion" id="accion" autofocus><%= locals?.oldData?.accion_inmediata % ></textarea>
       <span id="error-accion">
         <%= locals.PACErrors?.accion?.msg %>
       </span>
