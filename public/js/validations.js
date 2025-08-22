@@ -125,6 +125,13 @@ const checkPasswordValidation = (input, password) => {
   handleValidation(input, validation, errorMessage);
 }
 
+// * Validación de confirmación de nuevo email
+const sameEmailValidation = (input, check) => {
+  const validation = input.value == check.value;
+  const errorMessage = `Los emails no coinciden`;
+  handleValidation(input, validation, errorMessage);
+}
+
 // * Validación de fechas con formato valido (YYYY-MM-DD)
 const isDateValidation = (input) => {
   const datePattern = /^\d{4}-\d{2}-\d{2}$/; // Expresión regular para YYYY-MM-DD
